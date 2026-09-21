@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>
+        فرم ساخته شد
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #f5f6f8;
+            color: #222;
+        }
+
+
+        /* =========================
+           Container
+        ========================== */
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+
+        /* =========================
+           Card
+        ========================== */
+
+        .card {
+            width: 100%;
+            max-width: 100%;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+
+        .card h1 {
+            margin: 0 0 15px;
+            font-size: 28px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+
+        .card p {
+            line-height: 1.9;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           Link Box
+        ========================== */
+
+        .link-box {
+            display: flex;
+            align-items: stretch;
+            width: 100%;
+            max-width: 100%;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+
+        .link-box input {
+            display: block;
+            flex: 1 1 auto;
+            width: 100%;
+            min-width: 0;
+            padding: 12px;
+            border: 1px solid #dddddd;
+            border-radius: 10px;
+            direction: ltr;
+            text-align: left;
+            font-family: Tahoma, Arial, sans-serif;
+            font-size: 14px;
+            outline: none;
+        }
+
+
+        .link-box input:focus {
+            border-color: #888;
+        }
+
+
+        /* =========================
+           Buttons
+        ========================== */
+
+        .copy-btn,
+        .form-link {
+            min-height: 46px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: 0.2s;
+            touch-action: manipulation;
+        }
+
+
+        .copy-btn {
+            flex: 0 0 auto;
+            border: 0;
+            background: #222222;
+            color: #ffffff;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+
+        .copy-btn:hover {
+            background: #333333;
+        }
+
+
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+
+
+        .form-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 100%;
+            margin-top: 20px;
+            background: #eeeeee;
+            color: #222222;
+            text-decoration: none;
+        }
+
+
+        .form-link:hover {
+            background: #e3e3e3;
+        }
+
+
+        /* =========================
+           Mobile
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .container {
+                margin: 20px auto;
+                padding: 12px;
+            }
+
+
+            .card {
+                padding: 25px 15px;
+                border-radius: 15px;
+            }
+
+
+            .card h1 {
+                font-size: 23px;
+                margin-bottom: 12px;
+            }
+
+
+            .card p {
+                font-size: 14px;
+            }
+
+
+            .link-box {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+
+            .link-box input {
+                width: 100%;
+                min-height: 48px;
+                font-size: 14px;
+            }
+
+
+            .copy-btn {
+                width: 100%;
+                min-height: 48px;
+            }
+
+
+            .form-link {
+                width: 100%;
+                min-height: 48px;
+                margin-top: 12px;
+            }
+
+        }
+
+
+        /* =========================
+           Mobile Small
+        ========================== */
+
+        @media (max-width: 380px) {
+
+            .container {
+                margin: 15px auto;
+                padding: 8px;
+            }
+
+
+            .card {
+                padding: 22px 12px;
+                border-radius: 13px;
+            }
+
+
+            .card h1 {
+                font-size: 21px;
+            }
+
+
+            .card p {
+                font-size: 13px;
+            }
+
+
+            .link-box input,
+            .copy-btn,
+            .form-link {
+                font-size: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+
+        <h1>
+            ✅ فرم ساخته شد
+        </h1>
+
+
+        <p>
+            فرم «{{ form.title }}» با موفقیت ساخته شد.
+        </p>
+
+
+        <p>
+            لینک فرم:
+        </p>
+
+
+        <div class="link-box">
+
+            <input
+                id="formLink"
+                type="text"
+                value="{{ request.scheme }}://{{ request.get_host }}{% url 'forms:fill_form' form.id %}"
+                readonly
+            >
+
+
+            <button
+                type="button"
+                class="copy-btn"
+                id="copyButton"
+                onclick="copyLink(this)"
+            >
+                کپی
+            </button>
+
+        </div>
+
+
+        <a
+            class="form-link"
+            href="{% url 'forms:fill_form' form.id %}"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            مشاهده فرم
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function copyLink(button) {
+
+    const input =
+        document.getElementById("formLink");
+
+
+    navigator.clipboard.writeText(input.value)
+
+        .then(() => {
+
+            button.textContent =
+                "کپی شد ✓";
+
+            setTimeout(() => {
+
+                button.textContent =
+                    "کپی";
+
+            }, 1500);
+
+        })
+
+        .catch(() => {
+
+            input.focus();
+            input.select();
+
+            document.execCommand("copy");
+
+            button.textContent =
+                "کپی شد ✓";
+
+            setTimeout(() => {
+
+                button.textContent =
+                    "کپی";
+
+            }, 1500);
+
+        });
+
+}
+
+</script>
+
+</body>
+
+</html>
+

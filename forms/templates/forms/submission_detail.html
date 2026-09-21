@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>
+        پاسخ #{{ submission.id }}
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+
+        body {
+            background: #0d0f14;
+            color: #f4f5f7;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+
+        /* =========================
+           Container
+        ========================== */
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+
+        /* =========================
+           Back
+        ========================== */
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            max-width: 100%;
+            margin-bottom: 20px;
+            color: #9d96ff;
+            font-size: 14px;
+            line-height: 1.7;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+            transition: 0.2s;
+        }
+
+
+        .back:hover {
+            color: #b3afff;
+        }
+
+
+        /* =========================
+           Header + Answer
+        ========================== */
+
+        .header,
+        .answer {
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            background: #171a21;
+            border: 1px solid #282d36;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           Header
+        ========================== */
+
+        .header h1 {
+            margin: 0 0 12px;
+            color: #ffffff;
+            font-size: 28px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+
+        .meta {
+            color: #8c95a3;
+            line-height: 2;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+
+        .meta div {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           Answer
+        ========================== */
+
+        .question-title {
+            color: #9da5b2;
+            font-size: 13px;
+            line-height: 1.9;
+            margin-bottom: 9px;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+
+        .answer-value {
+            width: 100%;
+            max-width: 100%;
+            color: #ffffff;
+            line-height: 2;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           File
+        ========================== */
+
+        .file-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 100%;
+            min-height: 42px;
+            padding: 9px 13px;
+            color: #9d96ff;
+            background: #23283a;
+            border-radius: 9px;
+            font-size: 13px;
+            line-height: 1.6;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            transition: 0.2s;
+        }
+
+
+        .file-link:hover {
+            background: #2c3246;
+        }
+
+
+        /* =========================
+           Mobile
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 20px 10px;
+            }
+
+
+            .back {
+                margin-bottom: 15px;
+                font-size: 13px;
+            }
+
+
+            .header,
+            .answer {
+                padding: 17px 14px;
+                border-radius: 14px;
+                margin-bottom: 12px;
+            }
+
+
+            .header h1 {
+                font-size: 23px;
+                line-height: 1.6;
+                margin-bottom: 10px;
+            }
+
+
+            .meta {
+                font-size: 13px;
+                line-height: 1.9;
+            }
+
+
+            .question-title {
+                font-size: 13px;
+                line-height: 1.9;
+                margin-bottom: 8px;
+            }
+
+
+            .answer-value {
+                font-size: 14px;
+                line-height: 2;
+            }
+
+
+            .file-link {
+                width: 100%;
+                min-height: 46px;
+                font-size: 14px;
+            }
+
+        }
+
+
+        /* =========================
+           Mobile Small
+        ========================== */
+
+        @media (max-width: 380px) {
+
+            .container {
+                padding: 15px 8px;
+            }
+
+
+            .header,
+            .answer {
+                padding: 15px 11px;
+                border-radius: 12px;
+            }
+
+
+            .header h1 {
+                font-size: 21px;
+            }
+
+
+            .meta {
+                font-size: 12px;
+            }
+
+
+            .question-title {
+                font-size: 12px;
+            }
+
+
+            .answer-value {
+                font-size: 13px;
+            }
+
+
+            .file-link {
+                font-size: 13px;
+                padding: 9px 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- بازگشت -->
+
+    <a
+        href="{% url 'forms:responses' %}"
+        class="back"
+    >
+        → بازگشت به پاسخ‌ها
+    </a>
+
+
+    <!-- اطلاعات ثبت -->
+
+    <div class="header">
+
+        <h1>
+            پاسخ #{{ submission.id }}
+        </h1>
+
+
+        <div class="meta">
+
+            <div>
+                فرم:
+                {{ submission.form.title }}
+            </div>
+
+
+            <div>
+
+                کاربر:
+
+                {% if submission.user %}
+
+                    {{ submission.user.get_full_name|default:submission.user.username }}
+
+                {% else %}
+
+                    کاربر مهمان
+
+                {% endif %}
+
+            </div>
+
+
+            <div>
+
+                تاریخ:
+                {{ submission.created_at|date:"Y/m/d - H:i" }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- پاسخ‌ها -->
+
+    {% for answer in answers %}
+
+        <div class="answer">
+
+
+            <div class="question-title">
+
+                سؤال {{ forloop.counter }}
+
+                ·
+
+                {{ answer.question.title }}
+
+            </div>
+
+
+            {% if answer.file_value %}
+
+                <a
+                    href="{{ answer.file_value.url }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="file-link"
+                >
+                    مشاهده / دانلود فایل
+                </a>
+
+
+            {% elif answer.text_value %}
+
+                <div class="answer-value">
+
+                    {{ answer.text_value }}
+
+                </div>
+
+
+            {% else %}
+
+                <div class="answer-value">
+
+                    بدون پاسخ
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+    {% empty %}
+
+        <div class="answer">
+
+            <div class="answer-value">
+
+                برای این ثبت، پاسخی وجود ندارد.
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+
+</html>
+

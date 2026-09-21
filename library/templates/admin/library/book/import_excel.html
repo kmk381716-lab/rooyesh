@@ -1,0 +1,51 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<div id="content-main">
+
+    <h1>ورود کتاب‌ها از اکسل</h1>
+
+    <div style="
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+    ">
+
+        <p>
+            فایل Excel کتاب‌ها را انتخاب کنید.
+        </p>
+
+        <p>
+            ستون‌های مورد نیاز:
+            <strong>
+                title, author, description,
+                total_copies, available_copies, is_active
+            </strong>
+        </p>
+
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div style="margin-top: 20px;">
+
+            <input
+                type="submit"
+                value="آپلود و ساخت کتاب‌ها"
+                class="default"
+            >
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

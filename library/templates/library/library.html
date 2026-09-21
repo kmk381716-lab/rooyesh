@@ -1,0 +1,364 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    کتابخانه رویش
+{% endblock %}
+
+
+{% block content %}
+
+<section class="section library-page">
+
+    <div class="container">
+
+        <!-- =========================
+             Page Header
+        ========================== -->
+
+        <div class="section-heading library-heading">
+
+            <span>
+                کتابخانه رویش
+            </span>
+
+            <h1>
+                کتاب‌ها
+            </h1>
+
+            <p>
+                کتاب‌های موجود در کتابخانه کانون را پیدا کن،
+                اطلاعاتشان را ببین و برای امانت درخواست بده.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             Search
+        ========================== -->
+
+        <div class="library-search-box">
+
+            <form
+                method="get"
+                class="library-search"
+            >
+
+                <div class="search-input-wrapper">
+
+                    <span class="search-icon">
+                        🔍
+                    </span>
+
+                    <input
+                        type="text"
+                        name="q"
+                        value="{{ query }}"
+                        placeholder="جستجوی نام کتاب یا نویسنده..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="button primary-button"
+                >
+                    جستجو
+                </button>
+
+            </form>
+
+
+            {% if query %}
+
+                <div class="search-result-info">
+
+                    <span>
+                        نتایج جستجو برای:
+                        <strong>
+                            {{ query }}
+                        </strong>
+                    </span>
+
+                    <a
+                        href="{% url 'library' %}"
+                        class="clear-search"
+                    >
+                        پاک کردن ×
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- =========================
+             Messages
+        ========================== -->
+
+        {% if messages %}
+
+            <div class="messages">
+
+                {% for message in messages %}
+
+                    <div class="message {{ message.tags }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =========================
+             Books
+        ========================== -->
+
+        <div class="cards library-books">
+
+            {% for book in books %}
+
+                <article class="card book-card">
+
+                    <!-- Book Cover -->
+
+                    <div class="book-cover-wrapper">
+
+                        {% if book.cover %}
+
+                            <img
+                                src="{{ book.cover.url }}"
+                                alt="{{ book.title }}"
+                                class="card-image book-cover"
+                                loading="lazy"
+                            >
+
+                        {% else %}
+
+                            <div class="card-image book-cover book-cover-placeholder">
+
+                                <span>
+                                    {{ book.title }}
+                                </span>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Book Information -->
+
+                    <div class="card-content book-content">
+
+                        <h3>
+                            {{ book.title }}
+                        </h3>
+
+
+                        {% if book.author %}
+
+                            <p class="book-author">
+
+                                <span>
+                                    نویسنده
+                                </span>
+
+                                {{ book.author }}
+
+                            </p>
+
+                        {% endif %}
+
+
+                        {% if book.description %}
+
+                            <p class="book-description">
+                                {{ book.description }}
+                            </p>
+
+                        {% endif %}
+
+
+                        <!-- Stock -->
+
+                        <div class="book-stock">
+
+                            <div class="stock-item">
+
+                                <span class="stock-label">
+                                    موجود
+                                </span>
+
+                                <strong>
+                                    {{ book.available_copies }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="stock-item">
+
+                                <span class="stock-label">
+                                    امانت
+                                </span>
+
+                                <strong>
+                                    {{ book.borrowed_copies }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="stock-item">
+
+                                <span class="stock-label">
+                                    کل نسخه‌ها
+                                </span>
+
+                                <strong>
+                                    {{ book.total_copies }}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Borrow Request -->
+
+                        {% if book.available_copies > 0 %}
+
+                            <form
+                                method="post"
+                                action="{% url 'borrow_request' book.id %}"
+                                class="borrow-form"
+                            >
+
+                                {% csrf_token %}
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        نام و نام خانوادگی
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="requester_name"
+                                        placeholder="مثلاً محمد رضایی"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        شماره تماس
+                                    </label>
+
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        placeholder="مثلاً 09123456789"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <button
+                                    type="submit"
+                                    class="button primary-button borrow-button"
+                                >
+                                    درخواست امانت
+                                </button>
+
+                            </form>
+
+
+                        {% else %}
+
+                            <div class="book-unavailable">
+
+                                <span>
+                                    فعلاً موجود نیست
+                                </span>
+
+                                <small>
+                                    بعد از بازگشت کتاب، دوباره امکان درخواست فعال می‌شود.
+                                </small>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+
+            {% empty %}
+
+                <!-- =========================
+                     No Results
+                ========================== -->
+
+                <div class="library-empty">
+
+                    <div class="empty-icon">
+                        📚
+                    </div>
+
+                    {% if query %}
+
+                        <h2>
+                            کتابی پیدا نشد
+                        </h2>
+
+                        <p>
+                            برای «{{ query }}» نتیجه‌ای در کتابخانه پیدا نکردیم.
+                        </p>
+
+                        <a
+                            href="{% url 'library' %}"
+                            class="button secondary-button"
+                        >
+                            نمایش همه کتاب‌ها
+                        </a>
+
+                    {% else %}
+
+                        <h2>
+                            هنوز کتابی اضافه نشده
+                        </h2>
+
+                        <p>
+                            کتاب‌های کتابخانه به‌زودی در این قسمت نمایش داده خواهند شد.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

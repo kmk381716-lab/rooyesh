@@ -1,0 +1,239 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+            کانون رویش
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'home/style.css' %}"
+    >
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="container header-content">
+
+            <a href="{% url 'home' %}" class="logo">
+
+                {% if site_settings and site_settings.profile_image %}
+
+                    <img
+                        src="{{ site_settings.profile_image.url }}"
+                        alt="{{ site_settings.name }}"
+                        class="logo-image"
+                    >
+
+                {% else %}
+
+                    <div class="logo-mark">
+                        ر
+                    </div>
+
+                {% endif %}
+
+                <div class="logo-text">
+
+                    <strong>
+
+                        {% if site_settings %}
+                            {{ site_settings.name }}
+                        {% else %}
+                            کانون رویش
+                        {% endif %}
+
+                    </strong>
+
+                    <span>
+
+                        {% if site_settings %}
+                            {{ site_settings.subtitle }}
+                        {% else %}
+                            رشد، رفاقت، تجربه
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="nav">
+
+                <a href="{% url 'home' %}">
+                    خانه
+                </a>
+
+                <a href="{% url 'home' %}#activities">
+                    فعالیت‌ها
+                </a>
+
+                <a href="{% url 'home' %}#trips">
+                    اردوها
+                </a>
+
+                <a href="{% url 'library' %}">
+                    کتابخانه
+                </a>
+
+                <a href="{% url 'home' %}#join">
+                    عضویت
+                </a>
+                <a href="{% url 'home' %}admin">
+                    پنل مربیان
+                </a>
+                <a href="{% url 'home' %}forms">
+                    ساخت فرم
+                </a>
+
+
+            </nav>
+
+
+            <a
+                href="{% url 'home' %}#join"
+                class="header-button"
+            >
+                عضویت در رویش
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+
+                    {% if site_settings and site_settings.profile_image %}
+
+                        <img
+                            src="{{ site_settings.profile_image.url }}"
+                            alt="{{ site_settings.name }}"
+                            class="logo-image"
+                        >
+
+                    {% else %}
+
+                        <div class="logo-mark">
+                            ر
+                        </div>
+
+                    {% endif %}
+
+                    <strong>
+
+                        {% if site_settings %}
+                            {{ site_settings.name }}
+                        {% else %}
+                            کانون رویش
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+                <p>
+                    جایی برای رشد، رفاقت، یادگیری
+                    و تجربه‌های خوب نوجوانان.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    دسترسی سریع
+                </h3>
+
+                <a href="{% url 'home' %}">
+                    خانه
+                </a>
+
+                <a href="{% url 'home' %}#activities">
+                    فعالیت‌ها
+                </a>
+
+                <a href="{% url 'home' %}#trips">
+                    اردوها و برنامه‌ها
+                </a>
+
+                <a href="{% url 'library' %}">
+                    کتابخانه
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    ارتباط با ما
+                </h3>
+
+                <a href="#">
+                    اینستاگرام
+                </a>
+
+                <a href="#">
+                    پیام‌رسان
+                </a>
+
+                <a href="#">
+                    تماس با کانون
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="container footer-bottom">
+
+            <p>
+                © کانون فرهنگی نوجوانان رویش
+            </p>
+
+            <p>
+                تمامی حقوق محفوظ است.
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

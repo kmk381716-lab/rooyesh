@@ -1,0 +1,697 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>{{ form.title }}</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #0f1115;
+            color: #f1f3f5;
+        }
+
+
+        /* =========================
+           کانتینر اصلی
+        ========================== */
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+
+        /* =========================
+           کارت
+        ========================== */
+
+        .card {
+            width: 100%;
+            max-width: 100%;
+            background: #171a21;
+            border: 1px solid #252a33;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+        }
+
+
+        /* =========================
+           هدر فرم
+        ========================== */
+
+        .form-header h1 {
+            margin: 0 0 15px;
+            color: #ffffff;
+            font-size: 28px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .form-description {
+            color: #9da4ae;
+            line-height: 2;
+            margin: 0;
+            font-size: 15px;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           سؤال
+        ========================== */
+
+        .question {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 30px;
+            min-width: 0;
+        }
+
+        .question:last-child {
+            margin-bottom: 0;
+        }
+
+        .question-title {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            line-height: 1.9;
+            font-size: 15px;
+            color: #e8eaed;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .question-title strong {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .required {
+            color: #ff6b7a;
+            margin-right: 4px;
+        }
+
+
+        /* =========================
+           ورودی‌ها
+        ========================== */
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="file"],
+        textarea {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            padding: 12px 14px;
+            border: 1px solid #343a46;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 15px;
+            line-height: 1.6;
+            background: #101318;
+            color: #f1f3f5;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input[type="text"]::placeholder,
+        textarea::placeholder {
+            color: #7d8490;
+            opacity: 1;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        input[type="file"]:focus,
+        textarea:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+
+        /* =========================
+           فایل
+        ========================== */
+
+        input[type="file"] {
+            padding: 9px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        input[type="file"]::file-selector-button {
+            border: 0;
+            background: #252a33;
+            color: #ffffff;
+            padding: 9px 12px;
+            border-radius: 7px;
+            margin-left: 8px;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           گزینه‌ها
+        ========================== */
+
+        .choice {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 11px 13px;
+            border: 1px solid #292e38;
+            border-radius: 10px;
+            background: #12151b;
+            transition: 0.2s;
+        }
+
+        .choice:hover {
+            border-color: #454c58;
+            background: #171a21;
+        }
+
+        .choice label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            cursor: pointer;
+            font-weight: normal;
+            color: #dfe3e8;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .choice input[type="radio"],
+        .choice input[type="checkbox"] {
+            flex: 0 0 auto;
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            margin: 0;
+            cursor: pointer;
+            accent-color: #6c63ff;
+        }
+
+
+        /* =========================
+           خطا
+        ========================== */
+
+        .error {
+            width: 100%;
+            max-width: 100%;
+            margin-top: 8px;
+            color: #ff8f9a;
+            font-size: 14px;
+            line-height: 1.8;
+            background: #2a171b;
+            border: 1px solid #5a252d;
+            padding: 10px 12px;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           متن خالی گزینه
+        ========================== */
+
+        .empty-options {
+            color: #8d96a5;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+
+        /* =========================
+           دکمه ثبت
+        ========================== */
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            min-height: 52px;
+            padding: 14px;
+            background: #6c63ff;
+            color: #fff;
+            border: 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-top: 10px;
+            transition: 0.2s;
+            touch-action: manipulation;
+        }
+
+        .submit-btn:hover {
+            background: #5b52ed;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.99);
+        }
+
+
+        /* =========================
+           موبایل
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .container {
+                margin: 15px auto;
+                padding: 10px;
+            }
+
+            .card {
+                padding: 18px 14px;
+                border-radius: 14px;
+                margin-bottom: 14px;
+            }
+
+            .form-header h1 {
+                font-size: 23px;
+                line-height: 1.6;
+                margin-bottom: 12px;
+            }
+
+            .form-description {
+                font-size: 14px;
+                line-height: 1.9;
+            }
+
+            .question {
+                margin-bottom: 25px;
+            }
+
+            .question-title {
+                font-size: 14px;
+                line-height: 1.9;
+            }
+
+
+            /*
+             * در موبایل فونت 16px کمک می‌کند
+             * مرورگرهای موبایل هنگام فوکوس
+             * صفحه را بی‌دلیل زوم نکنند.
+             */
+
+            input[type="text"],
+            input[type="number"],
+            input[type="date"],
+            input[type="file"],
+            textarea {
+                font-size: 16px;
+            }
+
+            textarea {
+                min-height: 110px;
+            }
+
+
+            .choice {
+                padding: 11px 12px;
+            }
+
+            .choice label {
+                font-size: 14px;
+                line-height: 1.8;
+            }
+
+            .submit-btn {
+                min-height: 50px;
+                font-size: 15px;
+            }
+
+            .error {
+                font-size: 13px;
+            }
+
+        }
+
+
+        /* =========================
+           موبایل خیلی کوچک
+        ========================== */
+
+        @media (max-width: 380px) {
+
+            .container {
+                padding: 8px;
+            }
+
+            .card {
+                padding: 15px 10px;
+                border-radius: 12px;
+            }
+
+            .form-header h1 {
+                font-size: 21px;
+            }
+
+            .question-title {
+                font-size: 14px;
+            }
+
+            .choice {
+                padding: 10px;
+            }
+
+            .choice label {
+                font-size: 14px;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            input[type="date"],
+            input[type="file"],
+            textarea {
+                padding: 11px;
+            }
+
+            .submit-btn {
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- اطلاعات فرم -->
+
+    <div class="card form-header">
+
+        <h1>
+            {{ form.title }}
+        </h1>
+
+        {% if form.description %}
+
+            <p class="form-description">
+                {{ form.description }}
+            </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- فرم -->
+
+    <form
+        method="post"
+        enctype="multipart/form-data"
+    >
+
+        {% csrf_token %}
+
+
+        <div class="card">
+
+            {% for question in questions %}
+
+                <div class="question">
+
+
+                    <!-- عنوان سؤال -->
+
+                    <label class="question-title">
+
+                        <strong>
+
+                            {{ forloop.counter }}.
+                            {{ question.title }}
+
+                        </strong>
+
+
+                        {% if question.required %}
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        {% endif %}
+
+                    </label>
+
+
+                    <!-- متن کوتاه -->
+
+                    {% if question.field_type == "text" %}
+
+                        <input
+                            type="text"
+                            name="question_{{ question.id }}"
+                        >
+
+
+                    <!-- متن بلند -->
+
+                    {% elif question.field_type == "textarea" %}
+
+                        <textarea
+                            name="question_{{ question.id }}"
+                            rows="5"
+                        ></textarea>
+
+
+                    <!-- عدد -->
+
+                    {% elif question.field_type == "number" %}
+
+                        <input
+                            type="number"
+                            name="question_{{ question.id }}"
+                            inputmode="numeric"
+                        >
+
+
+                    <!-- تاریخ -->
+
+                    {% elif question.field_type == "date" %}
+
+                        <input
+                            type="date"
+                            name="question_{{ question.id }}"
+                        >
+
+
+                    <!-- فایل -->
+
+                    {% elif question.field_type == "file" %}
+
+                        <input
+                            type="file"
+                            name="question_{{ question.id }}"
+                        >
+
+
+                    <!-- بله / خیر -->
+
+                    {% elif question.field_type == "boolean" %}
+
+                        <div class="choice">
+
+                            <label>
+
+                                <input
+                                    type="radio"
+                                    name="question_{{ question.id }}"
+                                    value="بله"
+                                >
+
+                                <span>
+                                    بله
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="choice">
+
+                            <label>
+
+                                <input
+                                    type="radio"
+                                    name="question_{{ question.id }}"
+                                    value="خیر"
+                                >
+
+                                <span>
+                                    خیر
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                    <!-- تک انتخابی -->
+
+                    {% elif question.field_type == "single" %}
+
+                        {% for option in question.options.all %}
+
+                            <div class="choice">
+
+                                <label>
+
+                                    <input
+                                        type="radio"
+                                        name="question_{{ question.id }}"
+                                        value="{{ option.title }}"
+                                    >
+
+                                    <span>
+                                        {{ option.title }}
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+                        {% empty %}
+
+                            <p class="empty-options">
+                                برای این سؤال هنوز گزینه‌ای تعریف نشده است.
+                            </p>
+
+                        {% endfor %}
+
+
+                    <!-- چند انتخابی -->
+
+                    {% elif question.field_type == "multiple" %}
+
+                        {% for option in question.options.all %}
+
+                            <div class="choice">
+
+                                <label>
+
+                                    <input
+                                        type="checkbox"
+                                        name="question_{{ question.id }}"
+                                        value="{{ option.title }}"
+                                    >
+
+                                    <span>
+                                        {{ option.title }}
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+                        {% empty %}
+
+                            <p class="empty-options">
+                                برای این سؤال هنوز گزینه‌ای تعریف نشده است.
+                            </p>
+
+                        {% endfor %}
+
+                    {% endif %}
+
+
+                    <!-- خطای سؤال -->
+
+                    {% for error_question_id, error_message in errors.items %}
+
+                        {% if error_question_id == question.id %}
+
+                            <div class="error">
+                                {{ error_message }}
+                            </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
+
+
+            <!-- ثبت -->
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                ثبت پاسخ
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

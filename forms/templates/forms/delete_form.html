@@ -1,0 +1,236 @@
+```django
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .delete-page {
+        width: 100%;
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        background: #0d0f14;
+    }
+
+    .delete-card {
+        width: 100%;
+        max-width: 500px;
+        background: #171a21;
+        border: 1px solid #282d36;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        color: #ffffff;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .delete-title {
+        margin: 0 0 18px;
+        font-size: 28px;
+        line-height: 1.5;
+    }
+
+    .delete-question {
+        margin: 0;
+        color: #9da5b2;
+        line-height: 2;
+        font-size: 15px;
+        overflow-wrap: anywhere;
+    }
+
+    .delete-warning {
+        margin: 18px 0 25px;
+        color: #ff8f9a;
+        font-size: 13px;
+        line-height: 1.8;
+        overflow-wrap: anywhere;
+    }
+
+    .delete-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .delete-btn,
+    .cancel-btn {
+        min-height: 48px;
+        padding: 12px 22px;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.2s;
+        touch-action: manipulation;
+    }
+
+    .delete-btn {
+        border: 0;
+        background: #b42332;
+        color: #ffffff;
+    }
+
+    .delete-btn:hover {
+        background: #cf3042;
+    }
+
+    .cancel-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #252a33;
+        color: #ffffff;
+        text-decoration: none;
+        border: 1px solid #343a46;
+    }
+
+    .cancel-btn:hover {
+        background: #303641;
+    }
+
+
+    /* =========================
+       موبایل
+    ========================== */
+
+    @media (max-width: 600px) {
+
+        .delete-page {
+            min-height: 75vh;
+            padding: 20px 10px;
+        }
+
+        .delete-card {
+            padding: 25px 15px;
+            border-radius: 15px;
+        }
+
+        .delete-title {
+            font-size: 23px;
+            margin-bottom: 15px;
+        }
+
+        .delete-question {
+            font-size: 14px;
+        }
+
+        .delete-warning {
+            font-size: 13px;
+            margin-bottom: 22px;
+        }
+
+        .delete-form {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .delete-btn,
+        .cancel-btn {
+            width: 100%;
+            min-height: 48px;
+        }
+
+    }
+
+
+    /* =========================
+       موبایل خیلی کوچک
+    ========================== */
+
+    @media (max-width: 380px) {
+
+        .delete-page {
+            padding: 15px 8px;
+        }
+
+        .delete-card {
+            padding: 22px 12px;
+            border-radius: 13px;
+        }
+
+        .delete-title {
+            font-size: 21px;
+        }
+
+        .delete-question {
+            font-size: 14px;
+        }
+
+        .delete-btn,
+        .cancel-btn {
+            font-size: 14px;
+            padding: 11px 15px;
+        }
+
+    }
+
+</style>
+
+
+<div class="delete-page">
+
+    <div class="delete-card">
+
+        <h1 class="delete-title">
+            حذف فرم
+        </h1>
+
+
+        <p class="delete-question">
+            آیا از حذف فرم
+            «{{ form.title }}»
+            مطمئن هستید؟
+        </p>
+
+
+        <p class="delete-warning">
+            با حذف فرم، سؤال‌ها و پاسخ‌های ثبت‌شده آن نیز حذف خواهند شد.
+        </p>
+
+
+        <form
+            method="post"
+            class="delete-form"
+        >
+
+            {% csrf_token %}
+
+
+            <button
+                type="submit"
+                class="delete-btn"
+            >
+                حذف فرم
+            </button>
+
+
+            <a
+                href="{% url 'forms:form_list' %}"
+                class="cancel-btn"
+            >
+                انصراف
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

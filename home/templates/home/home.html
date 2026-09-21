@@ -1,0 +1,377 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    کانون رویش
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =========================
+     Hero
+========================== -->
+
+<section class="hero">
+
+    <div class="container hero-content">
+
+        <span class="hero-label">
+            کانون فرهنگی نوجوانان رویش
+        </span>
+
+        <h1>
+            جایی برای رشد، رفاقت و تجربه
+        </h1>
+
+        <p>
+            رویش جایی برای کنار هم بودن نوجوان‌ها،
+            یادگیری، فعالیت و ساختن خاطرات خوب است.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="#join"
+                class="button primary-button"
+            >
+                عضویت در رویش
+            </a>
+
+            <a
+                href="#activities"
+                class="button secondary-button"
+            >
+                فعالیت‌های ما
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     Activities
+========================== -->
+
+<section
+    class="section"
+    id="activities"
+>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>
+                در رویش چه می‌گذرد؟
+            </span>
+
+            <h2>
+                بخشی از فعالیت‌های کانون
+            </h2>
+
+            <p>
+                بخشی از برنامه‌ها و فعالیت‌هایی که در کانون برگزار می‌شود.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            {% for block in blocks %}
+
+                <article class="card">
+
+                    {% if block.content_type == "image" and block.image %}
+
+                        <img
+                            src="{{ block.image.url }}"
+                            alt="{{ block.title }}"
+                            class="card-image"
+                            loading="lazy"
+                        >
+
+                    {% elif block.content_type == "video" and block.video %}
+
+                        <video
+                            class="card-image"
+                            controls
+                            preload="metadata"
+                        >
+
+                            <source
+                                src="{{ block.video.url }}"
+                            >
+
+                            مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+
+                        </video>
+
+                    {% else %}
+
+                        <div class="card-image">
+
+                            <span>
+                                {{ block.title }}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="card-content">
+
+                        <h3>
+                            {{ block.title }}
+                        </h3>
+
+
+                        {% if block.description %}
+
+                            <p>
+                                {{ block.description }}
+                            </p>
+
+                        {% endif %}
+
+
+                        {% if block.button_text and block.button_url %}
+
+                            <a
+                                href="{{ block.button_url }}"
+                                class="card-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {{ block.button_text }}
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+
+            {% empty %}
+
+                <div class="trip-box">
+
+                    <h3>
+                        فعلاً فعالیتی برای نمایش وجود ندارد
+                    </h3>
+
+                    <p>
+                        فعالیت‌های فعال کانون در این قسمت نمایش داده خواهند شد.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     Trips
+========================== -->
+
+<section
+    class="section trips-section"
+    id="trips"
+>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>
+                برنامه‌های پیش‌رو
+            </span>
+
+            <h2>
+                ثبت‌نام اردوها و برنامه‌ها
+            </h2>
+
+            <p>
+                فرم‌های فعال ثبت‌نام را از این بخش مشاهده کنید.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            {% for trip in trips %}
+
+                <article class="card">
+
+                    {% if trip.image %}
+
+                        <img
+                            src="{{ trip.image.url }}"
+                            alt="{{ trip.title }}"
+                            class="card-image"
+                            loading="lazy"
+                        >
+
+                    {% else %}
+
+                        <div class="card-image">
+
+                            <span>
+                                {{ trip.title }}
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="card-content">
+
+                        <h3>
+                            {{ trip.title }}
+                        </h3>
+
+
+                        {% if trip.description %}
+
+                            <p>
+                                {{ trip.description }}
+                            </p>
+
+                        {% endif %}
+
+
+                        {% if trip.registration_url %}
+
+                            <a
+                                href="{{ trip.registration_url }}"
+                                class="button primary-button"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                ثبت‌نام
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+
+            {% empty %}
+
+                <div class="trip-box">
+
+                    <h3>
+                        فعلاً برنامه‌ای برای ثبت‌نام وجود ندارد
+                    </h3>
+
+                    <p>
+                        اردوها و برنامه‌های فعال در این قسمت نمایش داده خواهند شد.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     Library Highlight
+========================== -->
+
+<section class="section library-highlight">
+
+    <div class="container">
+
+        <div class="library-highlight-box">
+
+            <div class="library-highlight-content">
+
+                <span class="hero-label">
+                    کتابخانه رویش
+                </span>
+
+                <h2>
+                    کتابی برای خواندن پیدا کن
+                </h2>
+
+                <p>
+                    کتاب‌های موجود در کتابخانه کانون را ببین
+                    و برای امانت گرفتنشان درخواست بده.
+                </p>
+
+                <a
+                    href="{% url 'library' %}"
+                    class="button primary-button"
+                >
+                    ورود به کتابخانه
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     Join
+========================== -->
+
+<section
+    class="join-section"
+    id="join"
+>
+
+    <div class="container">
+
+        <div class="join-box">
+
+            <span>
+                خانواده رویش
+            </span>
+
+            <h2>
+                دوست داری تو هم عضو رویش باشی؟
+            </h2>
+
+            <p>
+                مشخصاتت را ثبت کن تا مربیان کانون
+                در اولین فرصت با تو تماس بگیرند.
+            </p>
+
+            <a
+                href="#"
+                class="button join-button"
+            >
+                ثبت‌نام در کانون
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

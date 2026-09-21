@@ -1,0 +1,933 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>
+        پاسخ‌های فرم‌ها
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+
+        body {
+            background: #0d0f14;
+            color: #f4f5f7;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================
+           Container
+        ========================== */
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+
+        /* =========================
+           Header
+        ========================== */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+
+        .header-content {
+            min-width: 0;
+        }
+
+
+        .header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+
+        .header p {
+            margin: 0;
+            color: #8c95a3;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           Statistics
+        ========================== */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+
+        .stat {
+            min-width: 0;
+            background: #171a21;
+            border: 1px solid #282d36;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+
+        .stat-title {
+            color: #8c95a3;
+            font-size: 13px;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+
+        /* =========================
+           Filters
+        ========================== */
+
+        .filters {
+            width: 100%;
+            background: #171a21;
+            border: 1px solid #282d36;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+
+        .filters form {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+            gap: 12px;
+        }
+
+
+        .filters input,
+        .filters select {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            min-height: 46px;
+            padding: 12px;
+            background: #101318;
+            color: #ffffff;
+            border: 1px solid #343a46;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+        }
+
+
+        .filters input::placeholder {
+            color: #7d8490;
+        }
+
+
+        .filters input:focus,
+        .filters select:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
+        }
+
+
+        .filters button {
+            min-height: 46px;
+            padding: 12px 20px;
+            border: 0;
+            border-radius: 10px;
+            background: #6c63ff;
+            color: #ffffff;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: 0.2s;
+            touch-action: manipulation;
+        }
+
+
+        .filters button:hover {
+            background: #5b52ed;
+        }
+
+
+        /* =========================
+           Table Box
+        ========================== */
+
+        .table-box {
+            width: 100%;
+            background: #171a21;
+            border: 1px solid #282d36;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+
+        th,
+        td {
+            padding: 16px;
+            text-align: right;
+            border-bottom: 1px solid #282d36;
+            vertical-align: middle;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+
+        th {
+            color: #8c95a3;
+            font-size: 13px;
+            font-weight: normal;
+            background: #14171d;
+            line-height: 1.7;
+        }
+
+
+        td {
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+
+        tbody tr {
+            transition: 0.15s;
+        }
+
+
+        tbody tr:hover {
+            background: #1c2028;
+        }
+
+
+        /* =========================
+           Action buttons
+        ========================== */
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+
+        .view-btn,
+        .delete-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            white-space: nowrap;
+            transition: 0.2s;
+            touch-action: manipulation;
+        }
+
+
+        .view-btn {
+            background: #23283a;
+            color: #9d96ff;
+        }
+
+
+        .view-btn:hover {
+            background: #2c3246;
+        }
+
+
+        .delete-btn {
+            background: #3a1d23;
+            color: #ff8f9a;
+        }
+
+
+        .delete-btn:hover {
+            background: #4a222a;
+            color: #ffffff;
+        }
+
+
+        .anonymous {
+            color: #777f8c;
+        }
+
+
+        /* =========================
+           Empty
+        ========================== */
+
+        .empty {
+            width: 100%;
+            padding: 60px 20px;
+            text-align: center;
+            color: #818a98;
+        }
+
+
+        .empty h3 {
+            margin: 0 0 10px;
+            color: #ffffff;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+
+        .empty p {
+            margin: 0;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           Pagination
+        ========================== */
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 25px;
+        }
+
+
+        .pagination a,
+        .pagination span {
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 13px;
+            border-radius: 8px;
+            background: #171a21;
+            border: 1px solid #292e38;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+
+        .pagination .current {
+            background: #6c63ff;
+            border-color: #6c63ff;
+        }
+
+
+        /* =========================
+           Tablet
+        ========================== */
+
+        @media (max-width: 850px) {
+
+            .container {
+                padding: 25px 15px;
+            }
+
+
+            .filters form {
+                grid-template-columns: 1fr 1fr;
+            }
+
+
+            .filters button {
+                width: 100%;
+                grid-column: 1 / -1;
+            }
+
+
+            th,
+            td {
+                padding: 13px;
+            }
+
+        }
+
+
+        /* =========================
+           Mobile
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .container {
+                padding: 20px 10px;
+            }
+
+
+            .header {
+                margin-bottom: 22px;
+            }
+
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+
+            .header p {
+                font-size: 13px;
+            }
+
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-bottom: 18px;
+            }
+
+
+            .stat {
+                padding: 16px;
+                border-radius: 14px;
+            }
+
+
+            .stat-title {
+                margin-bottom: 6px;
+            }
+
+
+            .stat-number {
+                font-size: 24px;
+            }
+
+
+            .filters {
+                padding: 14px;
+                border-radius: 14px;
+            }
+
+
+            .filters form {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+
+            .filters button {
+                grid-column: auto;
+            }
+
+
+            .filters input,
+            .filters select,
+            .filters button {
+                min-height: 48px;
+                font-size: 16px;
+            }
+
+
+            /*
+             * جدول در موبایل به کارت تبدیل می‌شود
+             */
+
+            .table-box {
+                background: transparent;
+                border: 0;
+                border-radius: 0;
+                overflow: visible;
+            }
+
+
+            table,
+            thead,
+            tbody,
+            tr,
+            th,
+            td {
+                display: block;
+                width: 100%;
+            }
+
+
+            thead {
+                display: none;
+            }
+
+
+            tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+
+            tbody tr {
+                background: #171a21;
+                border: 1px solid #282d36;
+                border-radius: 14px;
+                overflow: hidden;
+            }
+
+
+            tbody tr:hover {
+                background: #1a1d25;
+            }
+
+
+            tbody td {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 15px;
+                padding: 12px 14px;
+                border-bottom: 1px solid #282d36;
+                font-size: 13px;
+                min-height: 48px;
+            }
+
+
+            tbody td:last-child {
+                border-bottom: none;
+            }
+
+
+            tbody td::before {
+                content: attr(data-label);
+                flex: 0 0 85px;
+                color: #8c95a3;
+                font-size: 12px;
+                line-height: 1.8;
+            }
+
+
+            tbody td > * {
+                min-width: 0;
+            }
+
+
+            .actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+
+            .view-btn,
+            .delete-btn {
+                flex: 1 1 0;
+                min-height: 42px;
+                font-size: 13px;
+            }
+
+
+            .empty {
+                background: #171a21;
+                border: 1px dashed #363c47;
+                border-radius: 14px;
+                padding: 45px 15px;
+            }
+
+
+            .pagination {
+                margin-top: 18px;
+            }
+
+
+            .pagination a,
+            .pagination span {
+                min-height: 42px;
+                font-size: 13px;
+            }
+
+        }
+
+
+        /* =========================
+           Mobile Small
+        ========================== */
+
+        @media (max-width: 380px) {
+
+            .container {
+                padding: 15px 8px;
+            }
+
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+
+            .stat {
+                padding: 14px;
+            }
+
+
+            .stat-number {
+                font-size: 22px;
+            }
+
+
+            .filters {
+                padding: 12px;
+            }
+
+
+            tbody td {
+                padding: 11px 12px;
+                gap: 10px;
+            }
+
+
+            tbody td::before {
+                flex-basis: 70px;
+                font-size: 11px;
+            }
+
+
+            .actions {
+                gap: 6px;
+            }
+
+
+            .view-btn,
+            .delete-btn {
+                padding: 8px 9px;
+                font-size: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <div class="header-content">
+
+            <h1>
+                پاسخ‌های فرم‌ها
+            </h1>
+
+            <p>
+                پاسخ‌های ثبت‌شده را مشاهده و مدیریت کنید.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-title">
+                تعداد فرم‌ها
+            </div>
+
+            <div class="stat-number">
+                {{ total_forms }}
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                تعداد کل پاسخ‌ها
+            </div>
+
+            <div class="stat-number">
+                {{ total_submissions }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Filters -->
+
+    <div class="filters">
+
+        <form method="get">
+
+
+            <select name="form">
+
+                <option value="">
+                    همه فرم‌ها
+                </option>
+
+
+                {% for form in forms %}
+
+                    <option
+                        value="{{ form.id }}"
+                        {% if selected_form_id == form.id %}
+                            selected
+                        {% endif %}
+                    >
+                        {{ form.title }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <input
+                type="text"
+                name="q"
+                value="{{ search }}"
+                placeholder="جستجو در فرم، کاربر یا پاسخ..."
+                autocomplete="off"
+            >
+
+
+            <button type="submit">
+                جستجو
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Responses -->
+
+    <div class="table-box">
+
+        {% if page_obj.object_list %}
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>شماره</th>
+                        <th>فرم</th>
+                        <th>کاربر</th>
+                        <th>تاریخ ثبت</th>
+                        <th>عملیات</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for submission in page_obj %}
+
+                        <tr>
+
+
+                            <td data-label="شماره">
+
+                                #{{ submission.id }}
+
+                            </td>
+
+
+                            <td data-label="فرم">
+
+                                {{ submission.form.title }}
+
+                            </td>
+
+
+                            <td data-label="کاربر">
+
+                                {% if submission.user %}
+
+                                    {{ submission.user.get_full_name|default:submission.user.username }}
+
+                                {% else %}
+
+                                    <span class="anonymous">
+                                        کاربر مهمان
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td data-label="تاریخ ثبت">
+
+                                {{ submission.created_at|date:"Y/m/d - H:i" }}
+
+                            </td>
+
+
+                            <td data-label="عملیات">
+
+                                <div class="actions">
+
+
+                                    <a
+                                        href="{% url 'forms:submission_detail' submission.id %}"
+                                        class="view-btn"
+                                    >
+                                        مشاهده
+                                    </a>
+
+
+                                    <a
+                                        href="{% url 'forms:delete_submission' submission.id %}"
+                                        class="delete-btn"
+                                    >
+                                        حذف
+                                    </a>
+
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        {% else %}
+
+            <div class="empty">
+
+                <h3>
+                    پاسخی پیدا نشد
+                </h3>
+
+                <p>
+                    هنوز پاسخی برای فرم‌های انتخاب‌شده ثبت نشده است.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Pagination -->
+
+    {% if page_obj.paginator.num_pages > 1 %}
+
+        <div class="pagination">
+
+
+            {% if page_obj.has_previous %}
+
+                <a
+                    href="?page={{ page_obj.previous_page_number }}&form={{ selected_form_id|default:'' }}&q={{ search|urlencode }}"
+                >
+                    قبلی
+                </a>
+
+            {% endif %}
+
+
+            <span class="current">
+
+                صفحه
+                {{ page_obj.number }}
+                از
+                {{ page_obj.paginator.num_pages }}
+
+            </span>
+
+
+            {% if page_obj.has_next %}
+
+                <a
+                    href="?page={{ page_obj.next_page_number }}&form={{ selected_form_id|default:'' }}&q={{ search|urlencode }}"
+                >
+                    بعدی
+                </a>
+
+            {% endif %}
+
+
+        </div>
+
+    {% endif %}
+
+
+</div>
+
+</body>
+
+</html>

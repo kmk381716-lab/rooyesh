@@ -1,0 +1,927 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .builder-page {
+        width: 100%;
+        min-height: 80vh;
+        background: #0d0f14;
+        color: #f1f3f5;
+        padding: 45px 20px;
+        overflow-x: hidden;
+    }
+
+    .builder-container {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .builder-card {
+        width: 100%;
+        max-width: 100%;
+        background: #171a21;
+        border: 1px solid #252a33;
+        border-radius: 18px;
+        padding: 25px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .builder-title {
+        margin: 0 0 25px;
+        font-size: 28px;
+        line-height: 1.5;
+        color: #ffffff;
+        word-break: break-word;
+    }
+
+    .field {
+        width: 100%;
+        margin-bottom: 20px;
+        min-width: 0;
+    }
+
+    .field label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #e8eaed;
+        line-height: 1.6;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 12px 14px;
+        border: 1px solid #343a46;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 15px;
+        line-height: 1.6;
+        outline: none;
+        background: #101318;
+        color: #f1f3f5;
+        transition: 0.2s;
+    }
+
+    select {
+        cursor: pointer;
+    }
+
+    input[type="text"]::placeholder,
+    textarea::placeholder {
+        color: #7d8490;
+        opacity: 1;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus,
+    select:focus {
+        border-color: #6c63ff;
+        box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
+    }
+
+    textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    select option {
+        background: #171a21;
+        color: #f1f3f5;
+    }
+
+    .error {
+        width: 100%;
+        max-width: 100%;
+        background: #2a171b;
+        color: #ff8f9a;
+        border: 1px solid #5a252d;
+        padding: 13px 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+    }
+
+    .questions {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .question {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        border: 1px solid #2b303a;
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 16px;
+        background: #12151b;
+        overflow: hidden;
+    }
+
+    .question-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+        gap: 12px;
+        min-width: 0;
+    }
+
+    .question-number {
+        min-width: 0;
+        font-size: 17px;
+        font-weight: bold;
+        color: #ffffff;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .remove-btn {
+        flex-shrink: 0;
+        border: none;
+        background: #b42332;
+        color: #fff;
+        padding: 9px 13px;
+        min-height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        white-space: nowrap;
+        touch-action: manipulation;
+    }
+
+    .remove-btn:hover {
+        background: #cf3042;
+    }
+
+    .required-box {
+        display: flex !important;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        margin-top: 12px;
+        font-weight: normal !important;
+        cursor: pointer;
+        color: #cdd2da !important;
+        line-height: 1.7;
+    }
+
+    .required-box input {
+        flex: 0 0 auto;
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        cursor: pointer;
+        accent-color: #6c63ff;
+    }
+
+    .options {
+        width: 100%;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #292e38;
+    }
+
+    .options-title {
+        margin-bottom: 12px;
+        color: #dfe3e8;
+        font-weight: bold;
+        line-height: 1.6;
+    }
+
+    .option-list {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .option-row {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        gap: 10px;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    .option-row input {
+        flex: 1 1 auto;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .delete-option {
+        flex: 0 0 auto;
+        border: none;
+        background: #b42332;
+        color: #fff;
+        padding: 10px 13px;
+        min-height: 42px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        white-space: nowrap;
+        touch-action: manipulation;
+    }
+
+    .delete-option:hover {
+        background: #cf3042;
+    }
+
+    .add-option {
+        width: auto;
+        max-width: 100%;
+        border: 1px solid #343a46;
+        background: #1d222b;
+        color: #e8eaed;
+        padding: 10px 14px;
+        min-height: 42px;
+        border-radius: 9px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        margin-top: 5px;
+        touch-action: manipulation;
+    }
+
+    .add-option:hover {
+        background: #252b35;
+    }
+
+    .add-question {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+        min-height: 50px;
+        border: 2px dashed #454c58;
+        border-radius: 12px;
+        background: transparent;
+        color: #d7dbe1;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 16px;
+        line-height: 1.5;
+        transition: 0.2s;
+        margin-top: 10px;
+        touch-action: manipulation;
+    }
+
+    .add-question:hover {
+        background: #171a21;
+        border-color: #6c63ff;
+        color: #ffffff;
+    }
+
+    .save-btn {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+        min-height: 52px;
+        border: none;
+        border-radius: 12px;
+        background: #6c63ff;
+        color: #fff;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 16px;
+        line-height: 1.5;
+        margin-top: 20px;
+        transition: 0.2s;
+        touch-action: manipulation;
+    }
+
+    .save-btn:hover {
+        background: #5b52ed;
+    }
+
+    .empty-message {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        color: #7d8490;
+        padding: 25px 10px;
+        line-height: 1.7;
+        display: none;
+    }
+
+
+    /* =========================
+       موبایل
+    ========================== */
+
+    @media (max-width: 700px) {
+
+        .builder-page {
+            padding: 20px 10px;
+        }
+
+        .builder-container {
+            max-width: 100%;
+        }
+
+        .builder-card {
+            padding: 18px 14px;
+            border-radius: 14px;
+        }
+
+        .builder-title {
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            padding: 15px 12px;
+            border-radius: 13px;
+        }
+
+        .question-header {
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            font-size: 16px;
+        }
+
+        .remove-btn {
+            padding: 8px 11px;
+            min-height: 38px;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            font-size: 16px;
+            padding: 12px;
+        }
+
+        .required-box {
+            font-size: 14px;
+        }
+
+        .options {
+            margin-top: 18px;
+            padding-top: 18px;
+        }
+
+        .option-row {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .option-row input {
+            width: 100%;
+        }
+
+        .delete-option {
+            width: 100%;
+        }
+
+        .add-option {
+            width: 100%;
+        }
+
+        .add-question {
+            font-size: 15px;
+        }
+
+        .save-btn {
+            font-size: 15px;
+        }
+    }
+
+
+    /* =========================
+       موبایل خیلی کوچک
+    ========================== */
+
+    @media (max-width: 380px) {
+
+        .builder-page {
+            padding: 14px 8px;
+        }
+
+        .builder-card {
+            padding: 15px 10px;
+            border-radius: 12px;
+        }
+
+        .builder-title {
+            font-size: 21px;
+        }
+
+        .question {
+            padding: 13px 10px;
+        }
+
+        .question-header {
+            flex-wrap: wrap;
+        }
+
+        .question-number {
+            font-size: 15px;
+        }
+
+        .remove-btn {
+            padding: 7px 10px;
+            font-size: 13px;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            font-size: 16px;
+            padding: 11px;
+        }
+    }
+</style>
+
+
+<div class="builder-page">
+
+    <div class="builder-container">
+
+        <div class="builder-card">
+
+            <h1 class="builder-title">
+                ساخت فرم جدید
+            </h1>
+
+
+            {% if error %}
+
+                <div class="error">
+                    {{ error }}
+                </div>
+
+            {% endif %}
+
+
+            <form method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+
+                <!-- اطلاعات فرم -->
+
+                <div class="field">
+
+                    <label for="title">
+                        عنوان فرم
+                    </label>
+
+                    <input
+                        id="title"
+                        type="text"
+                        name="title"
+                        placeholder="مثلاً ثبت‌نام مسابقات فوتبال"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="description">
+                        توضیحات فرم
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        placeholder="توضیحات مربوط به این فرم..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- سؤالات -->
+
+                <div id="questions" class="questions"></div>
+
+
+                <div id="emptyMessage" class="empty-message">
+                    هنوز سؤالی اضافه نشده است.
+                </div>
+
+
+                <button
+                    type="button"
+                    class="add-question"
+                    onclick="addQuestion()"
+                >
+                    ＋ افزودن سؤال
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    ساخت فرم
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let questionIndex = 0;
+
+
+/*
+|--------------------------------------------------------------------------
+| اضافه کردن سؤال
+|--------------------------------------------------------------------------
+*/
+
+function addQuestion() {
+
+    const container =
+        document.getElementById("questions");
+
+    const question =
+        document.createElement("div");
+
+    question.className = "question";
+
+
+    const currentIndex =
+        questionIndex;
+
+    question.dataset.index =
+        currentIndex;
+
+
+    question.innerHTML = `
+
+        <input
+            type="hidden"
+            name="question_key"
+            value="${currentIndex}"
+        >
+
+
+        <div class="question-header">
+
+            <span class="question-number">
+                سؤال
+            </span>
+
+            <button
+                type="button"
+                class="remove-btn"
+                onclick="removeQuestion(this)"
+            >
+                حذف
+            </button>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                متن سؤال
+            </label>
+
+            <input
+                type="text"
+                name="question_title"
+                placeholder="مثلاً نام و نام خانوادگی"
+                autocomplete="off"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                نوع سؤال
+            </label>
+
+            <select
+                name="question_type"
+                onchange="toggleOptions(this)"
+            >
+
+                <option value="text">
+                    متن کوتاه
+                </option>
+
+                <option value="textarea">
+                    متن بلند
+                </option>
+
+                <option value="number">
+                    عدد
+                </option>
+
+                <option value="boolean">
+                    بله / خیر
+                </option>
+
+                <option value="single">
+                    تک‌انتخابی
+                </option>
+
+                <option value="multiple">
+                    چندانتخابی
+                </option>
+
+                <option value="date">
+                    تاریخ
+                </option>
+
+                <option value="file">
+                    فایل
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <label class="required-box">
+
+            <input
+                type="checkbox"
+                name="question_required"
+                value="${currentIndex}"
+            >
+
+            این سؤال اجباری باشد
+
+        </label>
+
+
+        <div class="options">
+
+            <div class="options-title">
+                گزینه‌ها
+            </div>
+
+            <div class="option-list"></div>
+
+            <button
+                type="button"
+                class="add-option"
+                onclick="addOption(this)"
+            >
+                ＋ افزودن گزینه
+            </button>
+
+        </div>
+
+    `;
+
+
+    container.appendChild(question);
+
+
+    questionIndex++;
+
+
+    updateQuestionNumbers();
+
+    updateEmptyMessage();
+
+
+    toggleOptions(
+        question.querySelector("select")
+    );
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| حذف سؤال
+|--------------------------------------------------------------------------
+*/
+
+function removeQuestion(button) {
+
+    const question =
+        button.closest(".question");
+
+    if (question) {
+        question.remove();
+    }
+
+    updateQuestionNumbers();
+
+    updateEmptyMessage();
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| شماره‌گذاری سؤال‌ها
+|--------------------------------------------------------------------------
+*/
+
+function updateQuestionNumbers() {
+
+    const questions =
+        document.querySelectorAll(".question");
+
+
+    questions.forEach((question, index) => {
+
+        const number =
+            question.querySelector(".question-number");
+
+        if (number) {
+
+            number.textContent =
+                `سؤال ${index + 1}`;
+
+        }
+
+    });
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| نمایش / مخفی کردن گزینه‌ها
+|--------------------------------------------------------------------------
+*/
+
+function toggleOptions(select) {
+
+    const question =
+        select.closest(".question");
+
+    if (!question) {
+        return;
+    }
+
+
+    const options =
+        question.querySelector(".options");
+
+
+    const needsOptions =
+        select.value === "single" ||
+        select.value === "multiple";
+
+
+    if (needsOptions) {
+
+        options.style.display = "block";
+
+    } else {
+
+        options.style.display = "none";
+
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| افزودن گزینه
+|--------------------------------------------------------------------------
+*/
+
+function addOption(button) {
+
+    const question =
+        button.closest(".question");
+
+    if (!question) {
+        return;
+    }
+
+
+    const list =
+        question.querySelector(".option-list");
+
+    const questionIndex =
+        question.dataset.index;
+
+
+    const row =
+        document.createElement("div");
+
+    row.className =
+        "option-row";
+
+
+    row.innerHTML = `
+
+        <input
+            type="text"
+            name="option_${questionIndex}"
+            placeholder="مثلاً پایه دهم"
+            autocomplete="off"
+        >
+
+        <button
+            type="button"
+            class="delete-option"
+            onclick="removeOption(this)"
+        >
+            حذف
+        </button>
+
+    `;
+
+
+    list.appendChild(row);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| حذف گزینه
+|--------------------------------------------------------------------------
+*/
+
+function removeOption(button) {
+
+    const row =
+        button.closest(".option-row");
+
+    if (row) {
+        row.remove();
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| پیام خالی بودن
+|--------------------------------------------------------------------------
+*/
+
+function updateEmptyMessage() {
+
+    const questions =
+        document.querySelectorAll(".question");
+
+    const emptyMessage =
+        document.getElementById("emptyMessage");
+
+
+    if (questions.length === 0) {
+
+        emptyMessage.style.display =
+            "block";
+
+    } else {
+
+        emptyMessage.style.display =
+            "none";
+
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| شروع صفحه
+|--------------------------------------------------------------------------
+*/
+
+addQuestion();
+
+</script>
+
+{% endblock %}
