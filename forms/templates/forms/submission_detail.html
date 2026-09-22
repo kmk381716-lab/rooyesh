@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -11,12 +10,21 @@
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
+    <meta
+        name="theme-color"
+        content="#080c15"
+    >
+
     <title>
-        پاسخ #{{ submission.id }}
+        پاسخ #{{ submission.id }} | کانون رویش
     </title>
 
 
     <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
 
         * {
             box-sizing: border-box;
@@ -25,257 +33,1628 @@
 
         html,
         body {
+
             width: 100%;
             max-width: 100%;
+
             margin: 0;
             padding: 0;
+
             overflow-x: hidden;
         }
 
 
-        body {
-            background: #0d0f14;
-            color: #f4f5f7;
-            font-family: Tahoma, Arial, sans-serif;
+        :root {
+
+            --bg:
+                #080c15;
+
+            --card:
+                rgba(15,23,38,.86);
+
+            --card-deep:
+                rgba(9,15,27,.82);
+
+            --border:
+                rgba(255,255,255,.075);
+
+            --border-light:
+                rgba(255,255,255,.11);
+
+            --text:
+                #f8fafc;
+
+            --text-soft:
+                #dce5ef;
+
+            --muted:
+                #7d899c;
+
+            --muted-dark:
+                #596578;
+
+            --blue:
+                #4f8cff;
+
+            --blue-light:
+                #60a5fa;
+
+            --purple:
+                #8b5cf6;
+
+            --cyan:
+                #22d3ee;
+
+            --green:
+                #34d399;
+
+            --red:
+                #fb7185;
         }
 
 
-        /* =========================
-           Container
-        ========================== */
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            color:
+                var(--text);
+
+            background:
+
+                radial-gradient(
+                    circle at 8% 5%,
+                    rgba(79,140,255,.10),
+                    transparent 25%
+                ),
+
+                radial-gradient(
+                    circle at 92% 8%,
+                    rgba(139,92,246,.085),
+                    transparent 24%
+                ),
+
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(34,211,238,.035),
+                    transparent 28%
+                ),
+
+                linear-gradient(
+                    145deg,
+                    #070b13,
+                    #0b1120 50%,
+                    #090d17
+                );
+
+            color-scheme:
+                dark;
+        }
+
+
+
+        /* =========================================================
+           BACKGROUND
+        ========================================================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,.012) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.012) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                42px 42px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
+
+            opacity:
+                .55;
+
+            z-index:
+                -5;
+        }
+
+
+        .details-glow {
+
+            position: fixed;
+
+            width:
+                430px;
+
+            height:
+                430px;
+
+            top:
+                -240px;
+
+            right:
+                -180px;
+
+            border-radius:
+                50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(79,140,255,.12),
+                    transparent 70%
+                );
+
+            filter:
+                blur(30px);
+
+            pointer-events:
+                none;
+
+            animation:
+                glowFloat
+                12s
+                ease-in-out
+                infinite;
+
+            z-index:
+                -3;
+        }
+
+
+
+        /* =========================================================
+           CONTAINER
+        ========================================================= */
 
         .container {
-            width: 100%;
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 40px 20px;
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            width:
+                100%;
+
+            max-width:
+                900px;
+
+            margin:
+                0 auto;
+
+            padding:
+                34px 18px 60px;
+
+            animation:
+                pageShow
+                .7s
+                cubic-bezier(.22,1,.36,1);
         }
 
 
-        /* =========================
-           Back
-        ========================== */
+
+        /* =========================================================
+           BACK BUTTON
+        ========================================================= */
 
         .back {
-            display: inline-flex;
-            align-items: center;
-            max-width: 100%;
-            margin-bottom: 20px;
-            color: #9d96ff;
-            font-size: 14px;
-            line-height: 1.7;
-            text-decoration: none;
-            overflow-wrap: anywhere;
-            transition: 0.2s;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            margin-bottom:
+                17px;
+
+            padding:
+                9px 12px;
+
+            color:
+                #8fb5ff;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.7;
+
+            text-decoration:
+                none;
+
+            border:
+                1px solid
+                rgba(79,140,255,.11);
+
+            border-radius:
+                9px;
+
+            background:
+                rgba(79,140,255,.045);
+
+            transition:
+                transform .22s ease,
+                background .22s ease,
+                border-color .22s ease,
+                color .22s ease;
         }
 
 
         .back:hover {
-            color: #b3afff;
+
+            transform:
+                translateX(3px);
+
+            background:
+                rgba(79,140,255,.08);
+
+            border-color:
+                rgba(79,140,255,.22);
+
+            color:
+                #b4ceff;
         }
 
 
-        /* =========================
-           Header + Answer
-        ========================== */
 
-        .header,
-        .answer {
-            width: 100%;
-            max-width: 100%;
-            min-width: 0;
-            background: #171a21;
-            border: 1px solid #282d36;
-            border-radius: 16px;
-            padding: 22px;
-            margin-bottom: 15px;
-            overflow: hidden;
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .header {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            margin-bottom:
+                14px;
+
+            padding:
+                24px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                19px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(16,25,41,.88),
+                    rgba(9,15,27,.82)
+                );
+
+            backdrop-filter:
+                blur(19px);
+
+            -webkit-backdrop-filter:
+                blur(19px);
+
+            box-shadow:
+                0 24px 60px
+                rgba(0,0,0,.23);
+
+            overflow:
+                hidden;
+
+            animation:
+                headerShow
+                .6s
+                .05s
+                both;
         }
 
 
-        /* =========================
-           Header
-        ========================== */
+        .header::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            right:
+                0;
+
+            top:
+                0;
+
+            width:
+                150px;
+
+            height:
+                2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--blue),
+                    var(--purple),
+                    transparent
+                );
+
+            animation:
+                headerLine
+                4s
+                ease-in-out
+                infinite;
+        }
+
+
+        .header-badge {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            margin-bottom:
+                11px;
+
+            padding:
+                6px 10px;
+
+            border-radius:
+                8px;
+
+            background:
+                rgba(79,140,255,.07);
+
+            border:
+                1px solid
+                rgba(79,140,255,.13);
+
+            color:
+                #93c5fd;
+
+            font-size:
+                8px;
+
+            font-weight:
+                700;
+        }
+
+
+        .header-badge-dot {
+
+            width:
+                6px;
+
+            height:
+                6px;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--cyan);
+
+            box-shadow:
+                0 0 10px
+                rgba(34,211,238,.58);
+
+            animation:
+                dotPulse
+                2s
+                ease-in-out
+                infinite;
+        }
+
 
         .header h1 {
-            margin: 0 0 12px;
-            color: #ffffff;
-            font-size: 28px;
-            line-height: 1.6;
-            overflow-wrap: anywhere;
-            word-break: break-word;
+
+            margin:
+                0 0 14px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                27px;
+
+            line-height:
+                1.55;
+
+            font-weight:
+                800;
+
+            overflow-wrap:
+                anywhere;
         }
 
+
+
+        /* =========================================================
+           META
+        ========================================================= */
 
         .meta {
-            color: #8c95a3;
-            line-height: 2;
-            font-size: 14px;
-            overflow-wrap: anywhere;
-            word-break: break-word;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3,minmax(0,1fr));
+
+            gap:
+                9px;
         }
 
 
-        .meta div {
-            overflow-wrap: anywhere;
-            word-break: break-word;
+        .meta-item {
+
+            min-width:
+                0;
+
+            padding:
+                11px 12px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(255,255,255,.025);
         }
 
 
-        /* =========================
-           Answer
-        ========================== */
+        .meta-label {
+
+            margin-bottom:
+                5px;
+
+            color:
+                var(--muted-dark);
+
+            font-size:
+                8px;
+
+            line-height:
+                1.7;
+        }
+
+
+        .meta-value {
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                10px;
+
+            font-weight:
+                700;
+
+            line-height:
+                1.8;
+
+            overflow-wrap:
+                anywhere;
+
+            word-break:
+                break-word;
+        }
+
+
+        .guest-user {
+
+            color:
+                #7f8a9a;
+        }
+
+
+
+        /* =========================================================
+           ANSWERS HEADER
+        ========================================================= */
+
+        .answers-header {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                12px;
+
+            margin:
+                22px 2px 11px;
+        }
+
+
+        .answers-title {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            color:
+                #e9eff7;
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+        }
+
+
+        .answers-title::before {
+
+            content:
+                "";
+
+            width:
+                5px;
+
+            height:
+                17px;
+
+            border-radius:
+                4px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    var(--blue),
+                    var(--purple)
+                );
+        }
+
+
+        .answers-count {
+
+            color:
+                var(--muted-dark);
+
+            font-size:
+                8px;
+        }
+
+
+
+        /* =========================================================
+           ANSWER CARD
+        ========================================================= */
+
+        .answer {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            min-width:
+                0;
+
+            margin-bottom:
+                10px;
+
+            padding:
+                17px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.06);
+
+            border-radius:
+                15px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,23,38,.82),
+                    rgba(9,15,27,.79)
+                );
+
+            box-shadow:
+                0 13px 32px
+                rgba(0,0,0,.15);
+
+            overflow:
+                hidden;
+
+            animation:
+                answerShow
+                .5s
+                both
+                cubic-bezier(.22,1,.36,1);
+
+            transition:
+                transform .25s ease,
+                background .25s ease,
+                border-color .25s ease,
+                box-shadow .25s ease;
+        }
+
+
+        .answer:nth-child(1) {
+            animation-delay:
+                .04s;
+        }
+
+        .answer:nth-child(2) {
+            animation-delay:
+                .08s;
+        }
+
+        .answer:nth-child(3) {
+            animation-delay:
+                .12s;
+        }
+
+        .answer:nth-child(4) {
+            animation-delay:
+                .16s;
+        }
+
+        .answer:nth-child(5) {
+            animation-delay:
+                .20s;
+        }
+
+        .answer:nth-child(6) {
+            animation-delay:
+                .24s;
+        }
+
+
+        .answer::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            right:
+                0;
+
+            top:
+                14px;
+
+            width:
+                2px;
+
+            height:
+                calc(100% - 28px);
+
+            border-radius:
+                4px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    var(--blue),
+                    var(--purple)
+                );
+
+            opacity:
+                .38;
+        }
+
+
+        .answer:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(17,27,44,.88),
+                    rgba(9,15,27,.84)
+                );
+
+            border-color:
+                rgba(96,165,250,.13);
+
+            box-shadow:
+                0 18px 37px
+                rgba(0,0,0,.20);
+        }
+
+
+
+        /* =========================================================
+           QUESTION
+        ========================================================= */
+
+        .question-top {
+
+            display:
+                flex;
+
+            align-items:
+                flex-start;
+
+            gap:
+                9px;
+
+            margin-bottom:
+                11px;
+
+            padding-bottom:
+                11px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.045);
+        }
+
+
+        .question-number {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            flex-shrink:
+                0;
+
+            border-radius:
+                8px;
+
+            background:
+                rgba(79,140,255,.09);
+
+            border:
+                1px solid
+                rgba(79,140,255,.12);
+
+            color:
+                #8fb7ff;
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+        }
+
 
         .question-title {
-            color: #9da5b2;
-            font-size: 13px;
-            line-height: 1.9;
-            margin-bottom: 9px;
-            overflow-wrap: anywhere;
-            word-break: break-word;
+
+            flex:
+                1;
+
+            min-width:
+                0;
+
+            color:
+                #9da8b8;
+
+            font-size:
+                9.5px;
+
+            line-height:
+                1.95;
+
+            overflow-wrap:
+                anywhere;
+
+            word-break:
+                break-word;
         }
 
+
+        .question-title strong {
+
+            color:
+                #e4eaf2;
+
+            font-weight:
+                700;
+        }
+
+
+
+        /* =========================================================
+           ANSWER VALUE
+        ========================================================= */
 
         .answer-value {
-            width: 100%;
-            max-width: 100%;
-            color: #ffffff;
-            line-height: 2;
-            white-space: pre-wrap;
-            overflow-wrap: anywhere;
-            word-break: break-word;
+
+            width:
+                100%;
+
+            max-width:
+                100%;
+
+            color:
+                #eef3f9;
+
+            font-size:
+                11px;
+
+            line-height:
+                2;
+
+            white-space:
+                pre-wrap;
+
+            overflow-wrap:
+                anywhere;
+
+            word-break:
+                break-word;
+
+            padding-right:
+                36px;
         }
 
 
-        /* =========================
-           File
-        ========================== */
+        .no-answer {
+
+            color:
+                var(--muted-dark);
+
+            font-style:
+                normal;
+        }
+
+
+
+        /* =========================================================
+           FILE
+        ========================================================= */
+
+        .file-area {
+
+            padding-right:
+                36px;
+        }
+
 
         .file-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            max-width: 100%;
-            min-height: 42px;
-            padding: 9px 13px;
-            color: #9d96ff;
-            background: #23283a;
-            border-radius: 9px;
-            font-size: 13px;
-            line-height: 1.6;
-            text-decoration: none;
-            overflow-wrap: anywhere;
-            word-break: break-word;
-            transition: 0.2s;
+
+            position:
+                relative;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                8px;
+
+            min-height:
+                42px;
+
+            padding:
+                9px 13px;
+
+            border:
+                1px solid
+                rgba(79,140,255,.14);
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(79,140,255,.065);
+
+            color:
+                #8fb5ff;
+
+            font-size:
+                9.5px;
+
+            line-height:
+                1.6;
+
+            text-decoration:
+                none;
+
+            transition:
+                transform .22s ease,
+                background .22s ease,
+                border-color .22s ease,
+                box-shadow .22s ease;
+        }
+
+
+        .file-icon {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            width:
+                23px;
+
+            height:
+                23px;
+
+            border-radius:
+                7px;
+
+            background:
+                rgba(79,140,255,.10);
+
+            font-size:
+                11px;
         }
 
 
         .file-link:hover {
-            background: #2c3246;
+
+            transform:
+                translateY(-1px);
+
+            background:
+                rgba(79,140,255,.11);
+
+            border-color:
+                rgba(79,140,255,.25);
+
+            box-shadow:
+                0 9px 20px
+                rgba(79,140,255,.07);
         }
 
 
-        /* =========================
-           Mobile
-        ========================== */
 
-        @media (max-width: 600px) {
+        /* =========================================================
+           EMPTY
+        ========================================================= */
+
+        .empty-answer {
+
+            min-height:
+                180px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align:
+                center;
+
+            color:
+                var(--muted);
+
+            font-size:
+                10px;
+
+            line-height:
+                1.9;
+
+            border:
+                1px dashed
+                rgba(148,163,184,.13);
+
+            border-radius:
+                15px;
+
+            background:
+                rgba(255,255,255,.014);
+
+            animation:
+                answerShow
+                .5s
+                both;
+        }
+
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .footer {
+
+            margin-top:
+                25px;
+
+            padding-top:
+                16px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.05);
+
+            color:
+                #4e5969;
+
+            text-align:
+                center;
+
+            font-size:
+                8px;
+
+            line-height:
+                1.8;
+        }
+
+
+
+        /* =========================================================
+           FOCUS
+        ========================================================= */
+
+        .back:focus-visible,
+        .file-link:focus-visible {
+
+            outline:
+                3px solid
+                rgba(96,165,250,.17);
+
+            outline-offset:
+                3px;
+        }
+
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 650px) {
 
             .container {
-                padding: 20px 10px;
+
+                padding:
+                    18px 9px 30px;
             }
 
 
             .back {
-                margin-bottom: 15px;
-                font-size: 13px;
+
+                margin-bottom:
+                    13px;
+
+                padding:
+                    8px 10px;
+
+                font-size:
+                    9px;
             }
 
 
-            .header,
-            .answer {
-                padding: 17px 14px;
-                border-radius: 14px;
-                margin-bottom: 12px;
+            .header {
+
+                padding:
+                    20px 15px;
+
+                border-radius:
+                    17px;
+            }
+
+
+            .header-badge {
+
+                font-size:
+                    7.5px;
             }
 
 
             .header h1 {
-                font-size: 23px;
-                line-height: 1.6;
-                margin-bottom: 10px;
+
+                font-size:
+                    21px;
+
+                margin-bottom:
+                    12px;
             }
 
 
             .meta {
-                font-size: 13px;
-                line-height: 1.9;
+
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    7px;
+            }
+
+
+            .meta-item {
+
+                display:
+                    flex;
+
+                align-items:
+                    center;
+
+                justify-content:
+                    space-between;
+
+                gap:
+                    15px;
+
+                min-height:
+                    40px;
+
+                padding:
+                    9px 10px;
+            }
+
+
+            .meta-label {
+
+                margin:
+                    0;
+
+                flex:
+                    0 0 65px;
+
+                font-size:
+                    8px;
+            }
+
+
+            .meta-value {
+
+                flex:
+                    1;
+
+                text-align:
+                    left;
+
+                font-size:
+                    9px;
+            }
+
+
+            .answers-header {
+
+                margin:
+                    18px 2px 10px;
+            }
+
+
+            .answers-title {
+
+                font-size:
+                    11px;
+            }
+
+
+            .answers-count {
+
+                font-size:
+                    7px;
+            }
+
+
+            .answer {
+
+                padding:
+                    14px 11px;
+
+                border-radius:
+                    13px;
+            }
+
+
+            .answer:hover {
+
+                transform:
+                    none;
+            }
+
+
+            .question-top {
+
+                gap:
+                    7px;
+
+                margin-bottom:
+                    10px;
+
+                padding-bottom:
+                    10px;
+            }
+
+
+            .question-number {
+
+                width:
+                    25px;
+
+                height:
+                    25px;
+
+                border-radius:
+                    7px;
+
+                font-size:
+                    8px;
             }
 
 
             .question-title {
-                font-size: 13px;
-                line-height: 1.9;
-                margin-bottom: 8px;
+
+                font-size:
+                    8.8px;
+
+                line-height:
+                    1.95;
             }
 
 
             .answer-value {
-                font-size: 14px;
-                line-height: 2;
+
+                padding-right:
+                    31px;
+
+                font-size:
+                    10px;
+
+                line-height:
+                    1.95;
+            }
+
+
+            .file-area {
+
+                padding-right:
+                    31px;
             }
 
 
             .file-link {
-                width: 100%;
-                min-height: 46px;
-                font-size: 14px;
+
+                width:
+                    100%;
+
+                min-height:
+                    44px;
+
+                font-size:
+                    9px;
+            }
+
+
+            .empty-answer {
+
+                min-height:
+                    160px;
+
+                font-size:
+                    9px;
+            }
+
+
+            .footer {
+
+                margin-top:
+                    21px;
+
+                padding-top:
+                    13px;
+
+                font-size:
+                    7.5px;
             }
 
         }
 
 
-        /* =========================
-           Mobile Small
-        ========================== */
+
+        /* =========================================================
+           SMALL MOBILE
+        ========================================================= */
 
         @media (max-width: 380px) {
 
             .container {
-                padding: 15px 8px;
+
+                padding:
+                    12px 7px 24px;
             }
 
 
-            .header,
-            .answer {
-                padding: 15px 11px;
-                border-radius: 12px;
+            .header {
+
+                padding:
+                    18px 12px;
+
+                border-radius:
+                    15px;
             }
 
 
             .header h1 {
-                font-size: 21px;
+
+                font-size:
+                    19px;
             }
 
 
-            .meta {
-                font-size: 12px;
+            .header p {
+
+                font-size:
+                    8.5px;
+            }
+
+
+            .meta-label {
+
+                flex-basis:
+                    58px;
+
+                font-size:
+                    7.5px;
+            }
+
+
+            .meta-value {
+
+                font-size:
+                    8.5px;
+            }
+
+
+            .answer {
+
+                padding:
+                    13px 9px;
             }
 
 
             .question-title {
-                font-size: 12px;
+
+                font-size:
+                    8.3px;
             }
 
 
             .answer-value {
-                font-size: 13px;
+
+                padding-right:
+                    30px;
+
+                font-size:
+                    9.3px;
             }
 
 
-            .file-link {
-                font-size: 13px;
-                padding: 9px 10px;
+            .file-area {
+
+                padding-right:
+                    30px;
+            }
+
+        }
+
+
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
+            }
+
+        }
+
+
+
+        /* =========================================================
+           ANIMATIONS
+        ========================================================= */
+
+        @keyframes pageShow {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(18px)
+                    scale(.985);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        @keyframes headerShow {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(10px);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        @keyframes answerShow {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(9px);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        @keyframes dotPulse {
+
+            0%,
+            100% {
+
+                opacity:
+                    .6;
+
+                transform:
+                    scale(1);
+            }
+
+            50% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.3);
+            }
+
+        }
+
+
+        @keyframes glowFloat {
+
+            0%,
+            100% {
+
+                transform:
+                    translate3d(0,0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate3d(-25px,25px,0);
+            }
+
+        }
+
+
+        @keyframes headerLine {
+
+            0%,
+            100% {
+
+                transform:
+                    translateX(0);
+            }
+
+            50% {
+
+                transform:
+                    translateX(-45px);
             }
 
         }
@@ -287,22 +1666,45 @@
 
 <body>
 
+
+<div class="details-glow"></div>
+
+
 <div class="container">
 
 
-    <!-- بازگشت -->
+    <!-- =====================================================
+         BACK
+    ====================================================== -->
 
     <a
         href="{% url 'forms:responses' %}"
         class="back"
     >
-        → بازگشت به پاسخ‌ها
+
+        ←
+
+        بازگشت به پاسخ‌ها
+
     </a>
 
 
-    <!-- اطلاعات ثبت -->
 
-    <div class="header">
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <section class="header">
+
+
+        <div class="header-badge">
+
+            <span class="header-badge-dot"></span>
+
+            جزئیات ثبت پاسخ
+
+        </div>
+
 
         <h1>
             پاسخ #{{ submission.id }}
@@ -311,72 +1713,156 @@
 
         <div class="meta">
 
-            <div>
-                فرم:
-                {{ submission.form.title }}
-            </div>
 
+            <div class="meta-item">
 
-            <div>
+                <div class="meta-label">
+                    فرم
+                </div>
 
-                کاربر:
-
-                {% if submission.user %}
-
-                    {{ submission.user.get_full_name|default:submission.user.username }}
-
-                {% else %}
-
-                    کاربر مهمان
-
-                {% endif %}
+                <div class="meta-value">
+                    {{ submission.form.title }}
+                </div>
 
             </div>
 
 
-            <div>
+            <div class="meta-item">
 
-                تاریخ:
-                {{ submission.created_at|date:"Y/m/d - H:i" }}
+                <div class="meta-label">
+                    کاربر
+                </div>
+
+
+                <div class="meta-value">
+
+                    {% if submission.user %}
+
+                        {{ submission.user.get_full_name|default:submission.user.username }}
+
+                    {% else %}
+
+                        <span class="guest-user">
+                            کاربر مهمان
+                        </span>
+
+                    {% endif %}
+
+                </div>
 
             </div>
+
+
+            <div class="meta-item">
+
+                <div class="meta-label">
+                    تاریخ ثبت
+                </div>
+
+                <div class="meta-value">
+                    {{ submission.created_at|date:"Y/m/d - H:i" }}
+                </div>
+
+            </div>
+
 
         </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ANSWERS TITLE
+    ====================================================== -->
+
+    <div class="answers-header">
+
+
+        <div class="answers-title">
+            پاسخ‌های ثبت‌شده
+        </div>
+
+
+        <div class="answers-count">
+            {{ answers|length }} پاسخ
+        </div>
+
 
     </div>
 
 
-    <!-- پاسخ‌ها -->
+
+    <!-- =====================================================
+         ANSWERS
+    ====================================================== -->
 
     {% for answer in answers %}
 
-        <div class="answer">
+
+        <article class="answer">
 
 
-            <div class="question-title">
+            <div class="question-top">
 
-                سؤال {{ forloop.counter }}
 
-                ·
+                <div class="question-number">
 
-                {{ answer.question.title }}
+                    {{ forloop.counter }}
+
+                </div>
+
+
+                <div class="question-title">
+
+                    <strong>
+                        سؤال {{ forloop.counter }}
+                    </strong>
+
+                    ·
+
+                    {{ answer.question.title }}
+
+                </div>
+
 
             </div>
 
 
+
+            <!-- فایل -->
+
             {% if answer.file_value %}
 
-                <a
-                    href="{{ answer.file_value.url }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="file-link"
-                >
-                    مشاهده / دانلود فایل
-                </a>
 
+                <div class="file-area">
+
+
+                    <a
+                        href="{{ answer.file_value.url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="file-link"
+                    >
+
+                        <span class="file-icon">
+                            ↗
+                        </span>
+
+                        مشاهده / دانلود فایل
+
+                    </a>
+
+
+                </div>
+
+
+
+            <!-- پاسخ متنی -->
 
             {% elif answer.text_value %}
+
 
                 <div class="answer-value">
 
@@ -385,36 +1871,53 @@
                 </div>
 
 
+
+            <!-- بدون پاسخ -->
+
             {% else %}
 
-                <div class="answer-value">
+
+                <div class="answer-value no-answer">
 
                     بدون پاسخ
 
                 </div>
 
+
             {% endif %}
 
-        </div>
+
+        </article>
 
 
     {% empty %}
 
-        <div class="answer">
 
-            <div class="answer-value">
+        <div class="empty-answer">
 
-                برای این ثبت، پاسخی وجود ندارد.
-
-            </div>
+            برای این ثبت، هیچ پاسخی وجود ندارد.
 
         </div>
 
+
     {% endfor %}
 
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div class="footer">
+
+        کانون فرهنگی تربیتی رویش
+
+    </div>
+
+
 </div>
+
 
 </body>
 
 </html>
-

@@ -1,15 +1,148 @@
+
 {% extends "admin/change_list.html" %}
+
+{% block extrastyle %}
+
+    {{ block.super }}
+
+    <style>
+
+        /* ================================================
+           Excel Import Button
+        ================================================ */
+
+        #content-main .object-tools .excel-import-button {
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 38px;
+
+            padding:
+                0 15px;
+
+            margin-left: 6px;
+
+            border-radius: 10px;
+
+            color: #ffffff !important;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4387ff,
+                    #7958eb
+                ) !important;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.10);
+
+            box-shadow:
+                0 8px 22px rgba(67, 135, 255, 0.18);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            text-decoration: none !important;
+
+            transition:
+                transform 0.22s ease,
+                box-shadow 0.22s ease,
+                filter 0.22s ease;
+
+        }
+
+
+        #content-main .object-tools .excel-import-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 28px rgba(67, 135, 255, 0.28);
+
+            filter:
+                brightness(1.06);
+
+        }
+
+
+        #content-main .object-tools .excel-import-button:active {
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        /* آیکن کوچک */
+
+        #content-main .object-tools .excel-import-button::before {
+
+            content: "↑";
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-left: 7px;
+
+            width: 19px;
+            height: 19px;
+
+            border-radius: 6px;
+
+            background:
+                rgba(255, 255, 255, 0.14);
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+        }
+
+
+        /* موبایل */
+
+        @media (max-width: 700px) {
+
+            #content-main .object-tools .excel-import-button {
+
+                min-height: 40px;
+
+                padding:
+                    0 12px;
+
+                font-size: 11px;
+
+                margin-bottom: 5px;
+
+            }
+
+        }
+
+    </style>
+
+{% endblock %}
+
 
 {% block object-tools-items %}
 
     <li>
+
         <a
             href="{% url 'admin:library_book_import_excel' %}"
-            class="addlink"
+            class="excel-import-button"
         >
             ورود کتاب‌ها از اکسل
         </a>
+
     </li>
+
 
     {{ block.super }}
 

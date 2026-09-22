@@ -1,187 +1,1308 @@
-```django
 {% extends "base.html" %}
 
 {% block content %}
 
 <style>
 
-    * {
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    .delete-page,
+    .delete-page * {
         box-sizing: border-box;
     }
 
-    html,
-    body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-    }
+
+    /* =========================================================
+       PAGE
+    ========================================================= */
 
     .delete-page {
+
+        --bg: #080b12;
+
+        --card:
+            rgba(16, 22, 35, 0.88);
+
+        --border:
+            rgba(255, 255, 255, 0.075);
+
+        --text:
+            #f8fafc;
+
+        --muted:
+            #7f8a9c;
+
+        --red:
+            #fb7185;
+
+        --red-strong:
+            #e23b55;
+
+        --red-bg:
+            rgba(244, 63, 94, 0.075);
+
+        position: relative;
+
         width: 100%;
-        min-height: 80vh;
+
+        min-height:
+            calc(100vh - 80px);
+
         display: flex;
+
         align-items: center;
         justify-content: center;
-        padding: 40px 20px;
-        background: #0d0f14;
+
+        padding:
+            35px 18px 55px;
+
+        color:
+            var(--text);
+
+        overflow: hidden;
+
+        background:
+
+            radial-gradient(
+                circle at 50% 10%,
+                rgba(244, 63, 94, .08),
+                transparent 27%
+            ),
+
+            radial-gradient(
+                circle at 10% 90%,
+                rgba(79, 140, 255, .05),
+                transparent 25%
+            ),
+
+            linear-gradient(
+                145deg,
+                #070a11,
+                #0a101b 52%,
+                #080c14
+            );
     }
+
+
+    /* =========================================================
+       GRID
+    ========================================================= */
+
+    .delete-page::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background-image:
+
+            linear-gradient(
+                rgba(255,255,255,.012) 1px,
+                transparent 1px
+            ),
+
+            linear-gradient(
+                90deg,
+                rgba(255,255,255,.012) 1px,
+                transparent 1px
+            );
+
+        background-size:
+            42px 42px;
+
+        mask-image:
+            linear-gradient(
+                to bottom,
+                black,
+                transparent 90%
+            );
+
+        pointer-events: none;
+
+        opacity: .55;
+    }
+
+
+    /* =========================================================
+       GLOW
+    ========================================================= */
+
+    .delete-glow {
+
+        position: absolute;
+
+        width: 410px;
+        height: 410px;
+
+        top: -230px;
+        left: 50%;
+
+        transform:
+            translateX(-50%);
+
+        border-radius: 50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(244,63,94,.11),
+                transparent 70%
+            );
+
+        filter:
+            blur(28px);
+
+        pointer-events: none;
+
+        animation:
+            glowMove
+            8s
+            ease-in-out
+            infinite;
+    }
+
+
+
+    /* =========================================================
+       CARD
+    ========================================================= */
 
     .delete-card {
+
+        position: relative;
+
+        z-index: 2;
+
         width: 100%;
-        max-width: 500px;
-        background: #171a21;
-        border: 1px solid #282d36;
-        border-radius: 20px;
-        padding: 30px;
-        text-align: center;
-        color: #ffffff;
-        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+
+        max-width:
+            530px;
+
+        padding:
+            34px 31px 28px;
+
+        text-align:
+            center;
+
+        border:
+            1px solid
+            var(--border);
+
+        border-radius:
+            23px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(18,25,39,.92),
+                rgba(9,14,25,.88)
+            );
+
+        backdrop-filter:
+            blur(22px);
+
+        -webkit-backdrop-filter:
+            blur(22px);
+
+        box-shadow:
+
+            0 35px 90px
+            rgba(0,0,0,.43),
+
+            0 0 0 1px
+            rgba(255,255,255,.01);
+
+        overflow:
+            hidden;
+
+        animation:
+            cardShow
+            .7s
+            cubic-bezier(.22,1,.36,1);
     }
 
-    .delete-title {
-        margin: 0 0 18px;
-        font-size: 28px;
-        line-height: 1.5;
+
+    .delete-card::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 280px;
+        height: 280px;
+
+        top: -170px;
+        right: -120px;
+
+        border-radius: 50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(244,63,94,.085),
+                transparent 70%
+            );
+
+        pointer-events: none;
     }
 
-    .delete-question {
-        margin: 0;
-        color: #9da5b2;
-        line-height: 2;
-        font-size: 15px;
-        overflow-wrap: anywhere;
+
+    .delete-card::after {
+
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        right: 0;
+        left: 0;
+
+        height: 2px;
+
+        background:
+            linear-gradient(
+                90deg,
+                transparent,
+                #f43f5e,
+                #fb7185,
+                transparent
+            );
+
+        opacity: .8;
     }
 
-    .delete-question strong {
-        color: #ffffff;
-    }
 
-    .delete-warning {
-        margin: 18px 0 25px;
-        color: #ff8f9a;
-        font-size: 13px;
-        line-height: 1.8;
-        overflow-wrap: anywhere;
-    }
 
-    .delete-form {
+    /* =========================================================
+       ICON
+    ========================================================= */
+
+    .warning-icon-wrap {
+
+        position: relative;
+
+        width: 74px;
+        height: 74px;
+
+        margin:
+            0 auto 18px;
+
         display: flex;
+
         align-items: center;
         justify-content: center;
-        gap: 10px;
-        width: 100%;
+
+        border-radius:
+            21px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(244,63,94,.12),
+                rgba(190,24,93,.065)
+            );
+
+        border:
+            1px solid
+            rgba(244,63,94,.18);
+
+        box-shadow:
+
+            inset 0 0 25px
+            rgba(244,63,94,.035),
+
+            0 12px 32px
+            rgba(0,0,0,.22);
+
+        animation:
+            iconShow
+            .65s
+            .05s
+            both
+            cubic-bezier(.22,1,.36,1);
     }
+
+
+    .warning-icon-wrap::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: -8px;
+
+        border-radius: 27px;
+
+        border:
+            1px solid
+            rgba(244,63,94,.07);
+
+        animation:
+            iconRing
+            2.7s
+            ease-out
+            infinite;
+    }
+
+
+    .warning-icon {
+
+        position: relative;
+
+        z-index: 2;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 48px;
+        height: 48px;
+
+        border-radius:
+            14px;
+
+        background:
+            rgba(244,63,94,.10);
+
+        color:
+            var(--red);
+
+        font-size:
+            23px;
+
+        font-weight:
+            800;
+    }
+
+
+
+    /* =========================================================
+       TEXT
+    ========================================================= */
+
+    .delete-title {
+
+        position: relative;
+
+        z-index: 2;
+
+        margin:
+            0 0 10px;
+
+        color:
+            var(--text);
+
+        font-size:
+            25px;
+
+        line-height:
+            1.55;
+
+        font-weight:
+            800;
+
+        animation:
+            textShow
+            .55s
+            .12s
+            both;
+    }
+
+
+    .delete-question {
+
+        position: relative;
+
+        z-index: 2;
+
+        margin:
+            0 auto;
+
+        max-width:
+            450px;
+
+        color:
+            #aeb9ca;
+
+        font-size:
+            11px;
+
+        line-height:
+            2;
+
+        overflow-wrap:
+            anywhere;
+
+        animation:
+            textShow
+            .55s
+            .18s
+            both;
+    }
+
+
+    .delete-question strong {
+
+        color:
+            #f1f5f9;
+
+        font-weight:
+            700;
+    }
+
+
+
+    /* =========================================================
+       WARNING
+    ========================================================= */
+
+    .delete-warning {
+
+        position: relative;
+
+        z-index: 2;
+
+        display: flex;
+
+        align-items:
+            flex-start;
+
+        gap:
+            9px;
+
+        margin:
+            21px 0 24px;
+
+        padding:
+            13px 14px;
+
+        text-align:
+            right;
+
+        border:
+            1px solid
+            rgba(244,63,94,.15);
+
+        border-radius:
+            12px;
+
+        background:
+            var(--red-bg);
+
+        color:
+            #dd8b99;
+
+        font-size:
+            9.5px;
+
+        line-height:
+            1.9;
+
+        animation:
+            warningShow
+            .55s
+            .23s
+            both;
+    }
+
+
+    .warning-icon-small {
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 23px;
+        height: 23px;
+
+        border-radius:
+            7px;
+
+        background:
+            rgba(244,63,94,.10);
+
+        color:
+            var(--red);
+
+        font-size:
+            11px;
+
+        font-weight:
+            800;
+    }
+
+
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+
+    .delete-form {
+
+        position: relative;
+
+        z-index: 2;
+
+        display: flex;
+
+        align-items:
+            center;
+
+        gap:
+            9px;
+
+        width:
+            100%;
+
+        animation:
+            buttonsShow
+            .55s
+            .28s
+            both;
+    }
+
 
     .delete-btn,
     .cancel-btn {
-        min-height: 48px;
-        padding: 12px 22px;
-        border-radius: 10px;
-        font-family: inherit;
-        font-size: 15px;
-        cursor: pointer;
-        transition: 0.2s;
-        touch-action: manipulation;
+
+        min-height:
+            48px;
+
+        border-radius:
+            11px;
+
+        font-family:
+            inherit;
+
+        font-size:
+            10px;
+
+        font-weight:
+            700;
+
+        cursor:
+            pointer;
+
+        transition:
+            transform .22s ease,
+            background .22s ease,
+            border-color .22s ease,
+            box-shadow .22s ease,
+            color .22s ease;
     }
+
+
+    /* =========================================================
+       DELETE BUTTON
+    ========================================================= */
 
     .delete-btn {
-        border: 0;
-        background: #b42332;
-        color: #ffffff;
+
+        position: relative;
+
+        flex:
+            1 1 auto;
+
+        border:
+            1px solid
+            rgba(244,63,94,.18);
+
+        background:
+            linear-gradient(
+                135deg,
+                #dc2949,
+                #bd2340
+            );
+
+        color:
+            white;
+
+        box-shadow:
+            0 11px 27px
+            rgba(244,63,94,.13);
+
+        overflow:
+            hidden;
     }
+
+
+    .delete-btn::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background:
+            linear-gradient(
+                110deg,
+                transparent 20%,
+                rgba(255,255,255,.17) 50%,
+                transparent 80%
+            );
+
+        transform:
+            translateX(120%);
+
+        transition:
+            transform .6s ease;
+    }
+
+
+    .delete-btn span {
+
+        position: relative;
+
+        z-index: 2;
+    }
+
 
     .delete-btn:hover {
-        background: #cf3042;
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 17px 33px
+            rgba(244,63,94,.21);
+
+        filter:
+            brightness(1.07);
     }
+
+
+    .delete-btn:hover::before {
+
+        transform:
+            translateX(-120%);
+    }
+
+
+    .delete-btn:active {
+
+        transform:
+            scale(.985);
+    }
+
+
+
+    /* =========================================================
+       CANCEL
+    ========================================================= */
 
     .cancel-btn {
+
+        flex:
+            0 0 110px;
+
         display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: #252a33;
-        color: #ffffff;
-        text-decoration: none;
-        border: 1px solid #343a46;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+
+        border:
+            1px solid
+            rgba(255,255,255,.07);
+
+        background:
+            rgba(255,255,255,.035);
+
+        color:
+            #bec8d6;
+
+        text-decoration:
+            none;
     }
+
 
     .cancel-btn:hover {
-        background: #303641;
+
+        transform:
+            translateY(-2px);
+
+        background:
+            rgba(255,255,255,.065);
+
+        border-color:
+            rgba(255,255,255,.12);
+
+        color:
+            #f2f5f9;
+
+        box-shadow:
+            0 10px 22px
+            rgba(0,0,0,.15);
     }
 
 
-    /* =========================
-       موبایل
-    ========================== */
+    .cancel-btn:active {
+
+        transform:
+            scale(.985);
+    }
+
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .delete-footer {
+
+        position:
+            relative;
+
+        z-index:
+            2;
+
+        margin-top:
+            19px;
+
+        padding-top:
+            15px;
+
+        border-top:
+            1px solid
+            rgba(255,255,255,.05);
+
+        color:
+            #4e5969;
+
+        font-size:
+            8px;
+
+        line-height:
+            1.8;
+
+        animation:
+            textShow
+            .55s
+            .36s
+            both;
+    }
+
+
+
+    /* =========================================================
+       FOCUS
+    ========================================================= */
+
+    .delete-btn:focus-visible,
+    .cancel-btn:focus-visible {
+
+        outline:
+            3px solid
+            rgba(251,113,133,.18);
+
+        outline-offset:
+            3px;
+    }
+
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
 
     @media (max-width: 600px) {
 
         .delete-page {
-            min-height: 75vh;
-            padding: 20px 10px;
+
+            min-height:
+                calc(100vh - 60px);
+
+            padding:
+                20px 10px 30px;
         }
+
 
         .delete-card {
-            padding: 25px 15px;
-            border-radius: 15px;
+
+            padding:
+                26px 16px 21px;
+
+            border-radius:
+                19px;
         }
+
+
+        .warning-icon-wrap {
+
+            width:
+                66px;
+
+            height:
+                66px;
+
+            margin-bottom:
+                15px;
+
+            border-radius:
+                19px;
+        }
+
+
+        .warning-icon {
+
+            width:
+                43px;
+
+            height:
+                43px;
+
+            border-radius:
+                13px;
+
+            font-size:
+                21px;
+        }
+
 
         .delete-title {
-            font-size: 23px;
-            margin-bottom: 15px;
+
+            font-size:
+                21px;
         }
+
 
         .delete-question {
-            font-size: 14px;
+
+            font-size:
+                10px;
+
+            line-height:
+                2;
         }
+
 
         .delete-warning {
-            font-size: 13px;
-            margin: 16px 0 22px;
+
+            margin:
+                18px 0 21px;
+
+            padding:
+                11px 12px;
+
+            font-size:
+                8.7px;
         }
 
+
         .delete-form {
-            flex-direction: column;
-            gap: 10px;
+
+            flex-direction:
+                column;
+
+            gap:
+                8px;
         }
+
 
         .delete-btn,
         .cancel-btn {
-            width: 100%;
-            min-height: 48px;
+
+            width:
+                100%;
+
+            min-height:
+                46px;
         }
+
+
+        .cancel-btn {
+
+            flex-basis:
+                auto;
+        }
+
+
+        .delete-footer {
+
+            margin-top:
+                17px;
+
+            padding-top:
+                13px;
+
+            font-size:
+                7.5px;
+        }
+
     }
 
 
-    /* =========================
-       موبایل خیلی کوچک
-    ========================== */
+
+    /* =========================================================
+       VERY SMALL PHONES
+    ========================================================= */
 
     @media (max-width: 380px) {
 
         .delete-page {
-            padding: 15px 8px;
+
+            padding:
+                13px 8px 23px;
         }
+
 
         .delete-card {
-            padding: 22px 12px;
-            border-radius: 13px;
+
+            padding:
+                22px 13px 18px;
+
+            border-radius:
+                17px;
         }
+
+
+        .warning-icon-wrap {
+
+            width:
+                61px;
+
+            height:
+                61px;
+
+            border-radius:
+                16px;
+        }
+
+
+        .warning-icon {
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            font-size:
+                19px;
+        }
+
 
         .delete-title {
-            font-size: 21px;
+
+            font-size:
+                19px;
         }
+
 
         .delete-question {
-            font-size: 14px;
+
+            font-size:
+                9.3px;
         }
 
-        .delete-btn,
-        .cancel-btn {
-            font-size: 14px;
-            padding: 11px 15px;
+
+        .delete-warning {
+
+            font-size:
+                8.2px;
         }
+
+    }
+
+
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes cardShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(23px)
+                scale(.975);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+    }
+
+
+    @keyframes iconShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                scale(.72)
+                rotate(-6deg);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                scale(1)
+                rotate(0);
+        }
+
+    }
+
+
+    @keyframes iconRing {
+
+        0% {
+
+            opacity: .5;
+
+            transform:
+                scale(.92);
+        }
+
+        70% {
+
+            opacity: 0;
+
+            transform:
+                scale(1.16);
+        }
+
+        100% {
+
+            opacity: 0;
+
+            transform:
+                scale(1.16);
+        }
+
+    }
+
+
+    @keyframes textShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes warningShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes buttonsShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes glowMove {
+
+        0%,
+        100% {
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+        50% {
+
+            transform:
+                translateX(-50%)
+                translateY(22px);
+        }
+
+    }
+
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .delete-page *,
+        .delete-page *::before,
+        .delete-page *::after {
+
+            animation-duration:
+                .01ms !important;
+
+            animation-iteration-count:
+                1 !important;
+
+            transition-duration:
+                .01ms !important;
+        }
+
     }
 
 </style>
+
+
+<div class="delete-page">
+
+
+    <div class="delete-glow"></div>
+
+
+    <section class="delete-card">
+
+
+        <!-- آیکون هشدار -->
+
+        <div class="warning-icon-wrap">
+
+            <div class="warning-icon">
+                !
+            </div>
+
+        </div>
+
+
+
+        <!-- عنوان -->
+
+        <h1 class="delete-title">
+            حذف فرم
+        </h1>
+
+
+
+        <!-- سؤال -->
+
+        <p class="delete-question">
+
+            آیا از حذف فرم
+
+            <strong>
+                «{{ form.title }}»
+            </strong>
+
+            مطمئن هستید؟
+
+        </p>
+
+
+
+        <!-- هشدار -->
+
+        <div class="delete-warning">
+
+            <div class="warning-icon-small">
+                !
+            </div>
+
+            <div>
+
+                با حذف این فرم، سؤال‌ها و پاسخ‌های ثبت‌شده
+                آن نیز حذف خواهند شد و این عملیات قابل بازگشت نیست.
+
+            </div>
+
+        </div>
+
+
+
+        <!-- دکمه‌ها -->
+
+        <form
+            method="post"
+            class="delete-form"
+        >
+
+            {% csrf_token %}
+
+
+            <button
+                type="submit"
+                class="delete-btn"
+            >
+
+                <span>
+                    حذف فرم برای همیشه
+                </span>
+
+            </button>
+
+
+            <a
+                href="{% url 'forms:form_list' %}"
+                class="cancel-btn"
+            >
+                انصراف
+            </a>
+
+        </form>
+
+
+
+        <!-- پایین کارت -->
+
+        <div class="delete-footer">
+
+            کانون فرهنگی تربیتی رویش
+
+        </div>
+
+
+    </section>
+
+
+</div>
 
 {% endblock %}

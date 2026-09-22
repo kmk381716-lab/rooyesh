@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -11,254 +10,1719 @@
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
+    <meta
+        name="theme-color"
+        content="#080c15"
+    >
+
     <title>
-        فرم ساخته شد
+        فرم ساخته شد | کانون رویش
     </title>
 
 
     <style>
 
+        /* =========================================================
+           RESET
+        ========================================================= */
+
         * {
             box-sizing: border-box;
         }
 
+
         html,
         body {
+
             width: 100%;
             max-width: 100%;
+
             margin: 0;
             padding: 0;
+
             overflow-x: hidden;
         }
 
-        body {
-            font-family: Tahoma, Arial, sans-serif;
-            background: #f5f6f8;
-            color: #222;
+
+        :root {
+
+            --bg:
+                #080c15;
+
+            --card:
+                rgba(15, 23, 38, .88);
+
+            --card-deep:
+                rgba(9, 15, 27, .84);
+
+            --border:
+                rgba(255,255,255,.075);
+
+            --text:
+                #f8fafc;
+
+            --text-soft:
+                #dce5ef;
+
+            --muted:
+                #7c889b;
+
+            --muted-dark:
+                #596578;
+
+            --blue:
+                #4f8cff;
+
+            --blue-light:
+                #60a5fa;
+
+            --purple:
+                #8b5cf6;
+
+            --cyan:
+                #22d3ee;
+
+            --green:
+                #34d399;
+
+            --green-light:
+                #6ee7b7;
         }
 
 
-        /* =========================
-           Container
-        ========================== */
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding:
+                25px 15px;
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            color:
+                var(--text);
+
+            background:
+
+                radial-gradient(
+                    circle at 12% 8%,
+                    rgba(79,140,255,.11),
+                    transparent 26%
+                ),
+
+                radial-gradient(
+                    circle at 88% 8%,
+                    rgba(139,92,246,.10),
+                    transparent 26%
+                ),
+
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(52,211,153,.045),
+                    transparent 28%
+                ),
+
+                linear-gradient(
+                    145deg,
+                    #070b13,
+                    #0b1120 50%,
+                    #090d17
+                );
+
+            color-scheme:
+                dark;
+        }
+
+
+
+        /* =========================================================
+           BACKGROUND GRID
+        ========================================================= */
+
+        body::before {
+
+            content:
+                "";
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            pointer-events:
+                none;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,.012) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.012) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                42px 42px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
+
+            opacity:
+                .6;
+
+            z-index:
+                -5;
+        }
+
+
+
+        /* =========================================================
+           GLOWS
+        ========================================================= */
+
+        .page-glow {
+
+            position:
+                fixed;
+
+            border-radius:
+                50%;
+
+            pointer-events:
+                none;
+
+            filter:
+                blur(30px);
+
+            z-index:
+                -3;
+        }
+
+
+        .glow-one {
+
+            width:
+                400px;
+
+            height:
+                400px;
+
+            top:
+                -220px;
+
+            right:
+                -160px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(79,140,255,.13),
+                    transparent 70%
+                );
+
+            animation:
+                glowOne
+                11s
+                ease-in-out
+                infinite;
+        }
+
+
+        .glow-two {
+
+            width:
+                370px;
+
+            height:
+                370px;
+
+            bottom:
+                -210px;
+
+            left:
+                -180px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(52,211,153,.075),
+                    transparent 70%
+                );
+
+            animation:
+                glowTwo
+                13s
+                ease-in-out
+                infinite;
+        }
+
+
+
+        /* =========================================================
+           CONTAINER
+        ========================================================= */
 
         .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 100px auto;
-            padding: 20px;
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            width:
+                100%;
+
+            max-width:
+                650px;
+
+            animation:
+                containerShow
+                .75s
+                cubic-bezier(.22,1,.36,1);
         }
 
 
-        /* =========================
-           Card
-        ========================== */
+
+        /* =========================================================
+           CARD
+        ========================================================= */
 
         .card {
-            width: 100%;
-            max-width: 100%;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 18px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
-            overflow: hidden;
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            padding:
+                38px 32px 30px;
+
+            text-align:
+                center;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--card),
+                    var(--card-deep)
+                );
+
+            backdrop-filter:
+                blur(23px);
+
+            -webkit-backdrop-filter:
+                blur(23px);
+
+            box-shadow:
+
+                0 35px 90px
+                rgba(0,0,0,.42),
+
+                0 0 0 1px
+                rgba(255,255,255,.01);
+
+            overflow:
+                hidden;
         }
 
+
+        .card::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                320px;
+
+            height:
+                320px;
+
+            top:
+                -210px;
+
+            left:
+                50%;
+
+            transform:
+                translateX(-50%);
+
+            border-radius:
+                50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(52,211,153,.09),
+                    transparent 70%
+                );
+
+            pointer-events:
+                none;
+        }
+
+
+        .card::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            right:
+                0;
+
+            left:
+                0;
+
+            height:
+                2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--green),
+                    var(--blue),
+                    var(--purple),
+                    transparent
+                );
+
+            opacity:
+                .8;
+        }
+
+
+
+        /* =========================================================
+           SUCCESS ICON
+        ========================================================= */
+
+        .success-icon-wrap {
+
+            position:
+                relative;
+
+            width:
+                82px;
+
+            height:
+                82px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            margin:
+                0 auto 20px;
+
+            border-radius:
+                24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(52,211,153,.13),
+                    rgba(79,140,255,.07)
+                );
+
+            border:
+                1px solid
+                rgba(52,211,153,.18);
+
+            box-shadow:
+
+                inset 0 0 28px
+                rgba(52,211,153,.035),
+
+                0 14px 35px
+                rgba(0,0,0,.23);
+
+            animation:
+                iconShow
+                .65s
+                .06s
+                both
+                cubic-bezier(.22,1,.36,1);
+        }
+
+
+        .success-icon-wrap::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            inset:
+                -9px;
+
+            border-radius:
+                30px;
+
+            border:
+                1px solid
+                rgba(52,211,153,.08);
+
+            animation:
+                iconRing
+                2.7s
+                ease-out
+                infinite;
+        }
+
+
+        .success-icon {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            width:
+                51px;
+
+            height:
+                51px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                16px;
+
+            background:
+                rgba(52,211,153,.10);
+
+            color:
+                var(--green-light);
+
+            box-shadow:
+                0 0 26px
+                rgba(52,211,153,.08);
+        }
+
+
+        .success-icon svg {
+
+            width:
+                29px;
+
+            height:
+                29px;
+
+            stroke:
+                currentColor;
+
+            stroke-width:
+                2.4;
+
+            stroke-linecap:
+                round;
+
+            stroke-linejoin:
+                round;
+
+            animation:
+                drawCheck
+                .55s
+                .22s
+                both;
+        }
+
+
+
+        /* =========================================================
+           TITLE
+        ========================================================= */
 
         .card h1 {
-            margin: 0 0 15px;
-            font-size: 28px;
-            line-height: 1.6;
-            overflow-wrap: anywhere;
-            word-break: break-word;
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            margin:
+                0 0 10px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                27px;
+
+            line-height:
+                1.55;
+
+            font-weight:
+                800;
+
+            animation:
+                textShow
+                .6s
+                .12s
+                both;
         }
 
 
-        .card p {
-            line-height: 1.9;
-            overflow-wrap: anywhere;
-            word-break: break-word;
+        .card-description {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            max-width:
+                490px;
+
+            margin:
+                0 auto;
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+
+            line-height:
+                2;
+
+            overflow-wrap:
+                anywhere;
+
+            word-break:
+                break-word;
+
+            animation:
+                textShow
+                .6s
+                .19s
+                both;
         }
 
 
-        /* =========================
-           Link Box
-        ========================== */
+        .card-description strong {
+
+            color:
+                #e1e9f3;
+
+            font-weight:
+                700;
+        }
+
+
+
+        /* =========================================================
+           LINK SECTION
+        ========================================================= */
+
+        .link-section {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            margin-top:
+                25px;
+
+            animation:
+                linkShow
+                .6s
+                .26s
+                both;
+        }
+
+
+        .link-label {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                8px;
+
+            color:
+                #b1bdcd;
+
+            font-size:
+                9px;
+
+            text-align:
+                right;
+        }
+
+
+        .link-status {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                5px;
+
+            color:
+                #63dbaa;
+
+            font-size:
+                8px;
+        }
+
+
+        .link-status-dot {
+
+            width:
+                5px;
+
+            height:
+                5px;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--green);
+
+            box-shadow:
+                0 0 8px
+                rgba(52,211,153,.60);
+
+            animation:
+                statusBlink
+                2s
+                ease-in-out
+                infinite;
+        }
+
 
         .link-box {
-            display: flex;
-            align-items: stretch;
-            width: 100%;
-            max-width: 100%;
-            gap: 10px;
-            margin-top: 20px;
+
+            display:
+                flex;
+
+            align-items:
+                stretch;
+
+            width:
+                100%;
+
+            gap:
+                8px;
+
+            padding:
+                6px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            border-radius:
+                13px;
+
+            background:
+                rgba(5,10,19,.57);
+
+            box-shadow:
+                inset 0 1px 2px
+                rgba(0,0,0,.25);
+
+            transition:
+                border-color .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+        }
+
+
+        .link-box:focus-within {
+
+            border-color:
+                rgba(79,140,255,.40);
+
+            background:
+                rgba(5,10,19,.72);
+
+            box-shadow:
+
+                0 0 0 3px
+                rgba(79,140,255,.06),
+
+                0 10px 25px
+                rgba(0,0,0,.16);
         }
 
 
         .link-box input {
-            display: block;
-            flex: 1 1 auto;
-            width: 100%;
-            min-width: 0;
-            padding: 12px;
-            border: 1px solid #dddddd;
-            border-radius: 10px;
-            direction: ltr;
-            text-align: left;
-            font-family: Tahoma, Arial, sans-serif;
-            font-size: 14px;
-            outline: none;
+
+            display:
+                block;
+
+            flex:
+                1 1 auto;
+
+            width:
+                100%;
+
+            min-width:
+                0;
+
+            min-height:
+                44px;
+
+            padding:
+                10px 11px;
+
+            border:
+                0;
+
+            border-radius:
+                9px;
+
+            direction:
+                ltr;
+
+            text-align:
+                left;
+
+            background:
+                transparent;
+
+            color:
+                #b9c8dc;
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            font-size:
+                10px;
+
+            outline:
+                none;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
+
+            white-space:
+                nowrap;
         }
 
 
-        .link-box input:focus {
-            border-color: #888;
-        }
 
-
-        /* =========================
-           Buttons
-        ========================== */
-
-        .copy-btn,
-        .form-link {
-            min-height: 46px;
-            padding: 12px 18px;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 14px;
-            transition: 0.2s;
-            touch-action: manipulation;
-        }
-
+        /* =========================================================
+           COPY BUTTON
+        ========================================================= */
 
         .copy-btn {
-            flex: 0 0 auto;
-            border: 0;
-            background: #222222;
-            color: #ffffff;
-            cursor: pointer;
-            white-space: nowrap;
+
+            position:
+                relative;
+
+            flex:
+                0 0 auto;
+
+            min-width:
+                92px;
+
+            min-height:
+                44px;
+
+            padding:
+                9px 14px;
+
+            border:
+                0;
+
+            border-radius:
+                9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #3478f6,
+                    #5b5cf0 58%,
+                    #7c4fe4
+                );
+
+            color:
+                #ffffff;
+
+            cursor:
+                pointer;
+
+            font-family:
+                inherit;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            overflow:
+                hidden;
+
+            box-shadow:
+                0 8px 20px
+                rgba(79,140,255,.15);
+
+            transition:
+                transform .22s ease,
+                box-shadow .22s ease,
+                filter .22s ease,
+                background .22s ease;
+        }
+
+
+        .copy-btn::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    transparent 20%,
+                    rgba(255,255,255,.20) 50%,
+                    transparent 80%
+                );
+
+            transform:
+                translateX(120%);
+
+            transition:
+                transform .6s ease;
+        }
+
+
+        .copy-btn span {
+
+            position:
+                relative;
+
+            z-index:
+                2;
         }
 
 
         .copy-btn:hover {
-            background: #333333;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 14px 28px
+                rgba(79,140,255,.22);
+
+            filter:
+                brightness(1.06);
+        }
+
+
+        .copy-btn:hover::before {
+
+            transform:
+                translateX(-120%);
         }
 
 
         .copy-btn:active {
-            transform: scale(0.98);
+
+            transform:
+                scale(.98);
         }
 
 
+        .copy-btn.copied {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #15956b,
+                    #17a879
+                );
+
+            box-shadow:
+                0 10px 25px
+                rgba(52,211,153,.14);
+        }
+
+
+
+        /* =========================================================
+           VIEW FORM
+        ========================================================= */
+
         .form-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            max-width: 100%;
-            margin-top: 20px;
-            background: #eeeeee;
-            color: #222222;
-            text-decoration: none;
+
+            position:
+                relative;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            width:
+                100%;
+
+            min-height:
+                46px;
+
+            margin-top:
+                9px;
+
+            padding:
+                10px 14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            color:
+                #c6d1df;
+
+            text-decoration:
+                none;
+
+            font-size:
+                9px;
+
+            font-weight:
+                700;
+
+            overflow:
+                hidden;
+
+            transition:
+                transform .22s ease,
+                background .22s ease,
+                border-color .22s ease,
+                color .22s ease,
+                box-shadow .22s ease;
+        }
+
+
+        .form-link::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    transparent 20%,
+                    rgba(255,255,255,.08) 50%,
+                    transparent 80%
+                );
+
+            transform:
+                translateX(120%);
+
+            transition:
+                transform .6s ease;
+        }
+
+
+        .form-link span {
+
+            position:
+                relative;
+
+            z-index:
+                2;
         }
 
 
         .form-link:hover {
-            background: #e3e3e3;
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(255,255,255,.06);
+
+            border-color:
+                rgba(96,165,250,.14);
+
+            color:
+                #f0f5fb;
+
+            box-shadow:
+                0 10px 23px
+                rgba(0,0,0,.15);
         }
 
 
-        /* =========================
-           Mobile
-        ========================== */
+        .form-link:hover::before {
+
+            transform:
+                translateX(-120%);
+        }
+
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .footer {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            margin-top:
+                22px;
+
+            padding-top:
+                15px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.05);
+
+            color:
+                #4d5869;
+
+            font-size:
+                8px;
+
+            line-height:
+                1.8;
+
+            animation:
+                textShow
+                .6s
+                .34s
+                both;
+        }
+
+
+
+        /* =========================================================
+           FOCUS
+        ========================================================= */
+
+        .copy-btn:focus-visible,
+        .form-link:focus-visible {
+
+            outline:
+                3px solid
+                rgba(96,165,250,.18);
+
+            outline-offset:
+                3px;
+        }
+
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
 
         @media (max-width: 600px) {
 
+            body {
+
+                align-items:
+                    center;
+
+                padding:
+                    16px 9px;
+            }
+
+
             .container {
-                margin: 20px auto;
-                padding: 12px;
+
+                max-width:
+                    100%;
             }
 
 
             .card {
-                padding: 25px 15px;
-                border-radius: 15px;
+
+                padding:
+                    28px 15px 22px;
+
+                border-radius:
+                    19px;
+            }
+
+
+            .success-icon-wrap {
+
+                width:
+                    68px;
+
+                height:
+                    68px;
+
+                margin-bottom:
+                    16px;
+
+                border-radius:
+                    20px;
+            }
+
+
+            .success-icon {
+
+                width:
+                    44px;
+
+                height:
+                    44px;
+
+                border-radius:
+                    13px;
+            }
+
+
+            .success-icon svg {
+
+                width:
+                    25px;
+
+                height:
+                    25px;
             }
 
 
             .card h1 {
-                font-size: 23px;
-                margin-bottom: 12px;
+
+                font-size:
+                    21px;
+
+                margin-bottom:
+                    8px;
             }
 
 
-            .card p {
-                font-size: 14px;
+            .card-description {
+
+                font-size:
+                    10px;
+
+                line-height:
+                    1.95;
+            }
+
+
+            .link-section {
+
+                margin-top:
+                    20px;
+            }
+
+
+            .link-label {
+
+                font-size:
+                    8px;
+            }
+
+
+            .link-status {
+
+                font-size:
+                    7px;
             }
 
 
             .link-box {
-                flex-direction: column;
-                gap: 10px;
+
+                flex-direction:
+                    column;
+
+                padding:
+                    6px;
+
+                gap:
+                    6px;
             }
 
 
             .link-box input {
-                width: 100%;
-                min-height: 48px;
-                font-size: 14px;
+
+                width:
+                    100%;
+
+                min-height:
+                    44px;
+
+                padding:
+                    10px;
+
+                border-radius:
+                    8px;
+
+                font-size:
+                    9px;
             }
 
 
             .copy-btn {
-                width: 100%;
-                min-height: 48px;
+
+                width:
+                    100%;
+
+                min-width:
+                    0;
+
+                min-height:
+                    45px;
+
+                font-size:
+                    9px;
             }
 
 
             .form-link {
-                width: 100%;
-                min-height: 48px;
-                margin-top: 12px;
+
+                min-height:
+                    45px;
+
+                font-size:
+                    9px;
+            }
+
+
+            .footer {
+
+                margin-top:
+                    18px;
+
+                padding-top:
+                    13px;
+
+                font-size:
+                    7.5px;
             }
 
         }
 
 
-        /* =========================
-           Mobile Small
-        ========================== */
+
+        /* =========================================================
+           SMALL MOBILE
+        ========================================================= */
 
         @media (max-width: 380px) {
 
-            .container {
-                margin: 15px auto;
-                padding: 8px;
+            body {
+
+                padding:
+                    11px 7px;
             }
 
 
             .card {
-                padding: 22px 12px;
-                border-radius: 13px;
+
+                padding:
+                    23px 12px 19px;
+
+                border-radius:
+                    17px;
+            }
+
+
+            .success-icon-wrap {
+
+                width:
+                    61px;
+
+                height:
+                    61px;
+
+                border-radius:
+                    17px;
+            }
+
+
+            .success-icon {
+
+                width:
+                    39px;
+
+                height:
+                    39px;
+
+                border-radius:
+                    11px;
+            }
+
+
+            .success-icon svg {
+
+                width:
+                    22px;
+
+                height:
+                    22px;
             }
 
 
             .card h1 {
-                font-size: 21px;
+
+                font-size:
+                    19px;
             }
 
 
-            .card p {
-                font-size: 13px;
+            .card-description {
+
+                font-size:
+                    9.2px;
             }
 
 
-            .link-box input,
+            .link-box input {
+
+                font-size:
+                    8px;
+            }
+
+
             .copy-btn,
             .form-link {
-                font-size: 13px;
+
+                min-height:
+                    43px;
+
+                font-size:
+                    8.5px;
+            }
+
+        }
+
+
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
+            }
+
+        }
+
+
+
+        /* =========================================================
+           ANIMATIONS
+        ========================================================= */
+
+        @keyframes containerShow {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(23px)
+                    scale(.975);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        @keyframes iconShow {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(.72)
+                    rotate(-7deg);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1)
+                    rotate(0);
+            }
+
+        }
+
+
+        @keyframes drawCheck {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(.7);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1);
+            }
+
+        }
+
+
+        @keyframes iconRing {
+
+            0% {
+
+                opacity:
+                    .5;
+
+                transform:
+                    scale(.92);
+            }
+
+            70% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(1.17);
+            }
+
+            100% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(1.17);
+            }
+
+        }
+
+
+        @keyframes textShow {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(8px);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        @keyframes linkShow {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(10px);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        @keyframes statusBlink {
+
+            0%,
+            100% {
+
+                opacity:
+                    .6;
+
+                transform:
+                    scale(1);
+            }
+
+            50% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.25);
+            }
+
+        }
+
+
+        @keyframes glowOne {
+
+            0%,
+            100% {
+
+                transform:
+                    translate3d(0,0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate3d(-25px,25px,0);
+            }
+
+        }
+
+
+        @keyframes glowTwo {
+
+            0%,
+            100% {
+
+                transform:
+                    translate3d(0,0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate3d(25px,-25px,0);
             }
 
         }
@@ -270,110 +1734,276 @@
 
 <body>
 
-<div class="container">
 
-    <div class="card">
+    <div class="page-glow glow-one"></div>
 
-
-        <h1>
-            ✅ فرم ساخته شد
-        </h1>
+    <div class="page-glow glow-two"></div>
 
 
-        <p>
-            فرم «{{ form.title }}» با موفقیت ساخته شد.
-        </p>
+    <main class="container">
 
 
-        <p>
-            لینک فرم:
-        </p>
+        <section class="card">
 
 
-        <div class="link-box">
+            <!-- =================================================
+                 SUCCESS ICON
+            ================================================== -->
 
-            <input
-                id="formLink"
-                type="text"
-                value="{{ request.scheme }}://{{ request.get_host }}{% url 'forms:fill_form' form.id %}"
-                readonly
-            >
+            <div class="success-icon-wrap">
 
 
-            <button
-                type="button"
-                class="copy-btn"
-                id="copyButton"
-                onclick="copyLink(this)"
-            >
-                کپی
-            </button>
+                <div class="success-icon">
 
-        </div>
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                    >
 
+                        <path
+                            d="M5 12.5L9.2 16.5L19 7.5"
+                        />
 
-        <a
-            class="form-link"
-            href="{% url 'forms:fill_form' form.id %}"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            مشاهده فرم
-        </a>
+                    </svg>
 
-    </div>
-
-</div>
+                </div>
 
 
-<script>
-
-function copyLink(button) {
-
-    const input =
-        document.getElementById("formLink");
+            </div>
 
 
-    navigator.clipboard.writeText(input.value)
 
-        .then(() => {
+            <!-- =================================================
+                 TITLE
+            ================================================== -->
 
-            button.textContent =
-                "کپی شد ✓";
+            <h1>
+                فرم با موفقیت ساخته شد
+            </h1>
 
-            setTimeout(() => {
 
-                button.textContent =
-                    "کپی";
+            <p class="card-description">
 
-            }, 1500);
+                فرم
 
-        })
+                <strong>
+                    «{{ form.title }}»
+                </strong>
 
-        .catch(() => {
+                آماده استفاده است.
+                لینک فرم را می‌توانید برای کاربران ارسال کنید.
+
+            </p>
+
+
+
+            <!-- =================================================
+                 LINK
+            ================================================== -->
+
+            <div class="link-section">
+
+
+                <div class="link-label">
+
+                    <span>
+                        لینک فرم
+                    </span>
+
+
+                    <span class="link-status">
+
+                        <span class="link-status-dot"></span>
+
+                        آماده انتشار
+
+                    </span>
+
+                </div>
+
+
+                <div class="link-box">
+
+
+                    <input
+                        id="formLink"
+                        type="text"
+                        value="{{ request.scheme }}://{{ request.get_host }}{% url 'forms:fill_form' form.id %}"
+                        readonly
+                        aria-label="لینک فرم"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="copy-btn"
+                        id="copyButton"
+                        onclick="copyLink()"
+                    >
+
+                        <span id="copyText">
+                            کپی لینک
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+                <a
+                    class="form-link"
+                    href="{% url 'forms:fill_form' form.id %}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <span>
+                        مشاهده فرم
+                    </span>
+
+                    <span>
+                        ←
+                    </span>
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <div class="footer">
+
+                کانون فرهنگی تربیتی رویش
+                <br>
+                فرم‌ساز کانون
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <script>
+
+        function copyLink() {
+
+            const input =
+                document.getElementById("formLink");
+
+            const button =
+                document.getElementById("copyButton");
+
+            const text =
+                document.getElementById("copyText");
+
+
+            navigator.clipboard
+                .writeText(input.value)
+
+                .then(() => {
+
+                    showCopiedState();
+
+                })
+
+                .catch(() => {
+
+                    fallbackCopy();
+
+                });
+
+        }
+
+
+
+        function fallbackCopy() {
+
+            const input =
+                document.getElementById("formLink");
+
 
             input.focus();
+
             input.select();
 
-            document.execCommand("copy");
+            input.setSelectionRange(
+                0,
+                99999
+            );
 
-            button.textContent =
-                "کپی شد ✓";
+
+            try {
+
+                document.execCommand("copy");
+
+                showCopiedState();
+
+            } catch (error) {
+
+                const text =
+                    document.getElementById(
+                        "copyText"
+                    );
+
+
+                text.textContent =
+                    "لینک را دستی کپی کنید";
+
+            }
+
+        }
+
+
+
+        function showCopiedState() {
+
+            const button =
+                document.getElementById(
+                    "copyButton"
+                );
+
+            const text =
+                document.getElementById(
+                    "copyText"
+                );
+
+
+            button.classList.add(
+                "copied"
+            );
+
+
+            text.textContent =
+                "✓ لینک کپی شد";
+
 
             setTimeout(() => {
 
-                button.textContent =
-                    "کپی";
+                button.classList.remove(
+                    "copied"
+                );
 
-            }, 1500);
+                text.textContent =
+                    "کپی لینک";
 
-        });
+            }, 1800);
 
-}
+        }
 
-</script>
+    </script>
+
 
 </body>
 
 </html>
-

@@ -1,499 +1,2295 @@
-
 {% extends "base.html" %}
 
 {% block content %}
 
+
 <style>
-    * {
+
+    /* =========================================================
+       FORM BUILDER
+    ========================================================= */
+
+    .builder-page,
+    .builder-page * {
         box-sizing: border-box;
     }
 
-    html,
-    body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-    }
 
     .builder-page {
+
+        --builder-bg: #080c15;
+        --builder-card: rgba(15, 22, 36, 0.86);
+        --builder-card-2: rgba(11, 17, 29, 0.82);
+
+        --builder-border:
+            rgba(255, 255, 255, 0.075);
+
+        --builder-border-strong:
+            rgba(255, 255, 255, 0.11);
+
+        --builder-text: #f7f9fc;
+        --builder-text-soft: #d8dfeb;
+        --builder-muted: #778398;
+        --builder-muted-2: #596578;
+
+        --builder-input:
+            rgba(6, 11, 20, 0.72);
+
+        --builder-blue: #4f8cff;
+        --builder-blue-light: #60a5fa;
+        --builder-purple: #8b5cf6;
+        --builder-cyan: #22d3ee;
+
+        --builder-danger: #fb7185;
+        --builder-danger-bg:
+            rgba(244, 63, 94, 0.075);
+
+        --builder-shadow:
+            0 30px 90px rgba(0, 0, 0, 0.36);
+
+
+        position: relative;
+
         width: 100%;
-        min-height: 80vh;
-        background: #0d0f14;
-        color: #f1f3f5;
-        padding: 45px 20px;
-        overflow-x: hidden;
-    }
 
-    .builder-container {
-        width: 100%;
-        max-width: 900px;
-        margin: 0 auto;
-    }
+        min-height: calc(100vh - 90px);
 
-    .builder-card {
-        width: 100%;
-        max-width: 100%;
-        background: #171a21;
-        border: 1px solid #252a33;
-        border-radius: 18px;
-        padding: 25px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-    }
+        padding:
+            35px 18px 65px;
 
-    .builder-title {
-        margin: 0 0 25px;
-        font-size: 28px;
-        line-height: 1.5;
-        color: #ffffff;
-        word-break: break-word;
-    }
+        color:
+            var(--builder-text);
 
-    .field {
-        width: 100%;
-        margin-bottom: 20px;
-        min-width: 0;
-    }
+        background:
 
-    .field label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: #e8eaed;
-        line-height: 1.6;
-    }
+            radial-gradient(
+                circle at 8% 8%,
+                rgba(79, 140, 255, .095),
+                transparent 24%
+            ),
 
-    input[type="text"],
-    textarea,
-    select {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        padding: 12px 14px;
-        border: 1px solid #343a46;
-        border-radius: 10px;
-        font-family: inherit;
-        font-size: 15px;
-        line-height: 1.6;
-        outline: none;
-        background: #101318;
-        color: #f1f3f5;
-        transition: 0.2s;
-    }
+            radial-gradient(
+                circle at 92% 12%,
+                rgba(139, 92, 246, .085),
+                transparent 23%
+            ),
 
-    select {
-        cursor: pointer;
-    }
+            radial-gradient(
+                circle at 50% 100%,
+                rgba(34, 211, 238, .035),
+                transparent 28%
+            ),
 
-    input[type="text"]::placeholder,
-    textarea::placeholder {
-        color: #7d8490;
-        opacity: 1;
-    }
+            #080c15;
 
-    input[type="text"]:focus,
-    textarea:focus,
-    select:focus {
-        border-color: #6c63ff;
-        box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
-    }
-
-    textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
-
-    select option {
-        background: #171a21;
-        color: #f1f3f5;
-    }
-
-    .error {
-        width: 100%;
-        max-width: 100%;
-        background: #2a171b;
-        color: #ff8f9a;
-        border: 1px solid #5a252d;
-        padding: 13px 15px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        line-height: 1.7;
-        overflow-wrap: anywhere;
-    }
-
-    .questions {
-        width: 100%;
-        margin-top: 30px;
-    }
-
-    .question {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        border: 1px solid #2b303a;
-        border-radius: 16px;
-        padding: 20px;
-        margin-bottom: 16px;
-        background: #12151b;
         overflow: hidden;
     }
 
-    .question-header {
+
+    .builder-page::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        pointer-events: none;
+
+        background-image:
+
+            linear-gradient(
+                rgba(255,255,255,.012) 1px,
+                transparent 1px
+            ),
+
+            linear-gradient(
+                90deg,
+                rgba(255,255,255,.012) 1px,
+                transparent 1px
+            );
+
+        background-size: 42px 42px;
+
+        mask-image:
+            linear-gradient(
+                to bottom,
+                black,
+                transparent 90%
+            );
+
+        opacity: .6;
+    }
+
+
+    .builder-page::after {
+
+        content: "";
+
+        position: absolute;
+
+        width: 330px;
+        height: 330px;
+
+        left: -170px;
+        bottom: -170px;
+
+        border-radius: 50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(79,140,255,.10),
+                transparent 70%
+            );
+
+        filter: blur(25px);
+
+        pointer-events: none;
+
+        animation:
+            builderGlow
+            11s
+            ease-in-out
+            infinite;
+    }
+
+
+
+    /* =========================================================
+       CONTAINER
+    ========================================================= */
+
+    .builder-container {
+
+        position: relative;
+
+        z-index: 2;
+
+        width: 100%;
+
+        max-width: 920px;
+
+        margin: 0 auto;
+
+        animation:
+            builderContainerShow
+            .7s
+            cubic-bezier(.22,1,.36,1);
+    }
+
+
+
+    /* =========================================================
+       MAIN CARD
+    ========================================================= */
+
+    .builder-card {
+
+        position: relative;
+
+        width: 100%;
+
+        padding: 31px;
+
+        border:
+            1px solid
+            var(--builder-border);
+
+        border-radius: 24px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(18, 27, 44, .90),
+                rgba(9, 15, 27, .86)
+            );
+
+        backdrop-filter:
+            blur(22px);
+
+        -webkit-backdrop-filter:
+            blur(22px);
+
+        box-shadow:
+            var(--builder-shadow);
+
+        overflow: hidden;
+    }
+
+
+    .builder-card::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 350px;
+        height: 350px;
+
+        top: -190px;
+        right: -110px;
+
+        border-radius: 50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(79,140,255,.10),
+                transparent 70%
+            );
+
+        pointer-events: none;
+    }
+
+
+    .builder-card::after {
+
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        right: 0;
+        left: 0;
+
+        height: 2px;
+
+        background:
+            linear-gradient(
+                90deg,
+                transparent,
+                var(--builder-blue),
+                var(--builder-purple),
+                transparent
+            );
+
+        opacity: .85;
+    }
+
+
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .builder-header {
+
+        position: relative;
+
+        z-index: 2;
+
         display: flex;
-        align-items: center;
+
+        align-items: flex-start;
+
         justify-content: space-between;
-        margin-bottom: 18px;
-        gap: 12px;
+
+        gap: 20px;
+
+        padding-bottom: 23px;
+
+        margin-bottom: 25px;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,.06);
+
+        animation:
+            builderHeaderShow
+            .6s
+            .05s
+            both;
+    }
+
+
+    .builder-heading {
+
         min-width: 0;
     }
 
-    .question-number {
-        min-width: 0;
-        font-size: 17px;
-        font-weight: bold;
-        color: #ffffff;
+
+    .builder-badge {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 7px;
+
+        margin-bottom: 11px;
+
+        padding:
+            6px 10px;
+
+        border-radius: 8px;
+
+        background:
+            rgba(79,140,255,.08);
+
+        border:
+            1px solid
+            rgba(79,140,255,.14);
+
+        color:
+            #93c5fd;
+
+        font-size: 9px;
+
+        font-weight: 700;
+    }
+
+
+    .builder-badge-dot {
+
+        width: 6px;
+        height: 6px;
+
+        border-radius: 50%;
+
+        background:
+            var(--builder-cyan);
+
+        box-shadow:
+            0 0 10px
+            rgba(34,211,238,.55);
+
+        animation:
+            builderDot
+            2s
+            ease-in-out
+            infinite;
+    }
+
+
+    .builder-title {
+
+        margin: 0 0 7px;
+
+        color:
+            var(--builder-text);
+
+        font-size: 27px;
+
         line-height: 1.5;
+
+        font-weight: 800;
+
+        letter-spacing: -.4px;
+    }
+
+
+    .builder-subtitle {
+
+        margin: 0;
+
+        max-width: 620px;
+
+        color:
+            var(--builder-muted);
+
+        font-size: 11px;
+
+        line-height: 2;
+    }
+
+
+    .builder-counter {
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        min-height: 38px;
+
+        padding:
+            8px 11px;
+
+        border-radius: 10px;
+
+        background:
+            rgba(255,255,255,.035);
+
+        border:
+            1px solid
+            rgba(255,255,255,.06);
+
+        color:
+            #a9b4c6;
+
+        font-size: 10px;
+
+        white-space: nowrap;
+    }
+
+
+    .builder-counter strong {
+
+        color: #eef4fc;
+
+        font-size: 14px;
+    }
+
+
+
+    /* =========================================================
+       ERROR
+    ========================================================= */
+
+    .builder-page .error {
+
+        position: relative;
+
+        z-index: 2;
+
+        width: 100%;
+
+        padding:
+            13px 14px;
+
+        margin-bottom: 20px;
+
+        border-radius: 12px;
+
+        color:
+            var(--builder-danger);
+
+        background:
+            var(--builder-danger-bg);
+
+        border:
+            1px solid
+            rgba(244,63,94,.18);
+
+        font-size: 11px;
+
+        line-height: 1.9;
+
+        animation:
+            builderErrorShow
+            .45s
+            cubic-bezier(.22,1,.36,1);
+    }
+
+
+
+    /* =========================================================
+       BASIC FIELDS
+    ========================================================= */
+
+    .builder-page .field {
+
+        position: relative;
+
+        width: 100%;
+
+        margin-bottom: 19px;
+
+        min-width: 0;
+
+        animation:
+            builderFieldShow
+            .55s
+            both
+            cubic-bezier(.22,1,.36,1);
+    }
+
+
+    .builder-page .field:nth-of-type(1) {
+        animation-delay: .06s;
+    }
+
+
+    .builder-page .field:nth-of-type(2) {
+        animation-delay: .10s;
+    }
+
+
+    .builder-page .field label {
+
+        display: block;
+
+        margin-bottom: 8px;
+
+        color:
+            var(--builder-text-soft);
+
+        font-size: 11px;
+
+        font-weight: 700;
+
+        line-height: 1.7;
+
+        transition:
+            color .2s ease,
+            transform .2s ease;
+    }
+
+
+    .builder-page .field:focus-within > label {
+
+        color:
+            #93c5fd;
+
+        transform:
+            translateX(-2px);
+    }
+
+
+
+    /* =========================================================
+       INPUTS
+    ========================================================= */
+
+    .builder-page input[type="text"],
+    .builder-page textarea,
+    .builder-page select {
+
+        display: block;
+
+        width: 100%;
+
+        max-width: 100%;
+
+        min-width: 0;
+
+        padding:
+            12px 14px;
+
+        border:
+            1px solid
+            rgba(148,163,184,.15);
+
+        border-radius: 11px;
+
+        outline: none;
+
+        background:
+            var(--builder-input);
+
+        color:
+            #f5f7fb;
+
+        font-family: inherit;
+
+        font-size: 12px;
+
+        line-height: 1.7;
+
+        box-shadow:
+            inset 0 1px 2px
+            rgba(0,0,0,.22);
+
+        transition:
+            border-color .25s ease,
+            background .25s ease,
+            box-shadow .25s ease,
+            transform .25s ease;
+    }
+
+
+    .builder-page input[type="text"]:hover,
+    .builder-page textarea:hover,
+    .builder-page select:hover {
+
+        border-color:
+            rgba(148,163,184,.25);
+
+        background:
+            rgba(6,11,20,.80);
+    }
+
+
+    .builder-page input[type="text"]:focus,
+    .builder-page textarea:focus,
+    .builder-page select:focus {
+
+        border-color:
+            rgba(79,140,255,.68);
+
+        background:
+            rgba(6,11,20,.94);
+
+        transform:
+            translateY(-1px);
+
+        box-shadow:
+
+            0 0 0 3px
+            rgba(79,140,255,.075),
+
+            0 12px 28px
+            rgba(0,0,0,.20);
+    }
+
+
+    .builder-page input[type="text"]::placeholder,
+    .builder-page textarea::placeholder {
+
+        color:
+            #586477;
+
+        opacity: 1;
+    }
+
+
+    .builder-page input[type="text"]:focus::placeholder,
+    .builder-page textarea:focus::placeholder {
+
+        opacity: .3;
+    }
+
+
+    .builder-page textarea {
+
+        min-height: 115px;
+
+        resize: vertical;
+    }
+
+
+    .builder-page select {
+
+        cursor: pointer;
+    }
+
+
+    .builder-page select option {
+
+        background:
+            #111827;
+
+        color:
+            #f8fafc;
+    }
+
+
+
+    /* =========================================================
+       QUESTIONS AREA
+    ========================================================= */
+
+    .questions {
+
+        width: 100%;
+
+        margin-top: 28px;
+    }
+
+
+    .questions-title {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 12px;
+
+        margin-bottom: 12px;
+    }
+
+
+    .questions-title h3 {
+
+        color:
+            #eaf0f7;
+
+        font-size: 14px;
+
+        font-weight: 800;
+    }
+
+
+    .questions-title span {
+
+        color:
+            var(--builder-muted-2);
+
+        font-size: 9px;
+    }
+
+
+
+    /* =========================================================
+       QUESTION CARD
+    ========================================================= */
+
+    .question {
+
+        position: relative;
+
+        width: 100%;
+
+        max-width: 100%;
+
+        min-width: 0;
+
+        padding:
+            20px;
+
+        margin-bottom: 13px;
+
+        border:
+            1px solid
+            rgba(255,255,255,.065);
+
+        border-radius: 17px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(14,21,35,.82),
+                rgba(8,14,25,.79)
+            );
+
+        overflow: hidden;
+
+        animation:
+            questionShow
+            .55s
+            both
+            cubic-bezier(.22,1,.36,1);
+
+        transition:
+            border-color .25s ease,
+            background .25s ease,
+            box-shadow .25s ease,
+            transform .25s ease;
+    }
+
+
+    .question::before {
+
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        right: 0;
+
+        width: 3px;
+        height: 100%;
+
+        background:
+            linear-gradient(
+                to bottom,
+                var(--builder-blue),
+                var(--builder-purple)
+            );
+
+        opacity: .45;
+    }
+
+
+    .question:hover {
+
+        border-color:
+            rgba(96,165,250,.14);
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(17,26,43,.88),
+                rgba(9,15,28,.86)
+            );
+
+        box-shadow:
+            0 14px 34px
+            rgba(0,0,0,.18);
+
+        transform:
+            translateY(-2px);
+    }
+
+
+
+    /* =========================================================
+       QUESTION HEADER
+    ========================================================= */
+
+    .question-header {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 12px;
+
+        min-width: 0;
+
+        margin-bottom: 18px;
+
+        padding-bottom: 13px;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,.055);
+    }
+
+
+    .question-heading {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        min-width: 0;
+    }
+
+
+    .question-number-badge {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 29px;
+        height: 29px;
+
+        flex-shrink: 0;
+
+        border-radius: 9px;
+
+        background:
+            rgba(79,140,255,.10);
+
+        border:
+            1px solid
+            rgba(79,140,255,.14);
+
+        color:
+            #93c5fd;
+
+        font-size: 10px;
+
+        font-weight: 800;
+    }
+
+
+    .question-number {
+
+        min-width: 0;
+
+        color:
+            #edf3fa;
+
+        font-size: 13px;
+
+        font-weight: 800;
+
+        line-height: 1.6;
+
         overflow-wrap: anywhere;
     }
 
+
     .remove-btn {
+
+        position: relative;
+
         flex-shrink: 0;
-        border: none;
-        background: #b42332;
-        color: #fff;
-        padding: 9px 13px;
-        min-height: 40px;
-        border-radius: 8px;
+
+        min-height: 36px;
+
+        padding:
+            7px 11px;
+
+        border:
+            1px solid
+            rgba(244,63,94,.18);
+
+        border-radius: 9px;
+
+        background:
+            rgba(244,63,94,.07);
+
+        color:
+            var(--builder-danger);
+
         cursor: pointer;
+
         font-family: inherit;
-        font-size: 14px;
+
+        font-size: 9px;
+
         white-space: nowrap;
-        touch-action: manipulation;
+
+        transition:
+            transform .22s ease,
+            background .22s ease,
+            border-color .22s ease,
+            box-shadow .22s ease;
     }
+
 
     .remove-btn:hover {
-        background: #cf3042;
+
+        transform:
+            translateY(-1px);
+
+        background:
+            rgba(244,63,94,.12);
+
+        border-color:
+            rgba(244,63,94,.32);
+
+        box-shadow:
+            0 8px 18px
+            rgba(244,63,94,.08);
     }
+
+
+
+    /* =========================================================
+       REQUIRED
+    ========================================================= */
 
     .required-box {
-        display: flex !important;
+
+        display: inline-flex !important;
+
         align-items: center;
+
         gap: 8px;
-        width: 100%;
-        margin-top: 12px;
-        font-weight: normal !important;
+
+        width: auto !important;
+
+        margin:
+            2px 0 0;
+
+        color:
+            #bdc7d5 !important;
+
+        font-size: 10px !important;
+
+        font-weight: 400 !important;
+
         cursor: pointer;
-        color: #cdd2da !important;
+
         line-height: 1.7;
+
+        transition:
+            color .2s ease;
     }
+
+
+    .required-box:hover {
+
+        color:
+            #e6edf6 !important;
+    }
+
 
     .required-box input {
+
+        width: 17px;
+        height: 17px;
+
         flex: 0 0 auto;
-        width: 18px;
-        height: 18px;
+
         margin: 0;
+
         cursor: pointer;
-        accent-color: #6c63ff;
+
+        accent-color:
+            var(--builder-blue);
     }
+
+
+
+    /* =========================================================
+       OPTIONS
+    ========================================================= */
 
     .options {
+
         width: 100%;
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 1px solid #292e38;
+
+        margin-top: 19px;
+
+        padding-top: 18px;
+
+        border-top:
+            1px solid
+            rgba(255,255,255,.055);
+
+        animation:
+            optionsShow
+            .3s
+            both;
     }
+
+
+    .options-title-row {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 10px;
+
+        margin-bottom: 11px;
+    }
+
 
     .options-title {
-        margin-bottom: 12px;
-        color: #dfe3e8;
-        font-weight: bold;
-        line-height: 1.6;
+
+        color:
+            #dce4ee;
+
+        font-size: 10px;
+
+        font-weight: 800;
     }
+
+
+    .options-hint {
+
+        color:
+            var(--builder-muted-2);
+
+        font-size: 8px;
+    }
+
 
     .option-list {
+
         width: 100%;
+
         max-width: 100%;
     }
+
 
     .option-row {
+
         display: flex;
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        gap: 10px;
-        margin-bottom: 10px;
+
         align-items: center;
+
+        width: 100%;
+
+        gap: 8px;
+
+        margin-bottom: 8px;
+
+        animation:
+            optionShow
+            .28s
+            both;
     }
+
 
     .option-row input {
-        flex: 1 1 auto;
+
+        flex:
+            1 1 auto;
+
         width: 100%;
+
         min-width: 0;
     }
 
+
     .delete-option {
-        flex: 0 0 auto;
-        border: none;
-        background: #b42332;
-        color: #fff;
-        padding: 10px 13px;
-        min-height: 42px;
+
+        flex:
+            0 0 auto;
+
+        min-height: 40px;
+
+        padding:
+            8px 11px;
+
+        border:
+            1px solid
+            rgba(244,63,94,.16);
+
         border-radius: 8px;
+
+        background:
+            rgba(244,63,94,.065);
+
+        color:
+            #fb7185;
+
         cursor: pointer;
+
         font-family: inherit;
-        font-size: 14px;
+
+        font-size: 9px;
+
         white-space: nowrap;
-        touch-action: manipulation;
+
+        transition:
+            transform .2s ease,
+            background .2s ease,
+            border-color .2s ease;
     }
+
 
     .delete-option:hover {
-        background: #cf3042;
+
+        transform:
+            translateY(-1px);
+
+        background:
+            rgba(244,63,94,.12);
+
+        border-color:
+            rgba(244,63,94,.28);
     }
+
 
     .add-option {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 6px;
+
         width: auto;
-        max-width: 100%;
-        border: 1px solid #343a46;
-        background: #1d222b;
-        color: #e8eaed;
-        padding: 10px 14px;
-        min-height: 42px;
+
+        min-height: 39px;
+
+        margin-top: 2px;
+
+        padding:
+            8px 12px;
+
+        border:
+            1px dashed
+            rgba(148,163,184,.18);
+
         border-radius: 9px;
+
+        background:
+            rgba(255,255,255,.025);
+
+        color:
+            #b7c2d2;
+
         cursor: pointer;
+
         font-family: inherit;
-        font-size: 14px;
-        margin-top: 5px;
-        touch-action: manipulation;
+
+        font-size: 9px;
+
+        transition:
+            transform .22s ease,
+            border-color .22s ease,
+            background .22s ease,
+            color .22s ease;
     }
+
 
     .add-option:hover {
-        background: #252b35;
+
+        transform:
+            translateY(-1px);
+
+        border-color:
+            rgba(96,165,250,.28);
+
+        background:
+            rgba(79,140,255,.06);
+
+        color:
+            #dce9fb;
     }
 
-    .add-question {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        padding: 15px;
-        min-height: 50px;
-        border: 2px dashed #454c58;
-        border-radius: 12px;
-        background: transparent;
-        color: #d7dbe1;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: 16px;
-        line-height: 1.5;
-        transition: 0.2s;
-        margin-top: 10px;
-        touch-action: manipulation;
-    }
 
-    .add-question:hover {
-        background: #171a21;
-        border-color: #6c63ff;
-        color: #ffffff;
-    }
 
-    .save-btn {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        padding: 15px;
-        min-height: 52px;
-        border: none;
-        border-radius: 12px;
-        background: #6c63ff;
-        color: #fff;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: 16px;
-        line-height: 1.5;
-        margin-top: 20px;
-        transition: 0.2s;
-        touch-action: manipulation;
-    }
-
-    .save-btn:hover {
-        background: #5b52ed;
-    }
+    /* =========================================================
+       EMPTY STATE
+    ========================================================= */
 
     .empty-message {
-        width: 100%;
-        max-width: 100%;
-        text-align: center;
-        color: #7d8490;
-        padding: 25px 10px;
-        line-height: 1.7;
+
         display: none;
+
+        width: 100%;
+
+        margin:
+            10px 0 12px;
+
+        padding:
+            24px 15px;
+
+        text-align: center;
+
+        border:
+            1px dashed
+            rgba(148,163,184,.14);
+
+        border-radius: 15px;
+
+        background:
+            rgba(255,255,255,.018);
+
+        color:
+            var(--builder-muted);
+
+        font-size: 10px;
+
+        line-height: 1.9;
+
+        animation:
+            emptyShow
+            .4s
+            both;
     }
 
 
-    /* =========================
-       موبایل
-    ========================== */
+    .empty-icon {
 
-    @media (max-width: 700px) {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 42px;
+        height: 42px;
+
+        margin:
+            0 auto 10px;
+
+        border-radius: 12px;
+
+        background:
+            rgba(79,140,255,.07);
+
+        border:
+            1px solid
+            rgba(79,140,255,.10);
+
+        color:
+            #8eb6ff;
+
+        font-size: 18px;
+    }
+
+
+
+    /* =========================================================
+       ADD QUESTION
+    ========================================================= */
+
+    .add-question {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 8px;
+
+        width: 100%;
+
+        min-height: 53px;
+
+        margin-top: 10px;
+
+        padding:
+            13px 15px;
+
+        border:
+            1px dashed
+            rgba(96,165,250,.24);
+
+        border-radius: 13px;
+
+        background:
+            rgba(79,140,255,.025);
+
+        color:
+            #bdca de;
+
+        color:
+            #bdcade;
+
+        cursor: pointer;
+
+        font-family: inherit;
+
+        font-size: 11px;
+
+        line-height: 1.5;
+
+        transition:
+            transform .25s ease,
+            border-color .25s ease,
+            background .25s ease,
+            color .25s ease,
+            box-shadow .25s ease;
+    }
+
+
+    .add-question span {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 25px;
+        height: 25px;
+
+        border-radius: 7px;
+
+        background:
+            rgba(79,140,255,.10);
+
+        color:
+            #93c5fd;
+
+        font-size: 16px;
+
+        line-height: 1;
+    }
+
+
+    .add-question:hover {
+
+        transform:
+            translateY(-2px);
+
+        border-color:
+            rgba(96,165,250,.45);
+
+        background:
+            rgba(79,140,255,.055);
+
+        color:
+            #eef5ff;
+
+        box-shadow:
+            0 12px 27px
+            rgba(0,0,0,.13);
+    }
+
+
+
+    /* =========================================================
+       SAVE
+    ========================================================= */
+
+    .save-btn {
+
+        position: relative;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 8px;
+
+        width: 100%;
+
+        min-height: 53px;
+
+        margin-top: 18px;
+
+        padding:
+            14px 16px;
+
+        border: none;
+
+        border-radius: 13px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #3478f6,
+                #5b5cf0 58%,
+                #7c4fe4
+            );
+
+        color:
+            white;
+
+        cursor: pointer;
+
+        font-family: inherit;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        overflow: hidden;
+
+        box-shadow:
+            0 12px 30px
+            rgba(79,140,255,.18);
+
+        transition:
+            transform .25s ease,
+            box-shadow .25s ease,
+            filter .25s ease;
+    }
+
+
+    .save-btn span {
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    .save-btn::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background:
+            linear-gradient(
+                110deg,
+                transparent 20%,
+                rgba(255,255,255,.20) 50%,
+                transparent 80%
+            );
+
+        transform:
+            translateX(120%);
+
+        transition:
+            transform .65s ease;
+    }
+
+
+    .save-btn:hover {
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 18px 38px
+            rgba(79,140,255,.25);
+
+        filter:
+            brightness(1.07);
+    }
+
+
+    .save-btn:hover::before {
+
+        transform:
+            translateX(-120%);
+    }
+
+
+    .save-btn:active {
+
+        transform:
+            translateY(0)
+            scale(.985);
+    }
+
+
+
+    /* =========================================================
+       FOCUS
+    ========================================================= */
+
+    .builder-page input:focus-visible,
+    .builder-page textarea:focus-visible,
+    .builder-page select:focus-visible,
+    .builder-page button:focus-visible {
+
+        outline:
+            3px solid
+            rgba(96,165,250,.18);
+
+        outline-offset: 3px;
+    }
+
+
+
+    /* =========================================================
+       TABLET
+    ========================================================= */
+
+    @media (max-width: 800px) {
 
         .builder-page {
-            padding: 20px 10px;
+
+            padding:
+                25px 13px 45px;
         }
 
-        .builder-container {
-            max-width: 100%;
-        }
 
         .builder-card {
-            padding: 18px 14px;
-            border-radius: 14px;
+
+            padding:
+                25px 20px;
+
+            border-radius:
+                20px;
         }
+
+
+        .builder-header {
+
+            align-items:
+                flex-start;
+        }
+
 
         .builder-title {
-            font-size: 23px;
-            margin-bottom: 20px;
+
+            font-size:
+                23px;
         }
 
-        .question {
-            padding: 15px 12px;
-            border-radius: 13px;
+
+        .cards {
+            grid-template-columns:
+                1fr;
         }
 
-        .question-header {
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .question-number {
-            font-size: 16px;
-        }
-
-        .remove-btn {
-            padding: 8px 11px;
-            min-height: 38px;
-        }
-
-        input[type="text"],
-        textarea,
-        select {
-            font-size: 16px;
-            padding: 12px;
-        }
-
-        .required-box {
-            font-size: 14px;
-        }
-
-        .options {
-            margin-top: 18px;
-            padding-top: 18px;
-        }
-
-        .option-row {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 8px;
-        }
-
-        .option-row input {
-            width: 100%;
-        }
-
-        .delete-option {
-            width: 100%;
-        }
-
-        .add-option {
-            width: 100%;
-        }
-
-        .add-question {
-            font-size: 15px;
-        }
-
-        .save-btn {
-            font-size: 15px;
-        }
     }
 
 
-    /* =========================
-       موبایل خیلی کوچک
-    ========================== */
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 650px) {
+
+        .builder-page {
+
+            min-height:
+                calc(100vh - 60px);
+
+            padding:
+                17px 9px 30px;
+        }
+
+
+        .builder-card {
+
+            padding:
+                20px 14px;
+
+            border-radius:
+                17px;
+        }
+
+
+        .builder-header {
+
+            flex-direction:
+                column;
+
+            gap: 13px;
+
+            padding-bottom:
+                19px;
+
+            margin-bottom:
+                20px;
+        }
+
+
+        .builder-badge {
+
+            margin-bottom:
+                9px;
+
+            font-size:
+                8px;
+        }
+
+
+        .builder-title {
+
+            margin-bottom:
+                6px;
+
+            font-size:
+                20px;
+
+            line-height:
+                1.55;
+        }
+
+
+        .builder-subtitle {
+
+            font-size:
+                10px;
+
+            line-height:
+                1.95;
+        }
+
+
+        .builder-counter {
+
+            width:
+                100%;
+
+            justify-content:
+                space-between;
+
+            min-height:
+                36px;
+        }
+
+
+        .builder-page .field {
+
+            margin-bottom:
+                17px;
+        }
+
+
+        .builder-page .field label {
+
+            margin-bottom:
+                7px;
+
+            font-size:
+                10px;
+        }
+
+
+        .builder-page input[type="text"],
+        .builder-page textarea,
+        .builder-page select {
+
+            min-height:
+                46px;
+
+            padding:
+                11px 12px;
+
+            border-radius:
+                10px;
+
+            font-size:
+                12px;
+        }
+
+
+        .builder-page textarea {
+
+            min-height:
+                105px;
+        }
+
+
+        .questions {
+
+            margin-top:
+                23px;
+        }
+
+
+        .questions-title {
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .questions-title h3 {
+
+            font-size:
+                12px;
+        }
+
+
+        .questions-title span {
+
+            font-size:
+                8px;
+        }
+
+
+        .question {
+
+            padding:
+                15px 12px;
+
+            border-radius:
+                14px;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .question-header {
+
+            margin-bottom:
+                15px;
+
+            padding-bottom:
+                11px;
+        }
+
+
+        .question-number-badge {
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            border-radius:
+                8px;
+        }
+
+
+        .question-number {
+
+            font-size:
+                11px;
+        }
+
+
+        .remove-btn {
+
+            min-height:
+                34px;
+
+            padding:
+                7px 9px;
+
+            font-size:
+                8px;
+        }
+
+
+        .required-box {
+
+            font-size:
+                9px !important;
+        }
+
+
+        .options {
+
+            margin-top:
+                17px;
+
+            padding-top:
+                16px;
+        }
+
+
+        .option-row {
+
+            flex-direction:
+                column;
+
+            align-items:
+                stretch;
+
+            gap:
+                7px;
+
+            padding:
+                10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.045);
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(255,255,255,.018);
+        }
+
+
+        .option-row input {
+
+            width:
+                100%;
+        }
+
+
+        .delete-option {
+
+            width:
+                100%;
+
+            min-height:
+                38px;
+        }
+
+
+        .add-option {
+
+            width:
+                100%;
+
+            min-height:
+                41px;
+        }
+
+
+        .add-question {
+
+            min-height:
+                49px;
+
+            font-size:
+                10px;
+        }
+
+
+        .save-btn {
+
+            min-height:
+                49px;
+
+            font-size:
+                11px;
+        }
+
+    }
+
+
+
+    /* =========================================================
+       VERY SMALL MOBILE
+    ========================================================= */
 
     @media (max-width: 380px) {
 
         .builder-page {
-            padding: 14px 8px;
+
+            padding:
+                12px 7px 25px;
         }
+
 
         .builder-card {
-            padding: 15px 10px;
-            border-radius: 12px;
+
+            padding:
+                17px 11px;
+
+            border-radius:
+                15px;
         }
+
 
         .builder-title {
-            font-size: 21px;
+
+            font-size:
+                18px;
         }
+
+
+        .builder-subtitle {
+
+            font-size:
+                9.5px;
+        }
+
 
         .question {
-            padding: 13px 10px;
+
+            padding:
+                13px 10px;
         }
 
-        .question-header {
-            flex-wrap: wrap;
+
+        .question-heading {
+
+            gap:
+                7px;
         }
 
-        .question-number {
-            font-size: 15px;
+
+        .question-number-badge {
+
+            width:
+                25px;
+
+            height:
+                25px;
         }
+
 
         .remove-btn {
-            padding: 7px 10px;
-            font-size: 13px;
+
+            min-height:
+                32px;
+
+            padding:
+                6px 8px;
         }
 
-        input[type="text"],
-        textarea,
-        select {
-            font-size: 16px;
-            padding: 11px;
+
+        .builder-page input[type="text"],
+        .builder-page textarea,
+        .builder-page select {
+
+            font-size:
+                16px;
         }
+
     }
+
+
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .builder-page *,
+        .builder-page *::before,
+        .builder-page *::after {
+
+            animation-duration:
+                .01ms !important;
+
+            animation-iteration-count:
+                1 !important;
+
+            transition-duration:
+                .01ms !important;
+        }
+
+    }
+
+
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes builderContainerShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(24px)
+                scale(.985);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+    }
+
+
+    @keyframes builderHeaderShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes builderFieldShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(9px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes questionShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(12px)
+                scale(.985);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+    }
+
+
+    @keyframes optionShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(6px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes optionsShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(5px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes emptyShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes builderErrorShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(-7px)
+                scale(.98);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+    }
+
+
+    @keyframes builderDot {
+
+        0%,
+        100% {
+            transform:
+                scale(1);
+
+            opacity:
+                .6;
+        }
+
+        50% {
+            transform:
+                scale(1.3);
+
+            opacity:
+                1;
+        }
+
+    }
+
+
+    @keyframes builderGlow {
+
+        0%,
+        100% {
+            transform:
+                translate3d(0,0,0);
+        }
+
+        50% {
+            transform:
+                translate3d(25px,-25px,0);
+        }
+
+    }
+
 </style>
+
 
 
 <div class="builder-page">
 
+
     <div class="builder-container">
+
 
         <div class="builder-card">
 
-            <h1 class="builder-title">
-                ساخت فرم جدید
-            </h1>
 
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <div class="builder-header">
+
+
+                <div class="builder-heading">
+
+
+                    <div class="builder-badge">
+
+                        <span class="builder-badge-dot"></span>
+
+                        فرم‌ساز کانون رویش
+
+                    </div>
+
+
+                    <h1 class="builder-title">
+                        ساخت فرم جدید
+                    </h1>
+
+
+                    <p class="builder-subtitle">
+
+                        عنوان، توضیحات و سؤالات فرم را مشخص کنید.
+                        سپس فرم آماده انتشار و استفاده خواهد بود.
+
+                    </p>
+
+
+                </div>
+
+
+                <div class="builder-counter">
+
+                    <span>
+                        تعداد سؤال
+                    </span>
+
+                    <strong id="questionCount">
+                        0
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ERROR
+            ================================================== -->
 
             {% if error %}
 
                 <div class="error">
+
                     {{ error }}
+
                 </div>
 
             {% endif %}
 
 
-            <form method="post" enctype="multipart/form-data">
+
+            <!-- =================================================
+                 FORM
+            ================================================== -->
+
+            <form
+                method="post"
+                enctype="multipart/form-data"
+            >
 
                 {% csrf_token %}
 
 
-                <!-- اطلاعات فرم -->
+
+                <!-- عنوان -->
 
                 <div class="field">
 
                     <label for="title">
                         عنوان فرم
                     </label>
+
 
                     <input
                         id="title"
@@ -507,80 +2303,147 @@
                 </div>
 
 
+
+                <!-- توضیحات -->
+
                 <div class="field">
 
                     <label for="description">
                         توضیحات فرم
                     </label>
 
+
                     <textarea
                         id="description"
                         name="description"
-                        placeholder="توضیحات مربوط به این فرم..."
+                        placeholder="توضیحات مربوط به این فرم را وارد کنید..."
                     ></textarea>
 
                 </div>
 
 
-                <!-- سؤالات -->
 
-                <div id="questions" class="questions"></div>
+                <!-- =================================================
+                     QUESTIONS
+                ================================================== -->
+
+                <div class="questions">
 
 
-                <div id="emptyMessage" class="empty-message">
-                    هنوز سؤالی اضافه نشده است.
+                    <div class="questions-title">
+
+                        <h3>
+                            سؤالات فرم
+                        </h3>
+
+                        <span>
+                            هر سؤال را جداگانه تنظیم کنید
+                        </span>
+
+                    </div>
+
+
+                    <div id="questionsList"></div>
+
+
+                    <div
+                        id="emptyMessage"
+                        class="empty-message"
+                    >
+
+                        <div class="empty-icon">
+                            ＋
+                        </div>
+
+                        هنوز سؤالی اضافه نشده است.
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="add-question"
+                        onclick="addQuestion()"
+                    >
+
+                        <span>
+                            ＋
+                        </span>
+
+                        افزودن سؤال جدید
+
+                    </button>
+
+
                 </div>
 
 
-                <button
-                    type="button"
-                    class="add-question"
-                    onclick="addQuestion()"
-                >
-                    ＋ افزودن سؤال
-                </button>
 
+                <!-- =================================================
+                     SAVE
+                ================================================== -->
 
                 <button
                     type="submit"
                     class="save-btn"
                 >
-                    ساخت فرم
+
+                    <span>
+                        ساخت و ذخیره فرم
+                    </span>
+
+                    <span>
+                        ✓
+                    </span>
+
                 </button>
+
 
             </form>
 
+
         </div>
 
+
     </div>
+
 
 </div>
 
 
+
 <script>
+
+
+/* ==========================================================
+   STATE
+========================================================== */
 
 let questionIndex = 0;
 
 
-/*
-|--------------------------------------------------------------------------
-| اضافه کردن سؤال
-|--------------------------------------------------------------------------
-*/
+
+/* ==========================================================
+   ADD QUESTION
+========================================================== */
 
 function addQuestion() {
 
     const container =
-        document.getElementById("questions");
+        document.getElementById("questionsList");
+
 
     const question =
         document.createElement("div");
 
-    question.className = "question";
-
 
     const currentIndex =
         questionIndex;
+
+
+    question.className =
+        "question";
+
 
     question.dataset.index =
         currentIndex;
@@ -597,16 +2460,25 @@ function addQuestion() {
 
         <div class="question-header">
 
-            <span class="question-number">
-                سؤال
-            </span>
+            <div class="question-heading">
+
+                <div class="question-number-badge">
+                    1
+                </div>
+
+                <div class="question-number">
+                    سؤال 1
+                </div>
+
+            </div>
+
 
             <button
                 type="button"
                 class="remove-btn"
                 onclick="removeQuestion(this)"
             >
-                حذف
+                حذف سؤال
             </button>
 
         </div>
@@ -617,6 +2489,7 @@ function addQuestion() {
             <label>
                 متن سؤال
             </label>
+
 
             <input
                 type="text"
@@ -634,6 +2507,7 @@ function addQuestion() {
             <label>
                 نوع سؤال
             </label>
+
 
             <select
                 name="question_type"
@@ -692,11 +2566,21 @@ function addQuestion() {
 
         <div class="options">
 
-            <div class="options-title">
-                گزینه‌ها
+            <div class="options-title-row">
+
+                <div class="options-title">
+                    گزینه‌های سؤال
+                </div>
+
+                <div class="options-hint">
+                    برای سؤال‌های انتخابی
+                </div>
+
             </div>
 
+
             <div class="option-list"></div>
+
 
             <button
                 type="button"
@@ -719,41 +2603,60 @@ function addQuestion() {
 
     updateQuestionNumbers();
 
+    updateQuestionCount();
+
     updateEmptyMessage();
 
 
     toggleOptions(
         question.querySelector("select")
     );
+
+
+    question
+        .querySelector("input[name='question_title']")
+        .focus();
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| حذف سؤال
-|--------------------------------------------------------------------------
-*/
+
+/* ==========================================================
+   REMOVE QUESTION
+========================================================== */
 
 function removeQuestion(button) {
 
     const question =
         button.closest(".question");
 
-    if (question) {
-        question.remove();
+
+    if (!question) {
+        return;
     }
 
-    updateQuestionNumbers();
 
-    updateEmptyMessage();
+    question.style.animation =
+        "questionRemove .25s ease forwards";
+
+
+    setTimeout(() => {
+
+        question.remove();
+
+        updateQuestionNumbers();
+
+        updateQuestionCount();
+
+        updateEmptyMessage();
+
+    }, 220);
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| شماره‌گذاری سؤال‌ها
-|--------------------------------------------------------------------------
-*/
+
+/* ==========================================================
+   UPDATE QUESTION NUMBERS
+========================================================== */
 
 function updateQuestionNumbers() {
 
@@ -764,12 +2667,33 @@ function updateQuestionNumbers() {
     questions.forEach((question, index) => {
 
         const number =
-            question.querySelector(".question-number");
+            index + 1;
 
-        if (number) {
 
-            number.textContent =
-                `سؤال ${index + 1}`;
+        const title =
+            question.querySelector(
+                ".question-number"
+            );
+
+
+        const badge =
+            question.querySelector(
+                ".question-number-badge"
+            );
+
+
+        if (title) {
+
+            title.textContent =
+                `سؤال ${number}`;
+
+        }
+
+
+        if (badge) {
+
+            badge.textContent =
+                number;
 
         }
 
@@ -777,16 +2701,45 @@ function updateQuestionNumbers() {
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| نمایش / مخفی کردن گزینه‌ها
-|--------------------------------------------------------------------------
-*/
+
+/* ==========================================================
+   UPDATE COUNT
+========================================================== */
+
+function updateQuestionCount() {
+
+    const count =
+        document.querySelectorAll(
+            ".question"
+        ).length;
+
+
+    const counter =
+        document.getElementById(
+            "questionCount"
+        );
+
+
+    if (counter) {
+
+        counter.textContent =
+            count;
+
+    }
+
+}
+
+
+
+/* ==========================================================
+   TOGGLE OPTIONS
+========================================================== */
 
 function toggleOptions(select) {
 
     const question =
         select.closest(".question");
+
 
     if (!question) {
         return;
@@ -797,6 +2750,11 @@ function toggleOptions(select) {
         question.querySelector(".options");
 
 
+    if (!options) {
+        return;
+    }
+
+
     const needsOptions =
         select.value === "single" ||
         select.value === "multiple";
@@ -804,26 +2762,29 @@ function toggleOptions(select) {
 
     if (needsOptions) {
 
-        options.style.display = "block";
+        options.style.display =
+            "block";
 
     } else {
 
-        options.style.display = "none";
+        options.style.display =
+            "none";
 
     }
+
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| افزودن گزینه
-|--------------------------------------------------------------------------
-*/
+
+/* ==========================================================
+   ADD OPTION
+========================================================== */
 
 function addOption(button) {
 
     const question =
         button.closest(".question");
+
 
     if (!question) {
         return;
@@ -831,14 +2792,23 @@ function addOption(button) {
 
 
     const list =
-        question.querySelector(".option-list");
+        question.querySelector(
+            ".option-list"
+        );
+
 
     const questionIndex =
         question.dataset.index;
 
 
+    if (!list) {
+        return;
+    }
+
+
     const row =
         document.createElement("div");
+
 
     row.className =
         "option-row";
@@ -853,6 +2823,7 @@ function addOption(button) {
             autocomplete="off"
         >
 
+
         <button
             type="button"
             class="delete-option"
@@ -865,63 +2836,162 @@ function addOption(button) {
 
 
     list.appendChild(row);
+
+
+    const input =
+        row.querySelector("input");
+
+
+    if (input) {
+        input.focus();
+    }
+
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| حذف گزینه
-|--------------------------------------------------------------------------
-*/
+
+/* ==========================================================
+   REMOVE OPTION
+========================================================== */
 
 function removeOption(button) {
 
     const row =
         button.closest(".option-row");
 
-    if (row) {
-        row.remove();
+
+    if (!row) {
+        return;
     }
+
+
+    row.style.animation =
+        "optionRemove .2s ease forwards";
+
+
+    setTimeout(() => {
+
+        row.remove();
+
+    }, 180);
+
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| پیام خالی بودن
-|--------------------------------------------------------------------------
-*/
+
+/* ==========================================================
+   EMPTY MESSAGE
+========================================================== */
 
 function updateEmptyMessage() {
 
-    const questions =
-        document.querySelectorAll(".question");
+    const count =
+        document.querySelectorAll(
+            ".question"
+        ).length;
+
 
     const emptyMessage =
-        document.getElementById("emptyMessage");
+        document.getElementById(
+            "emptyMessage"
+        );
 
 
-    if (questions.length === 0) {
-
-        emptyMessage.style.display =
-            "block";
-
-    } else {
-
-        emptyMessage.style.display =
-            "none";
-
+    if (!emptyMessage) {
+        return;
     }
+
+
+    emptyMessage.style.display =
+        count === 0
+            ? "block"
+            : "none";
+
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| شروع صفحه
-|--------------------------------------------------------------------------
-*/
+
+/* ==========================================================
+   SAVE BUTTON
+========================================================== */
+
+document
+    .querySelector(".save-btn")
+    ?.addEventListener(
+        "click",
+        function () {
+
+            this.style.transform =
+                "scale(.985)";
+
+            setTimeout(() => {
+
+                this.style.transform =
+                    "";
+
+            }, 130);
+
+        }
+    );
+
+
+
+/* ==========================================================
+   START
+========================================================== */
 
 addQuestion();
 
+updateQuestionCount();
+
+updateEmptyMessage();
+
+
 </script>
+
+
+<style>
+
+    @keyframes questionRemove {
+
+        from {
+            opacity: 1;
+
+            transform:
+                scale(1)
+                translateY(0);
+        }
+
+        to {
+            opacity: 0;
+
+            transform:
+                scale(.97)
+                translateY(-5px);
+        }
+
+    }
+
+
+    @keyframes optionRemove {
+
+        from {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+        to {
+            opacity: 0;
+
+            transform:
+                translateY(-4px);
+        }
+
+    }
+
+</style>
+
 
 {% endblock %}

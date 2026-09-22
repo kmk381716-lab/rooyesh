@@ -1,124 +1,1058 @@
-
 {% extends "base.html" %}
 
 {% block content %}
 
 <style>
 
-    * {
+    /* =========================================================
+       SUCCESS PAGE
+    ========================================================= */
+
+    .success-page,
+    .success-page * {
         box-sizing: border-box;
     }
 
-    html,
-    body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-    }
 
     .success-page {
+
+        --bg:
+            #080c15;
+
+        --card:
+            rgba(15, 23, 38, .87);
+
+        --card-deep:
+            rgba(9, 15, 27, .82);
+
+        --border:
+            rgba(255,255,255,.075);
+
+        --text:
+            #f8fafc;
+
+        --muted:
+            #7d899c;
+
+        --green:
+            #34d399;
+
+        --green-light:
+            #6ee7b7;
+
+        --blue:
+            #4f8cff;
+
+        --purple:
+            #8b5cf6;
+
+
+        position: relative;
+
         width: 100%;
-        min-height: 80vh;
+
+        min-height:
+            calc(100vh - 80px);
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
-        padding: 40px 20px;
-        background: #0d0f14;
+
+        padding:
+            40px 18px 60px;
+
+        overflow: hidden;
+
+        color:
+            var(--text);
+
+        background:
+
+            radial-gradient(
+                circle at 50% 8%,
+                rgba(52,211,153,.085),
+                transparent 27%
+            ),
+
+            radial-gradient(
+                circle at 10% 90%,
+                rgba(79,140,255,.065),
+                transparent 25%
+            ),
+
+            radial-gradient(
+                circle at 90% 90%,
+                rgba(139,92,246,.055),
+                transparent 24%
+            ),
+
+            linear-gradient(
+                145deg,
+                #070b13,
+                #0b1120 50%,
+                #090d17
+            );
     }
+
+
+
+    /* =========================================================
+       BACKGROUND GRID
+    ========================================================= */
+
+    .success-page::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        pointer-events: none;
+
+        background-image:
+
+            linear-gradient(
+                rgba(255,255,255,.012) 1px,
+                transparent 1px
+            ),
+
+            linear-gradient(
+                90deg,
+                rgba(255,255,255,.012) 1px,
+                transparent 1px
+            );
+
+        background-size:
+            42px 42px;
+
+        mask-image:
+            linear-gradient(
+                to bottom,
+                black,
+                transparent 90%
+            );
+
+        opacity:
+            .6;
+    }
+
+
+
+    /* =========================================================
+       GLOW
+    ========================================================= */
+
+    .success-glow {
+
+        position: absolute;
+
+        width:
+            430px;
+
+        height:
+            430px;
+
+        left:
+            50%;
+
+        top:
+            -245px;
+
+        transform:
+            translateX(-50%);
+
+        border-radius:
+            50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(52,211,153,.13),
+                transparent 70%
+            );
+
+        filter:
+            blur(30px);
+
+        pointer-events:
+            none;
+
+        animation:
+            glowFloat
+            9s
+            ease-in-out
+            infinite;
+    }
+
+
+
+    /* =========================================================
+       CARD
+    ========================================================= */
 
     .success-card {
-        width: 100%;
-        max-width: 550px;
-        background: #171a21;
-        border: 1px solid #282d36;
-        border-radius: 20px;
-        padding: 40px 30px;
-        text-align: center;
-        color: #ffffff;
-        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+
+        position:
+            relative;
+
+        z-index:
+            2;
+
+        width:
+            100%;
+
+        max-width:
+            560px;
+
+        padding:
+            38px 30px 30px;
+
+        text-align:
+            center;
+
+        border:
+            1px solid
+            var(--border);
+
+        border-radius:
+            24px;
+
+        background:
+            linear-gradient(
+                145deg,
+                var(--card),
+                var(--card-deep)
+            );
+
+        backdrop-filter:
+            blur(23px);
+
+        -webkit-backdrop-filter:
+            blur(23px);
+
+        box-shadow:
+
+            0 35px 90px
+            rgba(0,0,0,.42),
+
+            0 0 0 1px
+            rgba(255,255,255,.01);
+
+        overflow:
+            hidden;
+
+        animation:
+            cardShow
+            .75s
+            cubic-bezier(.22,1,.36,1);
     }
+
+
+    .success-card::before {
+
+        content: "";
+
+        position:
+            absolute;
+
+        width:
+            320px;
+
+        height:
+            320px;
+
+        left:
+            50%;
+
+        top:
+            -210px;
+
+        transform:
+            translateX(-50%);
+
+        border-radius:
+            50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(52,211,153,.11),
+                transparent 70%
+            );
+
+        pointer-events:
+            none;
+    }
+
+
+    .success-card::after {
+
+        content: "";
+
+        position:
+            absolute;
+
+        top:
+            0;
+
+        right:
+            0;
+
+        left:
+            0;
+
+        height:
+            2px;
+
+        background:
+            linear-gradient(
+                90deg,
+                transparent,
+                var(--green),
+                var(--blue),
+                var(--purple),
+                transparent
+            );
+
+        opacity:
+            .8;
+    }
+
+
+
+    /* =========================================================
+       ICON
+    ========================================================= */
+
+    .success-icon-wrap {
+
+        position:
+            relative;
+
+        width:
+            84px;
+
+        height:
+            84px;
+
+        display:
+            flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+
+        margin:
+            0 auto 21px;
+
+        border-radius:
+            25px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(52,211,153,.14),
+                rgba(79,140,255,.07)
+            );
+
+        border:
+            1px solid
+            rgba(52,211,153,.20);
+
+        box-shadow:
+
+            inset 0 0 28px
+            rgba(52,211,153,.035),
+
+            0 14px 35px
+            rgba(0,0,0,.22);
+
+        animation:
+            iconShow
+            .65s
+            .06s
+            both
+            cubic-bezier(.22,1,.36,1);
+    }
+
+
+    .success-icon-wrap::before {
+
+        content: "";
+
+        position:
+            absolute;
+
+        inset:
+            -9px;
+
+        border-radius:
+            31px;
+
+        border:
+            1px solid
+            rgba(52,211,153,.09);
+
+        animation:
+            ringPulse
+            2.8s
+            ease-out
+            infinite;
+    }
+
 
     .success-icon {
-        font-size: 55px;
-        line-height: 1;
-        margin-bottom: 18px;
+
+        position:
+            relative;
+
+        z-index:
+            2;
+
+        width:
+            52px;
+
+        height:
+            52px;
+
+        display:
+            flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+
+        border-radius:
+            16px;
+
+        background:
+            rgba(52,211,153,.11);
+
+        color:
+            var(--green-light);
+
+        box-shadow:
+            0 0 28px
+            rgba(52,211,153,.08);
     }
+
+
+    .success-icon svg {
+
+        width:
+            29px;
+
+        height:
+            29px;
+
+        stroke:
+            currentColor;
+
+        stroke-width:
+            2.3;
+
+        stroke-linecap:
+            round;
+
+        stroke-linejoin:
+            round;
+
+        animation:
+            drawCheck
+            .65s
+            .25s
+            both;
+    }
+
+
+
+    /* =========================================================
+       TEXT
+    ========================================================= */
 
     .success-title {
-        margin: 0 0 12px;
-        font-size: 28px;
-        line-height: 1.6;
+
+        position:
+            relative;
+
+        z-index:
+            2;
+
+        margin:
+            0 0 11px;
+
+        color:
+            #f8fafc;
+
+        font-size:
+            27px;
+
+        line-height:
+            1.55;
+
+        font-weight:
+            800;
+
+        animation:
+            textShow
+            .6s
+            .15s
+            both;
     }
+
 
     .success-text {
-        margin: 0;
-        color: #8d96a5;
-        line-height: 2;
-        font-size: 15px;
-        overflow-wrap: anywhere;
-        word-break: break-word;
+
+        position:
+            relative;
+
+        z-index:
+            2;
+
+        max-width:
+            450px;
+
+        margin:
+            0 auto;
+
+        color:
+            var(--muted);
+
+        font-size:
+            11px;
+
+        line-height:
+            2.05;
+
+        overflow-wrap:
+            anywhere;
+
+        word-break:
+            break-word;
+
+        animation:
+            textShow
+            .6s
+            .22s
+            both;
     }
 
 
-    /* =========================
-       موبایل
-    ========================== */
+    .success-text strong {
+
+        color:
+            #dfe8f3;
+
+        font-weight:
+            700;
+    }
+
+
+
+    /* =========================================================
+       STATUS
+    ========================================================= */
+
+    .success-status {
+
+        position:
+            relative;
+
+        z-index:
+            2;
+
+        display:
+            inline-flex;
+
+        align-items:
+            center;
+
+        gap:
+            7px;
+
+        margin:
+            23px auto 0;
+
+        padding:
+            8px 12px;
+
+        border-radius:
+            9px;
+
+        background:
+            rgba(52,211,153,.055);
+
+        border:
+            1px solid
+            rgba(52,211,153,.12);
+
+        color:
+            #68dbaa;
+
+        font-size:
+            8.5px;
+
+        animation:
+            textShow
+            .6s
+            .28s
+            both;
+    }
+
+
+    .success-status-dot {
+
+        width:
+            6px;
+
+        height:
+            6px;
+
+        border-radius:
+            50%;
+
+        background:
+            var(--green);
+
+        box-shadow:
+            0 0 9px
+            rgba(52,211,153,.60);
+
+        animation:
+            dotBlink
+            2s
+            ease-in-out
+            infinite;
+    }
+
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .success-footer {
+
+        position:
+            relative;
+
+        z-index:
+            2;
+
+        margin-top:
+            22px;
+
+        padding-top:
+            16px;
+
+        border-top:
+            1px solid
+            rgba(255,255,255,.05);
+
+        color:
+            #4e5969;
+
+        font-size:
+            8px;
+
+        line-height:
+            1.8;
+
+        animation:
+            textShow
+            .6s
+            .34s
+            both;
+    }
+
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
 
     @media (max-width: 600px) {
 
         .success-page {
-            min-height: 75vh;
-            padding: 20px 10px;
+
+            min-height:
+                calc(100vh - 60px);
+
+            padding:
+                20px 10px 30px;
         }
+
 
         .success-card {
-            padding: 28px 16px;
-            border-radius: 15px;
+
+            padding:
+                28px 16px 22px;
+
+            border-radius:
+                19px;
         }
+
+
+        .success-icon-wrap {
+
+            width:
+                70px;
+
+            height:
+                70px;
+
+            margin-bottom:
+                17px;
+
+            border-radius:
+                21px;
+        }
+
 
         .success-icon {
-            font-size: 45px;
-            margin-bottom: 14px;
+
+            width:
+                45px;
+
+            height:
+                45px;
+
+            border-radius:
+                14px;
         }
+
+
+        .success-icon svg {
+
+            width:
+                25px;
+
+            height:
+                25px;
+        }
+
 
         .success-title {
-            font-size: 23px;
-            margin-bottom: 10px;
+
+            font-size:
+                21px;
+
+            margin-bottom:
+                8px;
         }
 
+
         .success-text {
-            font-size: 14px;
-            line-height: 1.9;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.95;
+        }
+
+
+        .success-status {
+
+            margin-top:
+                18px;
+
+            padding:
+                7px 10px;
+
+            font-size:
+                7.5px;
+        }
+
+
+        .success-footer {
+
+            margin-top:
+                18px;
+
+            padding-top:
+                14px;
+
+            font-size:
+                7.5px;
         }
 
     }
 
 
-    /* =========================
-       موبایل خیلی کوچک
-    ========================== */
+
+    /* =========================================================
+       VERY SMALL
+    ========================================================= */
 
     @media (max-width: 380px) {
 
         .success-page {
-            padding: 15px 8px;
+
+            padding:
+                13px 8px 23px;
         }
+
 
         .success-card {
-            padding: 24px 12px;
-            border-radius: 13px;
+
+            padding:
+                23px 13px 19px;
+
+            border-radius:
+                17px;
         }
+
+
+        .success-icon-wrap {
+
+            width:
+                62px;
+
+            height:
+                62px;
+
+            border-radius:
+                18px;
+        }
+
 
         .success-icon {
-            font-size: 40px;
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            border-radius:
+                12px;
         }
+
+
+        .success-icon svg {
+
+            width:
+                22px;
+
+            height:
+                22px;
+        }
+
 
         .success-title {
-            font-size: 21px;
+
+            font-size:
+                19px;
         }
 
+
         .success-text {
-            font-size: 13px;
+
+            font-size:
+                9.3px;
+        }
+
+    }
+
+
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .success-page *,
+        .success-page *::before,
+        .success-page *::after {
+
+            animation-duration:
+                .01ms !important;
+
+            animation-iteration-count:
+                1 !important;
+
+            transition-duration:
+                .01ms !important;
+        }
+
+    }
+
+
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes cardShow {
+
+        from {
+            opacity:
+                0;
+
+            transform:
+                translateY(24px)
+                scale(.975);
+        }
+
+        to {
+            opacity:
+                1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+    }
+
+
+    @keyframes iconShow {
+
+        from {
+            opacity:
+                0;
+
+            transform:
+                scale(.70)
+                rotate(-8deg);
+        }
+
+        to {
+            opacity:
+                1;
+
+            transform:
+                scale(1)
+                rotate(0);
+        }
+
+    }
+
+
+    @keyframes drawCheck {
+
+        from {
+            opacity:
+                0;
+
+            transform:
+                scale(.7);
+        }
+
+        to {
+            opacity:
+                1;
+
+            transform:
+                scale(1);
+        }
+
+    }
+
+
+    @keyframes ringPulse {
+
+        0% {
+
+            opacity:
+                .55;
+
+            transform:
+                scale(.92);
+        }
+
+        70% {
+
+            opacity:
+                0;
+
+            transform:
+                scale(1.17);
+        }
+
+        100% {
+
+            opacity:
+                0;
+
+            transform:
+                scale(1.17);
+        }
+
+    }
+
+
+    @keyframes textShow {
+
+        from {
+
+            opacity:
+                0;
+
+            transform:
+                translateY(8px);
+        }
+
+        to {
+
+            opacity:
+                1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes dotBlink {
+
+        0%,
+        100% {
+
+            opacity:
+                .6;
+
+            transform:
+                scale(1);
+        }
+
+        50% {
+
+            opacity:
+                1;
+
+            transform:
+                scale(1.25);
+        }
+
+    }
+
+
+    @keyframes glowFloat {
+
+        0%,
+        100% {
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+        50% {
+
+            transform:
+                translateX(-50%)
+                translateY(20px);
         }
 
     }
@@ -128,27 +1062,93 @@
 
 <div class="success-page">
 
-    <div class="success-card">
 
-        <div class="success-icon">
-            ✅
+    <div class="success-glow"></div>
+
+
+    <section class="success-card">
+
+
+        <!-- =================================================
+             SUCCESS ICON
+        ================================================== -->
+
+        <div class="success-icon-wrap">
+
+
+            <div class="success-icon">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M5 12.5L9.2 16.5L19 7.5"
+                    />
+
+                </svg>
+
+            </div>
+
+
         </div>
 
 
+
+        <!-- =================================================
+             TITLE
+        ================================================== -->
+
         <h1 class="success-title">
-            پاسخ شما ثبت شد
+            پاسخ شما با موفقیت ثبت شد
         </h1>
 
 
         <p class="success-text">
+
             پاسخ شما برای فرم
-            «{{ form.title }}»
+
+            <strong>
+                «{{ form.title }}»
+            </strong>
+
             با موفقیت ثبت شد.
+
         </p>
 
-    </div>
+
+
+        <!-- =================================================
+             STATUS
+        ================================================== -->
+
+        <div class="success-status">
+
+            <span class="success-status-dot"></span>
+
+            ثبت پاسخ با موفقیت انجام شد
+
+        </div>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="success-footer">
+
+            کانون فرهنگی تربیتی رویش
+
+        </div>
+
+
+    </section>
+
 
 </div>
 
-{% endblock %}
 
+{% endblock %}

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -7,363 +8,1380 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
-    <title>ثبت حضور و غیاب | کانون رویش</title>
+    <title>
+        ثبت حضور و غیاب | کانون رویش
+    </title>
+
 
     <style>
+
+        /* =====================================================
+           ROOT
+        ===================================================== */
+
+        :root {
+
+            --bg: #050b14;
+            --bg-2: #08111f;
+            --card: rgba(13, 27, 46, 0.78);
+            --card-2: rgba(10, 22, 38, 0.94);
+
+            --white: #ffffff;
+            --text: #edf4ff;
+            --soft: #a9b7ca;
+            --muted: #718096;
+
+            --blue: #4e8cff;
+            --blue-light: #7badff;
+            --purple: #8b63ff;
+
+            --green: #35d49a;
+            --red: #ff6678;
+            --yellow: #e7c967;
+
+            --border: rgba(255,255,255,0.075);
+
+            --shadow:
+                0 22px 70px rgba(0,0,0,0.30);
+        }
+
+
+        /* =====================================================
+           RESET
+        ===================================================== */
 
         * {
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            font-family: Tahoma, sans-serif;
-            background: #f5f6f8;
-            color: #1f2937;
+
+        html {
+            scroll-behavior: smooth;
         }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            color: var(--text);
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            line-height: 1.8;
+
+            background:
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(78,140,255,0.13),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(139,99,255,0.11),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    180deg,
+                    var(--bg),
+                    var(--bg-2)
+                );
+
+            overflow-x: hidden;
+        }
+
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.012) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.012) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                40px 40px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 80%
+                );
+
+            z-index: -1;
+        }
+
 
         a {
             text-decoration: none;
+            color: inherit;
         }
+
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
 
         .header {
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
 
-            padding: 20px 30px;
+            position: sticky;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            top: 0;
 
-            gap: 15px;
+            z-index: 1000;
+
+            background:
+                rgba(5,12,22,0.82);
+
+            backdrop-filter:
+                blur(22px);
+
+            -webkit-backdrop-filter:
+                blur(22px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.055);
+
+            box-shadow:
+                0 10px 45px rgba(0,0,0,0.16);
         }
 
-        .header h1 {
-            margin: 0 0 7px;
-            font-size: 22px;
+
+        .header::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: 20%;
+
+            width: 60%;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(78,140,255,0.65),
+                    rgba(139,99,255,0.55),
+                    transparent
+                );
         }
 
-        .header p {
+
+        .header-inner {
+
+            width:
+                min(
+                    1100px,
+                    calc(100% - 36px)
+                );
+
+            min-height: 78px;
+
+            margin-inline: auto;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap: 20px;
+        }
+
+
+        .header-title {
+
+            min-width: 0;
+        }
+
+
+        .header-title h1 {
+
+            margin:
+                0 0 3px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                20px;
+
+            font-weight:
+                900;
+        }
+
+
+        .header-title p {
+
             margin: 0;
-            color: #6b7280;
-            font-size: 12px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
         }
+
 
         .back-button {
-            padding: 11px 16px;
-            border-radius: 10px;
 
-            background: #f3f4f6;
-            color: #374151;
+            display:
+                inline-flex;
 
-            font-size: 13px;
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap: 7px;
+
+            min-height:
+                43px;
+
+            padding:
+                0 15px;
+
+            border-radius:
+                12px;
+
+            color:
+                #cbd8ea;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            transition:
+                0.22s ease;
         }
+
+
+        .back-button:hover {
+
+            color:
+                #ffffff;
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(78,140,255,0.08);
+
+            border-color:
+                rgba(78,140,255,0.20);
+        }
+
+
+        /* =====================================================
+           CONTAINER
+        ===================================================== */
 
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 30px 20px;
+
+            width:
+                min(
+                    1000px,
+                    calc(100% - 36px)
+                );
+
+            margin-inline:
+                auto;
+
+            padding:
+                34px 0 70px;
         }
 
-        .card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 16px;
-            padding: 25px;
 
-            margin-bottom: 20px;
-        }
-
-        .card h2 {
-            margin: 0 0 8px;
-            font-size: 18px;
-        }
-
-        .description {
-            margin: 0 0 25px;
-            color: #6b7280;
-            font-size: 13px;
-            line-height: 1.8;
-        }
+        /* =====================================================
+           ERROR
+        ===================================================== */
 
         .error {
-            background: #fff1f2;
-            color: #be123c;
 
-            padding: 12px 15px;
-            border-radius: 10px;
+            margin-bottom:
+                18px;
 
-            margin-bottom: 20px;
+            padding:
+                13px 16px;
 
-            font-size: 13px;
+            color:
+                #ff97a2;
+
+            background:
+                rgba(255,102,120,0.055);
+
+            border:
+                1px solid rgba(255,102,120,0.14);
+
+            border-radius:
+                14px;
+
+            font-size:
+                12px;
         }
 
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .card {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            margin-bottom:
+                20px;
+
+            padding:
+                26px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                23px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,31,52,0.86),
+                    rgba(8,19,33,0.94)
+                );
+
+            box-shadow:
+                var(--shadow);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+        }
+
+
+        .card::before {
+
+            content: "";
+
+            position:
+                absolute;
+
+            top:
+                -100px;
+
+            right:
+                -100px;
+
+            width:
+                260px;
+
+            height:
+                260px;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(78,140,255,0.06);
+
+            filter:
+                blur(65px);
+
+            pointer-events:
+                none;
+        }
+
+
+        .card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        /* =====================================================
+           CARD TITLES
+        ===================================================== */
+
+        .card h2 {
+
+            margin:
+                0 0 6px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                19px;
+
+            font-weight:
+                900;
+        }
+
+
+        .description {
+
+            margin:
+                0 0 25px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+
+            line-height:
+                2;
+        }
+
+
+        /* =====================================================
+           EVENT FORM
+        ===================================================== */
+
         .form-grid {
-            display: grid;
+
+            display:
+                grid;
 
             grid-template-columns:
                 repeat(
-                    auto-fit,
-                    minmax(200px, 1fr)
+                    3,
+                    minmax(0, 1fr)
                 );
 
-            gap: 15px;
+            gap:
+                14px;
         }
+
+
+        .form-group {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                6px;
+        }
+
 
         .form-group label {
-            display: block;
 
-            margin-bottom: 8px;
+            color:
+                #aebbd0;
 
-            font-size: 13px;
+            font-size:
+                11px;
 
-            font-weight: bold;
+            font-weight:
+                800;
         }
+
 
         .form-group input,
         .form-group select {
-            width: 100%;
 
-            padding: 12px;
+            width:
+                100%;
+
+            min-height:
+                46px;
+
+            padding:
+                0 13px;
 
             border:
-                1px solid #d1d5db;
+                1px solid rgba(255,255,255,0.075);
 
-            border-radius: 10px;
+            border-radius:
+                12px;
 
-            background: white;
+            outline:
+                none;
 
-            font-family: Tahoma, sans-serif;
+            color:
+                #ffffff;
 
-            font-size: 13px;
+            background:
+                rgba(255,255,255,0.032);
 
-            outline: none;
+            font-size:
+                11px;
+
+            transition:
+                border-color .22s ease,
+                box-shadow .22s ease,
+                background .22s ease;
         }
+
+
+        .form-group select option {
+            color: #111827;
+            background: #ffffff;
+        }
+
+
+        .form-group input::placeholder {
+            color:
+                #59697f;
+        }
+
 
         .form-group input:focus,
         .form-group select:focus {
-            border-color: #374151;
+
+            border-color:
+                rgba(78,140,255,0.42);
+
+            background:
+                rgba(78,140,255,0.045);
+
+            box-shadow:
+                0 0 0 4px rgba(78,140,255,0.065);
         }
+
+
+        /* =====================================================
+           ATTENDANCE HEADER
+        ===================================================== */
 
         .attendance-header {
-            display: flex;
 
-            justify-content: space-between;
+            display:
+                flex;
 
-            align-items: center;
+            align-items:
+                center;
 
-            gap: 15px;
+            justify-content:
+                space-between;
 
-            margin-bottom: 15px;
+            gap:
+                15px;
+
+            margin-bottom:
+                18px;
         }
+
 
         .attendance-header h2 {
             margin: 0;
         }
 
+
         .all-present {
-            border: none;
 
-            background: #f3f4f6;
+            display:
+                inline-flex;
 
-            color: #374151;
+            align-items:
+                center;
 
-            padding: 9px 13px;
+            justify-content:
+                center;
 
-            border-radius: 9px;
+            gap:
+                7px;
 
-            font-family: Tahoma, sans-serif;
+            min-height:
+                42px;
 
-            font-size: 12px;
-
-            cursor: pointer;
-        }
-
-        .student-list {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 10px;
-        }
-
-        .student-row {
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 15px;
-
-            padding: 15px;
+            padding:
+                0 14px;
 
             border:
-                1px solid #e5e7eb;
+                1px solid rgba(53,212,154,0.14);
 
-            border-radius: 12px;
+            border-radius:
+                11px;
+
+            color:
+                #61deb0;
+
+            background:
+                rgba(53,212,154,0.055);
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.22s ease;
         }
+
+
+        .all-present::before {
+
+            content:
+                "✓";
+
+            width:
+                18px;
+
+            height:
+                18px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                6px;
+
+            background:
+                rgba(53,212,154,0.12);
+        }
+
+
+        .all-present:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(53,212,154,0.09);
+
+            border-color:
+                rgba(53,212,154,0.24);
+        }
+
+
+        /* =====================================================
+           STUDENT LIST
+        ===================================================== */
+
+        .student-list {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                9px;
+        }
+
+
+        .student-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                18px;
+
+            padding:
+                13px 14px;
+
+            border:
+                1px solid rgba(255,255,255,0.055);
+
+            border-radius:
+                16px;
+
+            background:
+                rgba(255,255,255,0.022);
+
+            transition:
+                border-color .2s ease,
+                background .2s ease,
+                transform .2s ease;
+        }
+
+
+        .student-row:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color:
+                rgba(78,140,255,0.16);
+
+            background:
+                rgba(78,140,255,0.035);
+        }
+
+
+        /* =====================================================
+           STUDENT INFO
+        ===================================================== */
 
         .student-info {
-            display: flex;
 
-            align-items: center;
+            display:
+                flex;
 
-            gap: 12px;
+            align-items:
+                center;
+
+            gap:
+                11px;
+
+            min-width:
+                0;
         }
+
 
         .avatar {
-            width: 42px;
-            height: 42px;
 
-            border-radius: 50%;
+            width:
+                43px;
 
-            background: #f3f4f6;
+            height:
+                43px;
 
-            display: flex;
+            flex-shrink:
+                0;
 
-            align-items: center;
-            justify-content: center;
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(78,140,255,0.14),
+                    rgba(139,99,255,0.14)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.07);
+
+            font-size:
+                19px;
         }
+
 
         .student-name {
-            font-size: 13px;
-            font-weight: bold;
+
+            color:
+                #eaf2fd;
+
+            font-size:
+                12px;
+
+            font-weight:
+                900;
+
+            white-space:
+                nowrap;
+
+            overflow:
+                hidden;
+
+            text-overflow:
+                ellipsis;
         }
+
 
         .student-grade {
-            margin-top: 4px;
 
-            color: #6b7280;
+            margin-top:
+                2px;
 
-            font-size: 11px;
+            color:
+                #6c7b90;
+
+            font-size:
+                9px;
         }
+
+
+        /* =====================================================
+           STATUS OPTIONS
+        ===================================================== */
 
         .statuses {
-            display: flex;
 
-            gap: 7px;
+            display:
+                flex;
 
-            flex-wrap: wrap;
+            align-items:
+                center;
+
+            gap:
+                6px;
+
+            flex-shrink:
+                0;
         }
+
 
         .status-option {
-            cursor: pointer;
+
+            cursor:
+                pointer;
         }
+
 
         .status-option input {
-            display: none;
+            display:
+                none;
         }
+
 
         .status-option span {
-            display: block;
 
-            padding: 9px 12px;
+            min-width:
+                68px;
 
-            border-radius: 9px;
+            min-height:
+                38px;
 
-            background: #f3f4f6;
+            display:
+                flex;
 
-            color: #4b5563;
+            align-items:
+                center;
 
-            font-size: 11px;
+            justify-content:
+                center;
+
+            padding:
+                0 10px;
+
+            border:
+                1px solid rgba(255,255,255,0.055);
+
+            border-radius:
+                10px;
+
+            color:
+                #78869b;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+            transition:
+                0.2s ease;
         }
 
-        .status-option input:checked + span {
-            background: #111827;
-            color: white;
+
+        .status-option span:hover {
+
+            color:
+                #ced9e8;
+
+            background:
+                rgba(255,255,255,0.045);
         }
+
+
+        /* حاضر */
+
+        .status-option input[value="present"]:checked + span {
+
+            color:
+                #66dfb3;
+
+            background:
+                rgba(53,212,154,0.09);
+
+            border-color:
+                rgba(53,212,154,0.25);
+
+            box-shadow:
+                0 7px 20px rgba(53,212,154,0.08);
+        }
+
+
+        /* غایب */
+
+        .status-option input[value="absent"]:checked + span {
+
+            color:
+                #ff8795;
+
+            background:
+                rgba(255,102,120,0.09);
+
+            border-color:
+                rgba(255,102,120,0.25);
+
+            box-shadow:
+                0 7px 20px rgba(255,102,120,0.07);
+        }
+
+
+        /* موجه */
+
+        .status-option input[value="excused"]:checked + span {
+
+            color:
+                #e9cf74;
+
+            background:
+                rgba(233,207,116,0.08);
+
+            border-color:
+                rgba(233,207,116,0.22);
+
+            box-shadow:
+                0 7px 20px rgba(233,207,116,0.06);
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
 
         .actions {
-            display: flex;
 
-            justify-content: flex-end;
+            display:
+                flex;
 
-            margin-top: 20px;
+            justify-content:
+                flex-end;
 
-            padding-top: 20px;
+            margin-top:
+                21px;
+
+            padding-top:
+                20px;
 
             border-top:
-                1px solid #e5e7eb;
+                1px solid rgba(255,255,255,0.06);
         }
+
 
         .submit-button {
-            border: none;
 
-            background: #111827;
-            color: white;
+            min-height:
+                48px;
 
-            padding: 13px 20px;
+            padding:
+                0 23px;
 
-            border-radius: 10px;
+            border:
+                1px solid rgba(255,255,255,0.10);
 
-            font-family: Tahoma, sans-serif;
+            border-radius:
+                12px;
 
-            font-size: 13px;
+            color:
+                #ffffff;
 
-            cursor: pointer;
+            background:
+                linear-gradient(
+                    135deg,
+                    #4387ff,
+                    #7958eb
+                );
+
+            box-shadow:
+                0 12px 30px rgba(67,135,255,0.20);
+
+            font-size:
+                11px;
+
+            font-weight:
+                900;
+
+            cursor:
+                pointer;
+
+            transition:
+                transform .22s ease,
+                box-shadow .22s ease;
         }
+
+
+        .submit-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 16px 38px rgba(67,135,255,0.28);
+        }
+
+
+        /* =====================================================
+           EMPTY
+        ===================================================== */
 
         .empty {
-            padding: 40px 20px;
 
-            text-align: center;
+            padding:
+                45px 20px;
 
-            color: #6b7280;
+            text-align:
+                center;
 
-            font-size: 13px;
+            color:
+                #6e7d91;
+
+            font-size:
+                12px;
+
+            border:
+                1px dashed rgba(255,255,255,0.08);
+
+            border-radius:
+                15px;
+
+            background:
+                rgba(255,255,255,0.018);
         }
 
-        @media (max-width: 650px) {
 
-            .header {
-                padding: 18px;
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .form-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0, 1fr)
+                    );
             }
 
-            .header h1 {
-                font-size: 18px;
-            }
-
-            .header p {
-                display: none;
-            }
-
-            .container {
-                padding: 20px 15px;
-            }
-
-            .card {
-                padding: 18px;
-            }
-
-            .attendance-header {
-                align-items: stretch;
-                flex-direction: column;
-            }
 
             .student-row {
-                align-items: stretch;
-                flex-direction: column;
+
+                align-items:
+                    stretch;
+
+                flex-direction:
+                    column;
             }
+
 
             .statuses {
-                width: 100%;
+
+                width:
+                    100%;
             }
+
 
             .status-option {
-                flex: 1;
+
+                flex:
+                    1;
             }
+
 
             .status-option span {
-                text-align: center;
+
+                width:
+                    100%;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .header-inner {
+
+                width:
+                    calc(100% - 24px);
+
+                min-height:
+                    68px;
+
+                gap:
+                    10px;
             }
 
+
+            .header-title h1 {
+
+                font-size:
+                    17px;
+            }
+
+
+            .header-title p {
+
+                font-size:
+                    9px;
+            }
+
+
+            .back-button {
+
+                min-height:
+                    40px;
+
+                padding:
+                    0 11px;
+
+                font-size:
+                    10px;
+            }
+
+
+            .container {
+
+                width:
+                    calc(100% - 22px);
+
+                padding:
+                    22px 0 50px;
+            }
+
+
+            .card {
+
+                padding:
+                    18px;
+
+                border-radius:
+                    19px;
+
+                margin-bottom:
+                    15px;
+            }
+
+
+            .card h2 {
+
+                font-size:
+                    17px;
+            }
+
+
+            .description {
+
+                font-size:
+                    10px;
+
+                margin-bottom:
+                    20px;
+            }
+
+
+            .form-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .attendance-header {
+
+                align-items:
+                    stretch;
+
+                flex-direction:
+                    column;
+            }
+
+
+            .all-present {
+
+                width:
+                    100%;
+            }
+
+
+            .student-row {
+
+                padding:
+                    13px;
+            }
+
+
+            .student-name {
+
+                font-size:
+                    11px;
+            }
+
+
+            .statuses {
+
+                gap:
+                    6px;
+            }
+
+
+            .status-option span {
+
+                min-height:
+                    42px;
+
+                font-size:
+                    10px;
+            }
+
+
+            .actions {
+
+                margin-top:
+                    18px;
+
+                padding-top:
+                    17px;
+            }
+
+
             .submit-button {
-                width: 100%;
+
+                width:
+                    100%;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL PHONES
+        ===================================================== */
+
+        @media (max-width: 380px) {
+
+            .header-title h1 {
+
+                font-size:
+                    15px;
+            }
+
+
+            .header-title p {
+                display:
+                    none;
+            }
+
+
+            .back-button {
+
+                padding:
+                    0 9px;
+            }
+
+
+            .avatar {
+
+                width:
+                    39px;
+
+                height:
+                    39px;
+
+                font-size:
+                    17px;
+            }
+
+
+            .status-option span {
+
+                min-width:
+                    0;
+
+                padding:
+                    0 6px;
+
+                font-size:
+                    9px;
+            }
+
+        }
+
+
+        /* =====================================================
+           REDUCE MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            * {
+
+                transition:
+                    none !important;
+
+                scroll-behavior:
+                    auto !important;
             }
 
         }
@@ -372,33 +1390,47 @@
 
 </head>
 
+
 <body>
 
 
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
 <header class="header">
 
-    <div>
+    <div class="header-inner">
 
-        <h1>
-            ثبت حضور و غیاب
-        </h1>
 
-        <p>
-            ثبت حضور دانش‌آموزان گروه شما
-        </p>
+        <div class="header-title">
+
+            <h1>
+                ثبت حضور و غیاب
+            </h1>
+
+            <p>
+                ثبت حضور دانش‌آموزان گروه شما
+            </p>
+
+        </div>
+
+
+        <a
+            href="{% url 'coaches:dashboard' %}"
+            class="back-button"
+        >
+            ← بازگشت
+        </a>
 
     </div>
 
-
-    <a
-        href="{% url 'coaches:dashboard' %}"
-        class="back-button"
-    >
-        ← بازگشت
-    </a>
-
 </header>
 
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
 
 <main class="container">
 
@@ -417,7 +1449,9 @@
         {% csrf_token %}
 
 
-        <!-- Event Information -->
+        <!-- =================================================
+             EVENT INFORMATION
+        ================================================== -->
 
         <div class="card">
 
@@ -425,8 +1459,9 @@
                 اطلاعات برنامه
             </h2>
 
+
             <p class="description">
-                نوع برنامه و تاریخ را مشخص کنید.
+                نوع برنامه، تاریخ و عنوان برنامه را مشخص کنید.
             </p>
 
 
@@ -439,6 +1474,7 @@
                         نوع برنامه
                     </label>
 
+
                     <select
                         name="attendance_type"
                         id="attendance_type"
@@ -449,13 +1485,16 @@
                             انتخاب کنید
                         </option>
 
+
                         <option value="heyat">
                             هیئت
                         </option>
 
+
                         <option value="weekly_class">
                             کلاس هفتگی
                         </option>
+
 
                         <option value="meeting">
                             قرار
@@ -471,6 +1510,7 @@
                     <label for="date">
                         تاریخ
                     </label>
+
 
                     <input
                         type="date"
@@ -489,6 +1529,7 @@
                         عنوان برنامه
                     </label>
 
+
                     <input
                         type="text"
                         name="title"
@@ -504,7 +1545,9 @@
         </div>
 
 
-        <!-- Students -->
+        <!-- =================================================
+             STUDENTS
+        ================================================== -->
 
         <div class="card">
 
@@ -533,15 +1576,20 @@
 
             {% if students %}
 
+
                 <div class="student-list">
 
 
                     {% for student in students %}
 
+
                         <div class="student-row">
 
 
+                            <!-- STUDENT -->
+
                             <div class="student-info">
+
 
                                 <div class="avatar">
                                     👨‍🎓
@@ -568,6 +1616,8 @@
 
                             </div>
 
+
+                            <!-- STATUS -->
 
                             <div class="statuses">
 
@@ -623,11 +1673,14 @@
 
                         </div>
 
+
                     {% endfor %}
 
 
                 </div>
 
+
+                <!-- ACTION -->
 
                 <div class="actions">
 
@@ -643,11 +1696,13 @@
 
             {% else %}
 
+
                 <div class="empty">
 
                     هنوز دانش‌آموز فعالی برای ثبت حضور وجود ندارد.
 
                 </div>
+
 
             {% endif %}
 
@@ -665,12 +1720,16 @@
 
     function markAllPresent() {
 
-        const radios = document.querySelectorAll(
-            'input[type="radio"][value="present"]'
-        );
+        const radios =
+            document.querySelectorAll(
+                'input[type="radio"][value="present"]'
+            );
+
 
         radios.forEach(function (radio) {
+
             radio.checked = true;
+
         });
 
     }

@@ -2,6 +2,7 @@
 <html lang="fa" dir="rtl">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,129 +10,1225 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>ورود مربیان | کانون رویش</title>
+    <meta
+        name="theme-color"
+        content="#080c16"
+    >
+
+    <title>
+        ورود مربیان | کانون رویش
+    </title>
+
 
     <style>
 
+        /* ==================================================
+           RESET
+        ================================================== */
+
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
+
+        :root {
+
+            --bg: #080c16;
+
+            --card:
+                rgba(14, 21, 36, 0.82);
+
+            --border:
+                rgba(255, 255, 255, 0.08);
+
+            --text:
+                #f8fafc;
+
+            --muted:
+                #778398;
+
+            --input-bg:
+                rgba(6, 11, 21, 0.68);
+
+            --input-border:
+                rgba(148, 163, 184, 0.16);
+
+            --blue:
+                #4f8cff;
+
+            --blue-light:
+                #60a5fa;
+
+            --purple:
+                #8b5cf6;
+
+            --cyan:
+                #22d3ee;
+
+            --danger:
+                #fb7185;
+
+            --danger-bg:
+                rgba(244, 63, 94, 0.08);
+
+            --danger-border:
+                rgba(244, 63, 94, 0.20);
+        }
+
+
+        html {
+            height: 100%;
+        }
+
+
         body {
-            margin: 0;
+
             min-height: 100vh;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
-            font-family: Tahoma, sans-serif;
+            padding: 25px;
 
-            background: #f3f4f6;
+            font-family:
+                Tahoma,
+                "Segoe UI",
+                sans-serif;
+
+            color:
+                var(--text);
+
+            background:
+
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(79,140,255,.14),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 85% 12%,
+                    rgba(139,92,246,.13),
+                    transparent 27%
+                ),
+
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(34,211,238,.05),
+                    transparent 28%
+                ),
+
+                linear-gradient(
+                    145deg,
+                    #070b13 0%,
+                    #0b1120 50%,
+                    #090d17 100%
+                );
+
+            overflow: hidden;
         }
 
+
+        /* ==================================================
+           BACKGROUND
+        ================================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,.015) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.015) 1px,
+                    transparent 1px
+                );
+
+            background-size: 42px 42px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 90%
+                );
+
+            opacity: .55;
+
+            z-index: -5;
+        }
+
+
+        .glow {
+
+            position: fixed;
+
+            width: 430px;
+            height: 430px;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            filter: blur(35px);
+
+            z-index: -2;
+        }
+
+
+        .glow-one {
+
+            top: -210px;
+            right: -150px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(79,140,255,.17),
+                    transparent 70%
+                );
+
+            animation:
+                glowFloatOne
+                10s
+                ease-in-out
+                infinite;
+        }
+
+
+        .glow-two {
+
+            left: -210px;
+            bottom: -200px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(139,92,246,.14),
+                    transparent 70%
+                );
+
+            animation:
+                glowFloatTwo
+                13s
+                ease-in-out
+                infinite;
+        }
+
+
+
+        /* ==================================================
+           LOGIN BOX
+        ================================================== */
+
         .login-box {
+
+            position: relative;
+
             width: 100%;
-            max-width: 420px;
 
-            background: white;
+            max-width: 430px;
 
-            padding: 35px;
+            padding: 34px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(18,27,45,.90),
+                    rgba(9,15,28,.84)
+                );
+
+            border:
+                1px solid
+                var(--border);
+
+            backdrop-filter:
+                blur(24px);
+
+            -webkit-backdrop-filter:
+                blur(24px);
+
+            box-shadow:
+
+                0 30px 90px
+                rgba(0,0,0,.46),
+
+                0 0 0 1px
+                rgba(255,255,255,.015);
+
+            overflow: hidden;
+
+            animation:
+                loginShow
+                .8s
+                cubic-bezier(.22,1,.36,1);
+        }
+
+
+        .login-box::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: -130px;
+            right: -110px;
+
+            width: 270px;
+            height: 270px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(79,140,255,.13),
+                    transparent 70%
+                );
+
+            pointer-events: none;
+        }
+
+
+        .login-box::after {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            right: 0;
+            left: 0;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--blue),
+                    var(--purple),
+                    transparent
+                );
+
+            opacity: .85;
+        }
+
+
+
+        /* ==================================================
+           BRAND / TITLE
+        ================================================== */
+
+        .title {
+
+            text-align: center;
+
+            margin-bottom: 28px;
+
+            animation:
+                titleShow
+                .65s
+                .08s
+                both
+                cubic-bezier(.22,1,.36,1);
+        }
+
+
+        .logo {
+
+            position: relative;
+
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 17px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
 
             border-radius: 18px;
 
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79,140,255,.15),
+                    rgba(139,92,246,.13)
+                );
+
+            border:
+                1px solid
+                rgba(96,165,250,.16);
+
+            color:
+                #9cc1ff;
+
             box-shadow:
-                0 10px 30px rgba(0, 0, 0, 0.08);
+
+                inset 0 0 25px
+                rgba(79,140,255,.05),
+
+                0 12px 30px
+                rgba(0,0,0,.25);
+
+            animation:
+                logoPulse
+                3s
+                ease-in-out
+                infinite;
         }
 
-        .title {
-            text-align: center;
-            margin-bottom: 30px;
+
+        .logo svg {
+
+            width: 30px;
+            height: 30px;
         }
+
 
         .title h1 {
-            margin: 0 0 8px;
-            font-size: 25px;
+
+            margin-bottom: 8px;
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+            color:
+                #f8fafc;
         }
+
 
         .title p {
-            margin: 0;
-            color: #777;
-            font-size: 14px;
+
+            color:
+                var(--muted);
+
+            font-size: 11px;
+
+            line-height: 1.8;
         }
 
-        .form-group {
-            margin-bottom: 18px;
-        }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
 
-        input {
-            width: 100%;
-
-            padding: 13px 14px;
-
-            border: 1px solid #ddd;
-            border-radius: 10px;
-
-            font-family: inherit;
-            font-size: 14px;
-
-            outline: none;
-        }
-
-        input:focus {
-            border-color: #222;
-        }
+        /* ==================================================
+           ERROR
+        ================================================== */
 
         .error {
-            background: #ffe9e9;
-            color: #b42318;
 
-            padding: 10px 12px;
+            position: relative;
 
-            border-radius: 10px;
+            padding:
+                12px 14px;
 
-            margin-bottom: 18px;
+            margin-bottom: 21px;
 
-            font-size: 13px;
+            border-radius: 12px;
+
+            color:
+                var(--danger);
+
+            background:
+                var(--danger-bg);
+
+            border:
+                1px solid
+                var(--danger-border);
+
+            font-size: 11px;
+
+            line-height: 1.9;
+
+            animation:
+                errorShow
+                .4s
+                cubic-bezier(.22,1,.36,1);
         }
 
-        button {
+
+
+        /* ==================================================
+           FORM GROUP
+        ================================================== */
+
+        .form-group {
+
+            margin-bottom: 19px;
+
+            animation:
+                fieldShow
+                .55s
+                both
+                cubic-bezier(.22,1,.36,1);
+        }
+
+
+        .form-group:nth-of-type(1) {
+            animation-delay: .12s;
+        }
+
+
+        .form-group:nth-of-type(2) {
+            animation-delay: .18s;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color:
+                #dbe4ef;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            transition:
+                color .25s ease,
+                transform .25s ease;
+        }
+
+
+        .form-group:focus-within label {
+
+            color:
+                #93c5fd;
+
+            transform:
+                translateX(-2px);
+        }
+
+
+
+        /* ==================================================
+           INPUT
+        ================================================== */
+
+        .form-group input {
+
             width: 100%;
 
-            border: none;
-            border-radius: 10px;
+            min-height: 49px;
 
-            padding: 13px;
+            padding:
+                13px 14px;
 
-            background: #111;
-            color: white;
+            border-radius: 12px;
 
-            font-family: inherit;
-            font-size: 15px;
+            border:
+                1px solid
+                var(--input-border);
 
-            cursor: pointer;
+            outline: none;
+
+            background:
+                var(--input-bg);
+
+            color:
+                #f8fafc;
+
+            font-family:
+                Tahoma,
+                "Segoe UI",
+                sans-serif;
+
+            font-size: 12px;
+
+            box-shadow:
+                inset 0 1px 2px
+                rgba(0,0,0,.25);
+
+            transition:
+                border-color .25s ease,
+                box-shadow .25s ease,
+                background .25s ease,
+                transform .25s ease;
         }
 
+
+        .form-group input::placeholder {
+
+            color:
+                #566174;
+
+            transition:
+                opacity .2s ease,
+                transform .2s ease;
+        }
+
+
+        .form-group input:hover {
+
+            border-color:
+                rgba(148,163,184,.28);
+
+            background:
+                rgba(6,11,21,.78);
+        }
+
+
+        .form-group input:focus {
+
+            border-color:
+                rgba(79,140,255,.72);
+
+            background:
+                rgba(6,11,21,.94);
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+
+                0 0 0 3px
+                rgba(79,140,255,.08),
+
+                0 12px 28px
+                rgba(0,0,0,.24);
+        }
+
+
+        .form-group input:focus::placeholder {
+
+            opacity: .35;
+
+            transform:
+                translateX(-3px);
+        }
+
+
+
+        /* ==================================================
+           LOGIN BUTTON
+        ================================================== */
+
+        button {
+
+            position: relative;
+
+            width: 100%;
+
+            min-height: 50px;
+
+            margin-top: 7px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-family:
+                Tahoma,
+                "Segoe UI",
+                sans-serif;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #3478f6,
+                    #5b5cf0 58%,
+                    #7c4fe4
+                );
+
+            box-shadow:
+                0 12px 30px
+                rgba(79,140,255,.21);
+
+            overflow: hidden;
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                filter .25s ease;
+        }
+
+
+        button::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    transparent 20%,
+                    rgba(255,255,255,.22) 50%,
+                    transparent 80%
+                );
+
+            transform:
+                translateX(120%);
+
+            transition:
+                transform .65s ease;
+        }
+
+
+        button::after {
+
+            content: "→";
+
+            position: absolute;
+
+            left: 18px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 16px;
+
+            opacity: .75;
+
+            transition:
+                transform .25s ease;
+        }
+
+
         button:hover {
-            background: #222;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 18px 38px
+                rgba(79,140,255,.28);
+
+            filter:
+                brightness(1.07);
+        }
+
+
+        button:hover::before {
+
+            transform:
+                translateX(-120%);
+        }
+
+
+        button:hover::after {
+
+            transform:
+                translate(-4px,-50%);
+        }
+
+
+        button:active {
+
+            transform:
+                translateY(0)
+                scale(.985);
+        }
+
+
+
+        /* ==================================================
+           FOOTER TEXT
+        ================================================== */
+
+        .login-footer {
+
+            margin-top: 20px;
+
+            padding-top: 17px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.055);
+
+            text-align: center;
+
+            color:
+                #4f5a6b;
+
+            font-size: 9px;
+
+            line-height: 1.8;
+        }
+
+
+
+        /* ==================================================
+           FOCUS
+        ================================================== */
+
+        input:focus-visible,
+        button:focus-visible {
+
+            outline:
+                3px solid
+                rgba(96,165,250,.20);
+
+            outline-offset: 3px;
+        }
+
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 500px) {
+
+            body {
+
+                align-items: center;
+
+                padding:
+                    17px 12px;
+            }
+
+
+            .login-box {
+
+                max-width:
+                    100%;
+
+                padding:
+                    25px 19px;
+
+                border-radius:
+                    19px;
+            }
+
+
+            .title {
+
+                margin-bottom:
+                    23px;
+            }
+
+
+            .logo {
+
+                width: 57px;
+                height: 57px;
+
+                margin-bottom:
+                    14px;
+
+                border-radius:
+                    15px;
+            }
+
+
+            .logo svg {
+
+                width: 27px;
+                height: 27px;
+            }
+
+
+            .title h1 {
+
+                font-size:
+                    20px;
+            }
+
+
+            .title p {
+
+                font-size:
+                    10px;
+            }
+
+
+            .error {
+
+                padding:
+                    11px 12px;
+
+                font-size:
+                    10px;
+            }
+
+
+            .form-group {
+
+                margin-bottom:
+                    17px;
+            }
+
+
+            .form-group label {
+
+                font-size:
+                    10.5px;
+            }
+
+
+            .form-group input {
+
+                min-height:
+                    47px;
+
+                border-radius:
+                    11px;
+
+                font-size:
+                    11.5px;
+            }
+
+
+            button {
+
+                min-height:
+                    48px;
+
+                font-size:
+                    11.5px;
+            }
+
+
+            button::after {
+
+                left:
+                    15px;
+
+                font-size:
+                    15px;
+            }
+
+
+            .login-footer {
+
+                margin-top:
+                    17px;
+
+                padding-top:
+                    14px;
+
+                font-size:
+                    8px;
+            }
+
+        }
+
+
+
+        /* ==================================================
+           SMALL PHONES
+        ================================================== */
+
+        @media (max-width: 370px) {
+
+            body {
+
+                padding:
+                    12px 9px;
+            }
+
+
+            .login-box {
+
+                padding:
+                    22px 15px;
+
+                border-radius:
+                    17px;
+            }
+
+
+            .logo {
+
+                width:
+                    52px;
+
+                height:
+                    52px;
+            }
+
+
+            .title h1 {
+
+                font-size:
+                    18px;
+            }
+
+
+            .title p {
+
+                font-size:
+                    9px;
+            }
+
+        }
+
+
+
+        /* ==================================================
+           REDUCED MOTION
+        ================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    .01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    .01ms !important;
+            }
+
+        }
+
+
+
+        /* ==================================================
+           ANIMATIONS
+        ================================================== */
+
+        @keyframes loginShow {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px)
+                    scale(.97);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        @keyframes titleShow {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(10px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        @keyframes fieldShow {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(9px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        @keyframes errorShow {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(-7px)
+                    scale(.98);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        @keyframes logoPulse {
+
+            0%,
+            100% {
+
+                box-shadow:
+
+                    inset 0 0 25px
+                    rgba(79,140,255,.05),
+
+                    0 12px 30px
+                    rgba(0,0,0,.25);
+            }
+
+            50% {
+
+                box-shadow:
+
+                    inset 0 0 28px
+                    rgba(79,140,255,.09),
+
+                    0 14px 35px
+                    rgba(79,140,255,.08);
+            }
+
+        }
+
+
+        @keyframes glowFloatOne {
+
+            0%,
+            100% {
+
+                transform:
+                    translate3d(0,0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate3d(-25px,25px,0);
+            }
+
+        }
+
+
+        @keyframes glowFloatTwo {
+
+            0%,
+            100% {
+
+                transform:
+                    translate3d(0,0,0);
+            }
+
+            50% {
+
+                transform:
+                    translate3d(30px,-25px,0);
+            }
+
         }
 
     </style>
+
 </head>
+
 
 <body>
 
-    <div class="login-box">
+
+    <!-- Background -->
+
+    <div class="glow glow-one"></div>
+
+    <div class="glow glow-two"></div>
+
+
+
+    <!-- Login -->
+
+    <main class="login-box">
+
+
+        <!-- Title -->
 
         <div class="title">
 
-            <h1>پنل مربیان</h1>
+
+            <div class="logo">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <path
+                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                    />
+
+                    <circle
+                        cx="12"
+                        cy="7"
+                        r="4"
+                    />
+
+                    <path
+                        d="M16 3.13a4 4 0 0 1 0 7.75"
+                    />
+
+                </svg>
+
+            </div>
+
+
+            <h1>
+                پنل مربیان
+            </h1>
+
 
             <p>
                 کانون فرهنگی تربیتی رویش
@@ -139,55 +1236,106 @@
 
         </div>
 
+
+
+        <!-- Error -->
+
         {% if error %}
+
             <div class="error">
+
                 {{ error }}
+
             </div>
+
         {% endif %}
 
-        <form method="post">
+
+
+        <!-- Form -->
+
+        <form
+            method="post"
+        >
 
             {% csrf_token %}
 
+
+
+            <!-- Username -->
+
             <div class="form-group">
 
-                <label for="username">
+                <label
+                    for="username"
+                >
                     نام کاربری
                 </label>
+
 
                 <input
                     type="text"
                     id="username"
                     name="username"
                     placeholder="نام کاربری خود را وارد کنید"
+                    autocomplete="username"
                     required
                 >
 
             </div>
 
+
+
+            <!-- Password -->
+
             <div class="form-group">
 
-                <label for="password">
+                <label
+                    for="password"
+                >
                     رمز عبور
                 </label>
+
 
                 <input
                     type="password"
                     id="password"
                     name="password"
                     placeholder="رمز عبور خود را وارد کنید"
+                    autocomplete="current-password"
                     required
                 >
 
             </div>
 
-            <button type="submit">
+
+
+            <!-- Submit -->
+
+            <button
+                type="submit"
+            >
                 ورود به پنل
             </button>
 
+
         </form>
 
-    </div>
+
+
+        <!-- Footer -->
+
+        <div class="login-footer">
+
+            کانون فرهنگی تربیتی رویش
+            <br>
+            پنل اختصاصی مربیان
+
+        </div>
+
+
+    </main>
+
 
 </body>
 

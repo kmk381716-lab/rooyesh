@@ -1,230 +1,1364 @@
-
+```html
 {% extends "base.html" %}
 
 {% block content %}
 
+
 <style>
 
-    * {
+    /* =========================================================
+       SUCCESS PAGE
+    ========================================================= */
+
+    .success-page,
+    .success-page * {
         box-sizing: border-box;
     }
 
-    html,
-    body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-    }
 
     .success-page {
+
+        --success-bg: #080c15;
+
+        --success-card:
+            rgba(14, 22, 36, .88);
+
+        --success-card-2:
+            rgba(9, 15, 27, .84);
+
+        --success-border:
+            rgba(255,255,255,.075);
+
+        --success-text:
+            #f8fafc;
+
+        --success-muted:
+            #7d899d;
+
+        --success-green:
+            #34d399;
+
+        --success-green-light:
+            #6ee7b7;
+
+        --success-blue:
+            #4f8cff;
+
+        --success-purple:
+            #8b5cf6;
+
+
+        position: relative;
+
         width: 100%;
-        min-height: 80vh;
+
+        min-height:
+            calc(100vh - 90px);
+
         display: flex;
+
         align-items: center;
+
         justify-content: center;
-        padding: 40px 20px;
-        background: #0d0f14;
+
+        padding:
+            40px 18px 60px;
+
+        overflow: hidden;
+
+        background:
+
+            radial-gradient(
+                circle at 15% 15%,
+                rgba(52,211,153,.09),
+                transparent 25%
+            ),
+
+            radial-gradient(
+                circle at 87% 10%,
+                rgba(79,140,255,.10),
+                transparent 25%
+            ),
+
+            radial-gradient(
+                circle at 50% 100%,
+                rgba(139,92,246,.065),
+                transparent 30%
+            ),
+
+            var(--success-bg);
     }
+
+
+    /* =========================================================
+       BACKGROUND GRID
+    ========================================================= */
+
+    .success-page::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        pointer-events: none;
+
+        background-image:
+
+            linear-gradient(
+                rgba(255,255,255,.012) 1px,
+                transparent 1px
+            ),
+
+            linear-gradient(
+                90deg,
+                rgba(255,255,255,.012) 1px,
+                transparent 1px
+            );
+
+        background-size: 42px 42px;
+
+        mask-image:
+            linear-gradient(
+                to bottom,
+                black,
+                transparent 90%
+            );
+
+        opacity: .6;
+    }
+
+
+    /* =========================================================
+       GLOW
+    ========================================================= */
+
+    .success-glow {
+
+        position: absolute;
+
+        width: 390px;
+        height: 390px;
+
+        border-radius: 50%;
+
+        pointer-events: none;
+
+        filter: blur(30px);
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(52,211,153,.11),
+                transparent 70%
+            );
+
+        animation:
+            successGlowFloat
+            10s
+            ease-in-out
+            infinite;
+    }
+
+
+
+    /* =========================================================
+       CARD
+    ========================================================= */
 
     .success-card {
+
+        position: relative;
+
+        z-index: 2;
+
         width: 100%;
-        max-width: 600px;
-        background: #171a21;
-        border: 1px solid #282d36;
-        border-radius: 20px;
-        padding: 35px;
+
+        max-width: 620px;
+
+        padding:
+            38px 34px 32px;
+
         text-align: center;
-        color: #ffffff;
-        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+
+        border:
+            1px solid
+            var(--success-border);
+
+        border-radius: 24px;
+
+        background:
+            linear-gradient(
+                145deg,
+                var(--success-card),
+                var(--success-card-2)
+            );
+
+        backdrop-filter:
+            blur(23px);
+
+        -webkit-backdrop-filter:
+            blur(23px);
+
+        box-shadow:
+
+            0 35px 90px
+            rgba(0,0,0,.42),
+
+            0 0 0 1px
+            rgba(255,255,255,.012);
+
+        overflow: hidden;
+
+        animation:
+            successCardShow
+            .75s
+            cubic-bezier(.22,1,.36,1);
     }
+
+
+    .success-card::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 300px;
+        height: 300px;
+
+        top: -185px;
+        left: 50%;
+
+        transform:
+            translateX(-50%);
+
+        border-radius: 50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(52,211,153,.12),
+                transparent 70%
+            );
+
+        pointer-events: none;
+    }
+
+
+    .success-card::after {
+
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        right: 0;
+        left: 0;
+
+        height: 2px;
+
+        background:
+            linear-gradient(
+                90deg,
+                transparent,
+                var(--success-green),
+                var(--success-blue),
+                var(--success-purple),
+                transparent
+            );
+
+        opacity: .8;
+    }
+
+
+
+    /* =========================================================
+       SUCCESS ICON
+    ========================================================= */
+
+    .success-icon-wrap {
+
+        position: relative;
+
+        width: 82px;
+        height: 82px;
+
+        margin:
+            0 auto 20px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 24px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(52,211,153,.13),
+                rgba(79,140,255,.08)
+            );
+
+        border:
+            1px solid
+            rgba(52,211,153,.19);
+
+        box-shadow:
+
+            inset 0 0 28px
+            rgba(52,211,153,.035),
+
+            0 14px 35px
+            rgba(0,0,0,.22);
+
+        animation:
+            iconShow
+            .65s
+            .10s
+            both
+            cubic-bezier(.22,1,.36,1);
+    }
+
+
+    .success-icon-wrap::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: -9px;
+
+        border-radius: 30px;
+
+        border:
+            1px solid
+            rgba(52,211,153,.08);
+
+        animation:
+            iconRing
+            2.7s
+            ease-out
+            infinite;
+    }
+
 
     .success-icon {
-        font-size: 50px;
-        line-height: 1;
-        margin-bottom: 15px;
+
+        position: relative;
+
+        z-index: 2;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 52px;
+        height: 52px;
+
+        border-radius: 16px;
+
+        background:
+            rgba(52,211,153,.11);
+
+        color:
+            var(--success-green-light);
+
+        font-size: 25px;
+
+        box-shadow:
+            0 0 25px
+            rgba(52,211,153,.08);
     }
+
+
+
+    /* =========================================================
+       TITLE
+    ========================================================= */
 
     .success-title {
-        margin: 0 0 12px;
-        font-size: 28px;
-        line-height: 1.5;
+
+        position: relative;
+
+        z-index: 2;
+
+        margin:
+            0 0 10px;
+
+        color:
+            var(--success-text);
+
+        font-size: 27px;
+
+        line-height: 1.55;
+
+        font-weight: 800;
+
+        animation:
+            successTextShow
+            .6s
+            .18s
+            both
+            cubic-bezier(.22,1,.36,1);
     }
+
 
     .success-text {
-        margin: 0;
-        color: #8d96a5;
-        font-size: 15px;
-        line-height: 1.8;
+
+        position: relative;
+
+        z-index: 2;
+
+        margin: 0 auto;
+
+        max-width: 500px;
+
+        color:
+            var(--success-muted);
+
+        font-size: 11px;
+
+        line-height: 2;
+
         overflow-wrap: anywhere;
+
+        animation:
+            successTextShow
+            .6s
+            .24s
+            both
+            cubic-bezier(.22,1,.36,1);
     }
+
+
+    .success-text strong {
+
+        color:
+            #dce6f2;
+
+        font-weight: 700;
+    }
+
+
+
+    /* =========================================================
+       LINK BOX
+    ========================================================= */
+
+    .link-section {
+
+        position: relative;
+
+        z-index: 2;
+
+        margin-top: 25px;
+
+        animation:
+            linkShow
+            .6s
+            .30s
+            both
+            cubic-bezier(.22,1,.36,1);
+    }
+
+
+    .link-label {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 10px;
+
+        margin-bottom: 8px;
+
+        color:
+            #aab5c5;
+
+        font-size: 9px;
+
+        text-align: right;
+    }
+
+
+    .link-status {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 5px;
+
+        color:
+            #5ee6ad;
+
+        font-size: 8px;
+    }
+
+
+    .link-status span {
+
+        width: 5px;
+        height: 5px;
+
+        border-radius: 50%;
+
+        background:
+            var(--success-green);
+
+        box-shadow:
+            0 0 8px
+            rgba(52,211,153,.55);
+    }
+
 
     .form-link {
+
         display: block;
+
         width: 100%;
-        max-width: 100%;
-        margin-top: 18px;
-        padding: 13px 14px;
-        border-radius: 10px;
-        border: 1px solid #343a46;
-        background: #101318;
-        color: #ffffff;
+
+        min-height: 50px;
+
+        padding:
+            14px;
+
+        border-radius: 12px;
+
+        border:
+            1px solid
+            rgba(148,163,184,.14);
+
+        background:
+            rgba(5,10,19,.72);
+
+        color:
+            #b9c8dc;
+
         direction: ltr;
+
         text-align: left;
-        font-family: inherit;
-        font-size: 14px;
+
+        font-family:
+            Tahoma,
+            "Segoe UI",
+            sans-serif;
+
+        font-size: 10px;
+
+        line-height: 1.7;
+
         outline: none;
+
         overflow: hidden;
+
         text-overflow: ellipsis;
+
+        white-space: nowrap;
+
+        box-shadow:
+            inset 0 1px 2px
+            rgba(0,0,0,.25);
+
+        transition:
+            border-color .25s ease,
+            box-shadow .25s ease,
+            background .25s ease;
     }
+
+
+    .form-link:hover {
+
+        background:
+            rgba(5,10,19,.84);
+
+        border-color:
+            rgba(148,163,184,.23);
+    }
+
 
     .form-link:focus {
-        border-color: #6c63ff;
-        box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.12);
+
+        border-color:
+            rgba(79,140,255,.65);
+
+        background:
+            rgba(5,10,19,.94);
+
+        box-shadow:
+
+            0 0 0 3px
+            rgba(79,140,255,.07),
+
+            0 10px 25px
+            rgba(0,0,0,.18);
     }
+
+
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+
+    .actions {
+
+        display: flex;
+
+        justify-content: center;
+
+        gap: 9px;
+
+        margin-top: 11px;
+    }
+
+
+    .copy-btn,
+    .new-form-btn {
+
+        position: relative;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 7px;
+
+        min-height: 47px;
+
+        padding:
+            11px 18px;
+
+        border-radius: 11px;
+
+        font-family: inherit;
+
+        font-size: 10px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        overflow: hidden;
+
+        transition:
+            transform .25s ease,
+            background .25s ease,
+            border-color .25s ease,
+            box-shadow .25s ease,
+            color .25s ease;
+    }
+
 
     .copy-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        max-width: 220px;
-        min-height: 48px;
-        margin-top: 12px;
-        padding: 12px 20px;
-        border: 0;
-        border-radius: 10px;
-        background: #6c63ff;
-        color: #ffffff;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: 15px;
-        transition: 0.2s;
-        touch-action: manipulation;
+
+        flex:
+            1 1 auto;
+
+        border:
+            1px solid
+            rgba(79,140,255,.18);
+
+        background:
+            linear-gradient(
+                135deg,
+                #3478f6,
+                #5b5cf0 58%,
+                #7c4fe4
+            );
+
+        color:
+            #fff;
+
+        box-shadow:
+            0 10px 25px
+            rgba(79,140,255,.16);
     }
+
+
+    .copy-btn::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background:
+            linear-gradient(
+                110deg,
+                transparent 20%,
+                rgba(255,255,255,.20) 50%,
+                transparent 80%
+            );
+
+        transform:
+            translateX(120%);
+
+        transition:
+            transform .6s ease;
+    }
+
+
+    .copy-btn span {
+
+        position: relative;
+
+        z-index: 2;
+    }
+
 
     .copy-btn:hover {
-        background: #5b52ed;
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 16px 32px
+            rgba(79,140,255,.23);
+
+        filter:
+            brightness(1.06);
     }
+
+
+    .copy-btn:hover::before {
+
+        transform:
+            translateX(-120%);
+    }
+
 
     .copy-btn:active {
-        transform: scale(0.98);
+
+        transform:
+            scale(.98);
     }
 
 
-    /* =========================
-       موبایل
-    ========================== */
+    .copy-btn.copied {
+
+        background:
+            linear-gradient(
+                135deg,
+                #119669,
+                #16a779
+            );
+
+        border-color:
+            rgba(52,211,153,.24);
+
+        box-shadow:
+            0 12px 28px
+            rgba(52,211,153,.14);
+    }
+
+
+    .new-form-btn {
+
+        flex:
+            0 0 auto;
+
+        border:
+            1px solid
+            rgba(255,255,255,.07);
+
+        background:
+            rgba(255,255,255,.035);
+
+        color:
+            #bac5d5;
+    }
+
+
+    .new-form-btn:hover {
+
+        transform:
+            translateY(-2px);
+
+        background:
+            rgba(255,255,255,.065);
+
+        border-color:
+            rgba(255,255,255,.12);
+
+        color:
+            #eef3fa;
+    }
+
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .success-footer {
+
+        position: relative;
+
+        z-index: 2;
+
+        margin-top: 22px;
+
+        padding-top: 16px;
+
+        border-top:
+            1px solid
+            rgba(255,255,255,.055);
+
+        color:
+            #4d5869;
+
+        font-size: 8px;
+
+        line-height: 1.8;
+
+        animation:
+            successTextShow
+            .6s
+            .38s
+            both;
+    }
+
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
 
     @media (max-width: 600px) {
 
         .success-page {
-            min-height: 75vh;
-            padding: 20px 10px;
+
+            min-height:
+                calc(100vh - 60px);
+
+            padding:
+                20px 10px 30px;
         }
+
 
         .success-card {
-            padding: 25px 15px;
-            border-radius: 15px;
+
+            max-width:
+                100%;
+
+            padding:
+                27px 16px 23px;
+
+            border-radius:
+                19px;
         }
+
+
+        .success-icon-wrap {
+
+            width:
+                69px;
+
+            height:
+                69px;
+
+            margin-bottom:
+                16px;
+
+            border-radius:
+                20px;
+        }
+
 
         .success-icon {
-            font-size: 44px;
-            margin-bottom: 12px;
+
+            width:
+                45px;
+
+            height:
+                45px;
+
+            border-radius:
+                14px;
+
+            font-size:
+                21px;
         }
+
 
         .success-title {
-            font-size: 23px;
+
+            font-size:
+                21px;
+
+            margin-bottom:
+                8px;
         }
+
 
         .success-text {
-            font-size: 14px;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.95;
         }
+
+
+        .link-section {
+
+            margin-top:
+                20px;
+        }
+
+
+        .link-label {
+
+            font-size:
+                8.5px;
+        }
+
+
+        .link-status {
+
+            font-size:
+                7.5px;
+        }
+
 
         .form-link {
-            padding: 12px;
-            font-size: 13px;
+
+            min-height:
+                47px;
+
+            padding:
+                12px;
+
+            font-size:
+                9px;
         }
 
-        .copy-btn {
-            max-width: none;
-            width: 100%;
-            font-size: 15px;
+
+        .actions {
+
+            flex-direction:
+                column;
+
+            gap:
+                8px;
         }
+
+
+        .copy-btn,
+        .new-form-btn {
+
+            width:
+                100%;
+
+            min-height:
+                46px;
+
+            font-size:
+                10px;
+        }
+
+
+        .success-footer {
+
+            margin-top:
+                18px;
+
+            padding-top:
+                14px;
+
+            font-size:
+                7.5px;
+        }
+
     }
 
 
-    /* =========================
-       موبایل خیلی کوچک
-    ========================== */
+
+    /* =========================================================
+       VERY SMALL PHONES
+    ========================================================= */
 
     @media (max-width: 380px) {
 
         .success-page {
-            padding: 15px 8px;
+
+            padding:
+                13px 8px 23px;
         }
+
 
         .success-card {
-            padding: 22px 12px;
-            border-radius: 13px;
+
+            padding:
+                23px 13px 20px;
+
+            border-radius:
+                17px;
         }
+
+
+        .success-icon-wrap {
+
+            width:
+                62px;
+
+            height:
+                62px;
+
+            border-radius:
+                17px;
+        }
+
 
         .success-icon {
-            font-size: 40px;
+
+            width:
+                41px;
+
+            height:
+                41px;
+
+            border-radius:
+                12px;
+
+            font-size:
+                19px;
         }
+
 
         .success-title {
-            font-size: 21px;
+
+            font-size:
+                19px;
         }
 
-        .form-link {
-            font-size: 12px;
-            padding: 11px 10px;
+
+        .success-text {
+
+            font-size:
+                9.5px;
         }
+
+
+        .form-link {
+
+            font-size:
+                8px;
+
+            min-height:
+                44px;
+        }
+
+    }
+
+
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .success-page *,
+        .success-page *::before,
+        .success-page *::after {
+
+            animation-duration:
+                .01ms !important;
+
+            animation-iteration-count:
+                1 !important;
+
+            transition-duration:
+                .01ms !important;
+        }
+
+    }
+
+
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes successCardShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(25px)
+                scale(.975);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+    }
+
+
+    @keyframes iconShow {
+
+        from {
+            opacity: 0;
+
+            transform:
+                scale(.75)
+                rotate(-7deg);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                scale(1)
+                rotate(0);
+        }
+
+    }
+
+
+    @keyframes iconRing {
+
+        0% {
+
+            opacity:
+                .55;
+
+            transform:
+                scale(.92);
+        }
+
+        70% {
+
+            opacity:
+                0;
+
+            transform:
+                scale(1.17);
+        }
+
+        100% {
+
+            opacity:
+                0;
+
+            transform:
+                scale(1.17);
+        }
+
+    }
+
+
+    @keyframes successTextShow {
+
+        from {
+
+            opacity: 0;
+
+            transform:
+                translateY(8px);
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes linkShow {
+
+        from {
+
+            opacity: 0;
+
+            transform:
+                translateY(10px);
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+    }
+
+
+    @keyframes successGlowFloat {
+
+        0%,
+        100% {
+
+            transform:
+                translate3d(0,0,0);
+        }
+
+        50% {
+
+            transform:
+                translate3d(25px,-20px,0);
+        }
+
     }
 
 </style>
 
 
+
 <div class="success-page">
+
+
+    <div class="success-glow"></div>
+
 
     <div class="success-card">
 
-        <div class="success-icon">
-            ✅
+
+        <!-- =================================================
+             SUCCESS ICON
+        ================================================== -->
+
+        <div class="success-icon-wrap">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
         </div>
 
 
+
+        <!-- =================================================
+             TITLE
+        ================================================== -->
+
         <h1 class="success-title">
-            فرم ساخته شد
+            فرم با موفقیت ساخته شد
         </h1>
 
 
         <p class="success-text">
-            فرم «{{ form.title }}» با موفقیت ساخته شد.
+
+            فرم
+            <strong>
+                «{{ form.title }}»
+            </strong>
+            با موفقیت ایجاد شد و لینک آن آماده استفاده است.
+
         </p>
 
 
-        <input
-            id="formLink"
-            class="form-link"
-            type="text"
-            readonly
-            value="{{ request.scheme }}://{{ request.get_host }}{% url 'forms:fill_form' form.id %}"
-        >
+
+        <!-- =================================================
+             LINK
+        ================================================== -->
+
+        <div class="link-section">
 
 
-        <button
-            type="button"
-            class="copy-btn"
-            id="copyButton"
-            onclick="copyLink()"
-        >
-            کپی لینک
-        </button>
+            <div class="link-label">
+
+                <span>
+                    لینک فرم
+                </span>
+
+
+                <span class="link-status">
+
+                    <span></span>
+
+                    آماده انتشار
+
+                </span>
+
+            </div>
+
+
+            <input
+                id="formLink"
+                class="form-link"
+                type="text"
+                readonly
+                value="{{ request.scheme }}://{{ request.get_host }}{% url 'forms:fill_form' form.id %}"
+            >
+
+
+            <div class="actions">
+
+
+                <button
+                    type="button"
+                    class="copy-btn"
+                    id="copyButton"
+                    onclick="copyLink()"
+                >
+
+                    <span id="copyText">
+                        کپی لینک
+                    </span>
+
+                </button>
+
+
+                <a
+                    href="{% url 'forms:fill_form' form.id %}"
+                    class="new-form-btn"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    مشاهده فرم
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="success-footer">
+
+            کانون فرهنگی تربیتی رویش
+            <br>
+            فرم‌ساز کانون
+
+        </div>
+
 
     </div>
 
+
 </div>
+
 
 
 <script>
@@ -237,42 +1371,109 @@ function copyLink() {
     const button =
         document.getElementById("copyButton");
 
+    const text =
+        document.getElementById("copyText");
 
-    navigator.clipboard.writeText(
-        input.value
-    ).then(() => {
 
-        button.textContent =
-            "✓ لینک کپی شد";
+    navigator.clipboard
+        .writeText(input.value)
 
-        setTimeout(() => {
+        .then(() => {
 
-            button.textContent =
-                "کپی لینک";
+            showCopiedState();
 
-        }, 1800);
+        })
 
-    }).catch(() => {
+        .catch(() => {
 
-        input.focus();
-        input.select();
+            fallbackCopy(input);
+
+        });
+
+}
+
+
+function fallbackCopy(input) {
+
+    input.focus();
+
+    input.select();
+
+    input.setSelectionRange(
+        0,
+        99999
+    );
+
+
+    try {
 
         document.execCommand("copy");
 
-        button.textContent =
-            "✓ لینک کپی شد";
+        showCopiedState();
 
-        setTimeout(() => {
+    } catch (error) {
 
-            button.textContent =
-                "کپی لینک";
+        const button =
+            document.getElementById(
+                "copyButton"
+            );
 
-        }, 1800);
+        const text =
+            document.getElementById(
+                "copyText"
+            );
 
-    });
+
+        text.textContent =
+            "لینک را دستی کپی کنید";
+
+        button.classList.remove(
+            "copied"
+        );
+
+    }
+
 }
+
+
+function showCopiedState() {
+
+    const button =
+        document.getElementById(
+            "copyButton"
+        );
+
+    const text =
+        document.getElementById(
+            "copyText"
+        );
+
+
+    button.classList.add(
+        "copied"
+    );
+
+
+    text.textContent =
+        "✓ لینک کپی شد";
+
+
+    setTimeout(() => {
+
+        button.classList.remove(
+            "copied"
+        );
+
+        text.textContent =
+            "کپی لینک";
+
+    }, 2000);
+
+}
+
 
 </script>
 
-{% endblock %}
 
+{% endblock %}
+```

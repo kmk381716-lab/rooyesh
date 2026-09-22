@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -7,7 +8,7 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
     <title>
@@ -16,364 +17,1509 @@
         | کانون رویش
     </title>
 
+
     <style>
+
+        /* =====================================================
+           ROOT
+        ===================================================== */
+
+        :root {
+
+            --bg: #050b14;
+            --bg-2: #08111f;
+
+            --card: rgba(13,27,46,0.82);
+            --card-2: rgba(9,20,35,0.94);
+
+            --text: #edf4ff;
+            --soft: #aab8ca;
+            --muted: #718096;
+
+            --blue: #4e8cff;
+            --blue-light: #78aaff;
+            --purple: #8b63ff;
+
+            --green: #35d49a;
+            --red: #ff6678;
+            --yellow: #e8ca6a;
+
+            --border: rgba(255,255,255,0.075);
+
+            --shadow:
+                0 24px 70px rgba(0,0,0,0.30);
+        }
+
+
+        /* =====================================================
+           RESET
+        ===================================================== */
 
         * {
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
 
-            font-family: Tahoma, sans-serif;
-
-            background: #f5f6f8;
-
-            color: #1f2937;
+        html {
+            scroll-behavior: smooth;
         }
 
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            color: var(--text);
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            line-height: 1.8;
+
+            background:
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(78,140,255,0.13),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(139,99,255,0.11),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(67,213,255,0.05),
+                    transparent 26%
+                ),
+                linear-gradient(
+                    180deg,
+                    var(--bg),
+                    var(--bg-2)
+                );
+
+            overflow-x: hidden;
+        }
+
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.012) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.012) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                40px 40px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 83%
+                );
+
+            z-index: -1;
+        }
+
+
         a {
+            color: inherit;
             text-decoration: none;
         }
 
 
-        /* Header */
+        /* =====================================================
+           HEADER
+        ===================================================== */
 
         .header {
-            background: white;
 
-            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
 
-            padding: 20px 30px;
+            top: 0;
 
-            display: flex;
+            z-index: 1000;
 
-            align-items: center;
+            background:
+                rgba(5,12,22,0.84);
 
-            justify-content: space-between;
+            backdrop-filter:
+                blur(22px);
 
-            gap: 15px;
+            -webkit-backdrop-filter:
+                blur(22px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.055);
+
+            box-shadow:
+                0 10px 45px rgba(0,0,0,0.16);
         }
+
+
+        .header::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: 18%;
+
+            width: 64%;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(78,140,255,0.65),
+                    rgba(139,99,255,0.55),
+                    transparent
+                );
+        }
+
+
+        .header-inner {
+
+            width:
+                min(
+                    1100px,
+                    calc(100% - 36px)
+                );
+
+            min-height:
+                76px;
+
+            margin-inline:
+                auto;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                18px;
+        }
+
 
         .header-title h1 {
-            margin: 0 0 7px;
 
-            font-size: 22px;
+            margin:
+                0 0 3px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                20px;
+
+            font-weight:
+                900;
         }
+
 
         .header-title p {
-            margin: 0;
 
-            color: #6b7280;
+            margin:
+                0;
 
-            font-size: 12px;
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
         }
+
 
         .back-button {
-            padding: 11px 16px;
 
-            border-radius: 10px;
+            display:
+                inline-flex;
 
-            background: #f3f4f6;
+            align-items:
+                center;
 
-            color: #374151;
+            justify-content:
+                center;
 
-            font-size: 13px;
+            min-height:
+                43px;
 
-            transition: 0.2s;
+            padding:
+                0 15px;
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius:
+                12px;
+
+            color:
+                #cbd8ea;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+            transition:
+                transform .22s ease,
+                background .22s ease,
+                border-color .22s ease,
+                color .22s ease;
         }
+
 
         .back-button:hover {
-            background: #e5e7eb;
+
+            transform:
+                translateY(-2px);
+
+            color:
+                #ffffff;
+
+            background:
+                rgba(78,140,255,0.08);
+
+            border-color:
+                rgba(78,140,255,0.21);
         }
 
 
-        /* Container */
+        /* =====================================================
+           MAIN
+        ===================================================== */
 
         .container {
-            max-width: 1100px;
 
-            margin: 0 auto;
+            width:
+                min(
+                    1100px,
+                    calc(100% - 36px)
+                );
 
-            padding: 30px 20px;
+            margin-inline:
+                auto;
+
+            padding:
+                34px 0 70px;
         }
 
 
-        /* Card */
+        /* =====================================================
+           CARD
+        ===================================================== */
 
         .card {
-            background: white;
 
-            border: 1px solid #e5e7eb;
+            position:
+                relative;
 
-            border-radius: 16px;
+            overflow:
+                hidden;
 
-            padding: 25px;
+            margin-bottom:
+                20px;
 
-            margin-bottom: 20px;
+            padding:
+                26px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                23px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,31,52,0.86),
+                    rgba(8,19,33,0.95)
+                );
+
+            box-shadow:
+                var(--shadow);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
         }
 
 
-        /* Student */
+        .card::before {
+
+            content: "";
+
+            position:
+                absolute;
+
+            top:
+                -110px;
+
+            right:
+                -100px;
+
+            width:
+                260px;
+
+            height:
+                260px;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(78,140,255,0.06);
+
+            filter:
+                blur(70px);
+
+            pointer-events:
+                none;
+        }
+
+
+        .card > * {
+
+            position:
+                relative;
+
+            z-index:
+                1;
+        }
+
+
+        /* =====================================================
+           STUDENT HEADER
+        ===================================================== */
 
         .student-header {
-            display: flex;
 
-            align-items: center;
+            display:
+                flex;
 
-            gap: 15px;
+            align-items:
+                center;
+
+            gap:
+                15px;
+
+            padding-bottom:
+                22px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.055);
         }
+
 
         .avatar {
-            width: 62px;
-            height: 62px;
 
-            border-radius: 50%;
+            width:
+                68px;
 
-            background: #f3f4f6;
+            height:
+                68px;
 
-            display: flex;
+            flex-shrink:
+                0;
 
-            align-items: center;
-            justify-content: center;
+            display:
+                flex;
 
-            font-size: 26px;
+            align-items:
+                center;
 
-            flex-shrink: 0;
+            justify-content:
+                center;
+
+            border-radius:
+                19px;
+
+            font-size:
+                30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(78,140,255,0.17),
+                    rgba(139,99,255,0.16)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            box-shadow:
+                0 12px 35px rgba(78,140,255,0.10);
         }
+
 
         .student-name {
-            margin: 0 0 7px;
 
-            font-size: 21px;
+            margin:
+                0 0 4px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                23px;
+
+            font-weight:
+                950;
         }
+
 
         .student-grade {
-            color: #6b7280;
 
-            font-size: 13px;
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
         }
 
 
-        /* Info */
+        /* =====================================================
+           INFO GRID
+        ===================================================== */
 
         .info-grid {
-            display: grid;
+
+            display:
+                grid;
 
             grid-template-columns:
                 repeat(
-                    auto-fit,
-                    minmax(180px, 1fr)
+                    3,
+                    minmax(0,1fr)
                 );
 
-            gap: 12px;
+            gap:
+                10px;
 
-            margin-top: 25px;
+            margin-top:
+                20px;
         }
+
 
         .info-item {
-            background: #f9fafb;
 
-            border-radius: 10px;
+            min-height:
+                78px;
 
-            padding: 15px;
+            padding:
+                14px;
+
+            border:
+                1px solid rgba(255,255,255,0.055);
+
+            border-radius:
+                13px;
+
+            background:
+                rgba(255,255,255,0.022);
+
+            transition:
+                transform .22s ease,
+                border-color .22s ease,
+                background .22s ease;
         }
+
+
+        .info-item:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color:
+                rgba(78,140,255,0.16);
+
+            background:
+                rgba(78,140,255,0.035);
+        }
+
 
         .info-label {
-            color: #6b7280;
 
-            font-size: 11px;
+            margin-bottom:
+                5px;
 
-            margin-bottom: 7px;
+            color:
+                #68788e;
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
         }
+
 
         .info-value {
-            font-size: 13px;
 
-            font-weight: bold;
+            color:
+                #dce7f5;
+
+            font-size:
+                12px;
+
+            font-weight:
+                900;
+
+            word-break:
+                break-word;
         }
 
 
-        /* Section */
+        /* وضعیت */
+
+        .info-item:last-child .info-value {
+
+            color:
+                var(--green);
+        }
+
+
+        /* =====================================================
+           SECTION TITLE
+        ===================================================== */
 
         .section-title {
-            margin: 0 0 18px;
 
-            font-size: 17px;
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            margin:
+                0 0 18px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                17px;
+
+            font-weight:
+                900;
         }
 
 
-        /* Summary */
+        .section-title::before {
+
+            content:
+                "";
+
+            width:
+                4px;
+
+            height:
+                19px;
+
+            border-radius:
+                999px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--blue),
+                    var(--purple)
+                );
+        }
+
+
+        /* =====================================================
+           SUMMARY
+        ===================================================== */
 
         .summary-grid {
-            display: grid;
+
+            display:
+                grid;
 
             grid-template-columns:
                 repeat(
-                    auto-fit,
-                    minmax(150px, 1fr)
+                    4,
+                    minmax(0,1fr)
                 );
 
-            gap: 12px;
+            gap:
+                11px;
         }
+
 
         .summary-box {
+
+            position:
+                relative;
+
+            min-height:
+                105px;
+
+            padding:
+                17px;
+
+            overflow:
+                hidden;
+
             border:
-                1px solid #e5e7eb;
+                1px solid rgba(255,255,255,0.06);
 
-            border-radius: 13px;
+            border-radius:
+                15px;
 
-            padding: 18px;
+            background:
+                rgba(255,255,255,0.022);
+
+            transition:
+                transform .22s ease,
+                border-color .22s ease;
         }
+
+
+        .summary-box:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                rgba(255,255,255,0.11);
+        }
+
+
+        .summary-box::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            bottom:
+                -45px;
+
+            left:
+                -30px;
+
+            width:
+                110px;
+
+            height:
+                110px;
+
+            border-radius:
+                50%;
+
+            opacity:
+                0.7;
+
+            filter:
+                blur(25px);
+        }
+
+
+        .summary-box:not(.present):not(.absent):not(.excused)::after {
+
+            background:
+                rgba(78,140,255,0.10);
+        }
+
+
+        .summary-box.present::after {
+
+            background:
+                rgba(53,212,154,0.11);
+        }
+
+
+        .summary-box.absent::after {
+
+            background:
+                rgba(255,102,120,0.10);
+        }
+
+
+        .summary-box.excused::after {
+
+            background:
+                rgba(232,202,106,0.10);
+        }
+
 
         .summary-title {
-            color: #6b7280;
 
-            font-size: 11px;
+            color:
+                #718096;
 
-            margin-bottom: 9px;
+            font-size:
+                10px;
+
+            font-weight:
+                800;
         }
+
 
         .summary-number {
-            font-size: 25px;
 
-            font-weight: bold;
+            margin-top:
+                5px;
+
+            color:
+                #ffffff;
+
+            font-size:
+                28px;
+
+            line-height:
+                1.35;
+
+            font-weight:
+                950;
         }
+
 
         .summary-box.present {
-            border-right: 4px solid #10b981;
+
+            border-bottom:
+                2px solid rgba(53,212,154,0.55);
         }
+
 
         .summary-box.absent {
-            border-right: 4px solid #ef4444;
+
+            border-bottom:
+                2px solid rgba(255,102,120,0.55);
         }
+
 
         .summary-box.excused {
-            border-right: 4px solid #f59e0b;
+
+            border-bottom:
+                2px solid rgba(232,202,106,0.55);
         }
 
 
-        /* Type table */
+        /* =====================================================
+           TABLE
+        ===================================================== */
 
         .table-wrapper {
-            overflow-x: auto;
+
+            overflow-x:
+                auto;
+
+            border:
+                1px solid rgba(255,255,255,0.055);
+
+            border-radius:
+                15px;
         }
+
 
         table {
-            width: 100%;
 
-            border-collapse: collapse;
+            width:
+                100%;
 
-            min-width: 620px;
+            min-width:
+                620px;
+
+            border-collapse:
+                collapse;
         }
+
 
         th,
         td {
-            padding: 14px 12px;
+
+            padding:
+                14px 13px;
+
+            text-align:
+                right;
+
+            font-size:
+                11px;
 
             border-bottom:
-                1px solid #e5e7eb;
-
-            text-align: right;
-
-            font-size: 12px;
+                1px solid rgba(255,255,255,0.05);
         }
+
 
         th {
-            background: #f9fafb;
 
-            color: #6b7280;
+            color:
+                #738299;
 
-            font-weight: bold;
+            background:
+                rgba(255,255,255,0.028);
+
+            font-weight:
+                900;
         }
+
+
+        td {
+
+            color:
+                #aebcd0;
+
+            background:
+                rgba(255,255,255,0.012);
+        }
+
+
+        tbody tr {
+
+            transition:
+                background .18s ease;
+        }
+
+
+        tbody tr:hover td {
+
+            background:
+                rgba(78,140,255,0.035);
+        }
+
 
         tr:last-child td {
-            border-bottom: none;
+
+            border-bottom:
+                none;
         }
+
 
         .type-name {
-            font-weight: bold;
+
+            color:
+                #e0e9f5;
+
+            font-weight:
+                900;
         }
 
 
-        /* Status */
+        /* =====================================================
+           STATUS
+        ===================================================== */
 
         .status {
-            display: inline-block;
 
-            padding: 6px 10px;
+            display:
+                inline-flex;
 
-            border-radius: 8px;
+            align-items:
+                center;
 
-            font-size: 11px;
+            justify-content:
+                center;
 
-            font-weight: bold;
+            min-height:
+                28px;
+
+            padding:
+                0 9px;
+
+            border-radius:
+                8px;
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
         }
+
 
         .present-status {
-            background: #ecfdf5;
 
-            color: #047857;
+            color:
+                #66dfb3;
+
+            background:
+                rgba(53,212,154,0.09);
+
+            border:
+                1px solid rgba(53,212,154,0.15);
         }
+
 
         .absent-status {
-            background: #fff1f2;
 
-            color: #be123c;
+            color:
+                #ff8897;
+
+            background:
+                rgba(255,102,120,0.09);
+
+            border:
+                1px solid rgba(255,102,120,0.15);
         }
+
 
         .excused-status {
-            background: #fffbeb;
 
-            color: #b45309;
+            color:
+                #e8cf79;
+
+            background:
+                rgba(232,207,121,0.08);
+
+            border:
+                1px solid rgba(232,207,121,0.15);
         }
 
 
-        /* Empty */
+        /* =====================================================
+           EMPTY
+        ===================================================== */
 
         .empty {
-            text-align: center;
 
-            padding: 40px 20px;
+            display:
+                flex;
 
-            color: #6b7280;
+            flex-direction:
+                column;
 
-            font-size: 13px;
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            min-height:
+                230px;
+
+            text-align:
+                center;
+
+            padding:
+                35px 20px;
+
+            color:
+                #6e7d91;
+
+            border:
+                1px dashed rgba(255,255,255,0.09);
+
+            border-radius:
+                16px;
+
+            background:
+                rgba(255,255,255,0.018);
+
+            font-size:
+                11px;
         }
+
 
         .empty-icon {
-            font-size: 35px;
 
-            margin-bottom: 12px;
+            width:
+                62px;
+
+            height:
+                62px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            margin-bottom:
+                12px;
+
+            border-radius:
+                18px;
+
+            font-size:
+                27px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(78,140,255,0.09),
+                    rgba(139,99,255,0.08)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.06);
         }
 
 
-        /* Mobile */
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .info-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0,1fr)
+                    );
+            }
+
+
+            .summary-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0,1fr)
+                    );
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
 
         @media (max-width: 600px) {
 
-            .header {
-                padding: 18px;
+            .header-inner {
+
+                width:
+                    calc(100% - 24px);
+
+                min-height:
+                    68px;
             }
+
 
             .header-title h1 {
-                font-size: 18px;
+
+                font-size:
+                    17px;
             }
+
 
             .header-title p {
-                display: none;
+
+                display:
+                    none;
             }
+
+
+            .back-button {
+
+                min-height:
+                    40px;
+
+                padding:
+                    0 11px;
+
+                font-size:
+                    10px;
+            }
+
 
             .container {
-                padding: 20px 15px;
+
+                width:
+                    calc(100% - 22px);
+
+                padding:
+                    22px 0 50px;
             }
+
 
             .card {
-                padding: 18px;
+
+                padding:
+                    18px;
+
+                margin-bottom:
+                    15px;
+
+                border-radius:
+                    19px;
             }
 
+
+            .student-header {
+
+                align-items:
+                    flex-start;
+            }
+
+
+            .avatar {
+
+                width:
+                    55px;
+
+                height:
+                    55px;
+
+                border-radius:
+                    15px;
+
+                font-size:
+                    24px;
+            }
+
+
             .student-name {
-                font-size: 18px;
+
+                font-size:
+                    19px;
+
+                line-height:
+                    1.5;
+            }
+
+
+            .student-grade {
+
+                font-size:
+                    10px;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .summary-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0,1fr)
+                    );
+            }
+
+
+            .summary-box {
+
+                min-height:
+                    92px;
+
+                padding:
+                    14px;
+            }
+
+
+            .summary-number {
+
+                font-size:
+                    24px;
+            }
+
+
+            .section-title {
+
+                font-size:
+                    16px;
+            }
+
+
+            .table-wrapper {
+
+                border:
+                    none;
+
+                overflow:
+                    visible;
+            }
+
+
+            /*
+               جدول گزارش تفکیکی
+               در موبایل به کارت تبدیل می‌شود
+            */
+
+            .table-wrapper table {
+
+                min-width:
+                    0;
+
+                display:
+                    block;
+            }
+
+
+            .table-wrapper thead {
+
+                display:
+                    none;
+            }
+
+
+            .table-wrapper tbody,
+            .table-wrapper tr,
+            .table-wrapper td {
+
+                display:
+                    block;
+
+                width:
+                    100%;
+            }
+
+
+            .table-wrapper tr {
+
+                margin-bottom:
+                    10px;
+
+                padding:
+                    13px;
+
+                border:
+                    1px solid rgba(255,255,255,0.055);
+
+                border-radius:
+                    14px;
+
+                background:
+                    rgba(255,255,255,0.02);
+            }
+
+
+            .table-wrapper tr:last-child {
+
+                margin-bottom:
+                    0;
+            }
+
+
+            .table-wrapper td {
+
+                display:
+                    flex;
+
+                align-items:
+                    center;
+
+                justify-content:
+                    space-between;
+
+                gap:
+                    12px;
+
+                padding:
+                    8px 0;
+
+                border:
+                    none;
+
+                background:
+                    transparent !important;
+
+                font-size:
+                    10px;
+            }
+
+
+            .table-wrapper td::before {
+
+                color:
+                    #69788d;
+
+                font-size:
+                    9px;
+
+                font-weight:
+                    800;
+            }
+
+
+            .table-wrapper td:nth-child(1)::before {
+                content:
+                    "نوع برنامه";
+            }
+
+
+            .table-wrapper td:nth-child(2)::before {
+                content:
+                    "کل";
+            }
+
+
+            .table-wrapper td:nth-child(3)::before {
+                content:
+                    "حاضر";
+            }
+
+
+            .table-wrapper td:nth-child(4)::before {
+                content:
+                    "غایب";
+            }
+
+
+            .table-wrapper td:nth-child(5)::before {
+                content:
+                    "موجه";
+            }
+
+
+            /*
+               جدول سابقه حضور
+            */
+
+            .history-table tr {
+
+                padding:
+                    14px;
+            }
+
+
+            .history-table td:nth-child(1)::before {
+                content:
+                    "تاریخ";
+            }
+
+
+            .history-table td:nth-child(2)::before {
+                content:
+                    "نوع برنامه";
+            }
+
+
+            .history-table td:nth-child(3)::before {
+                content:
+                    "عنوان";
+            }
+
+
+            .history-table td:nth-child(4)::before {
+                content:
+                    "وضعیت";
+            }
+
+
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 380px) {
+
+            .header-title h1 {
+
+                font-size:
+                    15px;
+            }
+
+
+            .card {
+
+                padding:
+                    16px;
+            }
+
+
+            .student-name {
+
+                font-size:
+                    17px;
+            }
+
+
+            .avatar {
+
+                width:
+                    50px;
+
+                height:
+                    50px;
+            }
+
+
+            .summary-grid {
+
+                gap:
+                    7px;
+            }
+
+
+            .summary-box {
+
+                min-height:
+                    84px;
+
+                padding:
+                    12px;
+            }
+
+
+            .summary-number {
+
+                font-size:
+                    22px;
+            }
+
+        }
+
+
+        /* =====================================================
+           REDUCE MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            * {
+
+                transition:
+                    none !important;
+
+                scroll-behavior:
+                    auto !important;
             }
 
         }
@@ -386,35 +1532,51 @@
 <body>
 
 
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
 <header class="header">
 
-    <div class="header-title">
+    <div class="header-inner">
 
-        <h1>
-            جزئیات دانش‌آموز
-        </h1>
 
-        <p>
-            کانون فرهنگی تربیتی رویش
-        </p>
+        <div class="header-title">
+
+            <h1>
+                جزئیات دانش‌آموز
+            </h1>
+
+
+            <p>
+                کانون فرهنگی تربیتی رویش
+            </p>
+
+        </div>
+
+
+        <a
+            href="{% url 'students:list' %}"
+            class="back-button"
+        >
+            ← بازگشت
+        </a>
 
     </div>
-
-
-    <a
-        href="{% url 'students:list' %}"
-        class="back-button"
-    >
-        ← بازگشت
-    </a>
 
 </header>
 
 
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
 <main class="container">
 
 
-    <!-- Student Information -->
+    <!-- =================================================
+         STUDENT INFORMATION
+    ================================================== -->
 
     <div class="card">
 
@@ -424,6 +1586,7 @@
                 👨‍🎓
             </div>
 
+
             <div>
 
                 <h2 class="student-name">
@@ -432,6 +1595,7 @@
                     {{ student.last_name }}
 
                 </h2>
+
 
                 <div class="student-grade">
 
@@ -495,9 +1659,13 @@
                 <div class="info-value">
 
                     {% if student.phone %}
+
                         {{ student.phone }}
+
                     {% else %}
+
                         ثبت نشده
+
                     {% endif %}
 
                 </div>
@@ -514,9 +1682,13 @@
                 <div class="info-value">
 
                     {% if student.parent_phone %}
+
                         {{ student.parent_phone }}
+
                     {% else %}
+
                         ثبت نشده
+
                     {% endif %}
 
                 </div>
@@ -533,9 +1705,15 @@
                 <div class="info-value">
 
                     {% if student.is_active %}
+
                         فعال
+
                     {% else %}
-                        غیرفعال
+
+                        <span style="color:#ff8897;">
+                            غیرفعال
+                        </span>
+
                     {% endif %}
 
                 </div>
@@ -548,7 +1726,9 @@
     </div>
 
 
-    <!-- Summary -->
+    <!-- =================================================
+         SUMMARY
+    ================================================== -->
 
     <div class="card">
 
@@ -617,7 +1797,9 @@
     </div>
 
 
-    <!-- Type Summary -->
+    <!-- =================================================
+         TYPE SUMMARY
+    ================================================== -->
 
     <div class="card">
 
@@ -628,7 +1810,7 @@
 
         <div class="table-wrapper">
 
-            <table>
+            <table class="type-table">
 
                 <thead>
 
@@ -746,7 +1928,9 @@
     </div>
 
 
-    <!-- Attendance History -->
+    <!-- =================================================
+         ATTENDANCE HISTORY
+    ================================================== -->
 
     <div class="card">
 
@@ -759,7 +1943,7 @@
 
             <div class="table-wrapper">
 
-                <table>
+                <table class="history-table">
 
                     <thead>
 
@@ -825,27 +2009,21 @@
 
                                     {% if attendance.status == "present" %}
 
-                                        <span
-                                            class="status present-status"
-                                        >
+                                        <span class="status present-status">
                                             حاضر
                                         </span>
 
 
                                     {% elif attendance.status == "absent" %}
 
-                                        <span
-                                            class="status absent-status"
-                                        >
+                                        <span class="status absent-status">
                                             غایب
                                         </span>
 
 
                                     {% elif attendance.status == "excused" %}
 
-                                        <span
-                                            class="status excused-status"
-                                        >
+                                        <span class="status excused-status">
                                             موجه
                                         </span>
 
