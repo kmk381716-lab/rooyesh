@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     "home",
     "library",
     "forms",
+    "coaches",
+    "students",
 ]
 
 

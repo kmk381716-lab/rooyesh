@@ -1,0 +1,901 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>داشبورد مربیان | کانون رویش</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Tahoma, sans-serif;
+            background: #f5f6f8;
+            color: #1f2937;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* ------------------------------
+           Layout
+        ------------------------------ */
+
+        .layout {
+            min-height: 100vh;
+            display: flex;
+        }
+
+
+        /* ------------------------------
+           Sidebar
+        ------------------------------ */
+
+        .sidebar {
+            width: 250px;
+
+            background: #111827;
+            color: white;
+
+            position: fixed;
+
+            top: 0;
+            right: 0;
+            bottom: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 25px 18px;
+        }
+
+        .brand {
+            padding: 5px 10px 25px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .brand h2 {
+            margin: 0 0 8px;
+            font-size: 20px;
+        }
+
+        .brand p {
+            margin: 0;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+        }
+
+        .menu {
+            margin-top: 25px;
+        }
+
+        .menu-title {
+            font-size: 11px;
+
+            color: #6b7280;
+
+            margin:
+                0 10px 10px;
+        }
+
+        .menu-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 12px 14px;
+
+            margin-bottom: 6px;
+
+            border-radius: 10px;
+
+            color: #d1d5db;
+
+            transition: 0.2s;
+        }
+
+        .menu-item:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        .menu-item.active {
+            background: #374151;
+            color: white;
+        }
+
+        .menu-item.disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .menu-item.disabled:hover {
+            background: transparent;
+            color: #d1d5db;
+        }
+
+        .menu-icon {
+            width: 25px;
+
+            text-align: center;
+
+            font-size: 16px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+
+        .logout {
+            color: #fca5a5;
+        }
+
+
+        /* ------------------------------
+           Main
+        ------------------------------ */
+
+        .main {
+            width: calc(100% - 250px);
+
+            margin-right: 250px;
+
+            min-height: 100vh;
+        }
+
+
+        /* ------------------------------
+           Topbar
+        ------------------------------ */
+
+        .topbar {
+            height: 75px;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 30px;
+
+            border-bottom:
+                1px solid #e5e7eb;
+        }
+
+        .page-title h1 {
+            margin: 0 0 5px;
+
+            font-size: 21px;
+        }
+
+        .page-title p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+        .user-box {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .user-info {
+            text-align: left;
+        }
+
+        .user-name {
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .user-role {
+            font-size: 11px;
+
+            color: #6b7280;
+
+            margin-top: 4px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #e5e7eb;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+
+        /* ------------------------------
+           Content
+        ------------------------------ */
+
+        .content {
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding: 30px;
+        }
+
+
+        /* ------------------------------
+           Welcome
+        ------------------------------ */
+
+        .welcome {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            margin: 0 0 10px;
+
+            font-size: 22px;
+        }
+
+        .welcome p {
+            margin: 0;
+
+            color: #6b7280;
+
+            line-height: 1.8;
+
+            font-size: 14px;
+        }
+
+
+        /* ------------------------------
+           Cards
+        ------------------------------ */
+
+        .section-title {
+            margin: 0 0 15px;
+
+            font-size: 17px;
+        }
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(220px, 1fr)
+                );
+
+            gap: 16px;
+
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.05);
+        }
+
+        .card-icon {
+            width: 45px;
+            height: 45px;
+
+            border-radius: 12px;
+
+            background: #f3f4f6;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin: 0 0 8px;
+
+            font-size: 16px;
+        }
+
+        .card p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+        }
+
+        .card.disabled {
+            opacity: 0.55;
+
+            cursor: default;
+        }
+
+        .card.disabled:hover {
+            transform: none;
+
+            box-shadow: none;
+        }
+
+
+        /* ------------------------------
+           Footer
+        ------------------------------ */
+
+        .footer {
+            text-align: center;
+
+            color: #9ca3af;
+
+            font-size: 11px;
+
+            padding:
+                20px 0 10px;
+        }
+
+
+        /* ------------------------------
+           Mobile
+        ------------------------------ */
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 75px;
+
+                padding:
+                    20px 10px;
+            }
+
+            .brand {
+                text-align: center;
+            }
+
+            .brand h2 {
+                font-size: 15px;
+            }
+
+            .brand p,
+            .menu-title,
+            .menu-item span:not(.menu-icon) {
+                display: none;
+            }
+
+            .menu-item {
+                justify-content: center;
+
+                padding:
+                    13px 8px;
+            }
+
+            .main {
+                width:
+                    calc(100% - 75px);
+
+                margin-right: 75px;
+            }
+
+            .topbar {
+                padding:
+                    0 18px;
+            }
+
+            .content {
+                padding:
+                    20px 15px;
+            }
+
+            .page-title p {
+                display: none;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="layout">
+
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+
+        <div class="brand">
+
+            <h2>
+                کانون رویش
+            </h2>
+
+            <p>
+                پنل مدیریت مربیان
+            </p>
+
+        </div>
+
+
+        <nav class="menu">
+
+
+            <div class="menu-title">
+                منوی اصلی
+            </div>
+
+
+            <!-- Dashboard -->
+
+            <a
+                href="{% url 'coaches:dashboard' %}"
+                class="menu-item active"
+            >
+
+                <span class="menu-icon">
+                    🏠
+                </span>
+
+                <span>
+                    داشبورد
+                </span>
+
+            </a>
+
+
+
+
+            <!-- Students -->
+
+            <a
+                href="{% url 'students:list' %}"
+                class="menu-item"
+            >
+
+                <span class="menu-icon">
+                    👨‍🎓
+                </span>
+
+                <span>
+                    دانش‌آموزان من
+                </span>
+
+            </a>
+
+
+            <!-- Attendance -->
+
+            <a
+                href="{% url 'students:attendance_create' %}"
+                class="menu-item"
+            >
+
+                <span class="menu-icon">
+                    📋
+                </span>
+
+                <span>
+                    حضور و غیاب
+                </span>
+
+            </a>
+
+
+            <!-- Profile -->
+
+            <div class="menu-item disabled">
+
+                <span class="menu-icon">
+                    👤
+                </span>
+
+                <span>
+                    پروفایل من
+                </span>
+
+            </div>
+
+
+            <!-- Activities -->
+
+            <div class="menu-item disabled">
+
+                <span class="menu-icon">
+                    📝
+                </span>
+
+                <span>
+                    فعالیت‌ها
+                </span>
+
+            </div>
+
+
+            <!-- Announcements -->
+
+            <div class="menu-item disabled">
+
+                <span class="menu-icon">
+                    📢
+                </span>
+
+                <span>
+                    اطلاعیه‌ها
+                </span>
+
+            </div>
+
+
+            <!-- Coach Management -->
+
+            {% if user.is_superuser %}
+
+                <a
+                    href="{% url 'coaches:coach_management' %}"
+                    class="menu-item"
+                >
+
+                    <span class="menu-icon">
+                        👥
+                    </span>
+
+                    <span>
+                        مدیریت مربیان
+                    </span>
+
+                </a>
+
+            {% endif %}
+
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+
+            <a
+                href="{% url 'coaches:logout' %}"
+                class="menu-item logout"
+            >
+
+                <span class="menu-icon">
+                    🚪
+                </span>
+
+                <span>
+                    خروج از حساب
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- Main -->
+
+    <main class="main">
+
+
+        <!-- Topbar -->
+
+        <header class="topbar">
+
+
+            <div class="page-title">
+
+                <h1>
+                    داشبورد
+                </h1>
+
+                <p>
+                    پنل مربیان کانون فرهنگی تربیتی رویش
+                </p>
+
+            </div>
+
+
+            <div class="user-box">
+
+
+                <div class="user-info">
+
+                    <div class="user-name">
+
+                        {{ user.get_full_name|default:user.username }}
+
+                    </div>
+
+
+                    <div class="user-role">
+
+                        {% if user.is_superuser %}
+
+                            مدیر پنل
+
+                        {% else %}
+
+                            مربی
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="avatar">
+                    👤
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+        <!-- Content -->
+
+        <section class="content">
+
+
+            <!-- Welcome -->
+
+            <div class="welcome">
+
+                <h2>
+
+                    سلام
+                    {{ user.get_full_name|default:user.username }}
+                    👋
+
+                </h2>
+
+                <p>
+
+                    به پنل مربیان کانون رویش خوش آمدید.
+                    از این بخش می‌توانید دانش‌آموزان، حضور و غیاب و فعالیت‌های مربوط به خودتان را مدیریت کنید.
+
+                </p>
+
+            </div>
+
+
+            <!-- Quick Access -->
+
+            <h2 class="section-title">
+                دسترسی سریع
+            </h2>
+
+
+            <div class="cards">
+
+
+                <!-- Students -->
+
+                <a
+                    href="{% url 'students:list' %}"
+                    class="card"
+                >
+
+                    <div class="card-icon">
+                        👨‍🎓
+                    </div>
+
+                    <h3>
+                        دانش‌آموزان من
+                    </h3>
+
+                    <p>
+                        مشاهده، افزودن و مدیریت دانش‌آموزان گروه شما.
+                    </p>
+
+                </a>
+
+
+                <!-- Attendance -->
+
+                <a
+                    href="{% url 'students:attendance_create' %}"
+                    class="card"
+                >
+
+                    <div class="card-icon">
+                        📋
+                    </div>
+
+                    <h3>
+                        حضور و غیاب
+                    </h3>
+
+                    <p>
+                        ثبت حضور دانش‌آموزان در هیئت، کلاس‌های هفتگی و قرارهای کانون.
+                    </p>
+
+                </a>
+
+
+                <!-- Profile -->
+
+                <div class="card disabled">
+
+                    <div class="card-icon">
+                        👤
+                    </div>
+
+                    <h3>
+                        پروفایل من
+                    </h3>
+
+                    <p>
+                        مشاهده و ویرایش اطلاعات حساب مربی.
+                    </p>
+
+                </div>
+
+
+                <!-- Activities -->
+
+                <div class="card disabled">
+
+                    <div class="card-icon">
+                        📝
+                    </div>
+
+                    <h3>
+                        فعالیت‌های من
+                    </h3>
+
+                    <p>
+                        ثبت و مشاهده فعالیت‌های انجام‌شده در کانون.
+                    </p>
+
+                </div>
+
+
+                <!-- Announcements -->
+
+                <div class="card disabled">
+
+                    <div class="card-icon">
+                        📢
+                    </div>
+
+                    <h3>
+                        اطلاعیه‌ها
+                    </h3>
+
+                    <p>
+                        مشاهده اطلاعیه‌ها و پیام‌های مربوط به مربیان.
+                    </p>
+
+                </div>
+
+
+                <!-- Coach Management -->
+
+                {% if user.is_superuser %}
+
+                    <a
+                        href="{% url 'coaches:coach_management' %}"
+                        class="card"
+                    >
+
+                        <div class="card-icon">
+                            👥
+                        </div>
+
+                        <h3>
+                            مدیریت مربیان
+                        </h3>
+
+                        <p>
+                            افزودن و مدیریت حساب‌های مربیان کانون.
+                        </p>
+
+                    </a>
+
+                {% endif %}
+
+
+            </div>
+
+
+            <!-- Footer -->
+
+            <div class="footer">
+
+                کانون فرهنگی تربیتی رویش
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>
+```

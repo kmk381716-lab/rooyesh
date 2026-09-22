@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>افزودن دانش‌آموز | کانون رویش</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family: Tahoma, sans-serif;
+
+            background: #f5f6f8;
+
+            color: #1f2937;
+        }
+
+        .header {
+            background: white;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            padding: 20px 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+        .header h1 {
+            margin: 0 0 7px;
+
+            font-size: 22px;
+        }
+
+        .header p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+        .back-button {
+            padding: 11px 16px;
+
+            border-radius: 10px;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            font-size: 13px;
+        }
+
+        .container {
+            max-width: 700px;
+
+            margin: 0 auto;
+
+            padding: 30px 20px;
+        }
+
+        .card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 28px;
+        }
+
+        .card h2 {
+            margin: 0 0 8px;
+
+            font-size: 18px;
+        }
+
+        .description {
+            margin: 0 0 25px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            font-family: Tahoma, sans-serif;
+
+            font-size: 13px;
+
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #374151;
+        }
+
+        .field-error {
+            color: #dc2626;
+
+            margin-top: 7px;
+
+            font-size: 11px;
+        }
+
+        .actions {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 25px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .submit-button {
+            border: none;
+
+            padding: 13px 20px;
+
+            border-radius: 10px;
+
+            background: #111827;
+
+            color: white;
+
+            font-family: Tahoma, sans-serif;
+
+            font-size: 13px;
+
+            cursor: pointer;
+        }
+
+        .cancel-button {
+            padding: 12px 18px;
+
+            border-radius: 10px;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 18px;
+            }
+
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .header p {
+                display: none;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .submit-button,
+            .cancel-button {
+                width: 100%;
+
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div>
+
+            <h1>
+                افزودن دانش‌آموز
+            </h1>
+
+            <p>
+                ثبت دانش‌آموز جدید در گروه شما
+            </p>
+
+        </div>
+
+        <a
+            href="{% url 'students:list' %}"
+            class="back-button"
+        >
+            ← بازگشت
+        </a>
+
+    </header>
+
+
+    <main class="container">
+
+        <div class="card">
+
+            <h2>
+                اطلاعات دانش‌آموز
+            </h2>
+
+            <p class="description">
+                اطلاعات دانش‌آموز را وارد کنید. این دانش‌آموز به صورت خودکار به حساب شما اختصاص داده می‌شود.
+            </p>
+
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                {% for field in form %}
+
+                    <div class="form-group">
+
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% for error in field.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endfor %}
+
+
+                <div class="actions">
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
+                        ثبت دانش‌آموز
+                    </button>
+
+                    <a
+                        href="{% url 'students:list' %}"
+                        class="cancel-button"
+                    >
+                        انصراف
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

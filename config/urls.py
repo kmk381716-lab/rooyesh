@@ -9,6 +9,11 @@ urlpatterns = [
     path("", include("home.urls")),
     path("library/", include("library.urls")),
     path("forms/", include("forms.urls")),
+    path('coaches/', include('coaches.urls')),
+    path("admin/",admin.site.urls),
+    path("coaches/",include("coaches.urls")),
+    path("students/",include("students.urls")),
+
 ]
 
 urlpatterns += static(

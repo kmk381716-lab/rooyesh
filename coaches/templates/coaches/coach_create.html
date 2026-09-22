@@ -1,0 +1,582 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>افزودن مربی | کانون رویش</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family: Tahoma, sans-serif;
+
+            background: #f5f6f8;
+
+            color: #1f2937;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* Header */
+
+        .header {
+            background: white;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            padding: 20px 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-title h1 {
+            margin: 0 0 7px;
+
+            font-size: 22px;
+        }
+
+        .header-title p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+        .back-button {
+            padding: 11px 16px;
+
+            border-radius: 10px;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+        .back-button:hover {
+            background: #e5e7eb;
+        }
+
+
+        /* Container */
+
+        .container {
+            max-width: 750px;
+
+            margin: 0 auto;
+
+            padding: 30px 20px;
+        }
+
+
+        /* Card */
+
+        .form-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 28px;
+        }
+
+
+        .form-header {
+            margin-bottom: 25px;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .form-header h2 {
+            margin: 0 0 8px;
+
+            font-size: 18px;
+        }
+
+        .form-header p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        /* Errors */
+
+        .form-error {
+            background: #fff1f2;
+
+            border: 1px solid #fecdd3;
+
+            color: #be123c;
+
+            border-radius: 10px;
+
+            padding: 12px 14px;
+
+            margin-bottom: 20px;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        /* Fields */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            background: white;
+
+            color: #111827;
+
+            font-family: Tahoma, sans-serif;
+
+            font-size: 13px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #374151;
+
+            box-shadow:
+                0 0 0 3px rgba(55, 65, 81, 0.08);
+        }
+
+        .help-text {
+            margin-top: 7px;
+
+            color: #9ca3af;
+
+            font-size: 11px;
+
+            line-height: 1.8;
+        }
+
+        .field-error {
+            margin-top: 7px;
+
+            color: #dc2626;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+
+        /* Buttons */
+
+        .actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 25px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .submit-button {
+            border: none;
+
+            padding: 13px 20px;
+
+            border-radius: 10px;
+
+            background: #111827;
+
+            color: white;
+
+            font-family: Tahoma, sans-serif;
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .submit-button:hover {
+            background: #1f2937;
+        }
+
+        .cancel-button {
+            padding: 12px 18px;
+
+            border-radius: 10px;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+        .cancel-button:hover {
+            background: #e5e7eb;
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 18px;
+            }
+
+            .header-title h1 {
+                font-size: 18px;
+            }
+
+            .header-title p {
+                display: none;
+            }
+
+            .back-button {
+                font-size: 12px;
+
+                padding: 10px 12px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .actions {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .submit-button,
+            .cancel-button {
+                width: 100%;
+
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <div class="header-title">
+
+            <h1>
+                افزودن مربی
+            </h1>
+
+            <p>
+                ایجاد حساب کاربری برای مربیان کانون فرهنگی تربیتی رویش
+            </p>
+
+        </div>
+
+
+        <a
+            href="{% url 'coaches:coach_management' %}"
+            class="back-button"
+        >
+            ← بازگشت
+        </a>
+
+    </header>
+
+
+    <!-- Content -->
+
+    <main class="container">
+
+        <div class="form-card">
+
+
+            <div class="form-header">
+
+                <h2>
+                    اطلاعات مربی
+                </h2>
+
+                <p>
+                    اطلاعات زیر را وارد کنید تا حساب کاربری مربی ساخته شود.
+                    پس از ایجاد حساب، مربی می‌تواند با نام کاربری و رمز عبور خود وارد پنل شود.
+                </p>
+
+            </div>
+
+
+            {% if form.non_field_errors %}
+
+                <div class="form-error">
+
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                <!-- Username -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.username.id_for_label }}">
+                        {{ form.username.label }}
+                    </label>
+
+                    {{ form.username }}
+
+                    {% if form.username.help_text %}
+
+                        <div class="help-text">
+                            {{ form.username.help_text|safe }}
+                        </div>
+
+                    {% endif %}
+
+                    {% for error in form.username.errors %}
+
+                        <div class="field-error">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- First Name -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.first_name.id_for_label }}">
+                        {{ form.first_name.label }}
+                    </label>
+
+                    {{ form.first_name }}
+
+                    {% for error in form.first_name.errors %}
+
+                        <div class="field-error">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Last Name -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.last_name.id_for_label }}">
+                        {{ form.last_name.label }}
+                    </label>
+
+                    {{ form.last_name }}
+
+                    {% for error in form.last_name.errors %}
+
+                        <div class="field-error">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.email.id_for_label }}">
+                        {{ form.email.label }}
+                    </label>
+
+                    {{ form.email }}
+
+                    {% for error in form.email.errors %}
+
+                        <div class="field-error">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Password 1 -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.password1.id_for_label }}">
+                        {{ form.password1.label }}
+                    </label>
+
+                    {{ form.password1 }}
+
+                    {% if form.password1.help_text %}
+
+                        <div class="help-text">
+                            {{ form.password1.help_text|safe }}
+                        </div>
+
+                    {% endif %}
+
+                    {% for error in form.password1.errors %}
+
+                        <div class="field-error">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Password 2 -->
+
+                <div class="form-group">
+
+                    <label for="{{ form.password2.id_for_label }}">
+                        {{ form.password2.label }}
+                    </label>
+
+                    {{ form.password2 }}
+
+                    {% if form.password2.help_text %}
+
+                        <div class="help-text">
+                            {{ form.password2.help_text|safe }}
+                        </div>
+
+                    {% endif %}
+
+                    {% for error in form.password2.errors %}
+
+                        <div class="field-error">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- Actions -->
+
+                <div class="actions">
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
+                        ساخت حساب مربی
+                    </button>
+
+
+                    <a
+                        href="{% url 'coaches:coach_management' %}"
+                        class="cancel-button"
+                    >
+                        انصراف
+                    </a>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>
+```

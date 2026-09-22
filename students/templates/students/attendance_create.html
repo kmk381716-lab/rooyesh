@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ثبت حضور و غیاب | کانون رویش</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Tahoma, sans-serif;
+            background: #f5f6f8;
+            color: #1f2937;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+
+            padding: 20px 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .header h1 {
+            margin: 0 0 7px;
+            font-size: 22px;
+        }
+
+        .header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .back-button {
+            padding: 11px 16px;
+            border-radius: 10px;
+
+            background: #f3f4f6;
+            color: #374151;
+
+            font-size: 13px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 25px;
+
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .description {
+            margin: 0 0 25px;
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .error {
+            background: #fff1f2;
+            color: #be123c;
+
+            padding: 12px 15px;
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            font-size: 13px;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(200px, 1fr)
+                );
+
+            gap: 15px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+
+            padding: 12px;
+
+            border:
+                1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            background: white;
+
+            font-family: Tahoma, sans-serif;
+
+            font-size: 13px;
+
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #374151;
+        }
+
+        .attendance-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 15px;
+        }
+
+        .attendance-header h2 {
+            margin: 0;
+        }
+
+        .all-present {
+            border: none;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            padding: 9px 13px;
+
+            border-radius: 9px;
+
+            font-family: Tahoma, sans-serif;
+
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+        .student-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+        .student-row {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 15px;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 12px;
+        }
+
+        .student-info {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #f3f4f6;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+        .student-name {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .student-grade {
+            margin-top: 4px;
+
+            color: #6b7280;
+
+            font-size: 11px;
+        }
+
+        .statuses {
+            display: flex;
+
+            gap: 7px;
+
+            flex-wrap: wrap;
+        }
+
+        .status-option {
+            cursor: pointer;
+        }
+
+        .status-option input {
+            display: none;
+        }
+
+        .status-option span {
+            display: block;
+
+            padding: 9px 12px;
+
+            border-radius: 9px;
+
+            background: #f3f4f6;
+
+            color: #4b5563;
+
+            font-size: 11px;
+        }
+
+        .status-option input:checked + span {
+            background: #111827;
+            color: white;
+        }
+
+        .actions {
+            display: flex;
+
+            justify-content: flex-end;
+
+            margin-top: 20px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid #e5e7eb;
+        }
+
+        .submit-button {
+            border: none;
+
+            background: #111827;
+            color: white;
+
+            padding: 13px 20px;
+
+            border-radius: 10px;
+
+            font-family: Tahoma, sans-serif;
+
+            font-size: 13px;
+
+            cursor: pointer;
+        }
+
+        .empty {
+            padding: 40px 20px;
+
+            text-align: center;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+        @media (max-width: 650px) {
+
+            .header {
+                padding: 18px;
+            }
+
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .header p {
+                display: none;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .attendance-header {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .student-row {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .statuses {
+                width: 100%;
+            }
+
+            .status-option {
+                flex: 1;
+            }
+
+            .status-option span {
+                text-align: center;
+            }
+
+            .submit-button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<header class="header">
+
+    <div>
+
+        <h1>
+            ثبت حضور و غیاب
+        </h1>
+
+        <p>
+            ثبت حضور دانش‌آموزان گروه شما
+        </p>
+
+    </div>
+
+
+    <a
+        href="{% url 'coaches:dashboard' %}"
+        class="back-button"
+    >
+        ← بازگشت
+    </a>
+
+</header>
+
+
+<main class="container">
+
+
+    {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+    {% endif %}
+
+
+    <form method="post">
+
+        {% csrf_token %}
+
+
+        <!-- Event Information -->
+
+        <div class="card">
+
+            <h2>
+                اطلاعات برنامه
+            </h2>
+
+            <p class="description">
+                نوع برنامه و تاریخ را مشخص کنید.
+            </p>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label for="attendance_type">
+                        نوع برنامه
+                    </label>
+
+                    <select
+                        name="attendance_type"
+                        id="attendance_type"
+                        required
+                    >
+
+                        <option value="">
+                            انتخاب کنید
+                        </option>
+
+                        <option value="heyat">
+                            هیئت
+                        </option>
+
+                        <option value="weekly_class">
+                            کلاس هفتگی
+                        </option>
+
+                        <option value="meeting">
+                            قرار
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="date">
+                        تاریخ
+                    </label>
+
+                    <input
+                        type="date"
+                        name="date"
+                        id="date"
+                        value="{{ today|date:'Y-m-d' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="title">
+                        عنوان برنامه
+                    </label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        placeholder="مثلاً هیئت هفتگی"
+                    >
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- Students -->
+
+        <div class="card">
+
+
+            <div class="attendance-header">
+
+                <h2>
+                    دانش‌آموزان
+                </h2>
+
+
+                {% if students %}
+
+                    <button
+                        type="button"
+                        class="all-present"
+                        onclick="markAllPresent()"
+                    >
+                        همه حاضر
+                    </button>
+
+                {% endif %}
+
+            </div>
+
+
+            {% if students %}
+
+                <div class="student-list">
+
+
+                    {% for student in students %}
+
+                        <div class="student-row">
+
+
+                            <div class="student-info">
+
+                                <div class="avatar">
+                                    👨‍🎓
+                                </div>
+
+
+                                <div>
+
+                                    <div class="student-name">
+
+                                        {{ student.first_name }}
+                                        {{ student.last_name }}
+
+                                    </div>
+
+
+                                    <div class="student-grade">
+
+                                        پایه {{ student.grade }}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="statuses">
+
+
+                                <label class="status-option">
+
+                                    <input
+                                        type="radio"
+                                        name="status_{{ student.id }}"
+                                        value="present"
+                                        checked
+                                    >
+
+                                    <span>
+                                        حاضر
+                                    </span>
+
+                                </label>
+
+
+                                <label class="status-option">
+
+                                    <input
+                                        type="radio"
+                                        name="status_{{ student.id }}"
+                                        value="absent"
+                                    >
+
+                                    <span>
+                                        غایب
+                                    </span>
+
+                                </label>
+
+
+                                <label class="status-option">
+
+                                    <input
+                                        type="radio"
+                                        name="status_{{ student.id }}"
+                                        value="excused"
+                                    >
+
+                                    <span>
+                                        موجه
+                                    </span>
+
+                                </label>
+
+
+                            </div>
+
+
+                        </div>
+
+                    {% endfor %}
+
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
+                        ثبت حضور و غیاب
+                    </button>
+
+                </div>
+
+
+            {% else %}
+
+                <div class="empty">
+
+                    هنوز دانش‌آموز فعالی برای ثبت حضور وجود ندارد.
+
+                </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+    </form>
+
+
+</main>
+
+
+<script>
+
+    function markAllPresent() {
+
+        const radios = document.querySelectorAll(
+            'input[type="radio"][value="present"]'
+        );
+
+        radios.forEach(function (radio) {
+            radio.checked = true;
+        });
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ student.first_name }}
+        {{ student.last_name }}
+        | کانون رویش
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family: Tahoma, sans-serif;
+
+            background: #f5f6f8;
+
+            color: #1f2937;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* Header */
+
+        .header {
+            background: white;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            padding: 20px 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .header-title h1 {
+            margin: 0 0 7px;
+
+            font-size: 22px;
+        }
+
+        .header-title p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+        .back-button {
+            padding: 11px 16px;
+
+            border-radius: 10px;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+        .back-button:hover {
+            background: #e5e7eb;
+        }
+
+
+        /* Container */
+
+        .container {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding: 30px 20px;
+        }
+
+
+        /* Card */
+
+        .card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* Student */
+
+        .student-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 62px;
+            height: 62px;
+
+            border-radius: 50%;
+
+            background: #f3f4f6;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 26px;
+
+            flex-shrink: 0;
+        }
+
+        .student-name {
+            margin: 0 0 7px;
+
+            font-size: 21px;
+        }
+
+        .student-grade {
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        /* Info */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(180px, 1fr)
+                );
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .info-item {
+            background: #f9fafb;
+
+            border-radius: 10px;
+
+            padding: 15px;
+        }
+
+        .info-label {
+            color: #6b7280;
+
+            font-size: 11px;
+
+            margin-bottom: 7px;
+        }
+
+        .info-value {
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        /* Section */
+
+        .section-title {
+            margin: 0 0 18px;
+
+            font-size: 17px;
+        }
+
+
+        /* Summary */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(150px, 1fr)
+                );
+
+            gap: 12px;
+        }
+
+        .summary-box {
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 13px;
+
+            padding: 18px;
+        }
+
+        .summary-title {
+            color: #6b7280;
+
+            font-size: 11px;
+
+            margin-bottom: 9px;
+        }
+
+        .summary-number {
+            font-size: 25px;
+
+            font-weight: bold;
+        }
+
+        .summary-box.present {
+            border-right: 4px solid #10b981;
+        }
+
+        .summary-box.absent {
+            border-right: 4px solid #ef4444;
+        }
+
+        .summary-box.excused {
+            border-right: 4px solid #f59e0b;
+        }
+
+
+        /* Type table */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 620px;
+        }
+
+        th,
+        td {
+            padding: 14px 12px;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            text-align: right;
+
+            font-size: 12px;
+        }
+
+        th {
+            background: #f9fafb;
+
+            color: #6b7280;
+
+            font-weight: bold;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .type-name {
+            font-weight: bold;
+        }
+
+
+        /* Status */
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 10px;
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        .present-status {
+            background: #ecfdf5;
+
+            color: #047857;
+        }
+
+        .absent-status {
+            background: #fff1f2;
+
+            color: #be123c;
+        }
+
+        .excused-status {
+            background: #fffbeb;
+
+            color: #b45309;
+        }
+
+
+        /* Empty */
+
+        .empty {
+            text-align: center;
+
+            padding: 40px 20px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+        .empty-icon {
+            font-size: 35px;
+
+            margin-bottom: 12px;
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 18px;
+            }
+
+            .header-title h1 {
+                font-size: 18px;
+            }
+
+            .header-title p {
+                display: none;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .student-name {
+                font-size: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="header-title">
+
+        <h1>
+            جزئیات دانش‌آموز
+        </h1>
+
+        <p>
+            کانون فرهنگی تربیتی رویش
+        </p>
+
+    </div>
+
+
+    <a
+        href="{% url 'students:list' %}"
+        class="back-button"
+    >
+        ← بازگشت
+    </a>
+
+</header>
+
+
+<main class="container">
+
+
+    <!-- Student Information -->
+
+    <div class="card">
+
+        <div class="student-header">
+
+            <div class="avatar">
+                👨‍🎓
+            </div>
+
+            <div>
+
+                <h2 class="student-name">
+
+                    {{ student.first_name }}
+                    {{ student.last_name }}
+
+                </h2>
+
+                <div class="student-grade">
+
+                    پایه {{ student.grade }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    نام
+                </div>
+
+                <div class="info-value">
+                    {{ student.first_name }}
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    نام خانوادگی
+                </div>
+
+                <div class="info-value">
+                    {{ student.last_name }}
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    پایه
+                </div>
+
+                <div class="info-value">
+                    {{ student.grade }}
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    شماره تماس
+                </div>
+
+                <div class="info-value">
+
+                    {% if student.phone %}
+                        {{ student.phone }}
+                    {% else %}
+                        ثبت نشده
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    تماس والدین
+                </div>
+
+                <div class="info-value">
+
+                    {% if student.parent_phone %}
+                        {{ student.parent_phone }}
+                    {% else %}
+                        ثبت نشده
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    وضعیت
+                </div>
+
+                <div class="info-value">
+
+                    {% if student.is_active %}
+                        فعال
+                    {% else %}
+                        غیرفعال
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- Summary -->
+
+    <div class="card">
+
+        <h2 class="section-title">
+            خلاصه حضور و غیاب
+        </h2>
+
+
+        <div class="summary-grid">
+
+
+            <div class="summary-box">
+
+                <div class="summary-title">
+                    کل ثبت‌ها
+                </div>
+
+                <div class="summary-number">
+                    {{ summary.total }}
+                </div>
+
+            </div>
+
+
+            <div class="summary-box present">
+
+                <div class="summary-title">
+                    حاضر
+                </div>
+
+                <div class="summary-number">
+                    {{ summary.present }}
+                </div>
+
+            </div>
+
+
+            <div class="summary-box absent">
+
+                <div class="summary-title">
+                    غایب
+                </div>
+
+                <div class="summary-number">
+                    {{ summary.absent }}
+                </div>
+
+            </div>
+
+
+            <div class="summary-box excused">
+
+                <div class="summary-title">
+                    موجه
+                </div>
+
+                <div class="summary-number">
+                    {{ summary.excused }}
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- Type Summary -->
+
+    <div class="card">
+
+        <h2 class="section-title">
+            گزارش تفکیکی
+        </h2>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            نوع برنامه
+                        </th>
+
+                        <th>
+                            کل
+                        </th>
+
+                        <th>
+                            حاضر
+                        </th>
+
+                        <th>
+                            غایب
+                        </th>
+
+                        <th>
+                            موجه
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td class="type-name">
+                            🕌 هیئت
+                        </td>
+
+                        <td>
+                            {{ type_summary.heyat.total }}
+                        </td>
+
+                        <td>
+                            {{ type_summary.heyat.present }}
+                        </td>
+
+                        <td>
+                            {{ type_summary.heyat.absent }}
+                        </td>
+
+                        <td>
+                            {{ type_summary.heyat.excused }}
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="type-name">
+                            📚 کلاس هفتگی
+                        </td>
+
+                        <td>
+                            {{ type_summary.weekly_class.total }}
+                        </td>
+
+                        <td>
+                            {{ type_summary.weekly_class.present }}
+                        </td>
+
+                        <td>
+                            {{ type_summary.weekly_class.absent }}
+                        </td>
+
+                        <td>
+                            {{ type_summary.weekly_class.excused }}
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="type-name">
+                            🤝 قرار
+                        </td>
+
+                        <td>
+                            {{ type_summary.meeting.total }}
+                        </td>
+
+                        <td>
+                            {{ type_summary.meeting.present }}
+                        </td>
+
+                        <td>
+                            {{ type_summary.meeting.absent }}
+                        </td>
+
+                        <td>
+                            {{ type_summary.meeting.excused }}
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- Attendance History -->
+
+    <div class="card">
+
+        <h2 class="section-title">
+            سابقه کامل حضور و غیاب
+        </h2>
+
+
+        {% if attendances %}
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                تاریخ
+                            </th>
+
+                            <th>
+                                نوع برنامه
+                            </th>
+
+                            <th>
+                                عنوان
+                            </th>
+
+                            <th>
+                                وضعیت
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        {% for attendance in attendances %}
+
+                            <tr>
+
+                                <td>
+                                    {{ attendance.date }}
+                                </td>
+
+
+                                <td>
+
+                                    {{ attendance.get_attendance_type_display }}
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if attendance.title %}
+
+                                        {{ attendance.title }}
+
+                                    {% else %}
+
+                                        بدون عنوان
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+
+                                    {% if attendance.status == "present" %}
+
+                                        <span
+                                            class="status present-status"
+                                        >
+                                            حاضر
+                                        </span>
+
+
+                                    {% elif attendance.status == "absent" %}
+
+                                        <span
+                                            class="status absent-status"
+                                        >
+                                            غایب
+                                        </span>
+
+
+                                    {% elif attendance.status == "excused" %}
+
+                                        <span
+                                            class="status excused-status"
+                                        >
+                                            موجه
+                                        </span>
+
+                                    {% endif %}
+
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        {% else %}
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📋
+                </div>
+
+                هنوز هیچ سابقه‌ای ثبت نشده است.
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+</main>
+
+
+</body>
+
+</html>

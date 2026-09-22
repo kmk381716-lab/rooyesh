@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>مدیریت مربیان | کانون رویش</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family: Tahoma, sans-serif;
+
+            background: #f5f6f8;
+
+            color: #1f2937;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding: 30px 20px;
+        }
+
+        /* Header */
+
+        .header {
+            background: white;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            padding: 20px 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .header-title h1 {
+            margin: 0 0 7px;
+
+            font-size: 22px;
+        }
+
+        .header-title p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+        .back-button {
+            padding: 11px 16px;
+
+            border-radius: 10px;
+
+            background: #f3f4f6;
+
+            color: #374151;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+        .back-button:hover {
+            background: #e5e7eb;
+        }
+
+        /* Card */
+
+        .page-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            margin-top: 25px;
+        }
+
+        .top-section {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .top-section h2 {
+            margin: 0 0 7px;
+
+            font-size: 18px;
+        }
+
+        .top-section p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+        .add-button {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 12px 17px;
+
+            background: #111827;
+
+            color: white;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+        }
+
+        .add-button:hover {
+            background: #1f2937;
+        }
+
+        /* Coach list */
+
+        .coach-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+        .coach-item {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 16px;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            transition: 0.2s;
+        }
+
+        .coach-item:hover {
+            background: #fafafa;
+        }
+
+        .coach-info {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            min-width: 0;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: #f3f4f6;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+        .coach-name {
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 5px;
+        }
+
+        .coach-username {
+            font-size: 11px;
+
+            color: #6b7280;
+        }
+
+        .delete-button {
+            border: none;
+
+            background: #fff1f2;
+
+            color: #be123c;
+
+            padding: 9px 13px;
+
+            border-radius: 9px;
+
+            font-family: Tahoma, sans-serif;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .delete-button:hover {
+            background: #ffe4e6;
+        }
+
+        /* Empty */
+
+        .empty-state {
+            border: 1px dashed #d1d5db;
+
+            border-radius: 14px;
+
+            padding: 50px 20px;
+
+            text-align: center;
+        }
+
+        .empty-icon {
+            font-size: 35px;
+
+            margin-bottom: 15px;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 8px;
+
+            font-size: 16px;
+        }
+
+        .empty-state p {
+            margin: 0;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 18px;
+            }
+
+            .header-title h1 {
+                font-size: 18px;
+            }
+
+            .header-title p {
+                display: none;
+            }
+
+            .back-button {
+                font-size: 12px;
+
+                padding: 10px 12px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .page-card {
+                padding: 18px;
+            }
+
+            .top-section {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .add-button {
+                justify-content: center;
+            }
+
+            .coach-item {
+                align-items: stretch;
+
+                flex-direction: column;
+            }
+
+            .delete-button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <header class="header">
+
+        <div class="header-title">
+
+            <h1>
+                مدیریت مربیان
+            </h1>
+
+            <p>
+                مدیریت حساب‌های مربیان کانون فرهنگی تربیتی رویش
+            </p>
+
+        </div>
+
+
+        <a
+            href="{% url 'coaches:dashboard' %}"
+            class="back-button"
+        >
+            ← بازگشت به داشبورد
+        </a>
+
+    </header>
+
+
+    <main class="container">
+
+        <div class="page-card">
+
+
+            <div class="top-section">
+
+                <div>
+
+                    <h2>
+                        مربیان کانون
+                    </h2>
+
+                    <p>
+                        {{ coaches.count }} مربی در سامانه ثبت شده است.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{% url 'coaches:coach_create' %}"
+                    class="add-button"
+                >
+                    <span>＋</span>
+                    افزودن مربی جدید
+                </a>
+
+            </div>
+
+
+            {% if coaches %}
+
+                <div class="coach-list">
+
+                    {% for coach in coaches %}
+
+                        <div class="coach-item">
+
+
+                            <div class="coach-info">
+
+                                <div class="avatar">
+                                    👤
+                                </div>
+
+
+                                <div>
+
+                                    <div class="coach-name">
+
+                                        {% if coach.get_full_name %}
+                                            {{ coach.get_full_name }}
+                                        {% else %}
+                                            بدون نام
+                                        {% endif %}
+
+                                    </div>
+
+
+                                    <div class="coach-username">
+
+                                        نام کاربری:
+                                        {{ coach.username }}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <form
+                                method="post"
+                                action="{% url 'coaches:coach_delete' coach.id %}"
+                                onsubmit="return confirm('آیا از حذف این حساب مربی مطمئن هستید؟');"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="delete-button"
+                                >
+                                    حذف مربی
+                                </button>
+
+                            </form>
+
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        👥
+                    </div>
+
+                    <h3>
+                        هنوز مربی‌ای ثبت نشده است
+                    </h3>
+
+                    <p>
+                        برای شروع، اولین مربی را از طریق دکمه «افزودن مربی جدید» ایجاد کنید.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
