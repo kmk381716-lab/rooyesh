@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        حساب مالی {{ student.first_name }} {{ student.last_name }}
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+
+            min-height: 100vh;
+
+            padding: 25px;
+
+            font-family:
+                Tahoma,
+                "Segoe UI",
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #080c16,
+                    #101827
+                );
+
+            color: #f8fafc;
+        }
+
+
+        .container {
+            max-width: 1000px;
+
+            margin: auto;
+        }
+
+
+        .header {
+            margin-bottom: 22px;
+        }
+
+
+        .header h1 {
+            margin:
+                0 0 8px;
+
+            font-size: 23px;
+        }
+
+
+        .header p {
+            margin: 0;
+
+            color: #8e9aad;
+
+            font-size: 11px;
+        }
+
+
+        /* ==================================================
+           SUMMARY
+        ================================================== */
+
+        .summary {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 12px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .summary-card {
+            padding: 20px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(16,24,40,.88);
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+
+        .summary-title {
+            margin-bottom: 9px;
+
+            color: #8895a8;
+
+            font-size: 10px;
+        }
+
+
+        .summary-value {
+            font-size: 21px;
+
+            font-weight: 800;
+        }
+
+
+        .remaining {
+            color: #fb7185;
+        }
+
+
+        /* ==================================================
+           CHARGES
+        ================================================== */
+
+        .content-card {
+            overflow: hidden;
+
+            border-radius: 16px;
+
+            background:
+                rgba(16,24,40,.88);
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+
+        .content-header {
+            padding:
+                18px 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.06);
+
+            font-size: 14px;
+
+            font-weight: 800;
+        }
+
+
+        .charge {
+            padding:
+                18px 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.05);
+        }
+
+
+        .charge:last-child {
+            border-bottom: none;
+        }
+
+
+        .charge-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .charge-title {
+            font-weight: 700;
+
+            font-size: 13px;
+        }
+
+
+        .charge-amount {
+            font-weight: 800;
+
+            font-size: 14px;
+        }
+
+
+        .charge-meta {
+            color: #7f8b9e;
+
+            font-size: 10px;
+
+            line-height: 1.8;
+        }
+
+
+        .charge-description {
+            margin-top: 8px;
+
+            color: #9ba6b7;
+
+            font-size: 10px;
+
+            line-height: 1.9;
+        }
+
+
+        /* ==================================================
+           PAYMENT INFO
+        ================================================== */
+
+        .payment-info {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 18px;
+
+            margin-top: 13px;
+
+            padding:
+                11px 13px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,.025);
+
+            border:
+                1px solid
+                rgba(255,255,255,.045);
+
+            font-size: 10px;
+        }
+
+
+        .payment-label {
+            color: #7f8b9e;
+        }
+
+
+        .payment-value {
+            color: #dbe7f6;
+
+            font-weight: 700;
+        }
+
+
+        .payment-remaining {
+            color: #fb7185;
+        }
+
+
+        .payment-paid {
+            color: #35d49a;
+        }
+
+
+        /* ==================================================
+           PAYMENT HISTORY
+        ================================================== */
+
+        .payments-history {
+            margin-top: 15px;
+
+            padding-top: 14px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.05);
+        }
+
+
+        .payments-title {
+            margin-bottom: 10px;
+
+            color: #aeb9ca;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        .payment-row {
+            padding:
+                11px 13px;
+
+            margin-bottom: 7px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,.018);
+
+            border:
+                1px solid
+                rgba(255,255,255,.045);
+        }
+
+
+        .payment-row:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .payment-main {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+        }
+
+
+        .payment-amount {
+            color: #35d49a;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        .payment-date {
+            color: #718096;
+
+            font-size: 9px;
+        }
+
+
+        .payment-creator {
+            margin-top: 6px;
+
+            color: #6f7d91;
+
+            font-size: 9px;
+
+            line-height: 1.8;
+        }
+
+
+        .payment-description {
+            margin-top: 6px;
+
+            color: #929eae;
+
+            font-size: 9px;
+
+            line-height: 1.8;
+        }
+
+
+        /* ==================================================
+           BUTTONS
+        ================================================== */
+
+        .charge-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 13px;
+        }
+
+
+        .payment-button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 37px;
+
+            padding:
+                0 13px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(53,212,154,.08);
+
+            border:
+                1px solid
+                rgba(53,212,154,.15);
+
+            color:
+                #67dfb2;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-decoration: none;
+
+            transition:
+                .2s ease;
+        }
+
+
+        .payment-button:hover {
+            background:
+                rgba(53,212,154,.13);
+
+            border-color:
+                rgba(53,212,154,.25);
+
+            color: #ffffff;
+        }
+
+
+        .paid-label {
+            display: inline-flex;
+
+            align-items: center;
+
+            min-height: 37px;
+
+            padding:
+                0 13px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(53,212,154,.06);
+
+            border:
+                1px solid
+                rgba(53,212,154,.10);
+
+            color:
+                #35d49a;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        /* ==================================================
+           EMPTY
+        ================================================== */
+
+        .empty {
+            padding:
+                35px 20px;
+
+            text-align: center;
+
+            color: #7f8b9e;
+
+            font-size: 11px;
+        }
+
+
+        .back {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            padding:
+                11px 16px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,.06);
+
+            color: #c7cfdb;
+
+            text-decoration: none;
+
+            font-size: 11px;
+        }
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 15px;
+            }
+
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+
+            .charge-top {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .payment-info {
+                flex-direction: column;
+
+                gap: 7px;
+            }
+
+
+            .payment-main {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 5px;
+            }
+
+
+            .charge-actions {
+                width: 100%;
+            }
+
+
+            .payment-button,
+            .paid-label {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ==================================================
+         HEADER
+    ================================================== -->
+
+    <div class="header">
+
+        <h1>
+            حساب مالی
+        </h1>
+
+
+        <p>
+
+            {{ student.first_name }}
+            {{ student.last_name }}
+
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         SUMMARY
+    ================================================== -->
+
+    <div class="summary">
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                مجموع بدهی
+            </div>
+
+            <div class="summary-value">
+
+                {{ total_charges|floatformat:0 }}
+
+                تومان
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                مجموع پرداخت
+            </div>
+
+            <div class="summary-value">
+
+                {{ total_payments|floatformat:0 }}
+
+                تومان
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                مانده
+            </div>
+
+            <div class="summary-value remaining">
+
+                {{ remaining|floatformat:0 }}
+
+                تومان
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==================================================
+         CHARGES
+    ================================================== -->
+
+    <div class="content-card">
+
+
+        <div class="content-header">
+            بدهی‌ها
+        </div>
+
+
+        {% for charge in charges %}
+
+
+            <div class="charge">
+
+
+                <!-- CHARGE TOP -->
+
+                <div class="charge-top">
+
+
+                    <div class="charge-title">
+
+                        {{ charge.title }}
+
+                    </div>
+
+
+                    <div class="charge-amount">
+
+                        {{ charge.amount|floatformat:0 }}
+
+                        تومان
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- CHARGE META -->
+
+                <div class="charge-meta">
+
+                    {{ charge.get_charge_type_display }}
+
+                    ·
+
+                    {{ charge.created_at|date:"Y/m/d" }}
+
+                    ·
+
+                    ثبت توسط:
+
+                    {{ charge.created_by.get_full_name|default:charge.created_by.username }}
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                {% if charge.description %}
+
+                    <div class="charge-description">
+
+                        {{ charge.description }}
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- PAYMENT INFO -->
+
+                <div class="payment-info">
+
+
+                    <div>
+
+                        <span class="payment-label">
+                            پرداخت شده:
+                        </span>
+
+                        <span class="payment-value payment-paid">
+
+                            {{ charge.paid_amount|floatformat:0 }}
+
+                            تومان
+
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="payment-label">
+                            مانده:
+                        </span>
+
+                        <span class="payment-value payment-remaining">
+
+                            {{ charge.remaining_amount|floatformat:0 }}
+
+                            تومان
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- PAYMENT HISTORY -->
+
+                <div class="payments-history">
+
+
+                    <div class="payments-title">
+                        تاریخچه پرداخت‌ها
+                    </div>
+
+
+                    {% for payment in charge.payments.all %}
+
+
+                        <div class="payment-row">
+
+
+                            <div class="payment-main">
+
+
+                                <span class="payment-amount">
+
+                                    {{ payment.amount|floatformat:0 }}
+
+                                    تومان
+
+                                </span>
+
+
+                                <span class="payment-date">
+
+                                    {{ payment.created_at|date:"Y/m/d - H:i" }}
+
+                                </span>
+
+
+                            </div>
+
+
+                            <div class="payment-creator">
+
+                                ثبت توسط:
+
+                                {{ payment.created_by.get_full_name|default:payment.created_by.username }}
+
+                            </div>
+
+
+                            {% if payment.description %}
+
+                                <div class="payment-description">
+
+                                    {{ payment.description }}
+
+                                </div>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                    {% empty %}
+
+
+                        <div class="empty">
+
+                            هنوز پرداختی برای این بدهی ثبت نشده است.
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+                <!-- PAYMENT BUTTON -->
+
+                <div class="charge-actions">
+
+
+                    {% if charge.remaining_amount > 0 %}
+
+                        <a
+                            href="{% url 'finance:payment_create' charge.id %}"
+                            class="payment-button"
+                        >
+                            💳 ثبت پرداخت
+                        </a>
+
+                    {% else %}
+
+                        <span class="paid-label">
+                            ✓ تسویه شده
+                        </span>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </div>
+
+
+        {% empty %}
+
+
+            <div class="empty">
+
+                هنوز هیچ بدهی برای این دانش‌آموز ثبت نشده است.
+
+            </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+    <a
+        href="{% url 'students:list' %}"
+        class="back"
+    >
+        بازگشت به دانش‌آموزان
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "forms",
     "coaches",
     "students",
+    "finance",
 ]
 
 

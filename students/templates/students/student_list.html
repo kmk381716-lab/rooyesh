@@ -647,7 +647,8 @@
         }
 
 
-        .detail-button {
+        .detail-button,
+        .finance-button {
             display: inline-flex;
 
             align-items: center;
@@ -659,16 +660,7 @@
             padding:
                 0 12px;
 
-            border:
-                1px solid rgba(78,140,255,0.13);
-
             border-radius: 10px;
-
-            color:
-                #8db7ff;
-
-            background:
-                rgba(78,140,255,0.055);
 
             font-size:
                 10px;
@@ -677,7 +669,21 @@
                 800;
 
             transition:
-                .2s ease;
+                transform .2s ease,
+                background .2s ease,
+                border-color .2s ease;
+        }
+
+
+        .detail-button {
+            border:
+                1px solid rgba(78,140,255,0.13);
+
+            color:
+                #8db7ff;
+
+            background:
+                rgba(78,140,255,0.055);
         }
 
 
@@ -690,6 +696,36 @@
 
             border-color:
                 rgba(78,140,255,0.23);
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .finance-button {
+            border:
+                1px solid rgba(53,212,154,0.14);
+
+            color:
+                #67dfb2;
+
+            background:
+                rgba(53,212,154,0.055);
+        }
+
+
+        .finance-button:hover {
+            color:
+                #ffffff;
+
+            background:
+                rgba(53,212,154,0.10);
+
+            border-color:
+                rgba(53,212,154,0.24);
+
+            transform:
+                translateY(-1px);
         }
 
 
@@ -961,7 +997,7 @@
                     grid;
 
                 grid-template-columns:
-                    1fr 1fr;
+                    repeat(3, 1fr);
 
                 gap:
                     7px;
@@ -969,6 +1005,7 @@
 
 
             .detail-button,
+            .finance-button,
             .delete-button {
                 width:
                     100%;
@@ -1162,7 +1199,18 @@
 
 
                                 <div class="student-meta">
-                                    پایه {{ student.grade }}
+
+                                    {% if student.group %}
+
+                                        گروه:
+                                        {{ student.group.name }}
+
+                                    {% else %}
+
+                                        بدون گروه
+
+                                    {% endif %}
+
                                 </div>
 
                             </div>
@@ -1180,6 +1228,14 @@
                                 class="detail-button"
                             >
                                 مشاهده جزئیات
+                            </a>
+
+
+                            <a
+                                href="{% url 'finance:student_finance' student.id %}"
+                                class="finance-button"
+                            >
+                                💰 حساب مالی
                             </a>
 
 

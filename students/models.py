@@ -1,5 +1,37 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.auth.models import User
+
+
+
+class StudentGroup(models.Model):
+
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+        verbose_name="نام گروه"
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="فعال"
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="تاریخ ثبت"
+    )
+
+    class Meta:
+        verbose_name = "گروه دانش‌آموزان"
+        verbose_name_plural = "گروه‌های دانش‌آموزان"
+
+        ordering = [
+            "name"
+        ]
+
+    def __str__(self):
+        return self.name
 
 
 class Student(models.Model):
@@ -21,9 +53,13 @@ class Student(models.Model):
         verbose_name="نام خانوادگی"
     )
 
-    grade = models.CharField(
-        max_length=50,
-        verbose_name="پایه"
+    group = models.ForeignKey(
+        StudentGroup,
+        on_delete=models.PROTECT,
+        related_name="students",
+        blank=True,
+        null=True,
+        verbose_name="گروه"
     )
 
     phone = models.CharField(
@@ -32,10 +68,16 @@ class Student(models.Model):
         verbose_name="شماره تماس دانش‌آموز"
     )
 
-    parent_phone = models.CharField(
+    parent_phone_1 = models.CharField(
         max_length=20,
         blank=True,
-        verbose_name="شماره تماس والدین"
+        verbose_name="شماره تماس والد اول"
+    )
+
+    parent_phone_2 = models.CharField(
+        max_length=20,
+        blank=True,
+        verbose_name="شماره تماس والد دوم"
     )
 
     is_active = models.BooleanField(
@@ -59,7 +101,6 @@ class Student(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-
 class Attendance(models.Model):
 
     ATTENDANCE_TYPES = [
