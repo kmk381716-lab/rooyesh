@@ -57,6 +57,7 @@ class HomeBlock(models.Model):
     def __str__(self):
         return self.title
 
+
 class Trip(models.Model):
 
     title = models.CharField(
@@ -91,6 +92,7 @@ class Trip(models.Model):
     def __str__(self):
         return self.title
 
+
 class SiteSettings(models.Model):
 
     name = models.CharField(
@@ -111,3 +113,45 @@ class SiteSettings(models.Model):
     def __str__(self):
         return self.name
 
+
+class SiteStat(models.Model):
+
+    title = models.CharField(
+        max_length=100,
+        verbose_name="عنوان"
+    )
+
+    value = models.CharField(
+        max_length=50,
+        verbose_name="مقدار"
+    )
+
+    description = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name="توضیح"
+    )
+
+    icon = models.CharField(
+        max_length=20,
+        blank=True,
+        verbose_name="آیکون"
+    )
+
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="نمایش در سایت"
+    )
+
+    order = models.PositiveIntegerField(
+        default=0,
+        verbose_name="ترتیب نمایش"
+    )
+
+    class Meta:
+        verbose_name = "آمار رویش"
+        verbose_name_plural = "آمار رویش"
+        ordering = ["order"]
+
+    def __str__(self):
+        return f"{self.value} - {self.title}"

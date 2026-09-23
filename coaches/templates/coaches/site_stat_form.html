@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+.stat-form-page {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+.stat-form-box {
+    padding: 30px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.stat-form-box h1 {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    color: inherit;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.form-actions button,
+.form-actions a {
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: linear-gradient(
+        135deg,
+        #4e8cff,
+        #8b63ff
+    );
+    color: white;
+}
+
+.cancel-btn {
+    background: rgba(255,255,255,0.07);
+    color: inherit;
+}
+
+</style>
+
+
+<div class="stat-form-page">
+
+    <div class="stat-form-box">
+
+        <h1>
+            {{ page_title }}
+        </h1>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {% for field in form %}
+
+                {% if field.name == "is_active" %}
+
+                    <div class="checkbox-row">
+
+                        {{ field }}
+
+                        <label>
+                            نمایش در سایت
+                        </label>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="form-group">
+
+                        {{ field.label_tag }}
+
+                        {{ field }}
+
+                        {{ field.errors }}
+
+                    </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    ذخیره
+                </button>
+
+                <a
+                    href="{% url 'coaches:site_stats' %}"
+                    class="cancel-btn"
+                >
+                    انصراف
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
