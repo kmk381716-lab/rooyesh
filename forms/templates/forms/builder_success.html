@@ -1,4 +1,3 @@
-```html
 {% extends "base.html" %}
 
 {% block content %}
@@ -7,7 +6,7 @@
 <style>
 
     /* =========================================================
-       SUCCESS PAGE
+       SUCCESS PAGE — با تم یکسان
     ========================================================= */
 
     .success-page,
@@ -18,42 +17,40 @@
 
     .success-page {
 
-        --success-bg: #080c15;
+        /* دارک (پیش‌فرض) */
 
-        --success-card:
-            rgba(14, 22, 36, .88);
+        --sp-card-1: #1a3055;
+        --sp-card-2: #102040;
+        --sp-border: rgba(109, 164, 255, 0.28);
+        --sp-border-hover: rgba(109, 164, 255, 0.55);
 
-        --success-card-2:
-            rgba(9, 15, 27, .84);
+        --sp-text: #e0eaff;
+        --sp-text-soft: #c8d8f5;
+        --sp-muted: #7a8fb5;
+        --sp-dim: #5a6d8e;
 
-        --success-border:
-            rgba(255,255,255,.075);
+        --sp-input: #050b18;
+        --sp-input-hover: #08111f;
+        --sp-input-focus: #020610;
+        --sp-input-border: rgba(109, 164, 255, 0.42);
 
-        --success-text:
-            #f8fafc;
+        --sp-green: #2dc98f;
+        --sp-green-light: #4ade80;
+        --sp-blue: #4a7de8;
+        --sp-blue-light: #6da4ff;
+        --sp-cyan: #4cc9e8;
 
-        --success-muted:
-            #7d899d;
-
-        --success-green:
-            #34d399;
-
-        --success-green-light:
-            #6ee7b7;
-
-        --success-blue:
-            #4f8cff;
-
-        --success-purple:
-            #8b5cf6;
+        --sp-shadow:
+            0 30px 80px rgba(0, 0, 0, 0.55),
+            0 0 60px rgba(74, 125, 232, 0.14),
+            inset 0 1px 0 rgba(180, 220, 255, 0.16);
 
 
         position: relative;
 
         width: 100%;
 
-        min-height:
-            calc(100vh - 90px);
+        min-height: calc(100vh - 200px);
 
         display: flex;
 
@@ -61,106 +58,44 @@
 
         justify-content: center;
 
-        padding:
-            40px 18px 60px;
+        padding: 30px 20px 50px;
 
-        overflow: hidden;
+        color: var(--sp-text);
 
-        background:
-
-            radial-gradient(
-                circle at 15% 15%,
-                rgba(52,211,153,.09),
-                transparent 25%
-            ),
-
-            radial-gradient(
-                circle at 87% 10%,
-                rgba(79,140,255,.10),
-                transparent 25%
-            ),
-
-            radial-gradient(
-                circle at 50% 100%,
-                rgba(139,92,246,.065),
-                transparent 30%
-            ),
-
-            var(--success-bg);
+        transition: color 0.4s ease;
     }
 
 
-    /* =========================================================
-       BACKGROUND GRID
-    ========================================================= */
+    /* تم روشن */
 
-    .success-page::before {
+    body.light .success-page {
 
-        content: "";
+        --sp-card-1: #c8d8f2;
+        --sp-card-2: #b0c4e8;
+        --sp-border: rgba(58, 109, 224, 0.35);
+        --sp-border-hover: rgba(58, 109, 224, 0.6);
 
-        position: absolute;
+        --sp-text: #0a1630;
+        --sp-text-soft: #1a2b52;
+        --sp-muted: #4a5c80;
+        --sp-dim: #6a7ba0;
 
-        inset: 0;
+        --sp-input: #f5f8ff;
+        --sp-input-hover: #ffffff;
+        --sp-input-focus: #ffffff;
+        --sp-input-border: rgba(58, 109, 224, 0.35);
 
-        pointer-events: none;
+        --sp-green: #167a52;
+        --sp-green-light: #1e9668;
+        --sp-blue: #2a6bff;
+        --sp-blue-light: #2a6bff;
+        --sp-cyan: #2e7bc4;
 
-        background-image:
-
-            linear-gradient(
-                rgba(255,255,255,.012) 1px,
-                transparent 1px
-            ),
-
-            linear-gradient(
-                90deg,
-                rgba(255,255,255,.012) 1px,
-                transparent 1px
-            );
-
-        background-size: 42px 42px;
-
-        mask-image:
-            linear-gradient(
-                to bottom,
-                black,
-                transparent 90%
-            );
-
-        opacity: .6;
+        --sp-shadow:
+            0 30px 80px rgba(58, 109, 224, 0.22),
+            0 0 60px rgba(58, 109, 224, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.7);
     }
-
-
-    /* =========================================================
-       GLOW
-    ========================================================= */
-
-    .success-glow {
-
-        position: absolute;
-
-        width: 390px;
-        height: 390px;
-
-        border-radius: 50%;
-
-        pointer-events: none;
-
-        filter: blur(30px);
-
-        background:
-            radial-gradient(
-                circle,
-                rgba(52,211,153,.11),
-                transparent 70%
-            );
-
-        animation:
-            successGlowFloat
-            10s
-            ease-in-out
-            infinite;
-    }
-
 
 
     /* =========================================================
@@ -177,72 +112,33 @@
 
         max-width: 620px;
 
-        padding:
-            38px 34px 32px;
+        padding: 40px 34px 32px;
 
         text-align: center;
 
-        border:
-            1px solid
-            var(--success-border);
+        border: 1.5px solid var(--sp-border);
 
         border-radius: 24px;
 
         background:
             linear-gradient(
-                145deg,
-                var(--success-card),
-                var(--success-card-2)
+                155deg,
+                var(--sp-card-1) 0%,
+                var(--sp-card-2) 100%
             );
 
-        backdrop-filter:
-            blur(23px);
-
-        -webkit-backdrop-filter:
-            blur(23px);
-
-        box-shadow:
-
-            0 35px 90px
-            rgba(0,0,0,.42),
-
-            0 0 0 1px
-            rgba(255,255,255,.012);
+        box-shadow: var(--sp-shadow);
 
         overflow: hidden;
 
         animation:
-            successCardShow
-            .75s
-            cubic-bezier(.22,1,.36,1);
-    }
+            successCardShow 0.75s
+            cubic-bezier(.22, 1, .36, 1);
 
-
-    .success-card::before {
-
-        content: "";
-
-        position: absolute;
-
-        width: 300px;
-        height: 300px;
-
-        top: -185px;
-        left: 50%;
-
-        transform:
-            translateX(-50%);
-
-        border-radius: 50%;
-
-        background:
-            radial-gradient(
-                circle,
-                rgba(52,211,153,.12),
-                transparent 70%
-            );
-
-        pointer-events: none;
+        transition:
+            background 0.4s ease,
+            border-color 0.4s ease,
+            box-shadow 0.4s ease;
     }
 
 
@@ -256,36 +152,44 @@
         right: 0;
         left: 0;
 
-        height: 2px;
+        height: 3px;
 
         background:
             linear-gradient(
                 90deg,
                 transparent,
-                var(--success-green),
-                var(--success-blue),
-                var(--success-purple),
+                var(--sp-green-light),
+                var(--sp-cyan),
+                var(--sp-blue-light),
                 transparent
             );
 
-        opacity: .8;
+        background-size: 200% 100%;
+
+        animation: successBorderShine 4s linear infinite;
+
+        opacity: 0.9;
     }
 
 
+    @keyframes successBorderShine {
+
+        to { background-position: 200% 0; }
+    }
+
 
     /* =========================================================
-       SUCCESS ICON
+       ICON
     ========================================================= */
 
     .success-icon-wrap {
 
         position: relative;
 
-        width: 82px;
-        height: 82px;
+        width: 90px;
+        height: 90px;
 
-        margin:
-            0 auto 20px;
+        margin: 0 auto 22px;
 
         display: flex;
 
@@ -293,33 +197,24 @@
 
         justify-content: center;
 
-        border-radius: 24px;
+        border-radius: 26px;
 
         background:
             linear-gradient(
                 145deg,
-                rgba(52,211,153,.13),
-                rgba(79,140,255,.08)
+                rgba(74, 222, 128, 0.18),
+                rgba(76, 201, 232, 0.14)
             );
 
-        border:
-            1px solid
-            rgba(52,211,153,.19);
+        border: 1.5px solid rgba(74, 222, 128, 0.4);
 
         box-shadow:
-
-            inset 0 0 28px
-            rgba(52,211,153,.035),
-
-            0 14px 35px
-            rgba(0,0,0,.22);
+            inset 0 1px 0 rgba(180, 255, 220, 0.18),
+            0 14px 35px rgba(74, 222, 128, 0.2);
 
         animation:
-            iconShow
-            .65s
-            .10s
-            both
-            cubic-bezier(.22,1,.36,1);
+            iconShow 0.65s 0.10s both
+            cubic-bezier(.22, 1, .36, 1);
     }
 
 
@@ -329,19 +224,35 @@
 
         position: absolute;
 
-        inset: -9px;
+        inset: -12px;
 
-        border-radius: 30px;
+        border-radius: 34px;
 
-        border:
-            1px solid
-            rgba(52,211,153,.08);
+        border: 1.5px solid rgba(74, 222, 128, 0.25);
 
         animation:
-            iconRing
-            2.7s
-            ease-out
-            infinite;
+            iconRing 2.7s ease-out infinite;
+
+        pointer-events: none;
+    }
+
+
+    @keyframes iconRing {
+
+        0% {
+            opacity: 0.6;
+            transform: scale(0.92);
+        }
+
+        70% {
+            opacity: 0;
+            transform: scale(1.18);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(1.18);
+        }
     }
 
 
@@ -357,24 +268,33 @@
 
         justify-content: center;
 
-        width: 52px;
-        height: 52px;
+        width: 58px;
+        height: 58px;
 
-        border-radius: 16px;
+        border-radius: 18px;
 
         background:
-            rgba(52,211,153,.11);
+            linear-gradient(
+                135deg,
+                rgba(74, 222, 128, 0.3),
+                rgba(76, 201, 232, 0.22)
+            );
 
-        color:
-            var(--success-green-light);
+        color: #6ee7b7;
 
-        font-size: 25px;
+        font-size: 30px;
+
+        font-weight: 900;
 
         box-shadow:
-            0 0 25px
-            rgba(52,211,153,.08);
+            0 0 30px rgba(74, 222, 128, 0.35),
+            inset 0 1px 0 rgba(180, 255, 220, 0.25);
     }
 
+
+    body.light .success-icon {
+        color: #167a52;
+    }
 
 
     /* =========================================================
@@ -387,24 +307,21 @@
 
         z-index: 2;
 
-        margin:
-            0 0 10px;
+        margin: 0 0 12px;
 
-        color:
-            var(--success-text);
+        color: var(--sp-text);
 
-        font-size: 27px;
+        font-size: 28px;
 
-        line-height: 1.55;
+        line-height: 1.5;
 
         font-weight: 800;
 
+        letter-spacing: -0.6px;
+
         animation:
-            successTextShow
-            .6s
-            .18s
-            both
-            cubic-bezier(.22,1,.36,1);
+            successTextShow 0.6s 0.18s both
+            cubic-bezier(.22, 1, .36, 1);
     }
 
 
@@ -418,36 +335,32 @@
 
         max-width: 500px;
 
-        color:
-            var(--success-muted);
+        color: var(--sp-muted);
 
-        font-size: 11px;
+        font-size: 13px;
+
+        font-weight: 500;
 
         line-height: 2;
 
         overflow-wrap: anywhere;
 
         animation:
-            successTextShow
-            .6s
-            .24s
-            both
-            cubic-bezier(.22,1,.36,1);
+            successTextShow 0.6s 0.24s both
+            cubic-bezier(.22, 1, .36, 1);
     }
 
 
     .success-text strong {
 
-        color:
-            #dce6f2;
+        color: var(--sp-text-soft);
 
-        font-weight: 700;
+        font-weight: 800;
     }
 
 
-
     /* =========================================================
-       LINK BOX
+       LINK SECTION
     ========================================================= */
 
     .link-section {
@@ -456,14 +369,11 @@
 
         z-index: 2;
 
-        margin-top: 25px;
+        margin-top: 28px;
 
         animation:
-            linkShow
-            .6s
-            .30s
-            both
-            cubic-bezier(.22,1,.36,1);
+            linkShow 0.6s 0.30s both
+            cubic-bezier(.22, 1, .36, 1);
     }
 
 
@@ -477,12 +387,13 @@
 
         gap: 10px;
 
-        margin-bottom: 8px;
+        margin-bottom: 10px;
 
-        color:
-            #aab5c5;
+        color: var(--sp-text-soft);
 
-        font-size: 9px;
+        font-size: 12.5px;
+
+        font-weight: 700;
 
         text-align: right;
     }
@@ -494,117 +405,132 @@
 
         align-items: center;
 
-        gap: 5px;
+        gap: 7px;
 
-        color:
-            #5ee6ad;
+        color: var(--sp-green-light);
 
-        font-size: 8px;
+        font-size: 11px;
+
+        font-weight: 700;
+    }
+
+
+    body.light .link-status {
+        color: #167a52;
     }
 
 
     .link-status span {
 
-        width: 5px;
-        height: 5px;
+        width: 7px;
+        height: 7px;
 
         border-radius: 50%;
 
-        background:
-            var(--success-green);
+        background: var(--sp-green-light);
 
-        box-shadow:
-            0 0 8px
-            rgba(52,211,153,.55);
+        box-shadow: 0 0 10px rgba(74, 222, 128, 0.8);
+
+        animation: dotPulse 2s ease-in-out infinite;
     }
 
 
+    @keyframes dotPulse {
+
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.3); opacity: 1; }
+    }
+
+
+    /* =========================================================
+       LINK INPUT
+    ========================================================= */
+
     .form-link {
 
-        display: block;
+        display: block !important;
 
-        width: 100%;
+        width: 100% !important;
 
-        min-height: 50px;
+        min-height: 52px !important;
 
-        padding:
-            14px;
+        padding: 14px 16px !important;
 
-        border-radius: 12px;
+        border-radius: 12px !important;
 
-        border:
-            1px solid
-            rgba(148,163,184,.14);
+        border: 1.5px solid var(--sp-input-border) !important;
 
-        background:
-            rgba(5,10,19,.72);
+        background: var(--sp-input) !important;
 
-        color:
-            #b9c8dc;
+        background-color: var(--sp-input) !important;
 
-        direction: ltr;
+        color: var(--sp-text) !important;
 
-        text-align: left;
+        direction: ltr !important;
 
-        font-family:
-            Tahoma,
-            "Segoe UI",
-            sans-serif;
+        text-align: left !important;
 
-        font-size: 10px;
+        font-family: 'Vazirmatn', Tahoma, sans-serif !important;
 
-        line-height: 1.7;
+        font-size: 12.5px !important;
 
-        outline: none;
+        font-weight: 600 !important;
 
-        overflow: hidden;
+        line-height: 1.7 !important;
 
-        text-overflow: ellipsis;
+        outline: none !important;
 
-        white-space: nowrap;
+        overflow: hidden !important;
+
+        text-overflow: ellipsis !important;
+
+        white-space: nowrap !important;
 
         box-shadow:
-            inset 0 1px 2px
-            rgba(0,0,0,.25);
+            0 0 0 1px rgba(0, 0, 0, 0.3) inset,
+            0 2px 6px rgba(0, 0, 0, 0.4) inset !important;
 
         transition:
-            border-color .25s ease,
-            box-shadow .25s ease,
-            background .25s ease;
+            border-color 0.25s ease,
+            box-shadow 0.25s ease,
+            background 0.25s ease !important;
+    }
+
+
+    body.light .form-link {
+
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.03) inset,
+            0 2px 6px rgba(58, 109, 224, 0.08) inset !important;
     }
 
 
     .form-link:hover {
 
-        background:
-            rgba(5,10,19,.84);
+        background: var(--sp-input-hover) !important;
 
-        border-color:
-            rgba(148,163,184,.23);
+        background-color: var(--sp-input-hover) !important;
+
+        border-color: rgba(109, 164, 255, 0.7) !important;
     }
 
 
     .form-link:focus {
 
-        border-color:
-            rgba(79,140,255,.65);
+        border-color: var(--sp-blue-light) !important;
 
-        background:
-            rgba(5,10,19,.94);
+        background: var(--sp-input-focus) !important;
+
+        background-color: var(--sp-input-focus) !important;
 
         box-shadow:
-
-            0 0 0 3px
-            rgba(79,140,255,.07),
-
-            0 10px 25px
-            rgba(0,0,0,.18);
+            0 0 0 4px rgba(74, 125, 232, 0.25) !important,
+            0 10px 25px rgba(0, 0, 0, 0.3) !important;
     }
 
 
-
     /* =========================================================
-       BUTTONS
+       ACTIONS
     ========================================================= */
 
     .actions {
@@ -613,9 +539,11 @@
 
         justify-content: center;
 
-        gap: 9px;
+        gap: 12px;
 
-        margin-top: 11px;
+        margin-top: 14px;
+
+        flex-wrap: wrap;
     }
 
 
@@ -630,57 +558,56 @@
 
         justify-content: center;
 
-        gap: 7px;
+        gap: 8px;
 
-        min-height: 47px;
+        min-height: 50px;
 
-        padding:
-            11px 18px;
+        padding: 13px 22px;
 
-        border-radius: 11px;
+        border-radius: 12px;
 
-        font-family: inherit;
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
 
-        font-size: 10px;
+        font-size: 13px;
 
-        font-weight: 700;
+        font-weight: 800;
 
         cursor: pointer;
 
         overflow: hidden;
 
+        text-decoration: none;
+
         transition:
-            transform .25s ease,
-            background .25s ease,
-            border-color .25s ease,
-            box-shadow .25s ease,
-            color .25s ease;
+            transform 0.25s ease,
+            background 0.25s ease,
+            border-color 0.25s ease,
+            box-shadow 0.25s ease,
+            color 0.25s ease;
     }
 
 
+    /* COPY BUTTON */
+
     .copy-btn {
 
-        flex:
-            1 1 auto;
+        flex: 1 1 200px;
 
-        border:
-            1px solid
-            rgba(79,140,255,.18);
+        border: none;
 
         background:
             linear-gradient(
                 135deg,
-                #3478f6,
-                #5b5cf0 58%,
-                #7c4fe4
+                #3a6bc4,
+                #2e7fc4 58%,
+                #2a9ac4
             );
 
-        color:
-            #fff;
+        color: #dbe6ff;
 
         box-shadow:
-            0 10px 25px
-            rgba(79,140,255,.16);
+            0 12px 30px rgba(74, 125, 232, 0.45),
+            inset 0 1px 0 rgba(180, 220, 255, 0.2);
     }
 
 
@@ -696,51 +623,43 @@
             linear-gradient(
                 110deg,
                 transparent 20%,
-                rgba(255,255,255,.20) 50%,
+                rgba(180, 220, 255, 0.3) 50%,
                 transparent 80%
             );
 
-        transform:
-            translateX(120%);
+        transform: translateX(120%);
 
-        transition:
-            transform .6s ease;
+        transition: transform 0.65s ease;
     }
 
 
     .copy-btn span {
-
         position: relative;
-
         z-index: 2;
     }
 
 
     .copy-btn:hover {
 
-        transform:
-            translateY(-2px);
+        transform: translateY(-3px);
+
+        color: #b8d0ff;
 
         box-shadow:
-            0 16px 32px
-            rgba(79,140,255,.23);
+            0 20px 45px rgba(58, 107, 196, 0.55),
+            0 0 45px rgba(76, 201, 232, 0.35);
 
-        filter:
-            brightness(1.06);
+        filter: brightness(1.08);
     }
 
 
     .copy-btn:hover::before {
-
-        transform:
-            translateX(-120%);
+        transform: translateX(-120%);
     }
 
 
     .copy-btn:active {
-
-        transform:
-            scale(.98);
+        transform: translateY(0) scale(0.985);
     }
 
 
@@ -749,51 +668,52 @@
         background:
             linear-gradient(
                 135deg,
-                #119669,
-                #16a779
+                #1e9668,
+                #239d75
             );
 
-        border-color:
-            rgba(52,211,153,.24);
+        color: #d8f4ea;
 
         box-shadow:
-            0 12px 28px
-            rgba(52,211,153,.14);
+            0 12px 30px rgba(45, 201, 143, 0.5),
+            0 0 40px rgba(74, 222, 128, 0.3);
     }
 
 
+    /* NEW FORM BUTTON */
+
     .new-form-btn {
 
-        flex:
-            0 0 auto;
+        flex: 0 0 auto;
 
-        border:
-            1px solid
-            rgba(255,255,255,.07);
+        border: 1.5px solid rgba(109, 164, 255, 0.3);
 
-        background:
-            rgba(255,255,255,.035);
+        background: rgba(109, 164, 255, 0.1);
 
-        color:
-            #bac5d5;
+        color: var(--sp-text-soft);
+    }
+
+
+    body.light .new-form-btn {
+
+        background: rgba(58, 109, 224, 0.08);
+
+        border-color: rgba(58, 109, 224, 0.3);
     }
 
 
     .new-form-btn:hover {
 
-        transform:
-            translateY(-2px);
+        transform: translateY(-3px);
 
-        background:
-            rgba(255,255,255,.065);
+        background: rgba(109, 164, 255, 0.2);
 
-        border-color:
-            rgba(255,255,255,.12);
+        border-color: rgba(109, 164, 255, 0.6);
 
-        color:
-            #eef3fa;
+        color: var(--sp-text);
+
+        box-shadow: 0 12px 28px rgba(74, 125, 232, 0.28);
     }
-
 
 
     /* =========================================================
@@ -806,28 +726,101 @@
 
         z-index: 2;
 
-        margin-top: 22px;
+        margin-top: 26px;
 
-        padding-top: 16px;
+        padding-top: 18px;
 
-        border-top:
-            1px solid
-            rgba(255,255,255,.055);
+        border-top: 1.5px solid var(--sp-border);
 
-        color:
-            #4d5869;
+        color: var(--sp-dim);
 
-        font-size: 8px;
+        font-size: 10.5px;
 
-        line-height: 1.8;
+        font-weight: 500;
+
+        line-height: 1.9;
 
         animation:
-            successTextShow
-            .6s
-            .38s
-            both;
+            successTextShow 0.6s 0.38s both;
     }
 
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes successCardShow {
+
+        from {
+            opacity: 0;
+            transform: translateY(28px) scale(0.975);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+
+    @keyframes iconShow {
+
+        from {
+            opacity: 0;
+            transform: scale(0.75) rotate(-7deg);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1) rotate(0);
+        }
+    }
+
+
+    @keyframes successTextShow {
+
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    @keyframes linkShow {
+
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    /* =========================================================
+       TABLET
+    ========================================================= */
+
+    @media (max-width: 800px) {
+
+        .success-page {
+            padding: 24px 14px 40px;
+        }
+
+
+        .success-card {
+            padding: 32px 24px 26px;
+            border-radius: 20px;
+        }
+    }
 
 
     /* =========================================================
@@ -837,231 +830,148 @@
     @media (max-width: 600px) {
 
         .success-page {
-
-            min-height:
-                calc(100vh - 60px);
-
-            padding:
-                20px 10px 30px;
+            padding: 20px 12px 35px;
+            min-height: auto;
         }
 
 
         .success-card {
-
-            max-width:
-                100%;
-
-            padding:
-                27px 16px 23px;
-
-            border-radius:
-                19px;
+            max-width: 100%;
+            padding: 28px 18px 24px;
+            border-radius: 18px;
         }
 
 
         .success-icon-wrap {
 
-            width:
-                69px;
-
-            height:
-                69px;
-
-            margin-bottom:
-                16px;
-
-            border-radius:
-                20px;
+            width: 74px;
+            height: 74px;
+            margin-bottom: 18px;
+            border-radius: 22px;
         }
 
 
         .success-icon {
 
-            width:
-                45px;
-
-            height:
-                45px;
-
-            border-radius:
-                14px;
-
-            font-size:
-                21px;
+            width: 48px;
+            height: 48px;
+            border-radius: 15px;
+            font-size: 24px;
         }
 
 
         .success-title {
 
-            font-size:
-                21px;
-
-            margin-bottom:
-                8px;
+            font-size: 22px;
+            margin-bottom: 10px;
         }
 
 
         .success-text {
-
-            font-size:
-                10px;
-
-            line-height:
-                1.95;
+            font-size: 12px;
+            line-height: 1.95;
         }
 
 
         .link-section {
-
-            margin-top:
-                20px;
+            margin-top: 22px;
         }
 
 
         .link-label {
-
-            font-size:
-                8.5px;
+            font-size: 12px;
         }
 
 
         .link-status {
-
-            font-size:
-                7.5px;
+            font-size: 10.5px;
         }
 
 
         .form-link {
 
-            min-height:
-                47px;
-
-            padding:
-                12px;
-
-            font-size:
-                9px;
+            min-height: 50px !important;
+            padding: 13px 14px !important;
+            font-size: 11.5px !important;
         }
 
 
         .actions {
 
-            flex-direction:
-                column;
-
-            gap:
-                8px;
+            flex-direction: column;
+            gap: 10px;
         }
 
 
         .copy-btn,
         .new-form-btn {
 
-            width:
-                100%;
-
-            min-height:
-                46px;
-
-            font-size:
-                10px;
+            width: 100%;
+            flex: 1 1 auto;
+            min-height: 52px;
+            font-size: 13px;
         }
 
 
         .success-footer {
 
-            margin-top:
-                18px;
-
-            padding-top:
-                14px;
-
-            font-size:
-                7.5px;
+            margin-top: 22px;
+            padding-top: 16px;
+            font-size: 10px;
         }
-
     }
 
 
-
     /* =========================================================
-       VERY SMALL PHONES
+       TINY PHONES
     ========================================================= */
 
     @media (max-width: 380px) {
 
         .success-page {
-
-            padding:
-                13px 8px 23px;
+            padding: 14px 8px 28px;
         }
 
 
         .success-card {
-
-            padding:
-                23px 13px 20px;
-
-            border-radius:
-                17px;
+            padding: 22px 14px 20px;
+            border-radius: 16px;
         }
 
 
         .success-icon-wrap {
 
-            width:
-                62px;
-
-            height:
-                62px;
-
-            border-radius:
-                17px;
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
         }
 
 
         .success-icon {
 
-            width:
-                41px;
-
-            height:
-                41px;
-
-            border-radius:
-                12px;
-
-            font-size:
-                19px;
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            font-size: 21px;
         }
 
 
         .success-title {
-
-            font-size:
-                19px;
+            font-size: 19px;
         }
 
 
         .success-text {
-
-            font-size:
-                9.5px;
+            font-size: 11.5px;
         }
 
 
         .form-link {
 
-            font-size:
-                8px;
-
-            min-height:
-                44px;
+            font-size: 10.5px !important;
+            min-height: 48px !important;
         }
-
     }
-
 
 
     /* =========================================================
@@ -1074,155 +984,12 @@
         .success-page *::before,
         .success-page *::after {
 
-            animation-duration:
-                .01ms !important;
+            animation-duration: 0.01ms !important;
 
-            animation-iteration-count:
-                1 !important;
+            animation-iteration-count: 1 !important;
 
-            transition-duration:
-                .01ms !important;
+            transition-duration: 0.01ms !important;
         }
-
-    }
-
-
-
-    /* =========================================================
-       ANIMATIONS
-    ========================================================= */
-
-    @keyframes successCardShow {
-
-        from {
-            opacity: 0;
-
-            transform:
-                translateY(25px)
-                scale(.975);
-        }
-
-        to {
-            opacity: 1;
-
-            transform:
-                translateY(0)
-                scale(1);
-        }
-
-    }
-
-
-    @keyframes iconShow {
-
-        from {
-            opacity: 0;
-
-            transform:
-                scale(.75)
-                rotate(-7deg);
-        }
-
-        to {
-            opacity: 1;
-
-            transform:
-                scale(1)
-                rotate(0);
-        }
-
-    }
-
-
-    @keyframes iconRing {
-
-        0% {
-
-            opacity:
-                .55;
-
-            transform:
-                scale(.92);
-        }
-
-        70% {
-
-            opacity:
-                0;
-
-            transform:
-                scale(1.17);
-        }
-
-        100% {
-
-            opacity:
-                0;
-
-            transform:
-                scale(1.17);
-        }
-
-    }
-
-
-    @keyframes successTextShow {
-
-        from {
-
-            opacity: 0;
-
-            transform:
-                translateY(8px);
-        }
-
-        to {
-
-            opacity: 1;
-
-            transform:
-                translateY(0);
-        }
-
-    }
-
-
-    @keyframes linkShow {
-
-        from {
-
-            opacity: 0;
-
-            transform:
-                translateY(10px);
-        }
-
-        to {
-
-            opacity: 1;
-
-            transform:
-                translateY(0);
-        }
-
-    }
-
-
-    @keyframes successGlowFloat {
-
-        0%,
-        100% {
-
-            transform:
-                translate3d(0,0,0);
-        }
-
-        50% {
-
-            transform:
-                translate3d(25px,-20px,0);
-        }
-
     }
 
 </style>
@@ -1232,15 +999,10 @@
 <div class="success-page">
 
 
-    <div class="success-glow"></div>
-
-
     <div class="success-card">
 
 
-        <!-- =================================================
-             SUCCESS ICON
-        ================================================== -->
+        <!-- ICON -->
 
         <div class="success-icon-wrap">
 
@@ -1252,9 +1014,7 @@
 
 
 
-        <!-- =================================================
-             TITLE
-        ================================================== -->
+        <!-- TITLE -->
 
         <h1 class="success-title">
             فرم با موفقیت ساخته شد
@@ -1273,9 +1033,7 @@
 
 
 
-        <!-- =================================================
-             LINK
-        ================================================== -->
+        <!-- LINK -->
 
         <div class="link-section">
 
@@ -1318,7 +1076,7 @@
                 >
 
                     <span id="copyText">
-                        کپی لینک
+                        📋 کپی لینک
                     </span>
 
                 </button>
@@ -1330,7 +1088,7 @@
                     target="_blank"
                     rel="noopener"
                 >
-                    مشاهده فرم
+                    👁 مشاهده فرم
                 </a>
 
 
@@ -1341,9 +1099,7 @@
 
 
 
-        <!-- =================================================
-             FOOTER
-        ================================================== -->
+        <!-- FOOTER -->
 
         <div class="success-footer">
 
@@ -1396,13 +1152,8 @@ function copyLink() {
 function fallbackCopy(input) {
 
     input.focus();
-
     input.select();
-
-    input.setSelectionRange(
-        0,
-        99999
-    );
+    input.setSelectionRange(0, 99999);
 
 
     try {
@@ -1414,22 +1165,16 @@ function fallbackCopy(input) {
     } catch (error) {
 
         const button =
-            document.getElementById(
-                "copyButton"
-            );
+            document.getElementById("copyButton");
 
         const text =
-            document.getElementById(
-                "copyText"
-            );
+            document.getElementById("copyText");
 
 
         text.textContent =
             "لینک را دستی کپی کنید";
 
-        button.classList.remove(
-            "copied"
-        );
+        button.classList.remove("copied");
 
     }
 
@@ -1439,19 +1184,13 @@ function fallbackCopy(input) {
 function showCopiedState() {
 
     const button =
-        document.getElementById(
-            "copyButton"
-        );
+        document.getElementById("copyButton");
 
     const text =
-        document.getElementById(
-            "copyText"
-        );
+        document.getElementById("copyText");
 
 
-    button.classList.add(
-        "copied"
-    );
+    button.classList.add("copied");
 
 
     text.textContent =
@@ -1460,20 +1199,16 @@ function showCopiedState() {
 
     setTimeout(() => {
 
-        button.classList.remove(
-            "copied"
-        );
+        button.classList.remove("copied");
 
         text.textContent =
-            "کپی لینک";
+            "📋 کپی لینک";
 
     }, 2000);
 
 }
 
-
 </script>
 
 
 {% endblock %}
-```

@@ -1,80 +1,117 @@
-from django.contrib import messages
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .models import Book, BorrowRequest
+
+User = get_user_model()
+
+LIBRARY_ADMIN_GROUP = "ادمین کتابخانه"
 
 
+def is_main_admin(user):
+    return user.is_authenticated and user.is_superuser
+
+
+@user_passes_test(is_main_admin, login_url="/coaches/login/")
 def library(request):
-    query = request.GET.get("q", "").strip()
+    return render(request, "library/index.html")
 
-    books = Book.objects.filter(
-        is_active=True
+
+@user_passes_test(is_main_admin, login_url="/coaches/login/")
+def library_dashboard(request):
+    return render(request, "library/dashboard/index.html")
+
+
+@user_passes_test(is_main_admin, login_url="/coaches/login/")
+def library_admin_list(request):
+    group, _ = Group.objects.get_or_create(
+        name=LIBRARY_ADMIN_GROUP
     )
 
-    if query:
-        books = books.filter(
-            title__icontains=query
-        ) | books.filter(
-            author__icontains=query
-        )
-
-    books = books.order_by("title")
+    library_admins = User.objects.filter(
+        groups=group
+    ).order_by("username")
 
     return render(
         request,
-        "library/library.html",
+        "library/dashboard/admins.html",
         {
-            "books": books,
-            "query": query,
+            "library_admins": library_admins
         }
     )
 
 
-def borrow_request(request, book_id):
-
-    book = get_object_or_404(
-        Book,
-        id=book_id,
-        is_active=True
-    )
+@user_passes_test(is_main_admin, login_url="/coaches/login/")
+def library_admin_create(request):
 
     if request.method == "POST":
+        form = UserCreationForm(request.POST)
 
-        requester_name = request.POST.get(
-            "requester_name",
-            ""
-        ).strip()
+        if form.is_valid():
+            user = form.save()
 
-        phone = request.POST.get(
-            "phone",
-            ""
-        ).strip()
-
-        if not requester_name or not phone:
-            messages.error(
-                request,
-                "لطفاً نام و شماره تماس را وارد کنید."
+            group, _ = Group.objects.get_or_create(
+                name=LIBRARY_ADMIN_GROUP
             )
-            return redirect("library")
 
-        if book.available_copies <= 0:
-            messages.error(
-                request,
-                "این کتاب در حال حاضر موجود نیست."
-            )
-            return redirect("library")
+            user.groups.add(group)
 
-        BorrowRequest.objects.create(
-            book=book,
-            requester_name=requester_name,
-            phone=phone,
-        )
+            return redirect("library_admin_list")
 
-        messages.success(
-            request,
-            "درخواست امانت شما ثبت شد."
-        )
+    else:
+        form = UserCreationForm()
 
-        return redirect("library")
+    return render(
+        request,
+        "library/dashboard/admin_create.html",
+        {
+            "form": form
+        }
+    )
 
-    return redirect("library")
+
+@user_passes_test(is_main_admin, login_url="/coaches/login/")
+def library_admin_toggle(request, user_id):
+
+    if request.method != "POST":
+        return redirect("library_admin_list")
+
+    group = get_object_or_404(
+        Group,
+        name=LIBRARY_ADMIN_GROUP
+    )
+
+    user = get_object_or_404(
+        User,
+        id=user_id,
+        groups=group
+    )
+
+    user.is_active = not user.is_active
+    user.save(update_fields=["is_active"])
+
+    return redirect("library_admin_list")
+
+
+@user_passes_test(is_main_admin, login_url="/coaches/login/")
+def library_admin_delete(request, user_id):
+
+    if request.method != "POST":
+        return redirect("library_admin_list")
+
+    group = get_object_or_404(
+        Group,
+        name=LIBRARY_ADMIN_GROUP
+    )
+
+    user = get_object_or_404(
+        User,
+        id=user_id,
+        groups=group
+    )
+
+    user.delete()
+
+    return redirect("library_admin_list")

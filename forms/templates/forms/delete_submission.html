@@ -5,7 +5,7 @@
 <style>
 
     /* =========================================================
-       RESET
+       DELETE PAGE — با تم یکسان
     ========================================================= */
 
     .delete-page,
@@ -14,157 +14,75 @@
     }
 
 
-    /* =========================================================
-       PAGE
-    ========================================================= */
-
     .delete-page {
 
-        --bg: #080b12;
+        /* دارک (پیش‌فرض) */
 
-        --card:
-            rgba(16, 22, 35, 0.88);
+        --dp-card-1: #1a3055;
+        --dp-card-2: #102040;
+        --dp-border: rgba(244, 63, 94, 0.3);
+        --dp-border-hover: rgba(244, 63, 94, 0.55);
 
-        --border:
-            rgba(255, 255, 255, 0.075);
+        --dp-text: #e0eaff;
+        --dp-text-soft: #c8d8f5;
+        --dp-muted: #7a8fb5;
+        --dp-dim: #5a6d8e;
 
-        --text:
-            #f8fafc;
+        --dp-red: #fb7185;
+        --dp-red-strong: #f43f5e;
+        --dp-red-bg: rgba(244, 63, 94, 0.15);
+        --dp-red-border: rgba(244, 63, 94, 0.4);
 
-        --muted:
-            #7f8a9c;
+        --dp-shadow:
+            0 30px 80px rgba(0, 0, 0, 0.55),
+            0 0 60px rgba(244, 63, 94, 0.14),
+            inset 0 1px 0 rgba(255, 200, 210, 0.16);
 
-        --red:
-            #fb7185;
-
-        --red-strong:
-            #e23b55;
-
-        --red-bg:
-            rgba(244, 63, 94, 0.075);
 
         position: relative;
 
         width: 100%;
 
-        min-height:
-            calc(100vh - 80px);
+        min-height: calc(100vh - 200px);
 
         display: flex;
 
         align-items: center;
+
         justify-content: center;
 
-        padding:
-            35px 18px 55px;
+        padding: 30px 20px 50px;
 
-        color:
-            var(--text);
+        color: var(--dp-text);
 
-        overflow: hidden;
-
-        background:
-
-            radial-gradient(
-                circle at 50% 10%,
-                rgba(244, 63, 94, .08),
-                transparent 27%
-            ),
-
-            radial-gradient(
-                circle at 10% 90%,
-                rgba(79, 140, 255, .05),
-                transparent 25%
-            ),
-
-            linear-gradient(
-                145deg,
-                #070a11,
-                #0a101b 52%,
-                #080c14
-            );
+        transition: color 0.4s ease;
     }
 
 
-    /* =========================================================
-       GRID
-    ========================================================= */
+    /* تم روشن */
 
-    .delete-page::before {
+    body.light .delete-page {
 
-        content: "";
+        --dp-card-1: #c8d8f2;
+        --dp-card-2: #b0c4e8;
+        --dp-border: rgba(220, 53, 69, 0.35);
+        --dp-border-hover: rgba(220, 53, 69, 0.6);
 
-        position: absolute;
+        --dp-text: #0a1630;
+        --dp-text-soft: #1a2b52;
+        --dp-muted: #4a5c80;
+        --dp-dim: #6a7ba0;
 
-        inset: 0;
+        --dp-red: #dc3545;
+        --dp-red-strong: #b02a37;
+        --dp-red-bg: rgba(220, 53, 69, 0.1);
+        --dp-red-border: rgba(220, 53, 69, 0.35);
 
-        background-image:
-
-            linear-gradient(
-                rgba(255,255,255,.012) 1px,
-                transparent 1px
-            ),
-
-            linear-gradient(
-                90deg,
-                rgba(255,255,255,.012) 1px,
-                transparent 1px
-            );
-
-        background-size:
-            42px 42px;
-
-        mask-image:
-            linear-gradient(
-                to bottom,
-                black,
-                transparent 90%
-            );
-
-        pointer-events: none;
-
-        opacity: .55;
+        --dp-shadow:
+            0 30px 80px rgba(220, 53, 69, 0.2),
+            0 0 60px rgba(220, 53, 69, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.7);
     }
-
-
-    /* =========================================================
-       GLOW
-    ========================================================= */
-
-    .delete-glow {
-
-        position: absolute;
-
-        width: 410px;
-        height: 410px;
-
-        top: -230px;
-        left: 50%;
-
-        transform:
-            translateX(-50%);
-
-        border-radius: 50%;
-
-        background:
-            radial-gradient(
-                circle,
-                rgba(244,63,94,.11),
-                transparent 70%
-            );
-
-        filter:
-            blur(28px);
-
-        pointer-events: none;
-
-        animation:
-            glowMove
-            8s
-            ease-in-out
-            infinite;
-    }
-
 
 
     /* =========================================================
@@ -179,75 +97,35 @@
 
         width: 100%;
 
-        max-width:
-            530px;
+        max-width: 560px;
 
-        padding:
-            34px 31px 28px;
+        padding: 38px 34px 32px;
 
-        text-align:
-            center;
+        text-align: center;
 
-        border:
-            1px solid
-            var(--border);
+        border: 1.5px solid var(--dp-border);
 
-        border-radius:
-            23px;
+        border-radius: 24px;
 
         background:
             linear-gradient(
-                145deg,
-                rgba(18,25,39,.92),
-                rgba(9,14,25,.88)
+                155deg,
+                var(--dp-card-1) 0%,
+                var(--dp-card-2) 100%
             );
 
-        backdrop-filter:
-            blur(22px);
+        box-shadow: var(--dp-shadow);
 
-        -webkit-backdrop-filter:
-            blur(22px);
-
-        box-shadow:
-
-            0 35px 90px
-            rgba(0,0,0,.43),
-
-            0 0 0 1px
-            rgba(255,255,255,.01);
-
-        overflow:
-            hidden;
+        overflow: hidden;
 
         animation:
-            cardShow
-            .7s
-            cubic-bezier(.22,1,.36,1);
-    }
+            deleteCardShow 0.75s
+            cubic-bezier(.22, 1, .36, 1);
 
-
-    .delete-card::before {
-
-        content: "";
-
-        position: absolute;
-
-        width: 280px;
-        height: 280px;
-
-        top: -170px;
-        right: -120px;
-
-        border-radius: 50%;
-
-        background:
-            radial-gradient(
-                circle,
-                rgba(244,63,94,.085),
-                transparent 70%
-            );
-
-        pointer-events: none;
+        transition:
+            background 0.4s ease,
+            border-color 0.4s ease,
+            box-shadow 0.4s ease;
     }
 
 
@@ -261,20 +139,30 @@
         right: 0;
         left: 0;
 
-        height: 2px;
+        height: 3px;
 
         background:
             linear-gradient(
                 90deg,
                 transparent,
-                #f43f5e,
-                #fb7185,
+                var(--dp-red),
+                var(--dp-red-strong),
+                var(--dp-red),
                 transparent
             );
 
-        opacity: .8;
+        background-size: 200% 100%;
+
+        animation: deleteBorderShine 4s linear infinite;
+
+        opacity: 0.9;
     }
 
+
+    @keyframes deleteBorderShine {
+
+        to { background-position: 200% 0; }
+    }
 
 
     /* =========================================================
@@ -285,45 +173,34 @@
 
         position: relative;
 
-        width: 74px;
-        height: 74px;
+        width: 86px;
+        height: 86px;
 
-        margin:
-            0 auto 18px;
+        margin: 0 auto 22px;
 
         display: flex;
 
         align-items: center;
         justify-content: center;
 
-        border-radius:
-            21px;
+        border-radius: 25px;
 
         background:
             linear-gradient(
                 145deg,
-                rgba(244,63,94,.12),
-                rgba(190,24,93,.065)
+                rgba(244, 63, 94, 0.18),
+                rgba(190, 24, 93, 0.14)
             );
 
-        border:
-            1px solid
-            rgba(244,63,94,.18);
+        border: 1.5px solid rgba(244, 63, 94, 0.4);
 
         box-shadow:
-
-            inset 0 0 25px
-            rgba(244,63,94,.035),
-
-            0 12px 32px
-            rgba(0,0,0,.22);
+            inset 0 1px 0 rgba(255, 200, 210, 0.18),
+            0 14px 35px rgba(244, 63, 94, 0.2);
 
         animation:
-            iconShow
-            .65s
-            .05s
-            both
-            cubic-bezier(.22,1,.36,1);
+            warningShow 0.65s 0.05s both
+            cubic-bezier(.22, 1, .36, 1);
     }
 
 
@@ -333,19 +210,35 @@
 
         position: absolute;
 
-        inset: -8px;
+        inset: -12px;
 
-        border-radius: 27px;
+        border-radius: 33px;
 
-        border:
-            1px solid
-            rgba(244,63,94,.07);
+        border: 1.5px solid rgba(244, 63, 94, 0.25);
 
         animation:
-            iconRing
-            2.7s
-            ease-out
-            infinite;
+            warningRing 2.8s ease-out infinite;
+
+        pointer-events: none;
+    }
+
+
+    @keyframes warningRing {
+
+        0% {
+            opacity: 0.6;
+            transform: scale(0.92);
+        }
+
+        70% {
+            opacity: 0;
+            transform: scale(1.18);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(1.18);
+        }
     }
 
 
@@ -355,34 +248,37 @@
 
         z-index: 2;
 
+        width: 56px;
+        height: 56px;
+
         display: flex;
 
         align-items: center;
         justify-content: center;
 
-        width: 48px;
-        height: 48px;
-
-        border-radius:
-            14px;
+        border-radius: 17px;
 
         background:
-            rgba(244,63,94,.10);
+            linear-gradient(
+                135deg,
+                rgba(244, 63, 94, 0.3),
+                rgba(190, 24, 93, 0.22)
+            );
 
-        color:
-            var(--red);
+        color: var(--dp-red);
 
-        font-size:
-            23px;
+        font-size: 28px;
 
-        font-weight:
-            800;
+        font-weight: 900;
+
+        box-shadow:
+            0 0 30px rgba(244, 63, 94, 0.35),
+            inset 0 1px 0 rgba(255, 200, 210, 0.25);
     }
 
 
-
     /* =========================================================
-       TEXT
+       TITLE
     ========================================================= */
 
     .delete-title {
@@ -391,26 +287,20 @@
 
         z-index: 2;
 
-        margin:
-            0 0 10px;
+        margin: 0 0 12px;
 
-        color:
-            var(--text);
+        color: var(--dp-text);
 
-        font-size:
-            25px;
+        font-size: 27px;
 
-        line-height:
-            1.55;
+        line-height: 1.5;
 
-        font-weight:
-            800;
+        font-weight: 800;
+
+        letter-spacing: -0.6px;
 
         animation:
-            textShow
-            .55s
-            .12s
-            both;
+            deleteTextShow 0.6s 0.12s both;
     }
 
 
@@ -420,45 +310,35 @@
 
         z-index: 2;
 
-        margin:
-            0 auto;
+        margin: 0 auto;
 
-        max-width:
-            450px;
+        max-width: 460px;
 
-        color:
-            #aeb9ca;
+        color: var(--dp-muted);
 
-        font-size:
-            11px;
+        line-height: 2;
 
-        line-height:
-            2;
+        font-size: 13px;
 
-        overflow-wrap:
-            anywhere;
+        font-weight: 500;
+
+        overflow-wrap: anywhere;
 
         animation:
-            textShow
-            .55s
-            .18s
-            both;
+            deleteTextShow 0.6s 0.19s both;
     }
 
 
     .delete-question strong {
 
-        color:
-            #f1f5f9;
+        color: var(--dp-text-soft);
 
-        font-weight:
-            700;
+        font-weight: 800;
     }
 
 
-
     /* =========================================================
-       WARNING
+       WARNING BOX
     ========================================================= */
 
     .delete-warning {
@@ -469,45 +349,37 @@
 
         display: flex;
 
-        align-items:
-            flex-start;
+        align-items: flex-start;
 
-        gap:
-            9px;
+        gap: 12px;
 
-        margin:
-            21px 0 24px;
+        margin: 24px 0 28px;
 
-        padding:
-            13px 14px;
+        padding: 16px 18px;
 
-        text-align:
-            right;
+        text-align: right;
 
-        border:
-            1px solid
-            rgba(244,63,94,.15);
+        border: 1.5px solid var(--dp-red-border);
 
-        border-radius:
-            12px;
+        border-radius: 14px;
 
-        background:
-            var(--red-bg);
+        background: var(--dp-red-bg);
 
-        color:
-            #dd8b99;
+        color: var(--dp-text-soft);
 
-        font-size:
-            9.5px;
+        font-size: 12.5px;
 
-        line-height:
-            1.9;
+        font-weight: 600;
+
+        line-height: 1.95;
 
         animation:
-            warningShow
-            .55s
-            .23s
-            both;
+            warningBoxShow 0.55s 0.24s both;
+    }
+
+
+    body.light .delete-warning {
+        color: #8a2a3a;
     }
 
 
@@ -515,34 +387,28 @@
 
         flex-shrink: 0;
 
+        width: 30px;
+        height: 30px;
+
         display: flex;
 
         align-items: center;
         justify-content: center;
 
-        width: 23px;
-        height: 23px;
+        border-radius: 9px;
 
-        border-radius:
-            7px;
+        background: rgba(244, 63, 94, 0.2);
 
-        background:
-            rgba(244,63,94,.10);
+        color: var(--dp-red);
 
-        color:
-            var(--red);
+        font-size: 15px;
 
-        font-size:
-            11px;
-
-        font-weight:
-            800;
+        font-weight: 900;
     }
 
 
-
     /* =========================================================
-       BUTTONS
+       FORM
     ========================================================= */
 
     .delete-form {
@@ -553,84 +419,81 @@
 
         display: flex;
 
-        align-items:
-            center;
+        align-items: center;
 
-        gap:
-            9px;
+        justify-content: center;
 
-        width:
-            100%;
+        gap: 12px;
+
+        width: 100%;
+
+        flex-wrap: wrap;
 
         animation:
-            buttonsShow
-            .55s
-            .28s
-            both;
+            buttonsShow 0.6s 0.30s both;
     }
 
 
     .delete-btn,
     .cancel-btn {
 
-        min-height:
-            48px;
+        position: relative;
 
-        border-radius:
-            11px;
+        display: inline-flex;
 
-        font-family:
-            inherit;
+        align-items: center;
 
-        font-size:
-            10px;
+        justify-content: center;
 
-        font-weight:
-            700;
+        gap: 8px;
 
-        cursor:
-            pointer;
+        min-height: 52px;
+
+        padding: 14px 24px;
+
+        border-radius: 12px;
+
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+        font-size: 13.5px;
+
+        font-weight: 800;
+
+        cursor: pointer;
+
+        text-decoration: none;
+
+        overflow: hidden;
 
         transition:
-            transform .22s ease,
-            background .22s ease,
-            border-color .22s ease,
-            box-shadow .22s ease,
-            color .22s ease;
+            transform 0.25s ease,
+            background 0.25s ease,
+            border-color 0.25s ease,
+            box-shadow 0.25s ease,
+            color 0.25s ease;
     }
 
 
-    /* =========================================================
-       DELETE BUTTON
-    ========================================================= */
+    /* DELETE BUTTON */
 
     .delete-btn {
 
-        position: relative;
+        flex: 1 1 220px;
 
-        flex:
-            1 1 auto;
-
-        border:
-            1px solid
-            rgba(244,63,94,.18);
+        border: none;
 
         background:
             linear-gradient(
                 135deg,
                 #dc2949,
-                #bd2340
+                #b81f3d
             );
 
-        color:
-            white;
+        color: #ffe4e9;
 
         box-shadow:
-            0 11px 27px
-            rgba(244,63,94,.13);
-
-        overflow:
-            hidden;
+            0 12px 30px rgba(244, 63, 94, 0.4),
+            inset 0 1px 0 rgba(255, 200, 210, 0.2);
     }
 
 
@@ -646,113 +509,87 @@
             linear-gradient(
                 110deg,
                 transparent 20%,
-                rgba(255,255,255,.17) 50%,
+                rgba(255, 200, 210, 0.3) 50%,
                 transparent 80%
             );
 
-        transform:
-            translateX(120%);
+        transform: translateX(120%);
 
-        transition:
-            transform .6s ease;
+        transition: transform 0.65s ease;
     }
 
 
     .delete-btn span {
-
         position: relative;
-
         z-index: 2;
     }
 
 
     .delete-btn:hover {
 
-        transform:
-            translateY(-2px);
+        transform: translateY(-3px);
+
+        color: #ffd0d8;
 
         box-shadow:
-            0 17px 33px
-            rgba(244,63,94,.21);
+            0 20px 45px rgba(244, 63, 94, 0.6),
+            0 0 45px rgba(244, 63, 94, 0.4);
 
-        filter:
-            brightness(1.07);
+        filter: brightness(1.08);
     }
 
 
     .delete-btn:hover::before {
-
-        transform:
-            translateX(-120%);
+        transform: translateX(-120%);
     }
 
 
     .delete-btn:active {
-
-        transform:
-            scale(.985);
+        transform: translateY(0) scale(0.985);
     }
 
 
-
-    /* =========================================================
-       CANCEL
-    ========================================================= */
+    /* CANCEL BUTTON */
 
     .cancel-btn {
 
-        flex:
-            0 0 110px;
+        flex: 0 0 auto;
 
-        display: inline-flex;
+        min-width: 130px;
 
-        align-items:
-            center;
+        border: 1.5px solid rgba(109, 164, 255, 0.3);
 
-        justify-content:
-            center;
+        background: rgba(109, 164, 255, 0.1);
 
-        border:
-            1px solid
-            rgba(255,255,255,.07);
+        color: var(--dp-text-soft);
+    }
 
-        background:
-            rgba(255,255,255,.035);
 
-        color:
-            #bec8d6;
+    body.light .cancel-btn {
 
-        text-decoration:
-            none;
+        background: rgba(58, 109, 224, 0.08);
+
+        border-color: rgba(58, 109, 224, 0.3);
     }
 
 
     .cancel-btn:hover {
 
-        transform:
-            translateY(-2px);
+        transform: translateY(-3px);
 
-        background:
-            rgba(255,255,255,.065);
+        background: rgba(109, 164, 255, 0.2);
 
-        border-color:
-            rgba(255,255,255,.12);
+        border-color: rgba(109, 164, 255, 0.6);
 
-        color:
-            #f2f5f9;
+        color: var(--dp-text);
 
-        box-shadow:
-            0 10px 22px
-            rgba(0,0,0,.15);
+        box-shadow: 0 12px 28px rgba(74, 125, 232, 0.28);
     }
 
 
     .cancel-btn:active {
-
-        transform:
-            scale(.985);
+        transform: translateY(0) scale(0.985);
     }
-
 
 
     /* =========================================================
@@ -761,38 +598,27 @@
 
     .delete-footer {
 
-        position:
-            relative;
+        position: relative;
 
-        z-index:
-            2;
+        z-index: 2;
 
-        margin-top:
-            19px;
+        margin-top: 24px;
 
-        padding-top:
-            15px;
+        padding-top: 18px;
 
-        border-top:
-            1px solid
-            rgba(255,255,255,.05);
+        border-top: 1.5px solid var(--dp-border);
 
-        color:
-            #4e5969;
+        color: var(--dp-dim);
 
-        font-size:
-            8px;
+        font-size: 10.5px;
 
-        line-height:
-            1.8;
+        font-weight: 500;
+
+        line-height: 1.9;
 
         animation:
-            textShow
-            .55s
-            .36s
-            both;
+            deleteTextShow 0.6s 0.4s both;
     }
-
 
 
     /* =========================================================
@@ -802,14 +628,107 @@
     .delete-btn:focus-visible,
     .cancel-btn:focus-visible {
 
-        outline:
-            3px solid
-            rgba(251,113,133,.18);
+        outline: 3px solid rgba(244, 63, 94, 0.4);
 
-        outline-offset:
-            3px;
+        outline-offset: 3px;
     }
 
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    @keyframes deleteCardShow {
+
+        from {
+            opacity: 0;
+            transform: translateY(28px) scale(0.975);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+
+    @keyframes warningShow {
+
+        from {
+            opacity: 0;
+            transform: scale(0.72) rotate(-6deg);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1) rotate(0);
+        }
+    }
+
+
+    @keyframes warningBoxShow {
+
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    @keyframes deleteTextShow {
+
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    @keyframes buttonsShow {
+
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    /* =========================================================
+       TABLET
+    ========================================================= */
+
+    @media (max-width: 800px) {
+
+        .delete-page {
+            padding: 24px 14px 40px;
+        }
+
+
+        .delete-card {
+            padding: 32px 24px 26px;
+            border-radius: 20px;
+        }
+
+
+        .delete-title {
+            font-size: 23px;
+        }
+    }
 
 
     /* =========================================================
@@ -819,353 +738,144 @@
     @media (max-width: 600px) {
 
         .delete-page {
-
-            min-height:
-                calc(100vh - 60px);
-
-            padding:
-                20px 10px 30px;
+            padding: 20px 12px 35px;
+            min-height: auto;
         }
 
 
         .delete-card {
-
-            padding:
-                26px 16px 21px;
-
-            border-radius:
-                19px;
+            max-width: 100%;
+            padding: 28px 18px 24px;
+            border-radius: 18px;
         }
 
 
         .warning-icon-wrap {
 
-            width:
-                66px;
-
-            height:
-                66px;
-
-            margin-bottom:
-                15px;
-
-            border-radius:
-                19px;
+            width: 72px;
+            height: 72px;
+            margin-bottom: 18px;
+            border-radius: 21px;
         }
 
 
         .warning-icon {
 
-            width:
-                43px;
-
-            height:
-                43px;
-
-            border-radius:
-                13px;
-
-            font-size:
-                21px;
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            font-size: 23px;
         }
 
 
         .delete-title {
 
-            font-size:
-                21px;
+            font-size: 21px;
+            margin-bottom: 10px;
         }
 
 
         .delete-question {
-
-            font-size:
-                10px;
-
-            line-height:
-                2;
+            font-size: 12.5px;
+            line-height: 2;
         }
 
 
         .delete-warning {
 
-            margin:
-                18px 0 21px;
+            margin: 20px 0 22px;
+            padding: 14px 15px;
+            font-size: 12px;
+        }
 
-            padding:
-                11px 12px;
 
-            font-size:
-                8.7px;
+        .warning-icon-small {
+
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
         }
 
 
         .delete-form {
 
-            flex-direction:
-                column;
-
-            gap:
-                8px;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
         }
 
 
         .delete-btn,
         .cancel-btn {
 
-            width:
-                100%;
-
-            min-height:
-                46px;
+            width: 100%;
+            flex: 1 1 auto;
+            min-height: 52px;
+            font-size: 13.5px;
         }
 
 
         .cancel-btn {
-
-            flex-basis:
-                auto;
+            min-width: 0;
         }
 
 
         .delete-footer {
 
-            margin-top:
-                17px;
-
-            padding-top:
-                13px;
-
-            font-size:
-                7.5px;
+            margin-top: 20px;
+            padding-top: 16px;
+            font-size: 10px;
         }
-
     }
 
 
-
     /* =========================================================
-       VERY SMALL PHONES
+       TINY PHONES
     ========================================================= */
 
     @media (max-width: 380px) {
 
         .delete-page {
-
-            padding:
-                13px 8px 23px;
+            padding: 14px 8px 28px;
         }
 
 
         .delete-card {
-
-            padding:
-                22px 13px 18px;
-
-            border-radius:
-                17px;
+            padding: 22px 14px 20px;
+            border-radius: 16px;
         }
 
 
         .warning-icon-wrap {
 
-            width:
-                61px;
-
-            height:
-                61px;
-
-            border-radius:
-                16px;
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
         }
 
 
         .warning-icon {
 
-            width:
-                39px;
-
-            height:
-                39px;
-
-            font-size:
-                19px;
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            font-size: 21px;
         }
 
 
         .delete-title {
-
-            font-size:
-                19px;
+            font-size: 19px;
         }
 
 
         .delete-question {
-
-            font-size:
-                9.3px;
+            font-size: 11.5px;
         }
 
 
         .delete-warning {
-
-            font-size:
-                8.2px;
+            font-size: 11px;
         }
-
-    }
-
-
-
-    /* =========================================================
-       ANIMATIONS
-    ========================================================= */
-
-    @keyframes cardShow {
-
-        from {
-            opacity: 0;
-
-            transform:
-                translateY(23px)
-                scale(.975);
-        }
-
-        to {
-            opacity: 1;
-
-            transform:
-                translateY(0)
-                scale(1);
-        }
-
-    }
-
-
-    @keyframes iconShow {
-
-        from {
-            opacity: 0;
-
-            transform:
-                scale(.72)
-                rotate(-6deg);
-        }
-
-        to {
-            opacity: 1;
-
-            transform:
-                scale(1)
-                rotate(0);
-        }
-
-    }
-
-
-    @keyframes iconRing {
-
-        0% {
-
-            opacity: .5;
-
-            transform:
-                scale(.92);
-        }
-
-        70% {
-
-            opacity: 0;
-
-            transform:
-                scale(1.16);
-        }
-
-        100% {
-
-            opacity: 0;
-
-            transform:
-                scale(1.16);
-        }
-
-    }
-
-
-    @keyframes textShow {
-
-        from {
-            opacity: 0;
-
-            transform:
-                translateY(8px);
-        }
-
-        to {
-            opacity: 1;
-
-            transform:
-                translateY(0);
-        }
-
-    }
-
-
-    @keyframes warningShow {
-
-        from {
-            opacity: 0;
-
-            transform:
-                translateY(8px);
-        }
-
-        to {
-            opacity: 1;
-
-            transform:
-                translateY(0);
-        }
-
-    }
-
-
-    @keyframes buttonsShow {
-
-        from {
-            opacity: 0;
-
-            transform:
-                translateY(10px);
-        }
-
-        to {
-            opacity: 1;
-
-            transform:
-                translateY(0);
-        }
-
-    }
-
-
-    @keyframes glowMove {
-
-        0%,
-        100% {
-
-            transform:
-                translateX(-50%)
-                translateY(0);
-        }
-
-        50% {
-
-            transform:
-                translateX(-50%)
-                translateY(22px);
-        }
-
     }
 
 
@@ -1179,31 +889,23 @@
         .delete-page *::before,
         .delete-page *::after {
 
-            animation-duration:
-                .01ms !important;
-
-            animation-iteration-count:
-                1 !important;
-
-            transition-duration:
-                .01ms !important;
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
         }
-
     }
 
 </style>
 
 
+
 <div class="delete-page">
-
-
-    <div class="delete-glow"></div>
 
 
     <section class="delete-card">
 
 
-        <!-- آیکون هشدار -->
+        <!-- ICON -->
 
         <div class="warning-icon-wrap">
 
@@ -1215,7 +917,7 @@
 
 
 
-        <!-- عنوان -->
+        <!-- TITLE -->
 
         <h1 class="delete-title">
             حذف فرم
@@ -1223,7 +925,7 @@
 
 
 
-        <!-- سؤال -->
+        <!-- QUESTION -->
 
         <p class="delete-question">
 
@@ -1239,7 +941,7 @@
 
 
 
-        <!-- هشدار -->
+        <!-- WARNING -->
 
         <div class="delete-warning">
 
@@ -1258,7 +960,7 @@
 
 
 
-        <!-- دکمه‌ها -->
+        <!-- ACTIONS -->
 
         <form
             method="post"
@@ -1274,7 +976,7 @@
             >
 
                 <span>
-                    حذف فرم برای همیشه
+                    🗑 حذف فرم برای همیشه
                 </span>
 
             </button>
@@ -1291,7 +993,7 @@
 
 
 
-        <!-- پایین کارت -->
+        <!-- FOOTER -->
 
         <div class="delete-footer">
 

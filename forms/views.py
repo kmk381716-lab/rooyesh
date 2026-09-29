@@ -26,21 +26,13 @@ FIELD_TYPES = {
 # =========================================================
 # ساخت فرم
 # =========================================================
-
 @staff_member_required
 def builder(request):
 
     if request.method == "POST":
 
-        title = request.POST.get(
-            "title",
-            "",
-        ).strip()
-
-        description = request.POST.get(
-            "description",
-            "",
-        ).strip()
+        title = request.POST.get("title", "").strip()
+        description = request.POST.get("description", "").strip()
 
         if not title:
             return render(
@@ -52,21 +44,8 @@ def builder(request):
                 },
             )
 
-        question_keys = request.POST.getlist(
-            "question_key"
-        )
-
-        question_titles = request.POST.getlist(
-            "question_title"
-        )
-
-        question_types = request.POST.getlist(
-            "question_type"
-        )
-
-        question_required = request.POST.getlist(
-            "question_required"
-        )
+        # کلیدهای سؤال‌ها (0، 1، 2، ...)
+        question_keys = request.POST.getlist("question_key")
 
         with transaction.atomic():
 
@@ -76,53 +55,44 @@ def builder(request):
                 created_by=request.user,
             )
 
-            for index, question_title in enumerate(
-                question_titles
-            ):
+            for order_index, key in enumerate(question_keys):
 
-                question_title = question_title.strip()
+                # اسم‌های دارای index
+                question_title = request.POST.get(
+                    f"question_title_{key}", ""
+                ).strip()
 
                 if not question_title:
                     continue
 
-                if index < len(question_keys):
-                    key = question_keys[index]
-                else:
-                    key = str(index)
-
-                if index < len(question_types):
-                    field_type = question_types[index]
-                else:
-                    field_type = "text"
+                field_type = request.POST.get(
+                    f"question_type_{key}", "text"
+                )
 
                 if field_type not in FIELD_TYPES:
                     field_type = "text"
 
-                required = key in question_required
+                # چک‌باکس اجباری (اگه تیک خورده باشه تو POST هست)
+                required = (
+                    f"question_required_{key}" in request.POST
+                )
 
                 question = Question.objects.create(
                     form=form,
                     title=question_title,
                     field_type=field_type,
                     required=required,
-                    order=index,
+                    order=order_index,
                 )
 
-                # گزینه‌ها فقط برای سوالات انتخابی
-                if field_type in [
-                    "single",
-                    "multiple",
-                ]:
-
-                    option_name = f"option_{key}"
+                # گزینه‌ها برای سوالات انتخابی
+                if field_type in ["single", "multiple"]:
 
                     options = request.POST.getlist(
-                        option_name
+                        f"option_{key}"
                     )
 
-                    for option_index, option_title in enumerate(
-                        options
-                    ):
+                    for option_index, option_title in enumerate(options):
 
                         option_title = option_title.strip()
 
@@ -135,23 +105,17 @@ def builder(request):
                             order=option_index,
                         )
 
-        # صفحه مخصوص سازنده فرم
         return render(
             request,
             "forms/builder_success.html",
-            {
-                "form": form,
-            },
+            {"form": form},
         )
 
     return render(
         request,
         "forms/builder.html",
-        {
-            "field_types": FIELD_TYPES,
-        },
+        {"field_types": FIELD_TYPES},
     )
-
 
 # =========================================================
 # لیست فرم‌ها

@@ -1,83 +1,47 @@
 from django.db import models
 
-# Create your models here.
-from django.db import models
-
 
 class Book(models.Model):
 
     title = models.CharField(
-        max_length=200
+        max_length=200,
+        verbose_name="عنوان کتاب"
     )
 
     author = models.CharField(
         max_length=150,
-        blank=True
+        verbose_name="نویسنده"
     )
 
-    description = models.TextField(
-        blank=True
-    )
-
-    cover = models.ImageField(
-        upload_to="library/covers/",
-        blank=True
+    category = models.CharField(
+        max_length=100,
+        verbose_name="دسته‌بندی"
     )
 
     total_copies = models.PositiveIntegerField(
-        default=1
+        default=1,
+        verbose_name="تعداد نسخه"
     )
 
     available_copies = models.PositiveIntegerField(
-        default=1
+        default=1,
+        verbose_name="نسخه موجود"
+    )
+
+    description = models.TextField(
+        blank=True,
+        verbose_name="توضیحات"
     )
 
     is_active = models.BooleanField(
-        default=True
+        default=True,
+        verbose_name="فعال"
     )
 
     created_at = models.DateTimeField(
-        auto_now_add=True
+        auto_now_add=True,
+        verbose_name="تاریخ ثبت"
     )
-
-    @property
-    def borrowed_copies(self):
-        return self.total_copies - self.available_copies
 
     def __str__(self):
         return self.title
-class BorrowRequest(models.Model):
-
-    STATUS_CHOICES = [
-        ("pending", "در انتظار بررسی"),
-        ("approved", "تأیید شده"),
-        ("rejected", "رد شده"),
-        ("returned", "بازگردانده شده"),
-    ]
-
-    book = models.ForeignKey(
-        Book,
-        on_delete=models.CASCADE,
-        related_name="borrow_requests"
-    )
-
-    requester_name = models.CharField(
-        max_length=150
-    )
-
-    phone = models.CharField(
-        max_length=20
-    )
-
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default="pending"
-    )
-
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-
-    def __str__(self):
-        return f"{self.requester_name} - {self.book.title}"

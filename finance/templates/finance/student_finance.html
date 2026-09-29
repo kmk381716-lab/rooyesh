@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -8,163 +7,924 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#080c16"
     >
 
     <title>
         حساب مالی {{ student.first_name }} {{ student.last_name }}
     </title>
 
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+
 
     <style>
 
-        * {
+        /* ==================================================
+           ROOT / THEME
+        ================================================== */
+
+        :root {
+
+            --bg-main: #080c16;
+
+            --card-bg-1: #1a3055;
+            --card-bg-2: #102040;
+            --card-border: rgba(109, 164, 255, 0.28);
+            --card-border-hover: rgba(109, 164, 255, 0.55);
+
+            --inner-bg: rgba(5, 11, 24, 0.6);
+            --inner-border: rgba(109, 164, 255, 0.16);
+
+            --text-heading: #e0eaff;
+            --text-label: #c8d8f5;
+            --text-body: #a4b8e0;
+            --text-muted: #7a8fb5;
+            --text-dim: #5a6d8e;
+
+            --amount-color: #dbe6ff;
+            --amount-bg: rgba(109, 164, 255, 0.1);
+            --amount-border: rgba(109, 164, 255, 0.28);
+
+            --blue: #4a7de8;
+            --blue-light: #6da4ff;
+            --cyan: #4cc9e8;
+            --green: #2dc98f;
+            --green-light: #4ade80;
+
+            --success: #4ade80;
+            --success-bg: rgba(74, 222, 128, 0.14);
+            --success-border: rgba(74, 222, 128, 0.4);
+
+            --danger: #fb7185;
+            --danger-bg: rgba(244, 63, 94, 0.15);
+            --danger-border: rgba(244, 63, 94, 0.4);
+
+            --shadow-card:
+                0 30px 80px rgba(0, 0, 0, 0.55),
+                0 0 60px rgba(74, 125, 232, 0.14),
+                inset 0 1px 0 rgba(180, 220, 255, 0.16);
+        }
+
+
+        body.light {
+
+            --bg-main: #e8eefb;
+
+            --card-bg-1: #c8d8f2;
+            --card-bg-2: #b0c4e8;
+            --card-border: rgba(58, 109, 224, 0.35);
+            --card-border-hover: rgba(58, 109, 224, 0.6);
+
+            --inner-bg: rgba(240, 245, 255, 0.7);
+            --inner-border: rgba(58, 109, 224, 0.2);
+
+            --text-heading: #0a1630;
+            --text-label: #1a2b52;
+            --text-body: #2a4272;
+            --text-muted: #4a5c80;
+            --text-dim: #6a7ba0;
+
+            --amount-color: #1a2b52;
+            --amount-bg: rgba(58, 109, 224, 0.08);
+            --amount-border: rgba(58, 109, 224, 0.25);
+
+            --shadow-card:
+                0 30px 80px rgba(58, 109, 224, 0.22),
+                0 0 60px rgba(58, 109, 224, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+
+
+        /* ==================================================
+           RESET
+        ================================================== */
+
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
         }
 
 
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+
         body {
+
             margin: 0;
 
             min-height: 100vh;
 
-            padding: 25px;
+            padding: 80px 20px 40px;
 
             font-family:
+                'Vazirmatn',
                 Tahoma,
                 "Segoe UI",
                 sans-serif;
 
-            background:
-                linear-gradient(
-                    145deg,
-                    #080c16,
-                    #101827
-                );
+            font-weight: 500;
 
-            color: #f8fafc;
-        }
+            color: var(--text-body);
 
+            background: var(--bg-main);
 
-        .container {
-            max-width: 1000px;
+            overflow-x: hidden;
 
-            margin: auto;
-        }
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
 
-
-        .header {
-            margin-bottom: 22px;
-        }
-
-
-        .header h1 {
-            margin:
-                0 0 8px;
-
-            font-size: 23px;
-        }
-
-
-        .header p {
-            margin: 0;
-
-            color: #8e9aad;
-
-            font-size: 11px;
+            transition:
+                background 0.5s ease,
+                color 0.4s ease;
         }
 
 
         /* ==================================================
-           SUMMARY
+           AURORA
         ================================================== */
 
-        .summary {
-            display: grid;
+        .bg-aurora {
 
-            grid-template-columns:
-                repeat(3, minmax(0, 1fr));
+            position: fixed;
 
-            gap: 12px;
+            inset: 0;
 
-            margin-bottom: 22px;
+            z-index: -5;
+
+            overflow: hidden;
+
+            pointer-events: none;
         }
 
 
-        .summary-card {
-            padding: 20px;
+        .bg-aurora__blob {
 
-            border-radius: 14px;
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(120px);
+
+            opacity: 0.55;
+
+            will-change: transform;
+        }
+
+
+        .bg-aurora__blob--1 {
+
+            width: 520px;
+            height: 520px;
 
             background:
-                rgba(16,24,40,.88);
+                radial-gradient(
+                    circle,
+                    rgba(58, 110, 220, 0.7),
+                    transparent 70%
+                );
 
-            border:
-                1px solid
-                rgba(255,255,255,.07);
+            top: -12%;
+            right: -12%;
+
+            animation: aurora1 20s ease-in-out infinite;
+        }
+
+
+        .bg-aurora__blob--2 {
+
+            width: 460px;
+            height: 460px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(50, 140, 200, 0.6),
+                    transparent 70%
+                );
+
+            top: 45%;
+            left: -15%;
+
+            animation: aurora2 24s ease-in-out infinite;
+        }
+
+
+        .bg-aurora__blob--3 {
+
+            width: 420px;
+            height: 420px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(60, 180, 210, 0.5),
+                    transparent 70%
+                );
+
+            bottom: -12%;
+            right: 28%;
+
+            animation: aurora3 26s ease-in-out infinite;
+        }
+
+
+        @keyframes aurora1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-130px, 90px) scale(1.2); }
+        }
+
+        @keyframes aurora2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(110px, -100px) scale(1.15); }
+        }
+
+        @keyframes aurora3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-90px, -70px) scale(1.22); }
+        }
+
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(109, 164, 255, 0.04) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(109, 164, 255, 0.04) 1px,
+                    transparent 1px
+                );
+
+            background-size: 48px 48px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.65),
+                    transparent 85%
+                );
+
+            -webkit-mask-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.65),
+                    transparent 85%
+                );
+
+            z-index: -3;
+        }
+
+
+        /* ==================================================
+           TOP BAR
+        ================================================== */
+
+        .top-bar {
+
+            position: fixed;
+
+            top: 16px;
+            left: 20px;
+            right: 20px;
+
+            z-index: 50;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            pointer-events: none;
+        }
+
+
+        .top-bar__right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            pointer-events: auto;
+        }
+
+
+        .icon-btn {
+
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            border: 1.5px solid var(--card-border);
+
+            background: var(--card-bg-1);
+
+            color: var(--text-heading);
+
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                color 0.3s ease;
+        }
+
+
+        .icon-btn:hover {
+
+            transform: translateY(-2px) scale(1.06);
+
+            border-color: var(--blue-light);
+
+            color: #7fb4ff;
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.35),
+                0 0 30px rgba(74, 125, 232, 0.35);
+        }
+
+
+        body.light .icon-btn:hover {
+            color: #1a2b52;
+        }
+
+
+        .icon-btn svg {
+
+            width: 20px;
+            height: 20px;
+
+            transition: transform 0.5s ease;
+        }
+
+
+        .theme-toggle:hover svg {
+            transform: rotate(180deg);
+        }
+
+
+        .home-btn:hover svg {
+            transform: translateY(-2px) scale(1.1);
+        }
+
+
+        .theme-toggle .icon-sun { display: none; }
+
+        body.light .theme-toggle .icon-sun { display: block; }
+
+        body.light .theme-toggle .icon-moon { display: none; }
+
+
+        /* ==================================================
+           CONTAINER
+        ================================================== */
+
+        .container {
+
+            position: relative;
+
+            z-index: 1;
+
+            width: 100%;
+
+            max-width: 1000px;
+
+            margin: 0 auto;
+
+            animation:
+                pageEnter 0.75s cubic-bezier(.22, 1, .36, 1);
+        }
+
+
+        @keyframes pageEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(28px) scale(0.985);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+        /* ==================================================
+           PAGE HEADER
+        ================================================== */
+
+        .page-header {
+
+            position: relative;
+
+            margin-bottom: 26px;
+
+            padding-bottom: 22px;
+
+            border-bottom: 1.5px solid var(--card-border);
+
+            animation:
+                headerShow 0.6s 0.1s both
+                cubic-bezier(.22, 1, .36, 1);
+        }
+
+
+        @keyframes headerShow {
+
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .page-header h1 {
+
+            position: relative;
+
+            margin: 0 0 10px;
+
+            font-size: 26px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.6px;
+
+            color: var(--text-heading);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .page-header h1::before {
+
+            content: "";
+
+            display: inline-block;
+
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: var(--green-light);
+
+            box-shadow:
+                0 0 14px rgba(74, 222, 128, 0.9),
+                0 0 30px rgba(74, 222, 128, 0.5);
+
+            animation: dotPulse 2.3s ease-in-out infinite;
+
+            flex-shrink: 0;
+        }
+
+
+        .page-header p {
+
+            margin: 0;
+
+            color: var(--text-muted);
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            line-height: 1.9;
+        }
+
+
+        .page-header p strong {
+
+            color: var(--text-heading);
+
+            font-weight: 800;
+        }
+
+
+        @keyframes dotPulse {
+
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.3);
+                opacity: 1;
+            }
+        }
+
+
+        /* ==================================================
+           GRID WRAPPER — چیدمان هوشمند
+        ================================================== */
+
+        .finance-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+
+            grid-template-areas:
+                "remaining charges payments"
+                "content content content";
+
+            gap: 16px;
+
+            margin-bottom: 26px;
+
+            animation:
+                fadeUp 0.6s 0.18s both
+                cubic-bezier(.22, 1, .36, 1);
+        }
+
+
+        .summary-card.remaining { grid-area: remaining; }
+        .summary-card.charges   { grid-area: charges; }
+        .summary-card.payments  { grid-area: payments; }
+        .content-card           { grid-area: content; }
+
+
+        /* ==================================================
+           SUMMARY CARDS
+        ================================================== */
+
+        .summary-card {
+
+            position: relative;
+
+            padding: 22px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    155deg,
+                    var(--card-bg-1) 0%,
+                    var(--card-bg-2) 100%
+                );
+
+            border: 1.5px solid var(--card-border);
+
+            box-shadow: var(--shadow-card);
+
+            overflow: hidden;
+
+            transition:
+                transform 0.4s cubic-bezier(.22, 1, .36, 1),
+                border-color 0.3s ease,
+                box-shadow 0.4s ease;
+        }
+
+
+        .summary-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: -100px;
+            right: -80px;
+
+            width: 200px;
+            height: 200px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(109, 164, 255, 0.3),
+                    transparent 65%
+                );
+
+            filter: blur(30px);
+
+            pointer-events: none;
+        }
+
+
+        .summary-card:hover {
+
+            transform: translateY(-5px);
+
+            border-color: var(--card-border-hover);
+
+            box-shadow:
+                0 35px 80px rgba(0, 0, 0, 0.55),
+                0 0 50px rgba(74, 125, 232, 0.22),
+                inset 0 1px 0 rgba(180, 220, 255, 0.2);
         }
 
 
         .summary-title {
-            margin-bottom: 9px;
 
-            color: #8895a8;
+            position: relative;
 
-            font-size: 10px;
+            z-index: 2;
+
+            margin-bottom: 12px;
+
+            color: var(--text-muted);
+
+            font-size: 12.5px;
+
+            font-weight: 600;
+
+            letter-spacing: -0.2px;
         }
 
 
         .summary-value {
-            font-size: 21px;
 
+            position: relative;
+
+            z-index: 2;
+
+            font-size: 24px;
+
+            font-weight: 900;
+
+            letter-spacing: -1px;
+
+            color: var(--text-heading);
+
+            font-variant-numeric: tabular-nums;
+        }
+
+
+        .summary-value small {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            opacity: 0.6;
+
+            margin-right: 5px;
+        }
+
+
+        /* مجموع بدهی — سفید-آبی نرم */
+
+        .summary-card.charges .summary-value {
+            color: var(--amount-color);
+        }
+
+
+        /* مجموع پرداخت — سبز */
+
+        .summary-card.payments .summary-value {
+            color: var(--green-light);
+        }
+
+
+        body.light .summary-card.payments .summary-value {
+            color: #167a52;
+        }
+
+
+        /* مانده — گرادیانت قرمز ملایم */
+
+        .summary-card.remaining {
+
+            border-color: rgba(244, 63, 94, 0.35);
+        }
+
+
+        .summary-card.remaining::before {
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(244, 63, 94, 0.22),
+                    transparent 65%
+                );
+        }
+
+
+        .summary-card.remaining .summary-title {
+            color: var(--danger);
             font-weight: 800;
         }
 
 
-        .remaining {
-            color: #fb7185;
+        .summary-card.remaining .summary-value {
+
+            background: linear-gradient(120deg, #fb7185, #f472b6);
+
+            background-size: 200% 200%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+
+            animation: gradientText 5s ease infinite;
+        }
+
+
+        body.light .summary-card.remaining .summary-value {
+
+            background: linear-gradient(120deg, #dc3545, #c2185b);
+
+            background-size: 200% 200%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+
+        .summary-card.remaining .summary-value small {
+
+            -webkit-text-fill-color: var(--text-muted);
+
+            color: var(--text-muted);
+
+            opacity: 0.7;
+        }
+
+
+        @keyframes gradientText {
+
+            0%, 100% { background-position: 0% 50%; }
+
+            50% { background-position: 100% 50%; }
         }
 
 
         /* ==================================================
-           CHARGES
+           CONTENT CARD
         ================================================== */
 
         .content-card {
-            overflow: hidden;
 
-            border-radius: 16px;
+            position: relative;
+
+            border-radius: 22px;
 
             background:
-                rgba(16,24,40,.88);
+                linear-gradient(
+                    155deg,
+                    var(--card-bg-1) 0%,
+                    var(--card-bg-2) 100%
+                );
 
-            border:
-                1px solid
-                rgba(255,255,255,.07);
+            border: 1.5px solid var(--card-border);
+
+            box-shadow: var(--shadow-card);
+
+            overflow: hidden;
+
+            animation:
+                fadeUp 0.7s 0.26s both
+                cubic-bezier(.22, 1, .36, 1);
+        }
+
+
+        .content-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            right: 0;
+            left: 0;
+
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #4ade80,
+                    #4cc9e8,
+                    #6da4ff,
+                    transparent
+                );
+
+            background-size: 200% 100%;
+
+            animation: borderShine 4s linear infinite;
+        }
+
+
+        @keyframes borderShine {
+
+            to { background-position: 200% 0; }
         }
 
 
         .content-header {
-            padding:
-                18px 20px;
 
-            border-bottom:
-                1px solid
-                rgba(255,255,255,.06);
+            position: relative;
 
-            font-size: 14px;
+            padding: 20px 24px;
+
+            border-bottom: 1.5px solid var(--card-border);
+
+            font-size: 16px;
 
             font-weight: 800;
+
+            color: var(--text-heading);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
         }
 
 
-        .charge {
-            padding:
-                18px 20px;
+        .content-header::before {
 
-            border-bottom:
-                1px solid
-                rgba(255,255,255,.05);
+            content: "";
+
+            display: inline-block;
+
+            width: 6px;
+            height: 20px;
+
+            border-radius: 4px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    var(--green-light),
+                    var(--cyan)
+                );
+
+            box-shadow: 0 0 12px rgba(74, 222, 128, 0.4);
+        }
+
+
+        /* ==================================================
+           CHARGE ITEM
+        ================================================== */
+
+        .charge {
+
+            position: relative;
+
+            padding: 22px 24px;
+
+            border-bottom: 1.5px solid var(--card-border);
+
+            transition:
+                background 0.3s ease,
+                padding 0.3s ease;
         }
 
 
@@ -173,50 +933,116 @@
         }
 
 
-        .charge-top {
-            display: flex;
+        .charge:hover {
 
-            justify-content: space-between;
+            background: var(--inner-bg);
+        }
+
+
+        .charge-top {
+
+            display: flex;
 
             align-items: center;
 
-            gap: 15px;
+            justify-content: space-between;
 
-            margin-bottom: 8px;
+            gap: 16px;
+
+            margin-bottom: 10px;
+
+            flex-wrap: wrap;
         }
 
 
         .charge-title {
-            font-weight: 700;
 
-            font-size: 13px;
+            color: var(--text-heading);
+
+            font-weight: 800;
+
+            font-size: 15px;
+
+            letter-spacing: -0.3px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .charge-title::before {
+
+            content: "";
+
+            display: inline-block;
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--blue-light);
+
+            box-shadow: 0 0 10px rgba(109, 164, 255, 0.7);
         }
 
 
         .charge-amount {
+
             font-weight: 800;
 
-            font-size: 14px;
+            font-size: 16px;
+
+            color: var(--amount-color);
+
+            font-variant-numeric: tabular-nums;
+
+            padding: 6px 14px;
+
+            border-radius: 10px;
+
+            background: var(--amount-bg);
+
+            border: 1.5px solid var(--amount-border);
+
+            letter-spacing: -0.3px;
         }
 
 
         .charge-meta {
-            color: #7f8b9e;
 
-            font-size: 10px;
+            color: var(--text-muted);
 
-            line-height: 1.8;
+            font-size: 11.5px;
+
+            font-weight: 500;
+
+            line-height: 1.9;
+
+            margin-bottom: 4px;
         }
 
 
         .charge-description {
-            margin-top: 8px;
 
-            color: #9ba6b7;
+            margin-top: 10px;
 
-            font-size: 10px;
+            padding: 10px 14px;
 
-            line-height: 1.9;
+            border-radius: 10px;
+
+            background: var(--inner-bg);
+
+            border-right: 3px solid var(--blue-light);
+
+            color: var(--text-body);
+
+            font-size: 12px;
+
+            line-height: 2;
         }
 
 
@@ -225,92 +1051,160 @@
         ================================================== */
 
         .payment-info {
+
             display: flex;
 
             flex-wrap: wrap;
 
-            gap: 18px;
+            gap: 12px;
 
-            margin-top: 13px;
+            margin-top: 14px;
 
-            padding:
-                11px 13px;
+            padding: 0;
+        }
 
-            border-radius: 9px;
 
-            background:
-                rgba(255,255,255,.025);
+        .payment-info > div {
 
-            border:
-                1px solid
-                rgba(255,255,255,.045);
+            display: flex;
 
-            font-size: 10px;
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 10px 16px;
+
+            border-radius: 11px;
+
+            background: var(--inner-bg);
+
+            border: 1.5px solid var(--inner-border);
+
+            font-size: 12.5px;
         }
 
 
         .payment-label {
-            color: #7f8b9e;
+
+            color: var(--text-muted);
+
+            font-size: 11.5px;
+
+            font-weight: 600;
         }
 
 
         .payment-value {
-            color: #dbe7f6;
 
-            font-weight: 700;
+            font-weight: 800;
+
+            font-variant-numeric: tabular-nums;
         }
 
 
         .payment-remaining {
-            color: #fb7185;
+            color: var(--danger);
         }
 
 
         .payment-paid {
-            color: #35d49a;
+            color: var(--green-light);
+        }
+
+
+        body.light .payment-paid {
+            color: #167a52;
         }
 
 
         /* ==================================================
-           PAYMENT HISTORY
+           PAYMENTS HISTORY
         ================================================== */
 
         .payments-history {
-            margin-top: 15px;
 
-            padding-top: 14px;
+            margin-top: 16px;
 
-            border-top:
-                1px solid
-                rgba(255,255,255,.05);
+            padding: 16px;
+
+            border-radius: 14px;
+
+            background: var(--inner-bg);
+
+            border: 1.5px solid var(--inner-border);
         }
 
 
         .payments-title {
-            margin-bottom: 10px;
 
-            color: #aeb9ca;
+            display: flex;
 
-            font-size: 10px;
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 12px;
+
+            color: var(--text-heading);
+
+            font-size: 12.5px;
 
             font-weight: 800;
+
+            letter-spacing: -0.2px;
+        }
+
+
+        .payments-title::before {
+
+            content: "";
+
+            display: inline-block;
+
+            width: 5px;
+            height: 14px;
+
+            border-radius: 3px;
+
+            background: var(--green-light);
+
+            box-shadow: 0 0 8px rgba(74, 222, 128, 0.5);
         }
 
 
         .payment-row {
-            padding:
-                11px 13px;
 
-            margin-bottom: 7px;
+            padding: 12px 14px;
 
-            border-radius: 10px;
+            margin-bottom: 8px;
 
-            background:
-                rgba(255,255,255,.018);
+            border-radius: 11px;
 
-            border:
-                1px solid
-                rgba(255,255,255,.045);
+            background: rgba(109, 164, 255, 0.05);
+
+            border: 1px solid var(--inner-border);
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+
+        body.light .payment-row {
+            background: rgba(58, 109, 224, 0.05);
+        }
+
+
+        .payment-row:hover {
+
+            background: rgba(109, 164, 255, 0.1);
+
+            transform: translateX(-3px);
+        }
+
+
+        body.light .payment-row:hover {
+            background: rgba(58, 109, 224, 0.1);
         }
 
 
@@ -320,6 +1214,7 @@
 
 
         .payment-main {
+
             display: flex;
 
             align-items: center;
@@ -327,133 +1222,194 @@
             justify-content: space-between;
 
             gap: 12px;
+
+            flex-wrap: wrap;
         }
 
 
         .payment-amount {
-            color: #35d49a;
 
-            font-size: 10px;
+            color: var(--green-light);
+
+            font-size: 13px;
 
             font-weight: 800;
+
+            font-variant-numeric: tabular-nums;
+        }
+
+
+        body.light .payment-amount {
+            color: #167a52;
         }
 
 
         .payment-date {
-            color: #718096;
 
-            font-size: 9px;
+            color: var(--text-dim);
+
+            font-size: 10.5px;
+
+            font-weight: 500;
         }
 
 
-        .payment-creator {
-            margin-top: 6px;
-
-            color: #6f7d91;
-
-            font-size: 9px;
-
-            line-height: 1.8;
-        }
-
-
+        .payment-creator,
         .payment-description {
+
             margin-top: 6px;
 
-            color: #929eae;
+            color: var(--text-muted);
 
-            font-size: 9px;
+            font-size: 10.5px;
 
-            line-height: 1.8;
+            line-height: 1.85;
         }
 
 
         /* ==================================================
-           BUTTONS
+           CHARGE ACTIONS
         ================================================== */
 
         .charge-actions {
+
             display: flex;
 
             align-items: center;
 
-            gap: 10px;
+            gap: 12px;
 
-            margin-top: 13px;
+            margin-top: 16px;
+
+            flex-wrap: wrap;
         }
 
 
         .payment-button {
+
+            position: relative;
+
             display: inline-flex;
 
             align-items: center;
 
             justify-content: center;
 
-            min-height: 37px;
+            gap: 8px;
 
-            padding:
-                0 13px;
+            min-height: 46px;
 
-            border-radius: 9px;
+            padding: 0 22px;
 
-            background:
-                rgba(53,212,154,.08);
-
-            border:
-                1px solid
-                rgba(53,212,154,.15);
-
-            color:
-                #67dfb2;
-
-            font-size: 10px;
-
-            font-weight: 800;
+            border-radius: 12px;
 
             text-decoration: none;
 
+            color: #d8f4ea;
+
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+            font-size: 12.5px;
+
+            font-weight: 800;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1e9668,
+                    #239d75
+                );
+
+            border: none;
+
+            box-shadow:
+                0 12px 30px rgba(45, 201, 143, 0.4),
+                inset 0 1px 0 rgba(180, 255, 220, 0.2);
+
+            overflow: hidden;
+
             transition:
-                .2s ease;
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                filter 0.25s ease,
+                color 0.25s ease;
+        }
+
+
+        .payment-button::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    transparent 20%,
+                    rgba(200, 255, 230, 0.3) 50%,
+                    transparent 80%
+                );
+
+            transform: translateX(120%);
+
+            transition: transform 0.65s ease;
         }
 
 
         .payment-button:hover {
-            background:
-                rgba(53,212,154,.13);
 
-            border-color:
-                rgba(53,212,154,.25);
+            transform: translateY(-3px);
 
-            color: #ffffff;
+            color: #b0e8d0;
+
+            box-shadow:
+                0 20px 45px rgba(45, 201, 143, 0.55),
+                0 0 45px rgba(74, 222, 128, 0.35);
+
+            filter: brightness(1.08);
+        }
+
+
+        .payment-button:hover::before {
+            transform: translateX(-120%);
+        }
+
+
+        .payment-button:active {
+            transform: translateY(0) scale(0.985);
         }
 
 
         .paid-label {
+
             display: inline-flex;
 
             align-items: center;
 
-            min-height: 37px;
+            gap: 7px;
 
-            padding:
-                0 13px;
+            min-height: 46px;
 
-            border-radius: 9px;
+            padding: 0 20px;
 
-            background:
-                rgba(53,212,154,.06);
+            border-radius: 12px;
 
-            border:
-                1px solid
-                rgba(53,212,154,.10);
+            background: var(--success-bg);
 
-            color:
-                #35d49a;
+            border: 1.5px solid var(--success-border);
 
-            font-size: 10px;
+            color: var(--success);
+
+            font-size: 12.5px;
 
             font-weight: 800;
+        }
+
+
+        body.light .paid-label {
+            color: #167a52;
         }
 
 
@@ -462,87 +1418,521 @@
         ================================================== */
 
         .empty {
-            padding:
-                35px 20px;
+
+            padding: 45px 24px;
 
             text-align: center;
 
-            color: #7f8b9e;
+            color: var(--text-muted);
 
-            font-size: 11px;
-        }
+            font-size: 13px;
 
-
-        .back {
-            display: inline-block;
-
-            margin-top: 18px;
-
-            padding:
-                11px 16px;
-
-            border-radius: 9px;
-
-            background:
-                rgba(255,255,255,.06);
-
-            color: #c7cfdb;
-
-            text-decoration: none;
-
-            font-size: 11px;
+            font-weight: 500;
         }
 
 
         /* ==================================================
-           MOBILE
+           BACK BUTTON
+        ================================================== */
+
+        .back {
+
+            position: relative;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            min-height: 50px;
+
+            margin-top: 26px;
+
+            padding: 0 24px;
+
+            border-radius: 12px;
+
+            text-decoration: none;
+
+            color: var(--text-heading);
+
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            background: rgba(109, 164, 255, 0.1);
+
+            border: 1.5px solid rgba(109, 164, 255, 0.3);
+
+            overflow: hidden;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .back:hover {
+
+            transform: translateY(-3px);
+
+            background: rgba(109, 164, 255, 0.2);
+
+            border-color: rgba(109, 164, 255, 0.6);
+
+            box-shadow: 0 12px 28px rgba(74, 125, 232, 0.28);
+        }
+
+
+        .back svg {
+
+            width: 16px;
+            height: 16px;
+
+            transition: transform 0.3s ease;
+        }
+
+
+        .back:hover svg {
+            transform: translateX(4px);
+        }
+
+
+        /* ==================================================
+           FOCUS
+        ================================================== */
+
+        .icon-btn:focus-visible,
+        .payment-button:focus-visible,
+        .back:focus-visible {
+
+            outline: 3px solid rgba(109, 164, 255, 0.4);
+
+            outline-offset: 3px;
+        }
+
+
+        /* ==================================================
+           ANIMATIONS
+        ================================================== */
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* ==================================================
+           TABLET
+        ================================================== */
+
+        @media (max-width: 900px) {
+
+            .finance-grid {
+
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+
+                grid-template-areas:
+                    "remaining charges"
+                    "content content"
+                    "payments payments";
+            }
+        }
+
+
+        /* ==================================================
+           MOBILE — مانده بالا، رسیدها زیرش، بقیه آخر
         ================================================== */
 
         @media (max-width: 700px) {
 
             body {
-                padding: 15px;
+                padding: 76px 14px 32px;
             }
 
 
-            .summary {
+            .top-bar {
+
+                top: 12px;
+                left: 14px;
+                right: 14px;
+            }
+
+
+            .icon-btn {
+
+                width: 42px;
+                height: 42px;
+
+                border-radius: 11px;
+            }
+
+
+            .icon-btn svg {
+
+                width: 19px;
+                height: 19px;
+            }
+
+
+            .page-header {
+
+                margin-bottom: 22px;
+
+                padding-bottom: 18px;
+            }
+
+
+            .page-header h1 {
+
+                font-size: 21px;
+
+                margin-bottom: 8px;
+
+                letter-spacing: -0.5px;
+            }
+
+
+            .page-header h1::before {
+
+                width: 8px;
+                height: 8px;
+            }
+
+
+            .page-header p {
+                font-size: 12px;
+            }
+
+
+            /* ============================================
+               چیدمان موبایل — مانده اول، محتوا، بعد بدهی و پرداخت
+            ============================================ */
+
+            .finance-grid {
+
                 grid-template-columns: 1fr;
+
+                grid-template-areas:
+                    "remaining"
+                    "content"
+                    "charges"
+                    "payments";
+
+                gap: 12px;
+
+                margin-bottom: 20px;
+            }
+
+
+            /* کارت مانده برجسته */
+            .summary-card.remaining {
+
+                padding: 24px 22px;
+
+                border-color: rgba(244, 63, 94, 0.5);
+
+                box-shadow:
+                    0 25px 60px rgba(0, 0, 0, 0.55),
+                    0 0 45px rgba(244, 63, 94, 0.22),
+                    inset 0 1px 0 rgba(255, 200, 210, 0.18);
+            }
+
+
+            .summary-card.remaining .summary-title {
+
+                font-size: 13px;
+
+                font-weight: 800;
+            }
+
+
+            .summary-card.remaining .summary-value {
+
+                font-size: 30px;
+
+                letter-spacing: -1.5px;
+            }
+
+
+            .summary-card {
+
+                padding: 18px 20px;
+
+                border-radius: 16px;
+            }
+
+
+            .summary-card:hover {
+                transform: none;
+            }
+
+
+            .summary-title {
+
+                font-size: 12px;
+
+                margin-bottom: 10px;
+            }
+
+
+            .summary-value {
+                font-size: 22px;
+            }
+
+
+            .summary-value small {
+                font-size: 12px;
+            }
+
+
+            .content-card {
+                border-radius: 18px;
+            }
+
+
+            .content-header {
+
+                padding: 18px 20px;
+
+                font-size: 15px;
+            }
+
+
+            .content-header::before {
+
+                width: 5px;
+                height: 18px;
+            }
+
+
+            .charge {
+                padding: 20px;
             }
 
 
             .charge-top {
-                align-items: flex-start;
 
                 flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 10px;
+            }
+
+
+            .charge-title {
+                font-size: 14px;
+            }
+
+
+            .charge-amount {
+
+                font-size: 15px;
+
+                padding: 6px 12px;
+
+                align-self: flex-start;
+            }
+
+
+            .charge-meta {
+                font-size: 11px;
             }
 
 
             .payment-info {
+
                 flex-direction: column;
 
-                gap: 7px;
+                gap: 8px;
+            }
+
+
+            .payment-info > div {
+
+                width: 100%;
+
+                justify-content: space-between;
+
+                padding: 10px 14px;
+
+                font-size: 12px;
+            }
+
+
+            .payments-history {
+
+                padding: 14px;
+
+                margin-top: 14px;
             }
 
 
             .payment-main {
-                align-items: flex-start;
 
                 flex-direction: column;
+
+                align-items: flex-start;
 
                 gap: 5px;
             }
 
 
             .charge-actions {
-                width: 100%;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 10px;
+
+                margin-top: 14px;
             }
 
 
             .payment-button,
             .paid-label {
+
                 width: 100%;
+
+                min-height: 48px;
+
+                font-size: 13px;
             }
 
+
+            .back {
+
+                width: 100%;
+
+                min-height: 50px;
+
+                font-size: 13px;
+            }
+        }
+
+
+        /* ==================================================
+           TINY PHONES
+        ================================================== */
+
+        @media (max-width: 400px) {
+
+            body {
+                padding: 72px 11px 28px;
+            }
+
+
+            .top-bar {
+
+                top: 10px;
+                left: 10px;
+                right: 10px;
+            }
+
+
+            .icon-btn {
+
+                width: 40px;
+                height: 40px;
+
+                border-radius: 10px;
+            }
+
+
+            .icon-btn svg {
+
+                width: 18px;
+                height: 18px;
+            }
+
+
+            .page-header h1 {
+                font-size: 19px;
+            }
+
+
+            .summary-card {
+
+                padding: 16px 18px;
+
+                border-radius: 14px;
+            }
+
+
+            .summary-card.remaining {
+                padding: 20px 18px;
+            }
+
+
+            .summary-card.remaining .summary-value {
+                font-size: 26px;
+            }
+
+
+            .summary-value {
+                font-size: 20px;
+            }
+
+
+            .content-card {
+                border-radius: 16px;
+            }
+
+
+            .content-header {
+                padding: 16px 18px;
+            }
+
+
+            .charge {
+                padding: 18px;
+            }
+
+
+            .charge-title {
+                font-size: 13.5px;
+            }
+
+
+            .charge-amount {
+                font-size: 14px;
+            }
+        }
+
+
+        /* ==================================================
+           REDUCED MOTION
+        ================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration: 0.01ms !important;
+
+                animation-iteration-count: 1 !important;
+
+                transition-duration: 0.01ms !important;
+            }
         }
 
     </style>
@@ -553,261 +1943,392 @@
 <body>
 
 
-<div class="container">
+    <!-- AURORA -->
 
+    <div class="bg-aurora" aria-hidden="true">
 
-    <!-- ==================================================
-         HEADER
-    ================================================== -->
-
-    <div class="header">
-
-        <h1>
-            حساب مالی
-        </h1>
-
-
-        <p>
-
-            {{ student.first_name }}
-            {{ student.last_name }}
-
-        </p>
+        <div class="bg-aurora__blob bg-aurora__blob--1"></div>
+        <div class="bg-aurora__blob bg-aurora__blob--2"></div>
+        <div class="bg-aurora__blob bg-aurora__blob--3"></div>
 
     </div>
 
 
-    <!-- ==================================================
-         SUMMARY
-    ================================================== -->
+    <!-- TOP BAR -->
 
-    <div class="summary">
+    <div class="top-bar">
 
+        <div class="top-bar__right">
 
-        <div class="summary-card">
+            <button
+                type="button"
+                class="icon-btn theme-toggle"
+                id="themeToggle"
+                aria-label="تغییر تم"
+                title="تغییر تم روشن/تاریک"
+            >
 
-            <div class="summary-title">
-                مجموع بدهی
-            </div>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
 
-            <div class="summary-value">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                </svg>
 
-                {{ total_charges|floatformat:0 }}
-
-                تومان
-
-            </div>
-
-        </div>
-
-
-        <div class="summary-card">
-
-            <div class="summary-title">
-                مجموع پرداخت
-            </div>
-
-            <div class="summary-value">
-
-                {{ total_payments|floatformat:0 }}
-
-                تومان
-
-            </div>
-
-        </div>
+            </button>
 
 
-        <div class="summary-card">
+            <a
+                href="{% url 'coaches:dashboard' %}"
+                class="icon-btn home-btn"
+                title="بازگشت به داشبورد"
+                aria-label="بازگشت به داشبورد"
+            >
 
-            <div class="summary-title">
-                مانده
-            </div>
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
 
-            <div class="summary-value remaining">
+                    <path d="M3 12l9-9 9 9"/>
+                    <path d="M5 10v10h14V10"/>
 
-                {{ remaining|floatformat:0 }}
+                </svg>
 
-                تومان
-
-            </div>
+            </a>
 
         </div>
-
 
     </div>
 
 
-    <!-- ==================================================
-         CHARGES
-    ================================================== -->
+    <!-- CONTAINER -->
 
-    <div class="content-card">
+    <div class="container">
 
 
-        <div class="content-header">
-            بدهی‌ها
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <h1>
+                حساب مالی
+            </h1>
+
+            <p>
+
+                دانش‌آموز:
+                <strong>
+                    {{ student.first_name }}
+                    {{ student.last_name }}
+                </strong>
+
+            </p>
+
         </div>
 
 
-        {% for charge in charges %}
+
+        <!-- FINANCE GRID — چیدمان هوشمند -->
+
+        <div class="finance-grid">
 
 
-            <div class="charge">
+            <!-- مانده (اول در موبایل) -->
 
+            <div class="summary-card remaining">
 
-                <!-- CHARGE TOP -->
+                <div class="summary-title">
+                    مانده
+                </div>
 
-                <div class="charge-top">
+                <div class="summary-value">
 
-
-                    <div class="charge-title">
-
-                        {{ charge.title }}
-
-                    </div>
-
-
-                    <div class="charge-amount">
-
-                        {{ charge.amount|floatformat:0 }}
-
-                        تومان
-
-                    </div>
-
+                    {{ remaining|floatformat:0 }}
+                    <small>تومان</small>
 
                 </div>
 
+            </div>
 
-                <!-- CHARGE META -->
 
-                <div class="charge-meta">
+            <!-- مجموع بدهی -->
 
-                    {{ charge.get_charge_type_display }}
+            <div class="summary-card charges">
 
-                    ·
+                <div class="summary-title">
+                    مجموع بدهی
+                </div>
 
-                    {{ charge.created_at|date:"Y/m/d" }}
+                <div class="summary-value">
 
-                    ·
-
-                    ثبت توسط:
-
-                    {{ charge.created_by.get_full_name|default:charge.created_by.username }}
+                    {{ total_charges|floatformat:0 }}
+                    <small>تومان</small>
 
                 </div>
 
-
-                <!-- DESCRIPTION -->
-
-                {% if charge.description %}
-
-                    <div class="charge-description">
-
-                        {{ charge.description }}
-
-                    </div>
-
-                {% endif %}
+            </div>
 
 
-                <!-- PAYMENT INFO -->
+            <!-- مجموع پرداخت -->
 
-                <div class="payment-info">
+            <div class="summary-card payments">
 
+                <div class="summary-title">
+                    مجموع پرداخت
+                </div>
 
-                    <div>
+                <div class="summary-value">
 
-                        <span class="payment-label">
-                            پرداخت شده:
-                        </span>
-
-                        <span class="payment-value payment-paid">
-
-                            {{ charge.paid_amount|floatformat:0 }}
-
-                            تومان
-
-                        </span>
-
-                    </div>
-
-
-                    <div>
-
-                        <span class="payment-label">
-                            مانده:
-                        </span>
-
-                        <span class="payment-value payment-remaining">
-
-                            {{ charge.remaining_amount|floatformat:0 }}
-
-                            تومان
-
-                        </span>
-
-                    </div>
-
+                    {{ total_payments|floatformat:0 }}
+                    <small>تومان</small>
 
                 </div>
 
-
-                <!-- PAYMENT HISTORY -->
-
-                <div class="payments-history">
+            </div>
 
 
-                    <div class="payments-title">
-                        تاریخچه پرداخت‌ها
-                    </div>
+            <!-- CONTENT CARD — لیست بدهی‌ها -->
+
+            <div class="content-card">
 
 
-                    {% for payment in charge.payments.all %}
+                <div class="content-header">
+                    لیست بدهی‌ها
+                </div>
 
 
-                        <div class="payment-row">
+                {% for charge in charges %}
 
 
-                            <div class="payment-main">
+                    <div class="charge">
 
 
-                                <span class="payment-amount">
+                        <!-- CHARGE TOP -->
 
-                                    {{ payment.amount|floatformat:0 }}
+                        <div class="charge-top">
 
+                            <div class="charge-title">
+                                {{ charge.title }}
+                            </div>
+
+                            <div class="charge-amount">
+
+                                {{ charge.amount|floatformat:0 }}
+                                تومان
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CHARGE META -->
+
+                        <div class="charge-meta">
+
+                            {{ charge.get_charge_type_display }}
+
+                            ·
+
+                            {{ charge.created_at|date:"Y/m/d" }}
+
+                            ·
+
+                            ثبت توسط:
+
+                            {{ charge.created_by.get_full_name|default:charge.created_by.username }}
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+
+                        {% if charge.description %}
+
+                            <div class="charge-description">
+                                {{ charge.description }}
+                            </div>
+
+                        {% endif %}
+
+
+
+                        <!-- PAYMENT INFO -->
+
+                        <div class="payment-info">
+
+
+                            <div>
+
+                                <span class="payment-label">
+                                    پرداخت شده:
+                                </span>
+
+                                <span class="payment-value payment-paid">
+
+                                    {{ charge.paid_amount|floatformat:0 }}
                                     تومان
 
                                 </span>
 
+                            </div>
 
-                                <span class="payment-date">
 
-                                    {{ payment.created_at|date:"Y/m/d - H:i" }}
+                            <div>
+
+                                <span class="payment-label">
+                                    مانده:
+                                </span>
+
+                                <span class="payment-value payment-remaining">
+
+                                    {{ charge.remaining_amount|floatformat:0 }}
+                                    تومان
 
                                 </span>
 
-
                             </div>
 
 
-                            <div class="payment-creator">
+                        </div>
 
-                                ثبت توسط:
 
-                                {{ payment.created_by.get_full_name|default:payment.created_by.username }}
 
+                        <!-- PAYMENT HISTORY -->
+
+                        <div class="payments-history">
+
+
+                            <div class="payments-title">
+                                تاریخچه پرداخت‌ها
                             </div>
 
 
-                            {% if payment.description %}
+                            {% for payment in charge.payments.all %}
 
-                                <div class="payment-description">
 
-                                    {{ payment.description }}
+                                <div class="payment-row">
+
+
+                                    <div class="payment-main">
+
+
+                                        <span class="payment-amount">
+
+                                            {{ payment.amount|floatformat:0 }}
+                                            تومان
+
+                                        </span>
+
+
+                                        <span class="payment-date">
+
+                                            {{ payment.created_at|date:"Y/m/d - H:i" }}
+
+                                        </span>
+
+
+                                    </div>
+
+
+                                    <div class="payment-creator">
+
+                                        ثبت توسط:
+
+                                        {{ payment.created_by.get_full_name|default:payment.created_by.username }}
+
+                                    </div>
+
+
+                                    {% if payment.description %}
+
+                                        <div class="payment-description">
+                                            {{ payment.description }}
+                                        </div>
+
+                                    {% endif %}
+
 
                                 </div>
+
+
+                            {% empty %}
+
+
+                                <div class="empty">
+
+                                    هنوز پرداختی برای این بدهی ثبت نشده است.
+
+                                </div>
+
+
+                            {% endfor %}
+
+
+                        </div>
+
+
+
+                        <!-- ACTION -->
+
+                        <div class="charge-actions">
+
+
+                            {% if charge.remaining_amount > 0 %}
+
+                                <a
+                                    href="{% url 'finance:payment_create' charge.id %}"
+                                    class="payment-button"
+                                >
+
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+
+                                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                        <line x1="1" y1="10" x2="23" y2="10"/>
+
+                                    </svg>
+
+                                    ثبت پرداخت
+
+                                </a>
+
+                            {% else %}
+
+                                <span class="paid-label">
+
+                                    <svg
+                                        width="14"
+                                        height="14"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="3"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+
+                                        <polyline points="20 6 9 17 4 12"/>
+
+                                    </svg>
+
+                                    تسویه شده
+
+                                </span>
 
                             {% endif %}
 
@@ -815,76 +2336,107 @@
                         </div>
 
 
-                    {% empty %}
+                    </div>
 
 
-                        <div class="empty">
-
-                            هنوز پرداختی برای این بدهی ثبت نشده است.
-
-                        </div>
+                {% empty %}
 
 
-                    {% endfor %}
+                    <div class="empty">
+
+                        هنوز هیچ بدهی برای این دانش‌آموز ثبت نشده است.
+
+                    </div>
 
 
-                </div>
-
-
-                <!-- PAYMENT BUTTON -->
-
-                <div class="charge-actions">
-
-
-                    {% if charge.remaining_amount > 0 %}
-
-                        <a
-                            href="{% url 'finance:payment_create' charge.id %}"
-                            class="payment-button"
-                        >
-                            💳 ثبت پرداخت
-                        </a>
-
-                    {% else %}
-
-                        <span class="paid-label">
-                            ✓ تسویه شده
-                        </span>
-
-                    {% endif %}
-
-
-                </div>
+                {% endfor %}
 
 
             </div>
 
 
-        {% empty %}
+        </div>
 
 
-            <div class="empty">
 
-                هنوز هیچ بدهی برای این دانش‌آموز ثبت نشده است.
+        <!-- BACK -->
 
-            </div>
+        <a
+            href="{% url 'students:list' %}"
+            class="back"
+        >
 
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
 
-        {% endfor %}
+                <path d="M5 12h14M13 6l6 6-6 6"/>
+
+            </svg>
+
+            بازگشت به دانش‌آموزان
+
+        </a>
 
 
     </div>
 
 
-    <a
-        href="{% url 'students:list' %}"
-        class="back"
-    >
-        بازگشت به دانش‌آموزان
-    </a>
+
+    <!-- SCRIPT -->
+
+    <script>
+
+    (function () {
+        "use strict";
+
+        const themeToggle = document.getElementById("themeToggle");
+        const STORAGE_KEY = "rooyesh-theme";
+
+        function applyTheme(theme) {
+
+            if (theme === "light") {
+                document.body.classList.add("light");
+            } else {
+                document.body.classList.remove("light");
+            }
+        }
 
 
-</div>
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if (saved) {
+            applyTheme(saved);
+        } else if (
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: light)").matches
+        ) {
+            applyTheme("light");
+        }
+
+
+        if (themeToggle) {
+
+            themeToggle.addEventListener("click", () => {
+
+                const isLight =
+                    document.body.classList.toggle("light");
+
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    isLight ? "light" : "dark"
+                );
+            });
+        }
+
+    })();
+
+    </script>
 
 
 </body>

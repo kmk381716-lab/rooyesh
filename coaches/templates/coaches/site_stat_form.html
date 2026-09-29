@@ -8,78 +8,1026 @@
 
 <style>
 
-.stat-form-page {
-    max-width: 700px;
-    margin: 60px auto;
-    padding: 20px;
+/* ==================================================
+   ROOT
+================================================== */
+
+:root {
+
+    /* کارت آبی نفتی روشن */
+    --card-bg-1: #1a3055;
+    --card-bg-2: #102040;
+    --card-border: rgba(109, 164, 255, 0.4);
+
+    /* input ها خیلی تیره تر */
+    --input-bg: #050b18;
+    --input-bg-hover: #08111f;
+    --input-bg-focus: #020610;
+
+    --input-border: rgba(109, 164, 255, 0.45);
+    --input-border-hover: rgba(109, 164, 255, 0.7);
+    --input-border-focus: #7fb4ff;
+
+    --text-heading: #e0eaff;
+    --text-label: #c8d8f5;
+    --text-muted: #8fa6c9;
+    --text-placeholder: #4a5c7f;
+
+    --blue: #4a7de8;
+    --blue-light: #6da4ff;
+    --cyan: #4cc9e8;
+
+    --danger: #fb7185;
+    --danger-bg: rgba(244, 63, 94, 0.18);
+    --danger-border: rgba(244, 63, 94, 0.45);
 }
+
+
+body.light {
+
+    --card-bg-1: #c8d8f2;
+    --card-bg-2: #b0c4e8;
+    --card-border: rgba(58, 109, 224, 0.4);
+
+    --input-bg: #f5f8ff;
+    --input-bg-hover: #ffffff;
+    --input-bg-focus: #ffffff;
+
+    --input-border: rgba(58, 109, 224, 0.35);
+    --input-border-hover: rgba(58, 109, 224, 0.6);
+    --input-border-focus: #2a6bff;
+
+    --text-heading: #0a1630;
+    --text-label: #1a2b52;
+    --text-muted: #4a5c80;
+    --text-placeholder: #8a9abb;
+}
+
+
+/* ==================================================
+   PAGE WRAPPER
+================================================== */
+
+.stat-form-page {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 720px;
+
+    margin: 0 auto;
+
+    padding: 50px 20px 80px;
+
+    animation: pageShow 0.75s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* ==================================================
+   FORM BOX — کارت روشن
+================================================== */
 
 .stat-form-box {
-    padding: 30px;
-    border-radius: 24px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
+
+    position: relative;
+
+    padding: 36px;
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            155deg,
+            var(--card-bg-1) 0%,
+            var(--card-bg-2) 100%
+        );
+
+    border: 1.5px solid var(--card-border);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(74, 125, 232, 0.2),
+        inset 0 1px 0 rgba(180, 220, 255, 0.2),
+        inset 0 -1px 0 rgba(74, 125, 232, 0.2);
+
+    overflow: hidden;
+
+    transition:
+        background 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease,
+        transform 0.4s ease;
 }
+
+
+body.light .stat-form-box {
+
+    box-shadow:
+        0 30px 80px rgba(58, 109, 224, 0.25),
+        0 0 60px rgba(58, 109, 224, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7),
+        inset 0 -1px 0 rgba(58, 109, 224, 0.15);
+}
+
+
+.stat-form-box::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -140px;
+    right: -100px;
+
+    width: 320px;
+    height: 320px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(109, 164, 255, 0.4),
+            transparent 65%
+        );
+
+    filter: blur(40px);
+
+    pointer-events: none;
+}
+
+
+.stat-form-box::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    left: 0;
+
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #6da4ff,
+            #4cc9e8,
+            #6da4ff,
+            transparent
+        );
+
+    background-size: 200% 100%;
+
+    animation: borderShine 4s linear infinite;
+}
+
+
+@keyframes borderShine {
+
+    to { background-position: 200% 0; }
+}
+
+
+/* ==================================================
+   TITLE
+================================================== */
 
 .stat-form-box h1 {
-    margin-top: 0;
-    margin-bottom: 25px;
+
+    position: relative;
+
+    margin: 0 0 30px !important;
+
+    padding: 0 0 22px !important;
+
+    font-size: 22px !important;
+
+    font-weight: 800 !important;
+
+    letter-spacing: -0.5px;
+
+    color: var(--text-heading) !important;
+
+    background: none !important;
+
+    -webkit-text-fill-color: var(--text-heading) !important;
+
+    border-bottom: 1px solid var(--card-border);
 }
+
+
+.stat-form-box h1::before {
+
+    content: "";
+
+    display: inline-block;
+
+    width: 8px;
+    height: 8px;
+
+    margin-left: 10px;
+
+    vertical-align: middle;
+
+    border-radius: 50%;
+
+    background: var(--cyan);
+
+    box-shadow: 0 0 14px rgba(76, 201, 232, 0.9);
+
+    animation: dotPulse 2.3s ease-in-out infinite;
+}
+
+
+/* ==================================================
+   FORM GROUP
+================================================== */
 
 .form-group {
-    margin-bottom: 18px;
+
+    position: relative;
+
+    margin-bottom: 22px;
+
+    animation:
+        fieldShow 0.55s both
+        cubic-bezier(.22, 1, .36, 1);
 }
 
-.form-group label {
+
+.form-group label,
+.stat-form-box .form-group label {
+
+    display: block !important;
+
+    margin-bottom: 10px !important;
+
+    color: var(--text-label) !important;
+
+    font-size: 13px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: -0.2px;
+
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+
+.form-group:focus-within label {
+
+    color: var(--blue-light) !important;
+
+    transform: translateX(-3px);
+}
+
+
+/* ==================================================
+   INPUT — خیلی تیره، کاملاً گود و متمایز
+================================================== */
+
+.stat-form-box .form-group input,
+.stat-form-box .form-group textarea,
+.stat-form-box .form-group select,
+.stat-form-page .form-group input,
+.stat-form-page .form-group textarea,
+.stat-form-page .form-group select,
+.stat-form-box input:not([type="checkbox"]),
+.stat-form-box textarea,
+.stat-form-box select {
+
+    display: block !important;
+
+    width: 100% !important;
+
+    min-height: 52px !important;
+
+    padding: 14px 16px !important;
+
+    margin: 0 !important;
+
+    border-radius: 12px !important;
+
+    border: 2px solid var(--input-border) !important;
+
+    outline: none !important;
+
+    background: var(--input-bg) !important;
+
+    background-color: var(--input-bg) !important;
+
+    background-image: none !important;
+
+    color: var(--text-heading) !important;
+
+    font-family: 'Vazirmatn', Tahoma, sans-serif !important;
+
+    font-size: 14px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.6 !important;
+
+    direction: rtl !important;
+
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.4) inset,
+        0 2px 6px rgba(0, 0, 0, 0.5) inset,
+        0 1px 0 rgba(180, 220, 255, 0.06) !important;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease !important;
+}
+
+
+/* حالت روشن */
+
+body.light .stat-form-box .form-group input,
+body.light .stat-form-box .form-group textarea,
+body.light .stat-form-box .form-group select {
+
+    color: #0a1630 !important;
+
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.05) inset,
+        0 2px 6px rgba(58, 109, 224, 0.1) inset !important;
+}
+
+
+/* حذف استایل پیش‌فرض مرورگر */
+
+.stat-form-box input[type="number"]::-webkit-outer-spin-button,
+.stat-form-box input[type="number"]::-webkit-inner-spin-button {
+
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+.stat-form-box input[type="number"] {
+    -moz-appearance: textfield !important;
+}
+
+.stat-form-box input:-webkit-autofill,
+.stat-form-box input:-webkit-autofill:hover,
+.stat-form-box input:-webkit-autofill:focus,
+.stat-form-box textarea:-webkit-autofill {
+
+    -webkit-text-fill-color: var(--text-heading) !important;
+
+    -webkit-box-shadow:
+        0 0 0 1000px var(--input-bg) inset !important;
+
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+
+/* TEXTAREA */
+
+.stat-form-box .form-group textarea {
+
+    min-height: 120px !important;
+
+    padding: 14px 16px !important;
+
+    resize: vertical;
+
+    line-height: 1.95 !important;
+}
+
+
+/* PLACEHOLDER */
+
+.stat-form-box .form-group input::placeholder,
+.stat-form-box .form-group textarea::placeholder {
+
+    color: var(--text-placeholder) !important;
+
+    font-weight: 500 !important;
+
+    opacity: 1 !important;
+}
+
+
+/* HOVER */
+
+.stat-form-box .form-group input:hover,
+.stat-form-box .form-group textarea:hover,
+.stat-form-box .form-group select:hover {
+
+    border-color: var(--input-border-hover) !important;
+
+    background: var(--input-bg-hover) !important;
+
+    background-color: var(--input-bg-hover) !important;
+}
+
+
+/* FOCUS */
+
+.stat-form-box .form-group input:focus,
+.stat-form-box .form-group textarea:focus,
+.stat-form-box .form-group select:focus {
+
+    border-color: var(--input-border-focus) !important;
+
+    background: var(--input-bg-focus) !important;
+
+    background-color: var(--input-bg-focus) !important;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 0 0 4px rgba(74, 125, 232, 0.3) !important,
+        0 15px 35px rgba(0, 0, 0, 0.5) !important,
+        0 2px 6px rgba(0, 0, 0, 0.5) inset !important;
+}
+
+
+/* SELECT */
+
+.stat-form-box .form-group select {
+
+    cursor: pointer;
+
+    appearance: none !important;
+
+    -webkit-appearance: none !important;
+
+    -moz-appearance: none !important;
+
+    background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236da4ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") !important;
+
+    background-repeat: no-repeat !important;
+
+    background-position: left 16px center !important;
+
+    background-size: 16px !important;
+
+    padding-left: 44px !important;
+}
+
+
+.stat-form-box .form-group select option {
+
+    background: #050b18 !important;
+
+    color: #e0eaff !important;
+
+    padding: 10px !important;
+}
+
+
+body.light .stat-form-box .form-group select option {
+
+    background: #f5f8ff !important;
+
+    color: #0a1630 !important;
+}
+
+
+/* ==================================================
+   HELP TEXT
+================================================== */
+
+.stat-form-box .helptext,
+.stat-form-box .help-text {
+
     display: block;
-    margin-bottom: 8px;
-    font-weight: 700;
+
+    margin-top: 10px;
+
+    padding: 9px 13px;
+
+    border-radius: 9px;
+
+    background: rgba(74, 125, 232, 0.15);
+
+    color: var(--text-muted);
+
+    font-size: 11.5px;
+
+    font-weight: 500;
+
+    line-height: 1.85;
+
+    border-right: 3px solid var(--blue-light);
 }
 
-.form-group input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 13px 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.04);
-    color: inherit;
+
+/* ==================================================
+   ERROR LIST
+================================================== */
+
+.stat-form-box ul.errorlist,
+.stat-form-box .errorlist {
+
+    list-style: none;
+
+    margin: 10px 0 0;
+
+    padding: 0;
+
+    color: var(--danger);
+
+    font-size: 11.5px;
+
+    font-weight: 700;
+
+    line-height: 1.9;
+
+    animation: errorShake 0.4s ease;
 }
+
+
+.stat-form-box ul.errorlist li,
+.stat-form-box .errorlist li {
+
+    padding: 8px 12px;
+
+    margin-bottom: 5px;
+
+    border-radius: 8px;
+
+    background: var(--danger-bg);
+
+    border: 1px solid var(--danger-border);
+}
+
+
+/* ==================================================
+   CHECKBOX ROW
+================================================== */
 
 .checkbox-row {
+
     display: flex;
+
     align-items: center;
-    gap: 8px;
-    margin: 20px 0;
+
+    gap: 14px;
+
+    margin: 26px 0;
+
+    padding: 16px 20px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(74, 125, 232, 0.2),
+            rgba(76, 201, 232, 0.16)
+        );
+
+    border: 1.5px solid rgba(109, 164, 255, 0.45);
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-.form-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 25px;
+
+.checkbox-row:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(74, 125, 232, 0.3),
+            rgba(76, 201, 232, 0.24)
+        );
+
+    border-color: rgba(109, 164, 255, 0.7);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 28px rgba(74, 125, 232, 0.3);
 }
 
-.form-actions button,
-.form-actions a {
-    padding: 12px 18px;
-    border-radius: 12px;
-    border: 0;
-    text-decoration: none;
+
+.stat-form-box .checkbox-row input[type="checkbox"] {
+
+    width: 22px !important;
+
+    height: 22px !important;
+
+    min-height: 22px !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    cursor: pointer;
+
+    accent-color: var(--blue);
+
+    flex-shrink: 0;
+
+    border-radius: 6px;
+
+    box-shadow: none !important;
+}
+
+
+.checkbox-row label {
+
+    margin: 0 !important;
+
+    color: var(--text-heading) !important;
+
+    font-size: 13.5px !important;
+
+    font-weight: 700 !important;
+
     cursor: pointer;
 }
 
-.save-btn {
-    background: linear-gradient(
-        135deg,
-        #4e8cff,
-        #8b63ff
-    );
-    color: white;
+
+/* ==================================================
+   ACTIONS
+================================================== */
+
+.form-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid var(--card-border);
 }
 
+
+.form-actions button,
+.form-actions a {
+
+    position: relative;
+
+    min-height: 52px;
+
+    padding: 14px 26px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+    font-size: 13.5px;
+
+    font-weight: 800;
+
+    text-decoration: none;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.save-btn {
+
+    color: #dbe6ff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #3a6bc4,
+            #2e7fc4 58%,
+            #2a9ac4
+        );
+
+    box-shadow:
+        0 12px 30px rgba(74, 125, 232, 0.5),
+        inset 0 1px 0 rgba(180, 220, 255, 0.25);
+}
+
+
+.save-btn::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            110deg,
+            transparent 20%,
+            rgba(180, 220, 255, 0.35) 50%,
+            transparent 80%
+        );
+
+    transform: translateX(120%);
+
+    transition: transform 0.65s ease;
+}
+
+
+.save-btn:hover {
+
+    transform: translateY(-3px);
+
+    color: #b8d0ff;
+
+    box-shadow:
+        0 20px 45px rgba(58, 107, 196, 0.65),
+        0 0 45px rgba(76, 201, 232, 0.45);
+
+    filter: brightness(1.08);
+}
+
+
+.save-btn:hover::before {
+    transform: translateX(-120%);
+}
+
+
 .cancel-btn {
-    background: rgba(255,255,255,0.07);
-    color: inherit;
+
+    color: var(--text-heading);
+
+    background: rgba(109, 164, 255, 0.12);
+
+    border: 1.5px solid rgba(109, 164, 255, 0.35);
+}
+
+
+.cancel-btn:hover {
+
+    transform: translateY(-3px);
+
+    background: rgba(109, 164, 255, 0.22);
+
+    border-color: rgba(109, 164, 255, 0.65);
+
+    box-shadow: 0 12px 28px rgba(74, 125, 232, 0.3);
+}
+
+
+/* ==================================================
+   FOCUS
+================================================== */
+
+.form-actions button:focus-visible,
+.form-actions a:focus-visible {
+
+    outline: 3px solid rgba(109, 164, 255, 0.4);
+
+    outline-offset: 3px;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 700px) {
+
+    .stat-form-page {
+        padding: 22px 14px 45px;
+    }
+
+
+    .stat-form-box {
+
+        padding: 26px 20px;
+
+        border-radius: 20px;
+    }
+
+
+    .stat-form-box h1 {
+
+        font-size: 19px !important;
+
+        margin-bottom: 24px !important;
+
+        padding-bottom: 18px !important;
+    }
+
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+
+    .form-group label {
+
+        font-size: 12.5px !important;
+
+        margin-bottom: 9px !important;
+    }
+
+
+    .stat-form-box .form-group input,
+    .stat-form-box .form-group textarea,
+    .stat-form-box .form-group select {
+
+        min-height: 52px !important;
+
+        padding: 14px 15px !important;
+
+        border-radius: 11px !important;
+
+        font-size: 14px !important;
+    }
+
+
+    .stat-form-box .form-group textarea {
+        min-height: 110px !important;
+    }
+
+
+    .checkbox-row {
+
+        padding: 14px 16px;
+
+        margin: 22px 0;
+
+        gap: 12px;
+    }
+
+
+    .stat-form-box .checkbox-row input[type="checkbox"] {
+
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+
+    .checkbox-row label {
+        font-size: 13px !important;
+    }
+
+
+    .form-actions {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 10px;
+
+        margin-top: 24px;
+
+        padding-top: 20px;
+    }
+
+
+    .form-actions button,
+    .form-actions a {
+
+        width: 100%;
+
+        min-height: 52px;
+
+        font-size: 13.5px;
+    }
+}
+
+
+/* ==================================================
+   TINY PHONES
+================================================== */
+
+@media (max-width: 400px) {
+
+    .stat-form-page {
+        padding: 16px 10px 35px;
+    }
+
+
+    .stat-form-box {
+
+        padding: 22px 16px;
+
+        border-radius: 18px;
+    }
+
+
+    .stat-form-box h1 {
+
+        font-size: 17px !important;
+
+        margin-bottom: 20px !important;
+    }
+
+
+    .stat-form-box .form-group input,
+    .stat-form-box .form-group textarea,
+    .stat-form-box .form-group select {
+
+        font-size: 13px !important;
+    }
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ==================================================
+   ANIMATIONS
+================================================== */
+
+@keyframes pageShow {
+
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+@keyframes fieldShow {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes errorShake {
+
+    0%, 100% { transform: translateX(0); }
+
+    25% { transform: translateX(-3px); }
+
+    50% { transform: translateX(3px); }
+
+    75% { transform: translateX(-2px); }
+}
+
+
+@keyframes dotPulse {
+
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
 }
 
 </style>
@@ -93,6 +1041,7 @@
             {{ page_title }}
         </h1>
 
+
         <form method="post">
 
             {% csrf_token %}
@@ -105,7 +1054,7 @@
 
                         {{ field }}
 
-                        <label>
+                        <label for="{{ field.id_for_label }}">
                             نمایش در سایت
                         </label>
 
@@ -118,6 +1067,14 @@
                         {{ field.label_tag }}
 
                         {{ field }}
+
+                        {% if field.help_text %}
+
+                            <span class="helptext">
+                                {{ field.help_text|safe }}
+                            </span>
+
+                        {% endif %}
 
                         {{ field.errors }}
 
@@ -136,6 +1093,7 @@
                 >
                     ذخیره
                 </button>
+
 
                 <a
                     href="{% url 'coaches:site_stats' %}"

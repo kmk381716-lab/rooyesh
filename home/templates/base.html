@@ -1,1814 +1,914 @@
-
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <title>
-        {% block title %}
-            کانون رویش
-        {% endblock %}
-    </title>
-
-
-    <style>
-
-        /* =====================================================
-           ROOT
-        ===================================================== */
-
-        :root {
-
-            --bg: #050b14;
-            --bg-2: #08111f;
-            --bg-3: #0b1728;
-
-            --card: rgba(13, 27, 46, 0.72);
-            --card-strong: rgba(12, 25, 43, 0.94);
-
-            --white: #ffffff;
-            --text: #edf4ff;
-            --text-soft: #aab7ca;
-            --text-muted: #6f7d92;
-
-            --blue: #4e8cff;
-            --blue-light: #75a8ff;
-            --purple: #8b63ff;
-            --cyan: #43d5ff;
-            --green: #35d49a;
-            --red: #ff6678;
-
-            --border: rgba(255, 255, 255, 0.075);
-            --border-strong: rgba(117, 168, 255, 0.24);
-
-            --shadow:
-                0 20px 70px rgba(0, 0, 0, 0.32);
-
-            --header-height: 78px;
-
-            --radius: 20px;
-        }
-
-
-        /* =====================================================
-           RESET
-        ===================================================== */
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        body {
-            margin: 0;
-
-            min-height: 100vh;
-
-            color: var(--text);
-
-            font-family:
-                Vazirmatn,
-                Tahoma,
-                Arial,
-                sans-serif;
-
-            line-height: 1.8;
-
-            background:
-                radial-gradient(
-                    circle at 10% 5%,
-                    rgba(78, 140, 255, 0.13),
-                    transparent 28%
-                ),
-                radial-gradient(
-                    circle at 90% 12%,
-                    rgba(139, 99, 255, 0.12),
-                    transparent 30%
-                ),
-                radial-gradient(
-                    circle at 50% 100%,
-                    rgba(67, 213, 255, 0.06),
-                    transparent 28%
-                ),
-                linear-gradient(
-                    180deg,
-                    var(--bg) 0%,
-                    var(--bg-2) 48%,
-                    #06101c 100%
-                );
-
-            overflow-x: hidden;
-        }
-
-
-        body::before {
-            content: "";
-
-            position: fixed;
-
-            inset: 0;
-
-            pointer-events: none;
-
-            background:
-                linear-gradient(
-                    rgba(255, 255, 255, 0.012) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255, 255, 255, 0.012) 1px,
-                    transparent 1px
-                );
-
-            background-size:
-                40px 40px;
-
-            mask-image:
-                linear-gradient(
-                    to bottom,
-                    rgba(0, 0, 0, 0.8),
-                    transparent 85%
-                );
-
-            z-index: -1;
-        }
-
-
-        a {
-            color: inherit;
-
-            text-decoration: none;
-        }
-
-
-        button,
-        input,
-        textarea,
-        select {
-            font: inherit;
-        }
-
-
-        img {
-            max-width: 100%;
-
-            display: block;
-        }
-
-
-        /* =====================================================
-           CONTAINER
-        ===================================================== */
-
-        .container {
-            width:
-                min(
-                    1180px,
-                    calc(100% - 40px)
-                );
-
-            margin-inline: auto;
-        }
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        .header {
-            position: sticky;
-
-            top: 0;
-
-            z-index: 9999;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    rgba(5, 12, 22, 0.94),
-                    rgba(5, 12, 22, 0.76)
-                );
-
-            backdrop-filter:
-                blur(22px);
-
-            -webkit-backdrop-filter:
-                blur(22px);
-
-            border-bottom:
-                1px solid rgba(255, 255, 255, 0.055);
-
-            box-shadow:
-                0 10px 45px rgba(0, 0, 0, 0.16);
-        }
-
-
-        .header::before {
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-
-            left: 18%;
-
-            width: 64%;
-
-            height: 1px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(78, 140, 255, 0.65),
-                    rgba(139, 99, 255, 0.58),
-                    transparent
-                );
-        }
-
-
-        .header::after {
-            content: "";
-
-            position: absolute;
-
-            top: -110px;
-
-            right: 22%;
-
-            width: 260px;
-
-            height: 160px;
-
-            background:
-                rgba(78, 140, 255, 0.09);
-
-            filter:
-                blur(70px);
-
-            border-radius: 50%;
-
-            pointer-events: none;
-        }
-
-
-        .header-content {
-
-            min-height:
-                var(--header-height);
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 22px;
-
-            position: relative;
-
-        }
-
-
-        /* =====================================================
-           LOGO
-        ===================================================== */
-
-        .logo {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 11px;
-
-            flex-shrink: 0;
-
-            position: relative;
-
-            z-index: 2;
-
-            transition:
-                transform 0.25s ease;
-        }
-
-
-        .logo:hover {
-            transform:
-                translateY(-1px);
-        }
-
-
-        .logo-image,
-        .logo-mark {
-
-            width: 47px;
-            height: 47px;
-
-            border-radius: 14px;
-
-            flex-shrink: 0;
-
-        }
-
-
-        .logo-image {
-
-            object-fit: cover;
-
-            border:
-                1px solid rgba(255, 255, 255, 0.10);
-
-            box-shadow:
-                0 10px 30px rgba(78, 140, 255, 0.18);
-        }
-
-
-        .logo-mark {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 22px;
-
-            font-weight: 900;
-
-            color: #ffffff;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--blue),
-                    var(--purple)
-                );
-
-            border:
-                1px solid rgba(255, 255, 255, 0.12);
-
-            box-shadow:
-                0 10px 32px rgba(78, 140, 255, 0.24);
-
-            position: relative;
-
-            overflow: hidden;
-        }
-
-
-        .logo-mark::before {
-            content: "";
-
-            position: absolute;
-
-            inset: -50%;
-
-            background:
-                linear-gradient(
-                    120deg,
-                    transparent 35%,
-                    rgba(255, 255, 255, 0.18),
-                    transparent 65%
-                );
-
-            transform:
-                translateX(-100%);
-
-            transition:
-                transform 0.7s ease;
-        }
-
-
-        .logo:hover .logo-mark::before {
-            transform:
-                translateX(100%);
-        }
-
-
-        .logo-text {
-
-            display: flex;
-
-            flex-direction: column;
-
-            min-width: 0;
-
-        }
-
-
-        .logo-text strong {
-
-            color: #ffffff;
-
-            font-size: 15px;
-
-            font-weight: 900;
-
-            white-space: nowrap;
-
-            letter-spacing: -0.2px;
-        }
-
-
-        .logo-text span {
-
-            color: var(--text-muted);
-
-            font-size: 10px;
-
-            line-height: 1.5;
-
-            white-space: nowrap;
-        }
-
-
-        /* =====================================================
-           NAV
-        ===================================================== */
-
-        .nav {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 4px;
-
-            margin-inline: auto;
-
-            padding: 5px;
-
-            border:
-                1px solid rgba(255, 255, 255, 0.05);
-
-            border-radius: 17px;
-
-            background:
-                rgba(255, 255, 255, 0.025);
-
-            box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.025);
-
-        }
-
-
-        .nav a {
-
-            position: relative;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            min-height: 42px;
-
-            padding:
-                0 13px;
-
-            border-radius: 12px;
-
-            color: #aeb9c9;
-
-            font-size: 12.5px;
-
-            font-weight: 800;
-
-            white-space: nowrap;
-
-            transition:
-                color 0.22s ease,
-                background 0.22s ease,
-                transform 0.22s ease;
-        }
-
-
-        .nav a:hover {
-
-            color: #ffffff;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(78, 140, 255, 0.12),
-                    rgba(139, 99, 255, 0.10)
-                );
-
-            transform:
-                translateY(-1px);
-        }
-
-
-        .nav a::after {
-
-            content: "";
-
-            position: absolute;
-
-            right: 14px;
-            left: 14px;
-
-            bottom: 5px;
-
-            height: 2px;
-
-            border-radius: 100px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--blue),
-                    var(--purple)
-                );
-
-            transform:
-                scaleX(0);
-
-            transition:
-                transform 0.22s ease;
-        }
-
-
-        .nav a:hover::after {
-            transform:
-                scaleX(1);
-        }
-
-
-        /* =====================================================
-           HEADER BUTTON
-        ===================================================== */
-
-        .header-button {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 8px;
-
-            min-height: 45px;
-
-            padding:
-                0 16px;
-
-            border-radius: 13px;
-
-            flex-shrink: 0;
-
-            color: #ffffff;
-
-            font-size: 11.5px;
-
-            font-weight: 900;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #427ff2,
-                    #7958eb
-                );
-
-            border:
-                1px solid rgba(255, 255, 255, 0.10);
-
-            box-shadow:
-                0 12px 30px rgba(78, 140, 255, 0.18);
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-
-        .header-button:hover {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 16px 36px rgba(78, 140, 255, 0.28);
-        }
-
-
-        .header-button span {
-
-            font-size: 15px;
-
-            transition:
-                transform 0.2s ease;
-        }
-
-
-        .header-button:hover span {
-
-            transform:
-                translateX(-3px);
-        }
-
-
-        /* =====================================================
-           MOBILE MENU BUTTON
-        ===================================================== */
-
-        .mobile-menu-button {
-
-            display: none;
-
-            width: 44px;
-            height: 44px;
-
-            align-items: center;
-
-            justify-content: center;
-
-            flex-direction: column;
-
-            gap: 5px;
-
-            margin-right: auto;
-
-            padding: 0;
-
-            border:
-                1px solid rgba(255, 255, 255, 0.08);
-
-            border-radius: 13px;
-
-            background:
-                rgba(255, 255, 255, 0.035);
-
-            cursor: pointer;
-
-            transition:
-                background 0.25s ease,
-                border-color 0.25s ease;
-        }
-
-
-        .mobile-menu-button:hover {
-
-            background:
-                rgba(78, 140, 255, 0.10);
-
-            border-color:
-                rgba(78, 140, 255, 0.22);
-        }
-
-
-        .mobile-menu-button span {
-
-            display: block;
-
-            width: 19px;
-
-            height: 2px;
-
-            border-radius: 100px;
-
-            background: #e7eef9;
-
-            transition:
-                transform 0.25s ease,
-                opacity 0.25s ease;
-        }
-
-
-        .mobile-menu-button.active span:nth-child(1) {
-
-            transform:
-                translateY(7px)
-                rotate(45deg);
-        }
-
-
-        .mobile-menu-button.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-
-        .mobile-menu-button.active span:nth-child(3) {
-
-            transform:
-                translateY(-7px)
-                rotate(-45deg);
-        }
-
-
-        /* =====================================================
-           MOBILE NAV BUTTON
-        ===================================================== */
-
-        .mobile-nav-button {
-            display: none;
-        }
-
-
-        /* =====================================================
-           MAIN
-        ===================================================== */
-
-        main {
-
-            min-height: 60vh;
-
-            position: relative;
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        .footer {
-
-            position: relative;
-
-            margin-top: 90px;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    rgba(4, 10, 18, 0.60),
-                    rgba(3, 8, 15, 0.96)
-                );
-
-            border-top:
-                1px solid rgba(255, 255, 255, 0.055);
-
-            overflow: hidden;
-        }
-
-
-        .footer::before {
-
-            content: "";
-
-            position: absolute;
-
-            top: -120px;
-
-            right: 15%;
-
-            width: 280px;
-
-            height: 250px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(78, 140, 255, 0.07);
-
-            filter:
-                blur(80px);
-        }
-
-
-        .footer::after {
-
-            content: "";
-
-            position: absolute;
-
-            bottom: -160px;
-
-            left: 10%;
-
-            width: 260px;
-
-            height: 260px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(139, 99, 255, 0.06);
-
-            filter:
-                blur(80px);
-        }
-
-
-        .footer-content {
-
-            position: relative;
-
-            z-index: 1;
-
-            display: grid;
-
-            grid-template-columns:
-                1.6fr
-                1fr
-                1fr;
-
-            gap: 70px;
-
-            padding:
-                58px 0 45px;
-        }
-
-
-        .footer-brand {
-
-            max-width: 390px;
-        }
-
-
-        .footer-logo {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 11px;
-
-            margin-bottom: 14px;
-        }
-
-
-        .footer-logo .logo-image,
-        .footer-logo .logo-mark {
-
-            width: 42px;
-
-            height: 42px;
-
-            border-radius: 12px;
-        }
-
-
-        .footer-logo strong {
-
-            color: #ffffff;
-
-            font-size: 15px;
-
-            font-weight: 900;
-        }
-
-
-        .footer-brand p {
-
-            color: var(--text-muted);
-
-            font-size: 12px;
-
-            line-height: 2;
-
-            max-width: 330px;
-        }
-
-
-        .footer-column {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 7px;
-        }
-
-
-        .footer-column h3 {
-
-            margin:
-                0 0 10px;
-
-            color: #ffffff;
-
-            font-size: 13px;
-
-            font-weight: 900;
-        }
-
-
-        .footer-column a {
-
-            width: fit-content;
-
-            color: #68778d;
-
-            font-size: 12px;
-
-            transition:
-                color 0.2s ease,
-                transform 0.2s ease;
-        }
-
-
-        .footer-column a:hover {
-
-            color: var(--blue-light);
-
-            transform:
-                translateX(-4px);
-        }
-
-
-        .footer-bottom {
-
-            position: relative;
-
-            z-index: 1;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 20px;
-
-            padding:
-                18px 0 22px;
-
-            border-top:
-                1px solid rgba(255, 255, 255, 0.045);
-
-            color: #4e5b6d;
-
-            font-size: 10.5px;
-        }
-
-
-        .footer-bottom p {
-            margin: 0;
-        }
-
-
-        /* =====================================================
-           TABLET
-        ===================================================== */
-
-        @media (max-width: 1120px) {
-
-            .header-content {
-                gap: 14px;
-            }
-
-
-            .nav {
-                gap: 2px;
-            }
-
-
-            .nav a {
-
-                padding:
-                    0 9px;
-
-                font-size: 11.5px;
-            }
-
-
-            .header-button {
-
-                padding:
-                    0 12px;
-
-                font-size: 10.5px;
-            }
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 900px) {
-
-            .container {
-
-                width:
-                    min(
-                        100% - 28px,
-                        1180px
-                    );
-            }
-
-
-            .header-content {
-
-                min-height: 70px;
-
-                gap: 10px;
-            }
-
-
-            .mobile-menu-button {
-                display: flex;
-            }
-
-
-            .header-button {
-                display: none;
-            }
-
-
-            .nav {
-
-                position: absolute;
-
-                top:
-                    calc(100% + 9px);
-
-                right: 14px;
-                left: 14px;
-
-                margin: 0;
-
-                display: flex;
-
-                flex-direction: column;
-
-                align-items: stretch;
-
-                gap: 4px;
-
-                padding: 9px;
-
-                border-radius: 20px;
-
-                background:
-                    rgba(8, 18, 31, 0.96);
-
-                border:
-                    1px solid rgba(255, 255, 255, 0.085);
-
-                box-shadow:
-                    0 28px 75px rgba(0, 0, 0, 0.46);
-
-                backdrop-filter:
-                    blur(24px);
-
-                -webkit-backdrop-filter:
-                    blur(24px);
-
-                opacity: 0;
-
-                visibility: hidden;
-
-                transform:
-                    translateY(-12px)
-                    scale(0.985);
-
-                transform-origin:
-                    top center;
-
-                transition:
-                    opacity 0.25s ease,
-                    visibility 0.25s ease,
-                    transform 0.25s ease;
-            }
-
-
-            .nav.active {
-
-                opacity: 1;
-
-                visibility: visible;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-
-
-            .nav a {
-
-                justify-content: flex-start;
-
-                min-height: 46px;
-
-                padding:
-                    0 15px;
-
-                border-radius: 13px;
-
-                font-size: 13px;
-            }
-
-
-            .nav a:hover {
-
-                transform: none;
-
-                background:
-                    rgba(78, 140, 255, 0.09);
-            }
-
-
-            .nav a::after {
-                display: none;
-            }
-
-
-            .mobile-nav-button {
-
-                display: flex !important;
-
-                align-items: center;
-
-                justify-content: center;
-
-                min-height: 47px;
-
-                margin-top: 6px;
-
-                border-radius: 13px;
-
-                color: #ffffff !important;
-
-                font-size: 12.5px !important;
-
-                font-weight: 900;
-
-                background:
-                    linear-gradient(
-                        135deg,
-                        var(--blue),
-                        var(--purple)
-                    ) !important;
-
-                box-shadow:
-                    0 10px 28px rgba(78, 140, 255, 0.18);
-            }
-
-
-            .mobile-nav-button:hover {
-
-                background:
-                    linear-gradient(
-                        135deg,
-                        var(--blue-light),
-                        #9676ff
-                    ) !important;
-            }
-
-
-            .footer-content {
-
-                grid-template-columns:
-                    1fr 1fr;
-
-                gap: 38px;
-            }
-
-
-            .footer-brand {
-
-                grid-column:
-                    1 / -1;
-
-                max-width: 100%;
-            }
-        }
-
-
-        /* =====================================================
-           SMALL MOBILE
-        ===================================================== */
-
-        @media (max-width: 600px) {
-
-            .container {
-
-                width:
-                    calc(100% - 22px);
-            }
-
-
-            .header-content {
-
-                min-height: 66px;
-            }
-
-
-            .logo {
-
-                gap: 9px;
-            }
-
-
-            .logo-image,
-            .logo-mark {
-
-                width: 40px;
-
-                height: 40px;
-
-                border-radius: 12px;
-            }
-
-
-            .logo-mark {
-
-                font-size: 19px;
-            }
-
-
-            .logo-text strong {
-
-                font-size: 13px;
-            }
-
-
-            .logo-text span {
-
-                font-size: 9px;
-            }
-
-
-            .mobile-menu-button {
-
-                width: 42px;
-
-                height: 42px;
-            }
-
-
-            .nav {
-
-                right: 11px;
-
-                left: 11px;
-
-                top:
-                    calc(100% + 7px);
-            }
-
-
-            .footer {
-
-                margin-top: 60px;
-            }
-
-
-            .footer-content {
-
-                grid-template-columns:
-                    1fr;
-
-                gap: 28px;
-
-                padding:
-                    42px 0 30px;
-            }
-
-
-            .footer-brand {
-
-                grid-column: auto;
-            }
-
-
-            .footer-bottom {
-
-                flex-direction: column;
-
-                align-items: flex-start;
-
-                gap: 3px;
-
-                padding:
-                    16px 0 20px;
-            }
-        }
-
-
-        /* =====================================================
-           VERY SMALL PHONES
-        ===================================================== */
-
-        @media (max-width: 380px) {
-
-            .logo-text span {
-                display: none;
-            }
-
-
-            .logo-text strong {
-                font-size: 12px;
-            }
-
-
-            .logo-image,
-            .logo-mark {
-
-                width: 38px;
-
-                height: 38px;
-            }
-
-
-            .mobile-menu-button {
-
-                width: 40px;
-
-                height: 40px;
-            }
-        }
-
-
-        /* =====================================================
-           REDUCE MOTION
-        ===================================================== */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
-
-                animation: none !important;
-
-                transition: none !important;
-
-                scroll-behavior: auto !important;
-            }
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050b14">
+<title>{% block title %}کانون رویش{% endblock %}</title>
+
+<!-- فونت وزیرمتن -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+
+<style>
+/* =====================================================
+   ROOT / THEME
+===================================================== */
+:root {
+    --bg: #050b14;
+    --bg-2: #08111f;
+    --card: rgba(13, 27, 46, 0.72);
+    --white: #ffffff;
+    --text: #edf4ff;
+    --text-soft: #aab7ca;
+    --text-muted: #6f7d92;
+    --blue: #4e8cff;
+    --blue-light: #75a8ff;
+    --purple: #8b63ff;
+    --cyan: #43d5ff;
+    --green: #35d49a;
+    --border: rgba(255, 255, 255, 0.075);
+    --shadow: 0 20px 70px rgba(0, 0, 0, 0.32);
+    --radius: 20px;
+    --header-height: 72px;
+    --header-bg: rgba(5, 12, 22, 0.85);
+    --nav-bg: rgba(8, 18, 31, 0.96);
+}
+
+body.light {
+    --bg: #f4f7fc;
+    --bg-2: #e8eefc;
+    --card: rgba(255, 255, 255, 0.85);
+    --text: #0a1628;
+    --text-soft: #33476b;
+    --text-muted: #7a8aa3;
+    --border: rgba(10, 22, 40, 0.08);
+    --shadow: 0 20px 70px rgba(30, 60, 120, 0.10);
+    --header-bg: rgba(255, 255, 255, 0.82);
+    --nav-bg: rgba(255, 255, 255, 0.98);
+    --blue: #2a6bff;
+    --purple: #7047ff;
+}
+
+/* =====================================================
+   RESET
+===================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--text);
+    font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.85;
+    background: var(--bg);
+    overflow-x: hidden;
+    transition: background 0.5s ease, color 0.4s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* پس‌زمینه گرادیانت متحرک */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+        radial-gradient(circle at 10% 5%, rgba(78, 140, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 90% 12%, rgba(139, 99, 255, 0.14), transparent 32%),
+        radial-gradient(circle at 50% 100%, rgba(67, 213, 255, 0.08), transparent 30%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+    animation: bgPulse 20s ease-in-out infinite;
+    pointer-events: none;
+    transition: background 0.5s ease;
+}
+
+@keyframes bgPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.75; }
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font: inherit; color: inherit; }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; border: none; background: none; }
+
+/* اسکرول‌بار خفن */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--blue), var(--purple));
+    border-radius: 100px;
+    border: 2px solid var(--bg);
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+.container {
+    width: min(1180px, calc(100% - 32px));
+    margin-inline: auto;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: var(--header-bg);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+    transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 15%;
+    width: 70%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue), var(--purple), transparent);
+    opacity: 0.65;
+}
+
+.header-content {
+    min-height: var(--header-height);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+}
+
+/* =====================================================
+   LOGO
+===================================================== */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    flex-shrink: 0;
+    z-index: 2;
+    transition: transform 0.25s ease;
+}
+
+.logo:hover { transform: translateY(-1px); }
+
+.logo-image,
+.logo-mark {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    flex-shrink: 0;
+}
+
+.logo-image {
+    object-fit: cover;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(78, 140, 255, 0.18);
+}
+
+.logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 32px rgba(78, 140, 255, 0.28);
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-mark::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.25), transparent 65%);
+    transform: translateX(-100%);
+    transition: transform 0.7s ease;
+}
+
+.logo:hover .logo-mark::before { transform: translateX(100%); }
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.logo-text strong {
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 900;
+    white-space: nowrap;
+    letter-spacing: -0.2px;
+    line-height: 1.4;
+}
+
+.logo-text span {
+    color: var(--text-muted);
+    font-size: 10.5px;
+    font-weight: 500;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+/* =====================================================
+   NAV
+===================================================== */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-inline: auto;
+    padding: 5px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+body.light .nav { background: rgba(0, 0, 0, 0.02); }
+
+.nav a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
+    color: var(--text-soft);
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: color 0.22s ease, background 0.22s ease, transform 0.22s ease;
+}
+
+.nav a:hover {
+    color: var(--text);
+    background: linear-gradient(135deg, rgba(78, 140, 255, 0.14), rgba(139, 99, 255, 0.10));
+    transform: translateY(-1px);
+}
+
+.nav a::after {
+    content: "";
+    position: absolute;
+    right: 14px; left: 14px; bottom: 5px;
+    height: 2px;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    transform: scaleX(0);
+    transition: transform 0.22s ease;
+}
+
+.nav a:hover::after { transform: scaleX(1); }
+
+/* =====================================================
+   HEADER ACTIONS (تم + عضویت)
+===================================================== */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* دکمه تم */
+.theme-toggle {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+body.light .theme-toggle { background: rgba(0, 0, 0, 0.03); }
+
+.theme-toggle:hover {
+    background: linear-gradient(135deg, rgba(78, 140, 255, 0.18), rgba(139, 99, 255, 0.14));
+    border-color: var(--blue);
+    transform: scale(1.06) rotate(-8deg);
+    box-shadow: 0 8px 24px rgba(78, 140, 255, 0.28);
+}
+
+.theme-toggle svg {
+    width: 20px; height: 20px;
+    transition: transform 0.5s ease;
+}
+
+.theme-toggle:hover svg { transform: rotate(180deg); }
+
+.theme-toggle .icon-sun { display: none; }
+body.light .theme-toggle .icon-sun { display: block; }
+body.light .theme-toggle .icon-moon { display: none; }
+
+/* دکمه عضویت */
+.header-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 13px;
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #427ff2, #7958eb);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 12px 30px rgba(78, 140, 255, 0.22);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-button::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+    transition: left 0.6s ease;
+}
+
+.header-button:hover::before { left: 100%; }
+
+.header-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(78, 140, 255, 0.35);
+}
+
+.header-button .arrow {
+    font-size: 16px;
+    transition: transform 0.25s ease;
+}
+
+.header-button:hover .arrow { transform: translateX(-4px); }
+
+/* =====================================================
+   MOBILE MENU BUTTON
+===================================================== */
+.mobile-menu-button {
+    display: none;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.04);
+    transition: background 0.25s ease, border-color 0.25s ease;
+    flex-shrink: 0;
+}
+
+body.light .mobile-menu-button { background: rgba(0, 0, 0, 0.03); }
+
+.mobile-menu-button:hover {
+    background: rgba(78, 140, 255, 0.12);
+    border-color: rgba(78, 140, 255, 0.28);
+}
+
+.mobile-menu-button span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 100px;
+    background: var(--text);
+    transition: transform 0.3s ease, opacity 0.25s ease, background 0.3s ease;
+}
+
+.mobile-menu-button.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-menu-button.active span:nth-child(2) { opacity: 0; }
+.mobile-menu-button.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* =====================================================
+   MOBILE NAV BUTTON (داخل منو)
+===================================================== */
+.mobile-nav-button { display: none; }
+
+/* =====================================================
+   MAIN / FOOTER
+===================================================== */
+main { min-height: 60vh; position: relative; }
+
+.footer {
+    position: relative;
+    margin-top: 90px;
+    background: linear-gradient(180deg, rgba(4, 10, 18, 0.6), rgba(3, 8, 15, 0.96));
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+    transition: background 0.5s ease;
+}
+
+body.light .footer {
+    background: linear-gradient(180deg, rgba(232, 238, 252, 0.6), rgba(220, 230, 248, 0.98));
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    top: -120px; right: 15%;
+    width: 280px; height: 250px;
+    border-radius: 50%;
+    background: rgba(78, 140, 255, 0.09);
+    filter: blur(80px);
+}
+
+.footer::after {
+    content: "";
+    position: absolute;
+    bottom: -160px; left: 10%;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(139, 99, 255, 0.07);
+    filter: blur(80px);
+}
+
+.footer-content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 70px;
+    padding: 58px 0 45px;
+}
+
+.footer-brand { max-width: 390px; }
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 14px;
+}
+
+.footer-logo .logo-image,
+.footer-logo .logo-mark { width: 42px; height: 42px; border-radius: 12px; }
+
+.footer-logo strong {
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.footer-brand p {
+    color: var(--text-muted);
+    font-size: 12.5px;
+    line-height: 2;
+    max-width: 330px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.footer-column h3 {
+    margin: 0 0 10px;
+    color: var(--text);
+    font-size: 13.5px;
+    font-weight: 900;
+}
+
+.footer-column a {
+    width: fit-content;
+    color: var(--text-muted);
+    font-size: 12.5px;
+    font-weight: 500;
+    transition: color 0.2s ease, transform 0.25s ease;
+}
+
+.footer-column a:hover {
+    color: var(--blue-light);
+    transform: translateX(-4px);
+}
+
+.footer-bottom {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 0 22px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+.footer-bottom p { margin: 0; }
+
+/* =====================================================
+   RESPONSIVE - TABLET
+===================================================== */
+@media (max-width: 1120px) {
+    .header-content { gap: 10px; }
+    .nav a { padding: 0 10px; font-size: 12px; }
+    .header-button { padding: 0 14px; font-size: 11.5px; }
+}
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+===================================================== */
+@media (max-width: 900px) {
+    :root { --header-height: 66px; }
+
+    .container { width: min(100% - 24px, 1180px); }
+
+    .header-content { gap: 8px; }
+
+    .mobile-menu-button { display: flex; margin-right: auto; }
+
+    .header-button { display: none; }
+
+    .theme-toggle {
+        width: 42px;
+        height: 42px;
+        order: -1;
+    }
+
+    /* منوی موبایل - کشویی */
+    .nav {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 12px;
+        left: 12px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 10px;
+        border-radius: 20px;
+        background: var(--nav-bg);
+        border: 1px solid var(--border);
+        box-shadow: 0 28px 75px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(24px) saturate(160%);
+        -webkit-backdrop-filter: blur(24px) saturate(160%);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-14px) scale(0.97);
+        transform-origin: top center;
+        transition:
+            opacity 0.28s ease,
+            visibility 0.28s ease,
+            transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+        max-height: calc(100vh - var(--header-height) - 30px);
+        overflow-y: auto;
+    }
+
+    .nav.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+    }
+
+    .nav a {
+        justify-content: flex-start;
+        min-height: 48px;
+        padding: 0 16px;
+        border-radius: 13px;
+        font-size: 13.5px;
+        font-weight: 700;
+    }
+
+    .nav a:hover { transform: none; background: rgba(78, 140, 255, 0.10); }
+
+    .nav a::after { display: none; }
+
+    .mobile-nav-button {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        margin-top: 6px;
+        border-radius: 13px;
+        color: #ffffff !important;
+        font-size: 13px !important;
+        font-weight: 900 !important;
+        background: linear-gradient(135deg, var(--blue), var(--purple)) !important;
+        box-shadow: 0 10px 28px rgba(78, 140, 255, 0.22);
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 38px;
+        padding: 48px 0 38px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+        max-width: 100%;
+    }
+}
+
+/* =====================================================
+   RESPONSIVE - SMALL MOBILE
+===================================================== */
+@media (max-width: 600px) {
+    :root { --header-height: 62px; }
+
+    .container { width: calc(100% - 20px); }
+
+    .logo { gap: 9px; }
+
+    .logo-image,
+    .logo-mark { width: 40px; height: 40px; border-radius: 12px; }
+
+    .logo-mark { font-size: 19px; }
+
+    .logo-text strong { font-size: 13px; }
+    .logo-text span { font-size: 9.5px; }
+
+    .mobile-menu-button,
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+    }
+
+    .nav {
+        right: 10px;
+        left: 10px;
+        top: calc(100% + 8px);
+    }
+
+    .footer { margin-top: 60px; }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 40px 0 28px;
+    }
+
+    .footer-brand { grid-column: auto; }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 16px 0 20px;
+        font-size: 10.5px;
+    }
+}
+
+/* =====================================================
+   RESPONSIVE - TINY PHONES
+===================================================== */
+@media (max-width: 380px) {
+    .logo-text span { display: none; }
+    .logo-text strong { font-size: 12px; }
+    .logo-image,
+    .logo-mark { width: 38px; height: 38px; }
+    .mobile-menu-button,
+    .theme-toggle { width: 38px; height: 38px; }
+}
+
+/* =====================================================
+   REDUCE MOTION
+===================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
+<!-- =====================================================
+     HEADER
+===================================================== -->
+<header class="header">
+    <div class="container header-content">
 
-    <!-- =====================================================
-         HEADER
-    ===================================================== -->
-
-    <header class="header">
-
-        <div class="container header-content">
-
-
-            <!-- لوگو -->
-
-            <a
-                href="{% url 'home' %}"
-                class="logo"
-            >
-
-                {% if site_settings and site_settings.profile_image %}
-
-                    <img
-                        src="{{ site_settings.profile_image.url }}"
-                        alt="{{ site_settings.name }}"
-                        class="logo-image"
-                    >
-
-                {% else %}
-
-                    <div class="logo-mark">
-                        ر
-                    </div>
-
-                {% endif %}
-
-
-                <div class="logo-text">
-
-                    <strong>
-
-                        {% if site_settings %}
-
-                            {{ site_settings.name }}
-
-                        {% else %}
-
-                            کانون رویش
-
-                        {% endif %}
-
-                    </strong>
-
-
-                    <span>
-
-                        {% if site_settings %}
-
-                            {{ site_settings.subtitle }}
-
-                        {% else %}
-
-                            رشد، رفاقت، تجربه
-
-                        {% endif %}
-
-                    </span>
-
-                </div>
-
-            </a>
-
-
-            <!-- دکمه منوی موبایل -->
-
+        <!-- دکمه تم -->
+        <div class="header-actions">
             <button
                 type="button"
-                class="mobile-menu-button"
-                id="mobileMenuButton"
-                aria-label="باز کردن منو"
-                aria-expanded="false"
-                aria-controls="mainNav"
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="تغییر تم"
+                title="تغییر تم روشن/تاریک"
             >
-
-                <span></span>
-                <span></span>
-                <span></span>
-
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                </svg>
             </button>
+        </div>
 
-
-            <!-- منو -->
-
-            <nav
-                class="nav"
-                id="mainNav"
-            >
-
-                <a href="{% url 'home' %}">
-                    خانه
-                </a>
-
-
-                <a href="{% url 'home' %}#activities">
-                    فعالیت‌ها
-                </a>
-
-
-                <a href="{% url 'home' %}#trips">
-                    اردوها
-                </a>
-
-
-                <a href="{% url 'library' %}">
-                    کتابخانه
-                </a>
-
-
-                <a href="{% url 'home' %}#join">
-                    عضویت
-                </a>
-
-
-                <a href="{% url 'coaches:dashboard' %}">
-                    پنل مربیان
-                </a>
-
-
-                <a href="{% url 'forms:form_list' %}">
-                    فرم‌ساز
-                </a>
-
-
-                <a
-                    href="{% url 'home' %}#join"
-                    class="mobile-nav-button"
-                >
-                    عضویت در رویش
-                </a>
-
-            </nav>
-
-
-            <!-- دکمه عضویت دسکتاپ -->
-
-            <a
-                href="{% url 'home' %}#join"
-                class="header-button"
-            >
-
-                <span>عضویت در رویش</span>
-
+        <!-- لوگو -->
+        <a href="{% url 'home' %}" class="logo">
+            {% if site_settings and site_settings.profile_image %}
+                <img src="{{ site_settings.profile_image.url }}" alt="{{ site_settings.name }}" class="logo-image">
+            {% else %}
+                <div class="logo-mark">ر</div>
+            {% endif %}
+            <div class="logo-text">
+                <strong>
+                    {% if site_settings %}{{ site_settings.name }}{% else %}کانون رویش{% endif %}
+                </strong>
                 <span>
-                    ←
+                    {% if site_settings %}{{ site_settings.subtitle }}{% else %}رشد، رفاقت، تجربه{% endif %}
                 </span>
+            </div>
+        </a>
 
+        <!-- دکمه منوی موبایل -->
+        <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobileMenuButton"
+            aria-label="باز کردن منو"
+            aria-expanded="false"
+            aria-controls="mainNav"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- منو -->
+        <nav class="nav" id="mainNav">
+            <a href="{% url 'home' %}">خانه</a>
+            <a href="{% url 'home' %}#activities">فعالیت‌ها</a>
+            <a href="{% url 'home' %}#trips">اردوها</a>
+            <a href="{% url 'library' %}">کتابخانه</a>
+            <a href="{% url 'home' %}#join">عضویت</a>
+            <a href="{% url 'coaches:dashboard' %}">پنل مربیان</a>
+            <a href="{% url 'forms:form_list' %}">فرم‌ساز</a>
+
+            <a href="{% url 'home' %}#join" class="mobile-nav-button">
+                عضویت در رویش
             </a>
+        </nav>
 
-        </div>
+        <!-- دکمه عضویت دسکتاپ -->
+        <a href="{% url 'home' %}#join" class="header-button">
+            <span>عضویت در رویش</span>
+            <span class="arrow">←</span>
+        </a>
 
-    </header>
+    </div>
+</header>
 
+<!-- =====================================================
+     MAIN
+===================================================== -->
+<main>
+    {% block content %}{% endblock %}
+</main>
 
-    <!-- =====================================================
-         MAIN
-    ===================================================== -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+<footer class="footer">
+    <div class="container footer-content">
 
-    <main>
-
-        {% block content %}
-
-        {% endblock %}
-
-    </main>
-
-
-    <!-- =====================================================
-         FOOTER
-    ===================================================== -->
-
-    <footer class="footer">
-
-        <div class="container footer-content">
-
-
-            <!-- برند -->
-
-            <div class="footer-brand">
-
-                <div class="footer-logo">
-
-                    {% if site_settings and site_settings.profile_image %}
-
-                        <img
-                            src="{{ site_settings.profile_image.url }}"
-                            alt="{{ site_settings.name }}"
-                            class="logo-image"
-                        >
-
-                    {% else %}
-
-                        <div class="logo-mark">
-                            ر
-                        </div>
-
-                    {% endif %}
-
-
-                    <strong>
-
-                        {% if site_settings %}
-
-                            {{ site_settings.name }}
-
-                        {% else %}
-
-                            کانون رویش
-
-                        {% endif %}
-
-                    </strong>
-
-                </div>
-
-
-                <p>
-                    جایی برای رشد، رفاقت، یادگیری
-                    و تجربه‌های خوب نوجوانان.
-                </p>
-
+        <div class="footer-brand">
+            <div class="footer-logo">
+                {% if site_settings and site_settings.profile_image %}
+                    <img src="{{ site_settings.profile_image.url }}" alt="{{ site_settings.name }}" class="logo-image">
+                {% else %}
+                    <div class="logo-mark">ر</div>
+                {% endif %}
+                <strong>
+                    {% if site_settings %}{{ site_settings.name }}{% else %}کانون رویش{% endif %}
+                </strong>
             </div>
-
-
-            <!-- دسترسی سریع -->
-
-            <div class="footer-column">
-
-                <h3>
-                    دسترسی سریع
-                </h3>
-
-
-                <a href="{% url 'home' %}">
-                    خانه
-                </a>
-
-
-                <a href="{% url 'home' %}#activities">
-                    فعالیت‌ها
-                </a>
-
-
-                <a href="{% url 'home' %}#trips">
-                    اردوها و برنامه‌ها
-                </a>
-
-
-                <a href="{% url 'library' %}">
-                    کتابخانه
-                </a>
-
-            </div>
-
-
-            <!-- ارتباط -->
-
-            <div class="footer-column">
-
-                <h3>
-                    ارتباط با ما
-                </h3>
-
-
-                <a href="#">
-                    اینستاگرام
-                </a>
-
-
-                <a href="#">
-                    پیام‌رسان
-                </a>
-
-
-                <a href="#">
-                    تماس با کانون
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- پایین فوتر -->
-
-        <div class="container footer-bottom">
-
             <p>
-                © کانون فرهنگی نوجوانان رویش
+                جایی برای رشد، رفاقت، یادگیری و تجربه‌های خوب نوجوانان.
             </p>
-
-
-            <p>
-                تمامی حقوق محفوظ است.
-            </p>
-
         </div>
 
-    </footer>
+        <div class="footer-column">
+            <h3>دسترسی سریع</h3>
+            <a href="{% url 'home' %}">خانه</a>
+            <a href="{% url 'home' %}#activities">فعالیت‌ها</a>
+            <a href="{% url 'home' %}#trips">اردوها و برنامه‌ها</a>
+            <a href="{% url 'library' %}">کتابخانه</a>
+        </div>
 
+        <div class="footer-column">
+            <h3>ارتباط با ما</h3>
+            <a href="#">اینستاگرام</a>
+            <a href="#">پیام‌رسان</a>
+            <a href="#">تماس با کانون</a>
+        </div>
 
-    <!-- =====================================================
-         MOBILE MENU SCRIPT
-    ===================================================== -->
+    </div>
 
-    <script>
+    <div class="container footer-bottom">
+        <p>© کانون فرهنگی نوجوانان رویش</p>
+        <p>تمامی حقوق محفوظ است.</p>
+    </div>
+</footer>
 
-        const mobileMenuButton =
-            document.getElementById("mobileMenuButton");
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
+<script>
+(function () {
+    "use strict";
 
-        const mainNav =
-            document.getElementById("mainNav");
+    /* ============ MOBILE MENU ============ */
+    const mobileMenuButton = document.getElementById("mobileMenuButton");
+    const mainNav = document.getElementById("mainNav");
 
+    if (mobileMenuButton && mainNav) {
 
-        if (
-            mobileMenuButton &&
-            mainNav
-        ) {
+        const closeMenu = () => {
+            mainNav.classList.remove("active");
+            mobileMenuButton.classList.remove("active");
+            mobileMenuButton.setAttribute("aria-expanded", "false");
+        };
 
-            mobileMenuButton.addEventListener(
-                "click",
-                function () {
+        mobileMenuButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = mainNav.classList.toggle("active");
+            mobileMenuButton.classList.toggle("active", isOpen);
+            mobileMenuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
 
-                    const isOpen =
-                        mainNav.classList.toggle("active");
+        mainNav.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
 
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 900) closeMenu();
+        });
 
-                    mobileMenuButton.classList.toggle(
-                        "active"
-                    );
+        document.addEventListener("click", (event) => {
+            if (
+                !mainNav.contains(event.target) &&
+                !mobileMenuButton.contains(event.target)
+            ) {
+                closeMenu();
+            }
+        });
 
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeMenu();
+        });
+    }
 
-                    mobileMenuButton.setAttribute(
-                        "aria-expanded",
-                        isOpen ? "true" : "false"
-                    );
+    /* ============ THEME TOGGLE ============ */
+    const themeToggle = document.getElementById("themeToggle");
+    const STORAGE_KEY = "rooyesh-theme";
 
-                }
-            );
-
-
-            /* بستن منو بعد از انتخاب لینک */
-
-            mainNav
-                .querySelectorAll("a")
-                .forEach(
-                    function (link) {
-
-                        link.addEventListener(
-                            "click",
-                            function () {
-
-                                mainNav.classList.remove(
-                                    "active"
-                                );
-
-
-                                mobileMenuButton.classList.remove(
-                                    "active"
-                                );
-
-
-                                mobileMenuButton.setAttribute(
-                                    "aria-expanded",
-                                    "false"
-                                );
-
-                            }
-                        );
-
-                    }
-                );
-
-
-            /* بستن منو هنگام بزرگ شدن صفحه */
-
-            window.addEventListener(
-                "resize",
-                function () {
-
-                    if (
-                        window.innerWidth > 900
-                    ) {
-
-                        mainNav.classList.remove(
-                            "active"
-                        );
-
-
-                        mobileMenuButton.classList.remove(
-                            "active"
-                        );
-
-
-                        mobileMenuButton.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                    }
-
-                }
-            );
-
-
-            /* بستن منو با کلیک بیرون */
-
-            document.addEventListener(
-                "click",
-                function (event) {
-
-                    const clickedInsideMenu =
-                        mainNav.contains(event.target);
-
-
-                    const clickedButton =
-                        mobileMenuButton.contains(event.target);
-
-
-                    if (
-                        !clickedInsideMenu &&
-                        !clickedButton
-                    ) {
-
-                        mainNav.classList.remove(
-                            "active"
-                        );
-
-
-                        mobileMenuButton.classList.remove(
-                            "active"
-                        );
-
-
-                        mobileMenuButton.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                    }
-
-                }
-            );
-
+    const applyTheme = (theme) => {
+        if (theme === "light") {
+            document.body.classList.add("light");
+        } else {
+            document.body.classList.remove("light");
         }
+    };
 
-    </script>
+    // تم ذخیره‌شده یا تم سیستم
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+        applyTheme(saved);
+    } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+        applyTheme("light");
+    }
 
+    if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+            const isLight = document.body.classList.toggle("light");
+            localStorage.setItem(STORAGE_KEY, isLight ? "light" : "dark");
+        });
+    }
+
+})();
+</script>
 
 </body>
-
 </html>

@@ -96,34 +96,40 @@ def charge_create(request):
             request.POST
         )
 
+        # 🔍 دیباگ — این خطا رو تو ترمینال چاپ می‌کنه
+        print("=" * 50)
+        print("POST DATA:", dict(request.POST))
+        print("FORM VALID:", form.is_valid())
+        if not form.is_valid():
+            print("FORM ERRORS:", form.errors)
+        print("=" * 50)
+
         if form.is_valid():
 
-            charge = form.save(
-                commit=False
-            )
+            charge = form.save(commit=False)
 
             charge.created_by = request.user
 
             charge.save()
 
-            return redirect(
-                "finance:charge_create"
+            # ✅ پیام موفقیت
+            messages.success(
+                request,
+                f"بدهی «{charge.title}» با موفقیت برای {charge.student} ثبت شد."
             )
+
+            # ✅ برگرد به داشبورد (نه به همین صفحه)
+            return redirect("coaches:dashboard")
 
     else:
 
-        form = ChargeForm(
-            request.user
-        )
+        form = ChargeForm(request.user)
 
     return render(
         request,
         "finance/charge_create.html",
-        {
-            "form": form
-        }
+        {"form": form}
     )
-
 
 @user_passes_test(
     can_manage_finance,
