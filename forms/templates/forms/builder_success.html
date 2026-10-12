@@ -6,7 +6,7 @@
 <style>
 
     /* =========================================================
-       SUCCESS PAGE — با تم یکسان
+       SUCCESS PAGE
     ========================================================= */
 
     .success-page,
@@ -16,8 +16,6 @@
 
 
     .success-page {
-
-        /* دارک (پیش‌فرض) */
 
         --sp-card-1: #1a3055;
         --sp-card-2: #102040;
@@ -39,6 +37,10 @@
         --sp-blue: #4a7de8;
         --sp-blue-light: #6da4ff;
         --sp-cyan: #4cc9e8;
+
+        --sp-warn: #fbbf24;
+        --sp-warn-bg: rgba(251, 191, 36, 0.12);
+        --sp-warn-border: rgba(251, 191, 36, 0.4);
 
         --sp-shadow:
             0 30px 80px rgba(0, 0, 0, 0.55),
@@ -65,8 +67,6 @@
         transition: color 0.4s ease;
     }
 
-
-    /* تم روشن */
 
     body.light .success-page {
 
@@ -110,7 +110,7 @@
 
         width: 100%;
 
-        max-width: 620px;
+        max-width: 660px;
 
         padding: 40px 34px 32px;
 
@@ -360,6 +360,92 @@
 
 
     /* =========================================================
+       META STATS
+    ========================================================= */
+
+    .meta-stats {
+
+        position: relative;
+
+        z-index: 2;
+
+        display: flex;
+
+        justify-content: center;
+
+        gap: 10px;
+
+        margin-top: 22px;
+
+        flex-wrap: wrap;
+
+        animation:
+            successTextShow 0.6s 0.28s both
+            cubic-bezier(.22, 1, .36, 1);
+    }
+
+
+    .meta-chip {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 9px 14px;
+
+        border-radius: 11px;
+
+        background: rgba(74, 125, 232, 0.08);
+
+        border: 1.5px solid rgba(109, 164, 255, 0.22);
+
+        color: var(--sp-text-soft);
+
+        font-size: 11.5px;
+
+        font-weight: 700;
+    }
+
+
+    body.light .meta-chip {
+        background: rgba(58, 109, 224, 0.06);
+    }
+
+
+    .meta-chip strong {
+
+        color: var(--sp-text);
+
+        font-weight: 900;
+
+        font-variant-numeric: tabular-nums;
+    }
+
+
+    .meta-chip-icon {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 22px;
+        height: 22px;
+
+        border-radius: 7px;
+
+        background: rgba(109, 164, 255, 0.16);
+
+        color: var(--sp-blue-light);
+
+        font-size: 12px;
+    }
+
+
+    /* =========================================================
        LINK SECTION
     ========================================================= */
 
@@ -486,6 +572,8 @@
 
         white-space: nowrap !important;
 
+        cursor: text;
+
         box-shadow:
             0 0 0 1px rgba(0, 0, 0, 0.3) inset,
             0 2px 6px rgba(0, 0, 0, 0.4) inset !important;
@@ -535,20 +623,17 @@
 
     .actions {
 
-        display: flex;
+        display: grid;
 
-        justify-content: center;
+        grid-template-columns: 1fr 1fr;
 
-        gap: 12px;
+        gap: 10px;
 
         margin-top: 14px;
-
-        flex-wrap: wrap;
     }
 
 
-    .copy-btn,
-    .new-form-btn {
+    .action-btn {
 
         position: relative;
 
@@ -562,7 +647,7 @@
 
         min-height: 50px;
 
-        padding: 13px 22px;
+        padding: 13px 18px;
 
         border-radius: 12px;
 
@@ -578,6 +663,8 @@
 
         text-decoration: none;
 
+        border: none;
+
         transition:
             transform 0.25s ease,
             background 0.25s ease,
@@ -587,13 +674,26 @@
     }
 
 
-    /* COPY BUTTON */
+    .action-btn svg {
 
-    .copy-btn {
+        width: 16px;
+        height: 16px;
 
-        flex: 1 1 200px;
+        flex-shrink: 0;
+    }
 
-        border: none;
+
+    .action-btn span {
+        position: relative;
+        z-index: 2;
+    }
+
+
+    /* PRIMARY (copy) */
+
+    .action-btn.primary {
+
+        grid-column: 1 / -1;
 
         background:
             linear-gradient(
@@ -611,7 +711,7 @@
     }
 
 
-    .copy-btn::before {
+    .action-btn.primary::before {
 
         content: "";
 
@@ -633,13 +733,7 @@
     }
 
 
-    .copy-btn span {
-        position: relative;
-        z-index: 2;
-    }
-
-
-    .copy-btn:hover {
+    .action-btn.primary:hover {
 
         transform: translateY(-3px);
 
@@ -653,17 +747,17 @@
     }
 
 
-    .copy-btn:hover::before {
+    .action-btn.primary:hover::before {
         transform: translateX(-120%);
     }
 
 
-    .copy-btn:active {
+    .action-btn.primary:active {
         transform: translateY(0) scale(0.985);
     }
 
 
-    .copy-btn.copied {
+    .action-btn.primary.copied {
 
         background:
             linear-gradient(
@@ -680,11 +774,9 @@
     }
 
 
-    /* NEW FORM BUTTON */
+    /* SECONDARY */
 
-    .new-form-btn {
-
-        flex: 0 0 auto;
+    .action-btn.secondary {
 
         border: 1.5px solid rgba(109, 164, 255, 0.3);
 
@@ -694,7 +786,7 @@
     }
 
 
-    body.light .new-form-btn {
+    body.light .action-btn.secondary {
 
         background: rgba(58, 109, 224, 0.08);
 
@@ -702,7 +794,7 @@
     }
 
 
-    .new-form-btn:hover {
+    .action-btn.secondary:hover {
 
         transform: translateY(-3px);
 
@@ -713,6 +805,89 @@
         color: var(--sp-text);
 
         box-shadow: 0 12px 28px rgba(74, 125, 232, 0.28);
+    }
+
+
+    /* =========================================================
+       QR CODE
+    ========================================================= */
+
+    .qr-section {
+
+        position: relative;
+
+        z-index: 2;
+
+        display: none;
+
+        margin-top: 20px;
+
+        padding: 20px;
+
+        border-radius: 16px;
+
+        background: rgba(74, 125, 232, 0.06);
+
+        border: 1.5px solid rgba(109, 164, 255, 0.25);
+
+        animation: linkShow 0.4s ease;
+    }
+
+
+    body.light .qr-section {
+        background: rgba(58, 109, 224, 0.05);
+    }
+
+
+    .qr-section.show {
+        display: block;
+    }
+
+
+    .qr-title {
+
+        color: var(--sp-text-soft);
+
+        font-size: 12.5px;
+
+        font-weight: 800;
+
+        margin-bottom: 14px;
+    }
+
+
+    .qr-image {
+
+        display: block;
+
+        width: 180px;
+        height: 180px;
+
+        margin: 0 auto;
+
+        padding: 10px;
+
+        border-radius: 14px;
+
+        background: #ffffff;
+
+        box-shadow:
+            0 10px 25px rgba(0, 0, 0, 0.2),
+            inset 0 0 0 1px rgba(58, 109, 224, 0.12);
+    }
+
+
+    .qr-hint {
+
+        margin-top: 12px;
+
+        color: var(--sp-dim);
+
+        font-size: 10.5px;
+
+        font-weight: 500;
+
+        line-height: 1.9;
     }
 
 
@@ -742,6 +917,109 @@
 
         animation:
             successTextShow 0.6s 0.38s both;
+    }
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast-container {
+
+        position: fixed;
+
+        top: 20px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 9999;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        pointer-events: none;
+    }
+
+
+    .toast {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        min-width: 220px;
+
+        max-width: 380px;
+
+        padding: 12px 16px;
+
+        border-radius: 12px;
+
+        background: rgba(20, 32, 56, 0.95);
+
+        border: 1.5px solid rgba(109, 164, 255, 0.4);
+
+        color: #e0eaff;
+
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+        font-size: 12.5px;
+
+        font-weight: 700;
+
+        box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.5),
+            0 0 40px rgba(74, 125, 232, 0.2);
+
+        animation: toastIn 0.35s cubic-bezier(.22, 1, .36, 1);
+
+        pointer-events: auto;
+    }
+
+
+    body.light .toast {
+
+        background: rgba(240, 245, 255, 0.98);
+
+        border-color: rgba(58, 109, 224, 0.4);
+
+        color: #0a1630;
+    }
+
+
+    .toast.success {
+
+        border-color: rgba(74, 222, 128, 0.5);
+
+        color: #6ee7b7;
+    }
+
+
+    body.light .toast.success {
+        color: #167a52;
+    }
+
+
+    .toast.out {
+        animation: toastOut 0.3s ease forwards;
+    }
+
+
+    @keyframes toastIn {
+        from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+
+    @keyframes toastOut {
+        to { opacity: 0; transform: translateY(-12px) scale(0.96); }
     }
 
 
@@ -815,7 +1093,6 @@
             padding: 24px 14px 40px;
         }
 
-
         .success-card {
             padding: 32px 24px 26px;
             border-radius: 20px;
@@ -834,87 +1111,80 @@
             min-height: auto;
         }
 
-
         .success-card {
             max-width: 100%;
             padding: 28px 18px 24px;
             border-radius: 18px;
         }
 
-
         .success-icon-wrap {
-
             width: 74px;
             height: 74px;
             margin-bottom: 18px;
             border-radius: 22px;
         }
 
-
         .success-icon {
-
             width: 48px;
             height: 48px;
             border-radius: 15px;
             font-size: 24px;
         }
 
-
         .success-title {
-
             font-size: 22px;
             margin-bottom: 10px;
         }
-
 
         .success-text {
             font-size: 12px;
             line-height: 1.95;
         }
 
+        .meta-stats {
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .meta-chip {
+            padding: 8px 12px;
+            font-size: 11px;
+        }
 
         .link-section {
             margin-top: 22px;
         }
 
-
         .link-label {
             font-size: 12px;
         }
-
 
         .link-status {
             font-size: 10.5px;
         }
 
-
         .form-link {
-
             min-height: 50px !important;
             padding: 13px 14px !important;
             font-size: 11.5px !important;
         }
 
-
         .actions {
-
-            flex-direction: column;
+            grid-template-columns: 1fr;
             gap: 10px;
         }
 
-
-        .copy-btn,
-        .new-form-btn {
-
-            width: 100%;
-            flex: 1 1 auto;
+        .action-btn {
             min-height: 52px;
             font-size: 13px;
         }
 
+        .qr-image {
+            width: 160px;
+            height: 160px;
+        }
 
         .success-footer {
-
             margin-top: 22px;
             padding-top: 16px;
             font-size: 10px;
@@ -922,61 +1192,44 @@
     }
 
 
-    /* =========================================================
-       TINY PHONES
-    ========================================================= */
-
     @media (max-width: 380px) {
 
         .success-page {
             padding: 14px 8px 28px;
         }
 
-
         .success-card {
             padding: 22px 14px 20px;
             border-radius: 16px;
         }
 
-
         .success-icon-wrap {
-
             width: 64px;
             height: 64px;
             border-radius: 18px;
         }
 
-
         .success-icon {
-
             width: 42px;
             height: 42px;
             border-radius: 13px;
             font-size: 21px;
         }
 
-
         .success-title {
             font-size: 19px;
         }
-
 
         .success-text {
             font-size: 11.5px;
         }
 
-
         .form-link {
-
             font-size: 10.5px !important;
             min-height: 48px !important;
         }
     }
 
-
-    /* =========================================================
-       REDUCED MOTION
-    ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
@@ -985,9 +1238,7 @@
         .success-page *::after {
 
             animation-duration: 0.01ms !important;
-
             animation-iteration-count: 1 !important;
-
             transition-duration: 0.01ms !important;
         }
     }
@@ -1033,6 +1284,54 @@
 
 
 
+        <!-- META STATS -->
+
+        <div class="meta-stats">
+
+            <div class="meta-chip">
+
+                <span class="meta-chip-icon">
+                    ✎
+                </span>
+
+                <strong>
+                    {{ form.questions.count }}
+                </strong>
+
+                سؤال
+
+            </div>
+
+
+            <div class="meta-chip">
+
+                <span class="meta-chip-icon">
+                    ◷
+                </span>
+
+                {{ form.created_at|date:"Y/m/d" }}
+
+            </div>
+
+
+            {% if form.created_by %}
+
+                <div class="meta-chip">
+
+                    <span class="meta-chip-icon">
+                        ☺
+                    </span>
+
+                    {{ form.created_by.get_full_name|default:form.created_by.username }}
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+
         <!-- LINK -->
 
         <div class="link-section">
@@ -1061,7 +1360,9 @@
                 class="form-link"
                 type="text"
                 readonly
-                value="{{ request.scheme }}://{{ request.get_host }}{% url 'forms:fill_form' form.id %}"
+                value="{{ fill_url }}"
+                onclick="selectLink(this)"
+                spellcheck="false"
             >
 
 
@@ -1070,27 +1371,137 @@
 
                 <button
                     type="button"
-                    class="copy-btn"
+                    class="action-btn primary"
                     id="copyButton"
                     onclick="copyLink()"
                 >
 
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                    </svg>
+
                     <span id="copyText">
-                        📋 کپی لینک
+                        کپی لینک فرم
                     </span>
 
                 </button>
 
 
                 <a
-                    href="{% url 'forms:fill_form' form.id %}"
-                    class="new-form-btn"
+                    href="{{ fill_url }}"
+                    class="action-btn secondary"
                     target="_blank"
                     rel="noopener"
                 >
-                    👁 مشاهده فرم
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+
+                    <span>
+                        مشاهده فرم
+                    </span>
+
                 </a>
 
+
+                <button
+                    type="button"
+                    class="action-btn secondary"
+                    onclick="toggleQR()"
+                    id="qrBtn"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                    </svg>
+
+                    <span>
+                        نمایش QR
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="action-btn secondary"
+                    onclick="shareForm()"
+                    id="shareBtn"
+                    style="display:none;"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="18" cy="5" r="3"/>
+                        <circle cx="6" cy="12" r="3"/>
+                        <circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    </svg>
+
+                    <span>
+                        اشتراک‌گذاری
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+            <!-- QR -->
+
+            <div
+                class="qr-section"
+                id="qrSection"
+            >
+
+                <div class="qr-title">
+                    اسکن با دوربین موبایل
+                </div>
+
+                <img
+                    class="qr-image"
+                    id="qrImage"
+                    alt="QR Code"
+                >
+
+                <div class="qr-hint">
+                    دوربین گوشی را روی کد بگیرید تا فرم باز شود.
+                </div>
 
             </div>
 
@@ -1117,7 +1528,70 @@
 
 
 
+<div class="toast-container" id="toastContainer"></div>
+
+
+
 <script>
+
+/* =========================================================
+   INIT
+========================================================= */
+
+const FORM_URL = document.getElementById("formLink").value;
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message, type = "info") {
+
+    const container =
+        document.getElementById("toastContainer");
+
+    if (!container) return;
+
+    const toast =
+        document.createElement("div");
+
+    toast.className = `toast ${type}`;
+
+    const icons = {
+        info: "ℹ",
+        success: "✓",
+    };
+
+    toast.innerHTML =
+        `<span>${icons[type] || "ℹ"}</span><span>${message}</span>`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+
+        toast.classList.add("out");
+
+        setTimeout(() => toast.remove(), 320);
+
+    }, 2600);
+}
+
+
+/* =========================================================
+   SELECT LINK
+========================================================= */
+
+function selectLink(input) {
+
+    input.select();
+
+    input.setSelectionRange(0, 99999);
+}
+
+
+/* =========================================================
+   COPY LINK
+========================================================= */
 
 function copyLink() {
 
@@ -1131,82 +1605,156 @@ function copyLink() {
         document.getElementById("copyText");
 
 
-    navigator.clipboard
-        .writeText(input.value)
+    const onSuccess = () => {
 
-        .then(() => {
+        button.classList.add("copied");
 
-            showCopiedState();
+        text.textContent = "لینک کپی شد";
 
-        })
+        showToast("لینک فرم کپی شد", "success");
 
-        .catch(() => {
+        setTimeout(() => {
 
-            fallbackCopy(input);
+            button.classList.remove("copied");
 
-        });
+            text.textContent = "کپی لینک فرم";
 
+        }, 2200);
+    };
+
+
+    if (navigator.clipboard && window.isSecureContext) {
+
+        navigator.clipboard
+            .writeText(input.value)
+            .then(onSuccess)
+            .catch(() => fallbackCopy(input, onSuccess));
+
+    } else {
+
+        fallbackCopy(input, onSuccess);
+    }
 }
 
 
-function fallbackCopy(input) {
-
-    input.focus();
-    input.select();
-    input.setSelectionRange(0, 99999);
-
+function fallbackCopy(input, onSuccess) {
 
     try {
 
-        document.execCommand("copy");
+        selectLink(input);
 
-        showCopiedState();
+        const ok =
+            document.execCommand("copy");
 
-    } catch (error) {
+        if (ok) onSuccess();
 
-        const button =
-            document.getElementById("copyButton");
+        else showToast("کپی دستی انجام دهید", "info");
 
-        const text =
-            document.getElementById("copyText");
+    } catch (_) {
+
+        showToast("کپی دستی انجام دهید", "info");
+    }
+}
 
 
-        text.textContent =
-            "لینک را دستی کپی کنید";
+/* =========================================================
+   QR CODE
+========================================================= */
 
-        button.classList.remove("copied");
+function toggleQR() {
 
+    const section =
+        document.getElementById("qrSection");
+
+    const image =
+        document.getElementById("qrImage");
+
+    const btn =
+        document.getElementById("qrBtn");
+
+    if (!section) return;
+
+
+    if (section.classList.contains("show")) {
+
+        section.classList.remove("show");
+
+        btn.querySelector("span").textContent = "نمایش QR";
+
+        return;
     }
 
+
+    // اگر هنوز تصویر لود نشده
+    if (!image.src) {
+
+        image.src =
+            "https://api.qrserver.com/v1/create-qr-code/?" +
+            "size=360x360&margin=10&data=" +
+            encodeURIComponent(FORM_URL);
+
+        image.onerror = () => {
+
+            section.innerHTML =
+                '<div class="qr-hint">' +
+                'امکان نمایش QR وجود ندارد.' +
+                '</div>';
+        };
+    }
+
+
+    section.classList.add("show");
+
+    btn.querySelector("span").textContent = "بستن QR";
+
+    section.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+    });
 }
 
 
-function showCopiedState() {
+/* =========================================================
+   SHARE
+========================================================= */
 
-    const button =
-        document.getElementById("copyButton");
+function shareForm() {
 
-    const text =
-        document.getElementById("copyText");
+    const shareData = {
 
+        title: document.title || "فرم",
 
-    button.classList.add("copied");
+        text: "لینک فرم را از طریق این آدرس باز کنید:",
 
-
-    text.textContent =
-        "✓ لینک کپی شد";
+        url: FORM_URL,
+    };
 
 
-    setTimeout(() => {
+    if (navigator.share) {
 
-        button.classList.remove("copied");
+        navigator.share(shareData)
+            .catch(() => { /* کاربر لغو کرد */ });
 
-        text.textContent =
-            "📋 کپی لینک";
+    } else {
 
-    }, 2000);
-
+        copyLink();
+    }
 }
+
+
+/* =========================================================
+   INIT SHARE (اگر پشتیبانی شد، نمایش داده شود)
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const shareBtn =
+        document.getElementById("shareBtn");
+
+    if (shareBtn && navigator.share) {
+        shareBtn.style.display = "inline-flex";
+    }
+});
 
 </script>
 

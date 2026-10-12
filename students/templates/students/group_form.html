@@ -1,1390 +1,407 @@
-
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        {{ title }} | کانون رویش
-    </title>
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-
-        :root {
-
-            --bg-1: #050711;
-            --bg-2: #0c1220;
-
-            --card-1: rgba(18, 26, 45, .91);
-            --card-2: rgba(10, 15, 28, .88);
-
-            --text: #f8fafc;
-            --soft: #94a3b8;
-            --muted: #64748b;
-
-            --blue: #4f8cff;
-            --purple: #715dff;
-
-            --green: #35d49a;
-
-            --danger: #fb7185;
-
-            --border: rgba(255,255,255,.08);
-        }
-
-
-        /* =========================
-           BODY
-        ========================= */
-
-        body {
-
-            margin: 0;
-
-            min-height: 100vh;
-
-            padding:
-                20px
-                14px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            font-family:
-                Tahoma,
-                "Segoe UI",
-                sans-serif;
-
-            color:
-                var(--text);
-
-            background:
-
-                radial-gradient(
-                    circle at 8% 10%,
-                    rgba(79,140,255,.11),
-                    transparent 28%
-                ),
-
-                radial-gradient(
-                    circle at 92% 18%,
-                    rgba(113,93,255,.10),
-                    transparent 28%
-                ),
-
-                radial-gradient(
-                    circle at 50% 100%,
-                    rgba(53,212,154,.045),
-                    transparent 32%
-                ),
-
-                linear-gradient(
-                    145deg,
-                    var(--bg-1),
-                    var(--bg-2)
-                );
-
-            overflow-x:
-                hidden;
-        }
-
-
-        /* =========================
-           FLOATING LIGHT
-        ========================= */
-
-        body::before,
-        body::after {
-
-            content:
-                "";
-
-            position:
-                fixed;
-
-            width:
-                300px;
-
-            height:
-                300px;
-
-            border-radius:
-                50%;
-
-            filter:
-                blur(85px);
-
-            pointer-events:
-                none;
-
-            z-index:
-                0;
-
-            animation:
-                floatingGlow
-                11s
-                ease-in-out
-                infinite
-                alternate;
-        }
-
-
-        body::before {
-
-            top:
-                -130px;
-
-            right:
-                -110px;
-
-            background:
-                rgba(79,140,255,.10);
-        }
-
-
-        body::after {
-
-            bottom:
-                -140px;
-
-            left:
-                -120px;
-
-            background:
-                rgba(113,93,255,.08);
-
-            animation-delay:
-                -4s;
-        }
-
-
-        @keyframes floatingGlow {
-
-            from {
-
-                transform:
-                    translate3d(0,0,0)
-                    scale(1);
-            }
-
-            to {
-
-                transform:
-                    translate3d(25px,20px,0)
-                    scale(1.12);
-            }
-        }
-
-
-        /* =========================
-           CONTAINER
-        ========================= */
-
-        .container {
-
-            position:
-                relative;
-
-            z-index:
-                1;
-
-            width:
-                100%;
-
-            max-width:
-                570px;
-
-            margin:
-                30px
-                auto;
-
-            animation:
-                pageEnter
-                .7s
-                cubic-bezier(.2,.8,.2,1);
-        }
-
-
-        @keyframes pageEnter {
-
-            from {
-
-                opacity:
-                    0;
-
-                transform:
-                    translateY(25px)
-                    scale(.975);
-            }
-
-            to {
-
-                opacity:
-                    1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-        }
-
-
-        /* =========================
-           CARD
-        ========================= */
-
-        .card {
-
-            position:
-                relative;
-
-            padding:
-                32px;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                23px;
-
-            background:
-
-                linear-gradient(
-                    145deg,
-                    var(--card-1),
-                    var(--card-2)
-                );
-
-            backdrop-filter:
-                blur(24px);
-
-            -webkit-backdrop-filter:
-                blur(24px);
-
-            box-shadow:
-
-                0 35px 90px
-                rgba(0,0,0,.46),
-
-                inset 0 1px 0
-                rgba(255,255,255,.035);
-
-            overflow:
-                hidden;
-
-            transition:
-                transform .3s ease,
-                border-color .3s ease,
-                box-shadow .3s ease;
-        }
-
-
-        .card::before {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            top:
-                0;
-
-            right:
-                0;
-
-            left:
-                0;
-
-            height:
-                1px;
-
-            background:
-
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(79,140,255,.65),
-                    rgba(113,93,255,.65),
-                    transparent
-                );
-        }
-
-
-        .card::after {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            width:
-                180px;
-
-            height:
-                180px;
-
-            left:
-                -105px;
-
-            bottom:
-                -110px;
-
-            border-radius:
-                50%;
-
-            background:
-                rgba(79,140,255,.045);
-
-            filter:
-                blur(35px);
-
-            pointer-events:
-                none;
-        }
-
-
-        .card:hover {
-
-            transform:
-                translateY(-3px);
-
-            border-color:
-                rgba(255,255,255,.12);
-
-            box-shadow:
-
-                0 42px 105px
-                rgba(0,0,0,.52),
-
-                inset 0 1px 0
-                rgba(255,255,255,.045);
-        }
-
-
-        /* =========================
-           HEADER
-        ========================= */
-
-        .header {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                14px;
-
-            margin-bottom:
-                27px;
-        }
-
-
-        .header-icon {
-
-            width:
-                53px;
-
-            height:
-                53px;
-
-            flex-shrink:
-                0;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                16px;
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    rgba(79,140,255,.16),
-                    rgba(113,93,255,.16)
-                );
-
-            border:
-                1px solid
-                rgba(79,140,255,.18);
-
-            box-shadow:
-                0 12px 30px
-                rgba(79,140,255,.09);
-
-            font-size:
-                22px;
-
-            animation:
-                iconPulse
-                3.2s
-                ease-in-out
-                infinite;
-        }
-
-
-        @keyframes iconPulse {
-
-            0%,
-            100% {
-
-                transform:
-                    translateY(0);
-
-                box-shadow:
-                    0 12px 30px
-                    rgba(79,140,255,.08);
-            }
-
-            50% {
-
-                transform:
-                    translateY(-2px);
-
-                box-shadow:
-                    0 16px 38px
-                    rgba(113,93,255,.16);
-            }
-        }
-
-
-        h1 {
-
-            margin:
-                0 0 6px;
-
-            font-size:
-                24px;
-
-            line-height:
-                1.3;
-
-            letter-spacing:
-                -.35px;
-        }
-
-
-        .description {
-
-            margin:
-                0;
-
-            color:
-                var(--soft);
-
-            font-size:
-                10.5px;
-
-            line-height:
-                2;
-        }
-
-
-        /* =========================
-           FORM
-        ========================= */
-
-        form {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-        }
-
-
-        .field {
-
-            margin-bottom:
-                18px;
-
-            animation:
-                fieldEnter
-                .55s
-                ease
-                both;
-        }
-
-
-        .field:nth-child(1) {
-
-            animation-delay:
-                .05s;
-        }
-
-
-        .field:nth-child(2) {
-
-            animation-delay:
-                .10s;
-        }
-
-
-        @keyframes fieldEnter {
-
-            from {
-
-                opacity:
-                    0;
-
-                transform:
-                    translateY(10px);
-            }
-
-            to {
-
-                opacity:
-                    1;
-
-                transform:
-                    translateY(0);
-            }
-        }
-
-
-        /* =========================
-           LABEL
-        ========================= */
-
-        label {
-
-            display:
-                block;
-
-            margin-bottom:
-                8px;
-
-            color:
-                #dce4ef;
-
-            font-size:
-                10.5px;
-
-            font-weight:
-                700;
-
-            transition:
-                color .25s ease;
-        }
-
-
-        .field:focus-within > label {
-
-            color:
-                #84aaff;
-        }
-
-
-        /* =========================
-           TEXT INPUT
-        ========================= */
-
-        input[type="text"] {
-
-            width:
-                100%;
-
-            min-height:
-                50px;
-
-            padding:
-                12px
-                14px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.09);
-
-            border-radius:
-                12px;
-
-            background:
-                rgba(255,255,255,.035);
-
-            color:
-                #f8fafc;
-
-            font-family:
-                inherit;
-
-            font-size:
-                12px;
-
-            outline:
-                none;
-
-            transition:
-                border-color .25s ease,
-                background .25s ease,
-                box-shadow .25s ease,
-                transform .25s ease;
-        }
-
-
-        input[type="text"]:hover {
-
-            border-color:
-                rgba(255,255,255,.14);
-
-            background:
-                rgba(255,255,255,.045);
-        }
-
-
-        input[type="text"]:focus {
-
-            border-color:
-                rgba(79,140,255,.40);
-
-            background:
-                rgba(79,140,255,.04);
-
-            box-shadow:
-
-                0 0 0 4px
-                rgba(79,140,255,.065),
-
-                0 12px 30px
-                rgba(0,0,0,.12);
-
-            transform:
-                translateY(-1px);
-        }
-
-
-        input::placeholder {
-
-            color:
-                #64748b;
-        }
-
-
-        /* =========================
-           CHECKBOX
-        ========================= */
-
-        .checkbox-field {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                10px;
-
-            margin-top:
-                2px;
-
-            padding:
-                12px
-                13px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.065);
-
-            border-radius:
-                11px;
-
-            background:
-                rgba(255,255,255,.025);
-
-            transition:
-                background .25s ease,
-                border-color .25s ease;
-        }
-
-
-        .checkbox-field:hover {
-
-            background:
-                rgba(255,255,255,.04);
-
-            border-color:
-                rgba(255,255,255,.11);
-        }
-
-
-        .checkbox-field input {
-
-            width:
-                17px;
-
-            height:
-                17px;
-
-            margin:
-                0;
-
-            accent-color:
-                var(--blue);
-
-            cursor:
-                pointer;
-        }
-
-
-        .checkbox-field label {
-
-            margin:
-                0;
-
-            cursor:
-                pointer;
-
-            color:
-                #dce4ef;
-        }
-
-
-        /* =========================
-           ERRORS
-        ========================= */
-
-        .errorlist {
-
-            margin:
-                0 0 8px;
-
-            padding:
-                0;
-
-            list-style:
-                none;
-
-            color:
-                var(--danger);
-
-            font-size:
-                10px;
-
-            line-height:
-                1.8;
-
-            animation:
-                errorShake
-                .35s
-                ease;
-        }
-
-
-        @keyframes errorShake {
-
-            0%,
-            100% {
-                transform:
-                    translateX(0);
-            }
-
-            25% {
-                transform:
-                    translateX(4px);
-            }
-
-            50% {
-                transform:
-                    translateX(-4px);
-            }
-
-            75% {
-                transform:
-                    translateX(3px);
-            }
-        }
-
-
-        /* =========================
-           BUTTONS
-        ========================= */
-
-        .buttons {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1.3fr
-                1fr;
-
-            gap:
-                11px;
-
-            margin-top:
-                8px;
-
-            padding-top:
-                7px;
-        }
-
-
-        button,
-        .cancel {
-
-            position:
-                relative;
-
-            min-height:
-                49px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            padding:
-                11px
-                16px;
-
-            border:
-                1px solid
-                transparent;
-
-            border-radius:
-                12px;
-
-            font-family:
-                inherit;
-
-            font-size:
-                10.5px;
-
-            font-weight:
-                800;
-
-            text-align:
-                center;
-
-            text-decoration:
-                none;
-
-            cursor:
-                pointer;
-
-            overflow:
-                hidden;
-
-            transition:
-                transform .25s ease,
-                box-shadow .25s ease,
-                background .25s ease,
-                border-color .25s ease;
-        }
-
-
-        /* =========================
-           SAVE BUTTON
-        ========================= */
-
-        button {
-
-            color:
-                white;
-
-            background:
-
-                linear-gradient(
-                    135deg,
-                    var(--blue),
-                    var(--purple)
-                );
-
-            box-shadow:
-
-                0 13px 30px
-                rgba(79,140,255,.19);
-        }
-
-
-        button::before {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            top:
-                0;
-
-            right:
-                -100%;
-
-            width:
-                50%;
-
-            height:
-                100%;
-
-            background:
-
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(255,255,255,.20),
-                    transparent
-                );
-
-            transform:
-                skewX(-20deg);
-
-            transition:
-                right .65s ease;
-        }
-
-
-        button:hover::before {
-
-            right:
-                140%;
-        }
-
-
-        button:hover {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-
-                0 18px 38px
-                rgba(79,140,255,.27);
-        }
-
-
-        button:active {
-
-            transform:
-                translateY(1px)
-                scale(.985);
-        }
-
-
-        /* =========================
-           CANCEL
-        ========================= */
-
-        .cancel {
-
-            color:
-                #cbd5e1;
-
-            background:
-                rgba(255,255,255,.035);
-
-            border-color:
-                rgba(255,255,255,.075);
-        }
-
-
-        .cancel:hover {
-
-            transform:
-                translateY(-2px);
-
-            background:
-                rgba(255,255,255,.065);
-
-            border-color:
-                rgba(255,255,255,.13);
-
-            box-shadow:
-                0 12px 25px
-                rgba(0,0,0,.17);
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 700px) {
-
-            body {
-
-                padding:
-                    11px;
-            }
-
-
-            .container {
-
-                max-width:
-                    100%;
-
-                margin:
-                    8px
-                    auto;
-            }
-
-
-            .card {
-
-                padding:
-                    24px
-                    18px;
-
-                border-radius:
-                    20px;
-            }
-
-
-            .header {
-
-                gap:
-                    11px;
-
-                margin-bottom:
-                    23px;
-            }
-
-
-            .header-icon {
-
-                width:
-                    47px;
-
-                height:
-                    47px;
-
-                border-radius:
-                    14px;
-
-                font-size:
-                    19px;
-            }
-
-
-            h1 {
-
-                font-size:
-                    21px;
-            }
-
-
-            .description {
-
-                font-size:
-                    9.7px;
-            }
-
-
-            input[type="text"] {
-
-                min-height:
-                    50px;
-
-                font-size:
-                    12px;
-            }
-
-
-            .buttons {
-
-                grid-template-columns:
-                    1fr;
-            }
-
-
-            button,
-            .cancel {
-
-                width:
-                    100%;
-
-                min-height:
-                    49px;
-            }
-
-        }
-
-
-        @media (max-width: 420px) {
-
-            body {
-
-                padding:
-                    7px;
-            }
-
-
-            .container {
-
-                margin:
-                    5px
-                    auto;
-            }
-
-
-            .card {
-
-                padding:
-                    21px
-                    14px;
-
-                border-radius:
-                    18px;
-            }
-
-
-            .header {
-
-                margin-bottom:
-                    20px;
-            }
-
-
-            .header-icon {
-
-                width:
-                    43px;
-
-                height:
-                    43px;
-
-                border-radius:
-                    12px;
-
-                font-size:
-                    17px;
-            }
-
-
-            h1 {
-
-                font-size:
-                    19px;
-            }
-
-
-            .description {
-
-                font-size:
-                    9px;
-
-                line-height:
-                    1.9;
-            }
-
-
-            label {
-
-                font-size:
-                    10px;
-            }
-
-
-            input[type="text"] {
-
-                min-height:
-                    49px;
-
-                padding:
-                    12px;
-
-                border-radius:
-                    11px;
-
-                font-size:
-                    11px;
-            }
-
-
-            .checkbox-field {
-
-                padding:
-                    10px
-                    11px;
-
-                border-radius:
-                    10px;
-            }
-
-
-            .checkbox-field label {
-
-                font-size:
-                    10px;
-            }
-
-
-            button,
-            .cancel {
-
-                min-height:
-                    48px;
-
-                font-size:
-                    10px;
-
-                border-radius:
-                    11px;
-            }
-
-        }
-
-
-        /* =========================
-           REDUCED MOTION
-        ========================= */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
-
-                animation-duration:
-                    .01ms !important;
-
-                animation-iteration-count:
-                    1 !important;
-
-                transition-duration:
-                    .01ms !important;
-            }
-        }
-
-    </style>
-
-</head>
-
-
-<body>
-
-
-<div class="container">
-
-
-    <div class="card">
-
-
-        <div class="header">
-
-            <div class="header-icon">
-                👥
-            </div>
-
-            <div>
-
-                <h1>
-                    {{ title }}
-                </h1>
-
-                <div class="description">
-                    نام گروه و وضعیت فعالیت آن را مدیریت کنید.
+{% extends "base.html" %}
+
+{% block title %}{{ title }} — کانون رویش{% endblock %}
+
+{% block content %}
+
+<style>
+/* =====================================================
+   PAGE — GROUP FORM
+===================================================== */
+.group-form-page {
+    padding: 40px 0 80px;
+}
+
+.group-form-wrap {
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+}
+
+/* ===================== CARD ===================== */
+.group-form-card {
+    position: relative;
+    overflow: hidden;
+    padding: 32px;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: var(--shadow);
+}
+
+.group-form-card::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; left: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(78, 140, 255, 0.55),
+        rgba(139, 99, 255, 0.55),
+        transparent
+    );
+}
+
+.group-form-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================== HEADER ===================== */
+.group-form-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 26px;
+}
+
+.group-form-icon {
+    width: 53px;
+    height: 53px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: linear-gradient(
+        135deg,
+        rgba(78, 140, 255, 0.16),
+        rgba(139, 99, 255, 0.16)
+    );
+    border: 1px solid rgba(78, 140, 255, 0.20);
+    box-shadow: 0 10px 26px rgba(78, 140, 255, 0.10);
+    font-size: 22px;
+}
+
+.group-form-header h1 {
+    margin: 0 0 6px;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+    font-weight: 900;
+    background: linear-gradient(120deg, #7fa8ff 0%, #a98eff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.group-form-header .description {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 11.5px;
+    line-height: 2;
+}
+
+/* ===================== FORM ===================== */
+.group-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field > label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-soft);
+    font-size: 11px;
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.field:focus-within > label {
+    color: var(--blue-light);
+}
+
+.field input[type="text"],
+.field input[type="number"],
+.field textarea,
+.field select {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.035);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12.5px;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.light .field input[type="text"],
+body.light .field input[type="number"],
+body.light .field textarea,
+body.light .field select {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.field input:hover,
+.field textarea:hover,
+.field select:hover {
+    border-color: rgba(78, 140, 255, 0.20);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+    border-color: rgba(78, 140, 255, 0.42);
+    background: rgba(78, 140, 255, 0.05);
+    box-shadow: 0 0 0 4px rgba(78, 140, 255, 0.08);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.field select option {
+    color: #111827;
+    background: #ffffff;
+}
+
+/* ===================== CHECKBOX ===================== */
+.checkbox-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 13px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: rgba(255, 255, 255, 0.025);
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+body.light .checkbox-field {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.checkbox-field:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(78, 140, 255, 0.20);
+}
+
+.checkbox-field input {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    accent-color: var(--blue);
+    cursor: pointer;
+}
+
+.checkbox-field label {
+    margin: 0;
+    cursor: pointer;
+    color: var(--text-soft);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ===================== ERRORS ===================== */
+.errorlist {
+    margin: 0 0 8px;
+    padding: 0;
+    list-style: none;
+    color: var(--red);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+/* ===================== BUTTONS ===================== */
+.buttons {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 11px;
+    margin-top: 8px;
+    padding-top: 7px;
+}
+
+.btn-primary,
+.btn-cancel {
+    position: relative;
+    min-height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 16px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background: linear-gradient(135deg, #4387ff, #7958eb);
+    border-color: rgba(255, 255, 255, 0.10);
+    box-shadow: 0 12px 30px rgba(79, 140, 255, 0.22);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 38px rgba(79, 140, 255, 0.30);
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+}
+
+.btn-cancel {
+    color: var(--text-soft);
+    background: rgba(255, 255, 255, 0.035);
+    border-color: var(--border);
+}
+
+body.light .btn-cancel {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.btn-cancel:hover {
+    transform: translateY(-2px);
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.065);
+    border-color: rgba(78, 140, 255, 0.24);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 700px) {
+    .group-form-page { padding: 24px 0 60px; }
+
+    .group-form-card {
+        padding: 24px 18px;
+        border-radius: 20px;
+    }
+
+    .group-form-header {
+        gap: 11px;
+        margin-bottom: 22px;
+    }
+
+    .group-form-icon {
+        width: 47px;
+        height: 47px;
+        border-radius: 14px;
+        font-size: 19px;
+    }
+
+    .group-form-header h1 { font-size: 1.1rem; }
+    .group-form-header .description { font-size: 10.5px; }
+
+    .buttons { grid-template-columns: 1fr; }
+    .btn-primary,
+    .btn-cancel { width: 100%; }
+}
+
+@media (max-width: 420px) {
+    .group-form-page { padding: 18px 0 50px; }
+
+    .group-form-card {
+        padding: 21px 14px;
+        border-radius: 18px;
+    }
+
+    .group-form-header { margin-bottom: 20px; }
+
+    .group-form-icon {
+        width: 43px;
+        height: 43px;
+        border-radius: 12px;
+        font-size: 17px;
+    }
+
+    .group-form-header h1 { font-size: 1rem; }
+    .group-form-header .description { font-size: 9.7px; }
+
+    .field > label { font-size: 10.5px; }
+
+    .field input[type="text"],
+    .field input[type="number"],
+    .field textarea,
+    .field select {
+        min-height: 48px;
+        padding: 11px 12px;
+        font-size: 11.5px;
+    }
+
+    .checkbox-field { padding: 10px 11px; border-radius: 10px; }
+    .checkbox-field label { font-size: 11px; }
+
+    .btn-primary,
+    .btn-cancel { min-height: 48px; font-size: 11px; }
+}
+</style>
+
+
+<div class="group-form-page">
+    <div class="container">
+
+        <div class="group-form-wrap">
+
+            <div class="group-form-card">
+
+                <div class="group-form-header">
+                    <div class="group-form-icon">👥</div>
+                    <div>
+                        <h1>{{ title }}</h1>
+                        <p class="description">
+                            نام گروه و وضعیت فعالیت آن را مدیریت کنید.
+                        </p>
+                    </div>
                 </div>
+
+
+                <form method="post" class="group-form">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <div class="field">
+                            {{ field.errors }}
+
+                            {% if field.name == "is_active" %}
+                                <div class="checkbox-field">
+                                    {{ field }}
+                                    <label for="{{ field.id_for_label }}">
+                                        {{ field.label }}
+                                    </label>
+                                </div>
+                            {% else %}
+                                <label for="{{ field.id_for_label }}">
+                                    {{ field.label }}
+                                </label>
+                                {{ field }}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+
+                    <div class="buttons">
+                        <button type="submit" class="btn-primary">
+                            ذخیره گروه
+                        </button>
+
+                        <a href="{% url 'students:group_management' %}" class="btn-cancel">
+                            انصراف
+                        </a>
+                    </div>
+                </form>
 
             </div>
 
         </div>
 
-
-        <form method="post">
-
-            {% csrf_token %}
-
-
-            {% for field in form %}
-
-                <div class="field">
-
-                    {{ field.errors }}
-
-
-                    {% if field.name == "is_active" %}
-
-                        <div class="checkbox-field">
-
-                            {{ field }}
-
-                            <label
-                                for="{{ field.id_for_label }}"
-                            >
-                                {{ field.label }}
-                            </label>
-
-                        </div>
-
-
-                    {% else %}
-
-                        <label
-                            for="{{ field.id_for_label }}"
-                        >
-                            {{ field.label }}
-                        </label>
-
-                        {{ field }}
-
-                    {% endif %}
-
-                </div>
-
-            {% endfor %}
-
-
-            <div class="buttons">
-
-                <button type="submit">
-                    ذخیره گروه
-                </button>
-
-
-                <a
-                    href="{% url 'students:group_management' %}"
-                    class="cancel"
-                >
-                    انصراف
-                </a>
-
-            </div>
-
-
-        </form>
-
-
     </div>
-
-
 </div>
 
-
-</body>
-
-</html>
+{% endblock %}

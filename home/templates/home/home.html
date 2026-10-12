@@ -8,7 +8,7 @@
 
 <style>
 /* =========================================================
-   ROOT / VARS — بدون هیچ سفیدی
+   ROOT / VARS
 ========================================================= */
 :root {
     --c-blue: #5b8def;
@@ -16,7 +16,6 @@
     --c-cyan: #4cc9e8;
     --c-green: #2dc98f;
 
-    /* متن‌ها — همه رنگی و اشباع */
     --t-title: #8fb4ff;
     --t-head: #9ab4e8;
     --t-card: #a4b8e0;
@@ -39,133 +38,10 @@
 .scroll-progress__bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #5b8def, #7c5ce8, #4cc9e8, #5b8def);
-    background-size: 300% 100%;
-    box-shadow: 0 0 16px rgba(91, 141, 239, 0.55);
-    animation: progressShine 3s linear infinite;
+    background: linear-gradient(90deg, #5b8def, #7c5ce8, #4cc9e8);
+    box-shadow: 0 0 12px rgba(91, 141, 239, 0.45);
     border-radius: 0 0 4px 4px;
-    transition: width 0.15s ease-out;
-}
-
-@keyframes progressShine { to { background-position: 300% 0; } }
-
-/* =========================================================
-   CUSTOM CURSOR
-========================================================= */
-.cursor-dot, .cursor-ring {
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 99999;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    will-change: transform;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.cursor-dot {
-    width: 6px; height: 6px;
-    background: #6da4ff;
-    box-shadow: 0 0 10px rgba(109, 164, 255, 0.8);
-    transition: opacity 0.3s ease, width 0.2s, height 0.2s, background 0.2s;
-}
-
-.cursor-ring {
-    width: 34px; height: 34px;
-    border: 1.5px solid rgba(109, 164, 255, 0.5);
-    transition:
-        opacity 0.3s ease,
-        width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-        height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-        border-color 0.3s,
-        background 0.3s;
-}
-
-body.cursor-ready .cursor-dot,
-body.cursor-ready .cursor-ring { opacity: 1; }
-
-body.cursor-hover .cursor-ring {
-    width: 56px; height: 56px;
-    background: rgba(109, 164, 255, 0.1);
-    border-color: rgba(124, 92, 232, 0.7);
-}
-
-body.cursor-hover .cursor-dot {
-    width: 10px; height: 10px;
-    background: #7c5ce8;
-}
-
-@media (hover: none), (pointer: coarse) {
-    .cursor-dot, .cursor-ring { display: none !important; }
-}
-
-/* =========================================================
-   GRAIN
-========================================================= */
-.grain {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    pointer-events: none;
-    opacity: 0.035;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-
-/* =========================================================
-   AURORA — پررنگ‌تر
-========================================================= */
-.aurora {
-    position: fixed;
-    inset: 0;
-    z-index: -5;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.aurora__blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.55;
-    will-change: transform;
-}
-
-.aurora__blob--1 {
-    width: 560px; height: 560px;
-    background: radial-gradient(circle, rgba(60, 110, 230, 0.7), transparent 70%);
-    top: -12%; right: -12%;
-    animation: auroraMove1 20s ease-in-out infinite;
-}
-
-.aurora__blob--2 {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(110, 70, 220, 0.65), transparent 70%);
-    top: 42%; left: -15%;
-    animation: auroraMove2 24s ease-in-out infinite;
-}
-
-.aurora__blob--3 {
-    width: 460px; height: 460px;
-    background: radial-gradient(circle, rgba(60, 170, 220, 0.5), transparent 70%);
-    bottom: -12%; right: 28%;
-    animation: auroraMove3 26s ease-in-out infinite;
-}
-
-@keyframes auroraMove1 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-130px, 90px) scale(1.2); }
-}
-
-@keyframes auroraMove2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(110px, -100px) scale(1.15); }
-}
-
-@keyframes auroraMove3 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-90px, -70px) scale(1.22); }
+    transition: width 0.15s linear;
 }
 
 /* =========================================================
@@ -181,7 +57,7 @@ body.cursor-hover .cursor-dot {
     overflow: hidden;
 }
 
-* { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 
 /* =========================================================
    HERO
@@ -190,14 +66,7 @@ body.cursor-hover .cursor-dot {
     min-height: calc(100vh - 78px);
     display: flex;
     align-items: center;
-    padding: 100px 0 140px;
-}
-
-.hero__canvas {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    opacity: 0.5;
+    padding: 100px 0 120px;
 }
 
 .hero__grid {
@@ -210,43 +79,7 @@ body.cursor-hover .cursor-dot {
     background-size: 64px 64px;
     mask-image: radial-gradient(ellipse at center, black 25%, transparent 72%);
     -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 72%);
-    animation: gridMove 24s linear infinite;
 }
-
-@keyframes gridMove { to { background-position: 64px 64px; } }
-
-.hero__rings {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 720px; height: 720px;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    pointer-events: none;
-}
-
-.hero__ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 1px dashed rgba(109, 164, 255, 0.08);
-    animation: ringSpin 32s linear infinite;
-}
-
-.hero__ring:nth-child(2) {
-    inset: 90px;
-    border-style: solid;
-    border-color: rgba(124, 92, 232, 0.07);
-    animation-duration: 24s;
-    animation-direction: reverse;
-}
-
-.hero__ring:nth-child(3) {
-    inset: 180px;
-    border-color: rgba(76, 201, 232, 0.06);
-    animation-duration: 16s;
-}
-
-@keyframes ringSpin { to { transform: rotate(360deg); } }
 
 /* =========================================================
    HERO CONTENT
@@ -256,10 +89,8 @@ body.cursor-hover .cursor-dot {
     max-width: 880px;
     margin-inline: auto;
     text-align: center;
-    animation: heroEnter 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* لیبل */
 .hero-label {
     position: relative;
     display: inline-flex;
@@ -273,13 +104,8 @@ body.cursor-hover .cursor-dot {
     font-weight: 800;
     background: linear-gradient(135deg, rgba(91, 141, 239, 0.16), rgba(124, 92, 232, 0.16));
     border: 1px solid rgba(109, 164, 255, 0.22);
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.25),
-        inset 0 1px 0 rgba(109, 164, 255, 0.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     margin-bottom: 26px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    animation: labelFloat 4s ease-in-out infinite;
 }
 
 .hero-label::before {
@@ -287,24 +113,9 @@ body.cursor-hover .cursor-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
     background: #43d5a5;
-    box-shadow: 0 0 9px #43d5a5, 0 0 20px rgba(67, 213, 165, 0.6);
-    animation: pulseDot 1.5s ease-in-out infinite;
-    z-index: 1;
+    box-shadow: 0 0 9px #43d5a5;
 }
 
-.hero-label::after {
-    content: "";
-    position: absolute;
-    top: 0; left: -100%;
-    width: 80%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(109, 164, 255, 0.2), transparent);
-    transform: skewX(-20deg);
-    animation: labelShine 4.5s ease-in-out infinite;
-}
-
-/* =========================================================
-   HERO TITLE — گرادیانت رنگی، بدون سفید
-========================================================= */
 .hero h1 {
     margin: 0 0 26px;
     font-size: clamp(34px, 5.5vw, 68px);
@@ -312,22 +123,16 @@ body.cursor-hover .cursor-dot {
     font-weight: 900;
     letter-spacing: -2px;
     background: linear-gradient(120deg, #7fa8ff 0%, #b090ff 50%, #5ec0e8 100%);
-    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradientText 8s ease infinite, fadeUp 1s 0.25s both;
-    filter: drop-shadow(0 4px 40px rgba(109, 164, 255, 0.25));
 }
 
 .hero h1 .accent {
     background: linear-gradient(120deg, #5ec0e8 0%, #a98eff 60%, #e879c4 100%);
-    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradientText 6s ease infinite;
-    filter: drop-shadow(0 4px 30px rgba(124, 92, 232, 0.4));
 }
 
 .hero p {
@@ -336,17 +141,11 @@ body.cursor-hover .cursor-dot {
     color: var(--t-body);
     font-size: 15px;
     line-height: 2.05;
-    animation: fadeUp 1s 0.5s both;
     font-weight: 500;
 }
 
-@keyframes gradientText {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
 /* =========================================================
-   BUTTONS — متن آبی روشن، نه سفید
+   BUTTONS
 ========================================================= */
 .hero-buttons {
     display: flex;
@@ -354,7 +153,6 @@ body.cursor-hover .cursor-dot {
     justify-content: center;
     gap: 12px;
     flex-wrap: wrap;
-    animation: fadeUp 1s 0.7s both;
 }
 
 .button {
@@ -369,105 +167,37 @@ body.cursor-hover .cursor-dot {
     font-size: 12.5px;
     font-weight: 800;
     overflow: hidden;
-    transition:
-        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow 0.4s ease,
-        border-color 0.3s ease,
-        background 0.3s ease;
-    will-change: transform;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
 }
-
-.button::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -120%;
-    width: 80%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(180, 210, 255, 0.22), transparent);
-    transform: skewX(-20deg);
-    transition: left 0.7s ease;
-}
-
-.button:hover::before { left: 140%; }
 
 .primary-button {
     color: #cfe0ff;
     background: linear-gradient(135deg, #3a6bc4, #5a3fb8);
     border: 1px solid rgba(109, 164, 255, 0.22);
-    box-shadow:
-        0 12px 28px rgba(58, 107, 196, 0.35),
-        inset 0 1px 0 rgba(109, 164, 255, 0.18);
+    box-shadow: 0 12px 28px rgba(58, 107, 196, 0.35);
 }
 
 .primary-button:hover {
-    transform: translateY(-6px) scale(1.02);
+    transform: translateY(-3px);
     color: #b8d0ff;
-    box-shadow:
-        0 22px 50px rgba(58, 107, 196, 0.5),
-        0 0 40px rgba(91, 141, 239, 0.3),
-        inset 0 1px 0 rgba(109, 164, 255, 0.28);
+    box-shadow: 0 18px 38px rgba(58, 107, 196, 0.45);
 }
 
 .secondary-button {
     color: #8fa6c9;
     background: rgba(60, 90, 140, 0.12);
     border: 1px solid rgba(109, 164, 255, 0.16);
-    backdrop-filter: blur(10px);
 }
 
 .secondary-button:hover {
-    transform: translateY(-6px);
+    transform: translateY(-3px);
     color: #b8cdff;
     background: rgba(60, 90, 140, 0.22);
     border-color: rgba(109, 164, 255, 0.38);
-    box-shadow: 0 15px 32px rgba(0, 0, 0, 0.3);
 }
 
 /* =========================================================
-   MARQUEE
-========================================================= */
-.marquee {
-    position: relative;
-    padding: 26px 0;
-    overflow: hidden;
-    border-block: 1px solid rgba(109, 164, 255, 0.08);
-    background: linear-gradient(90deg, rgba(91, 141, 239, 0.03), rgba(124, 92, 232, 0.03));
-    mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
-}
-
-.marquee__track {
-    display: flex;
-    gap: 60px;
-    width: max-content;
-    animation: marqueeScroll 45s linear infinite;
-}
-
-.marquee__item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: rgba(140, 170, 220, 0.35);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    white-space: nowrap;
-    transition: color 0.3s;
-}
-
-.marquee__item:hover { color: #6da4ff; }
-
-.marquee__item::before {
-    content: "";
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #5b8def, #7c5ce8);
-    box-shadow: 0 0 10px rgba(91, 141, 239, 0.65);
-}
-
-@keyframes marqueeScroll { to { transform: translateX(50%); } }
-
-/* =========================================================
-   SECTION HEADING — گرادیانت
+   SECTION HEADING
 ========================================================= */
 .section { padding: 100px 0; }
 
@@ -476,10 +206,8 @@ body.cursor-hover .cursor-dot {
     margin: 0 auto 52px;
     text-align: center;
     opacity: 0;
-    transform: translateY(40px);
-    transition:
-        opacity 0.9s ease,
-        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .section-heading.reveal-active {
@@ -522,12 +250,9 @@ body.cursor-hover .cursor-dot {
     font-weight: 900;
     letter-spacing: -1.2px;
     background: linear-gradient(120deg, #7fa8ff 0%, #a98eff 100%);
-    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradientText 7s ease infinite;
-    filter: drop-shadow(0 2px 20px rgba(109, 164, 255, 0.2));
 }
 
 .section-heading p {
@@ -561,76 +286,22 @@ body.cursor-hover .cursor-dot {
     border-radius: 22px;
     border: 1px solid rgba(109, 164, 255, 0.12);
     background: linear-gradient(145deg, rgba(24, 34, 62, 0.88), rgba(14, 22, 44, 0.94));
-    box-shadow:
-        0 20px 55px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(109, 164, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.4);
     opacity: 0;
-    transform: translateY(50px) scale(0.94);
-    transition:
-        opacity 0.85s ease,
-        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.35s ease,
-        box-shadow 0.45s ease;
-    will-change: transform;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-item.reveal-active {
     opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.stat-item:nth-child(1) { transition-delay: 0.06s; }
-.stat-item:nth-child(2) { transition-delay: 0.14s; }
-.stat-item:nth-child(3) { transition-delay: 0.22s; }
-.stat-item:nth-child(4) { transition-delay: 0.30s; }
-.stat-item:nth-child(5) { transition-delay: 0.38s; }
-.stat-item:nth-child(6) { transition-delay: 0.46s; }
-.stat-item:nth-child(7) { transition-delay: 0.54s; }
-.stat-item:nth-child(8) { transition-delay: 0.62s; }
-
-.stat-item::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-    background: conic-gradient(
-        from 0deg,
-        transparent,
-        rgba(91, 141, 239, 0.38),
-        transparent,
-        rgba(124, 92, 232, 0.3),
-        transparent
-    );
-    opacity: 0;
-    animation: statBorderSpin 9s linear infinite;
-    transition: opacity 0.4s ease;
-    z-index: -1;
-}
-
-.stat-item::after {
-    content: "";
-    position: absolute;
-    width: 220px; height: 220px;
-    right: -110px; top: -110px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(91, 141, 239, 0.22), transparent 68%);
-    filter: blur(40px);
-    transition: transform 0.6s ease;
-    pointer-events: none;
+    transform: translateY(0);
 }
 
 .stat-item:hover {
-    transform: translateY(-10px) scale(1.015);
+    transform: translateY(-6px);
     border-color: rgba(109, 164, 255, 0.3);
-    box-shadow:
-        0 32px 78px rgba(0, 0, 0, 0.5),
-        0 0 50px rgba(91, 141, 239, 0.15);
+    box-shadow: 0 28px 62px rgba(0, 0, 0, 0.5);
 }
-
-.stat-item:hover::before { opacity: 1; }
-.stat-item:hover::after { transform: scale(1.75); }
 
 .stat-icon {
     width: 60px; height: 60px;
@@ -642,19 +313,9 @@ body.cursor-hover .cursor-dot {
     font-size: 25px;
     background: linear-gradient(135deg, rgba(91, 141, 239, 0.22), rgba(124, 92, 232, 0.2));
     border: 1px solid rgba(109, 164, 255, 0.22);
-    box-shadow:
-        0 10px 28px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(109, 164, 255, 0.1);
-    animation: statIconFloat 5s ease-in-out infinite;
-}
-
-.stat-item:hover .stat-icon {
-    animation: statIconBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 .stat-item strong {
-    position: relative;
-    z-index: 1;
     font-size: 38px;
     line-height: 1;
     font-weight: 900;
@@ -662,16 +323,11 @@ body.cursor-hover .cursor-dot {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    background-size: 200% 200%;
-    animation: statTextGradient 5s ease infinite;
     letter-spacing: -1.8px;
     font-variant-numeric: tabular-nums;
-    filter: drop-shadow(0 0 22px rgba(91, 141, 239, 0.35));
 }
 
 .stat-item h3 {
-    position: relative;
-    z-index: 1;
     margin: 14px 0 0;
     color: #8fa8d4;
     font-size: 14.5px;
@@ -679,8 +335,6 @@ body.cursor-hover .cursor-dot {
 }
 
 .stat-item p {
-    position: relative;
-    z-index: 1;
     margin: 10px 0 0;
     color: #5f7096;
     font-size: 11.5px;
@@ -707,77 +361,22 @@ body.cursor-hover .cursor-dot {
     border: 1px solid rgba(109, 164, 255, 0.12);
     border-radius: 22px;
     background: linear-gradient(180deg, rgba(22, 32, 58, 0.88), rgba(12, 20, 40, 0.94));
-    box-shadow:
-        0 18px 55px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(109, 164, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    transition:
-        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.35s ease,
-        box-shadow 0.5s ease;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.4);
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     opacity: 0;
-    transform: translateY(50px) scale(0.95);
-    transform-style: preserve-3d;
-    will-change: transform;
+    transform: translateY(30px);
 }
 
 .card.reveal-active {
     opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.card:nth-child(1) { transition-delay: 0.06s; }
-.card:nth-child(2) { transition-delay: 0.13s; }
-.card:nth-child(3) { transition-delay: 0.20s; }
-.card:nth-child(4) { transition-delay: 0.27s; }
-.card:nth-child(5) { transition-delay: 0.34s; }
-.card:nth-child(6) { transition-delay: 0.41s; }
-.card:nth-child(7) { transition-delay: 0.48s; }
-.card:nth-child(8) { transition-delay: 0.55s; }
-
-.card::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-    background: conic-gradient(
-        from 0deg,
-        transparent,
-        rgba(91, 141, 239, 0.35),
-        transparent,
-        rgba(124, 92, 232, 0.35),
-        transparent
-    );
-    opacity: 0;
-    animation: cardRotate 9s linear infinite;
-    transition: opacity 0.4s ease;
-    z-index: -1;
-}
-
-.card::after {
-    content: "";
-    position: absolute;
-    width: 220px; height: 220px;
-    right: -110px; top: -110px;
-    border-radius: 50%;
-    background: rgba(91, 141, 239, 0.16);
-    filter: blur(50px);
-    transition: transform 0.6s ease, opacity 0.6s ease;
-    pointer-events: none;
+    transform: translateY(0);
 }
 
 .card:hover {
-    transform: translateY(-12px) scale(1.015);
+    transform: translateY(-6px);
     border-color: rgba(109, 164, 255, 0.32);
-    box-shadow:
-        0 38px 85px rgba(0, 0, 0, 0.55),
-        0 0 55px rgba(91, 141, 239, 0.15),
-        inset 0 1px 0 rgba(109, 164, 255, 0.1);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
 }
-
-.card:hover::before { opacity: 1; }
-.card:hover::after { transform: scale(2.3); opacity: 0.7; }
 
 .card-visual {
     height: 165px;
@@ -789,18 +388,6 @@ body.cursor-hover .cursor-dot {
     background: radial-gradient(circle at center, rgba(91, 141, 239, 0.16), transparent 62%);
 }
 
-.card-visual::before {
-    content: "";
-    position: absolute;
-    width: 140px; height: 140px;
-    border-radius: 50%;
-    border: 1px solid rgba(109, 164, 255, 0.12);
-    box-shadow:
-        0 0 0 22px rgba(109, 164, 255, 0.025),
-        0 0 0 44px rgba(124, 92, 232, 0.018);
-    animation: visualRing 11s linear infinite;
-}
-
 .card-icon {
     width: 80px; height: 80px;
     display: flex;
@@ -810,21 +397,12 @@ body.cursor-hover .cursor-dot {
     font-size: 32px;
     background: linear-gradient(135deg, rgba(91, 141, 239, 0.22), rgba(124, 92, 232, 0.2));
     border: 1px solid rgba(109, 164, 255, 0.24);
-    box-shadow:
-        0 15px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(109, 164, 255, 0.12),
-        0 0 36px rgba(91, 141, 239, 0.14);
-    animation: iconFloat 5s ease-in-out infinite;
-    transition: box-shadow 0.35s ease;
     color: #7fa8ff;
+    transition: transform 0.35s ease;
 }
 
 .card:hover .card-icon {
-    animation: iconSpin 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    box-shadow:
-        0 20px 45px rgba(91, 141, 239, 0.28),
-        inset 0 1px 0 rgba(109, 164, 255, 0.18),
-        0 0 48px rgba(91, 141, 239, 0.24);
+    transform: scale(1.06);
 }
 
 .card-icon svg {
@@ -832,17 +410,8 @@ body.cursor-hover .cursor-dot {
     stroke-width: 1.8;
 }
 
-.card-visual .line {
-    position: absolute;
-    width: 130px; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(109, 164, 255, 0.6), transparent);
-    animation: scanLine 3.5s ease-in-out infinite;
-}
-
 .card-content {
     padding: 24px;
-    position: relative;
-    z-index: 1;
 }
 
 .card-content h3 {
@@ -878,7 +447,7 @@ body.cursor-hover .cursor-dot {
 
 .card-link::after {
     content: "←";
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.25s ease;
 }
 
 .card-link:hover {
@@ -898,8 +467,6 @@ body.cursor-hover .cursor-dot {
     border: 1px dashed rgba(109, 164, 255, 0.16);
     border-radius: 22px;
     background: rgba(40, 60, 110, 0.12);
-    backdrop-filter: blur(10px);
-    animation: emptyPulse 3.5s ease-in-out infinite;
 }
 
 .trip-box h3 {
@@ -934,35 +501,7 @@ body.cursor-hover .cursor-dot {
         radial-gradient(circle at 85% 40%, rgba(80, 120, 230, 0.28), transparent 42%),
         radial-gradient(circle at 15% 90%, rgba(110, 70, 220, 0.2), transparent 44%),
         linear-gradient(135deg, rgba(18, 28, 54, 0.94), rgba(12, 20, 40, 0.96));
-    box-shadow:
-        0 30px 85px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(109, 164, 255, 0.08);
-    backdrop-filter: blur(24px);
-    animation: libraryFloat 8s ease-in-out infinite;
-}
-
-.library-highlight-box::before {
-    content: "";
-    position: absolute;
-    width: 340px; height: 340px;
-    right: -130px; top: -130px;
-    border: 1px solid rgba(109, 164, 255, 0.12);
-    border-radius: 50%;
-    box-shadow:
-        0 0 0 38px rgba(109, 164, 255, 0.032),
-        0 0 0 76px rgba(109, 164, 255, 0.02);
-    animation: orbit 15s linear infinite;
-}
-
-.library-highlight-box::after {
-    content: "";
-    position: absolute;
-    width: 9px; height: 9px;
-    left: 18%; bottom: 18%;
-    border-radius: 50%;
-    background: #6da4ff;
-    box-shadow: 0 0 15px #6da4ff, 0 0 30px rgba(109, 164, 255, 0.65);
-    animation: particleFloat 4.5s ease-in-out infinite reverse;
+    box-shadow: 0 30px 85px rgba(0, 0, 0, 0.45);
 }
 
 .library-highlight-content {
@@ -978,12 +517,9 @@ body.cursor-hover .cursor-dot {
     font-weight: 900;
     letter-spacing: -1.2px;
     background: linear-gradient(120deg, #7fa8ff 0%, #a98eff 100%);
-    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradientText 7s ease infinite;
-    filter: drop-shadow(0 2px 22px rgba(109, 164, 255, 0.25));
 }
 
 .library-highlight-content p {
@@ -1010,33 +546,7 @@ body.cursor-hover .cursor-dot {
     background:
         radial-gradient(circle at 50% 20%, rgba(45, 201, 143, 0.16), transparent 44%),
         linear-gradient(145deg, rgba(16, 38, 48, 0.95), rgba(12, 24, 38, 0.96));
-    box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(72, 217, 167, 0.08);
-    backdrop-filter: blur(24px);
-    animation: joinGlow 6s ease-in-out infinite;
-}
-
-.join-box::before {
-    content: "";
-    position: absolute;
-    width: 280px; height: 280px;
-    left: -110px; bottom: -150px;
-    border-radius: 50%;
-    background: rgba(45, 201, 143, 0.14);
-    filter: blur(90px);
-    animation: joinOrb 7s ease-in-out infinite alternate;
-}
-
-.join-box::after {
-    content: "";
-    position: absolute;
-    width: 7px; height: 7px;
-    right: 15%; top: 20%;
-    border-radius: 50%;
-    background: #48d9a7;
-    box-shadow: 0 0 10px #48d9a7, 0 0 28px rgba(72, 217, 167, 0.65);
-    animation: particleFloatTwo 4.5s ease-in-out infinite;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
 }
 
 .join-box > span {
@@ -1046,7 +556,6 @@ body.cursor-hover .cursor-dot {
     font-weight: 800;
     letter-spacing: 1.4px;
     margin-bottom: 14px;
-    animation: labelFloat 3.5s ease-in-out infinite;
 }
 
 .join-box h2 {
@@ -1057,12 +566,9 @@ body.cursor-hover .cursor-dot {
     font-weight: 900;
     letter-spacing: -1.2px;
     background: linear-gradient(120deg, #7fe0bc 0%, #6da4ff 100%);
-    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradientText 7s ease infinite;
-    filter: drop-shadow(0 2px 22px rgba(72, 217, 167, 0.25));
 }
 
 .join-box p {
@@ -1076,23 +582,16 @@ body.cursor-hover .cursor-dot {
 }
 
 .join-button {
-    position: relative;
     color: #c8f0e0;
     background: linear-gradient(135deg, #1e9668, #246ca8);
     border: 1px solid rgba(72, 217, 167, 0.24);
-    box-shadow:
-        0 15px 35px rgba(38, 179, 129, 0.35),
-        inset 0 1px 0 rgba(72, 217, 167, 0.2);
-    animation: joinButtonPulse 3s ease-in-out infinite;
+    box-shadow: 0 15px 35px rgba(38, 179, 129, 0.35);
 }
 
 .join-button:hover {
-    animation: none;
-    transform: translateY(-8px) scale(1.04);
+    transform: translateY(-4px);
     color: #b0e8d0;
-    box-shadow:
-        0 25px 55px rgba(38, 179, 129, 0.5),
-        0 0 50px rgba(38, 179, 129, 0.28);
+    box-shadow: 0 22px 48px rgba(38, 179, 129, 0.5);
 }
 
 /* =========================================================
@@ -1107,140 +606,10 @@ body.cursor-hover .cursor-dot {
 }
 
 /* =========================================================
-   KEYFRAMES
-========================================================= */
-@keyframes heroEnter {
-    from {
-        opacity: 0;
-        transform: translateY(50px) scale(0.95);
-        filter: blur(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-    }
-}
-
-@keyframes particleFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-40px, 25px) scale(1.4); }
-}
-
-@keyframes particleFloatTwo {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(32px, -36px) scale(1.5); }
-}
-
-@keyframes labelFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-
-@keyframes labelShine {
-    0%, 55% { left: -100%; }
-    75%, 100% { left: 140%; }
-}
-
-@keyframes pulseDot {
-    0%, 100% { transform: scale(1); opacity: 0.7; }
-    50% { transform: scale(1.7); opacity: 1; }
-}
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes statBorderSpin { to { transform: rotate(360deg); } }
-
-@keyframes statIconFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-9px) rotate(3deg); }
-}
-
-@keyframes statIconBounce {
-    0% { transform: scale(1) rotate(0); }
-    50% { transform: scale(1.15) rotate(-10deg); }
-    100% { transform: scale(1.05) rotate(5deg); }
-}
-
-@keyframes statTextGradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
-@keyframes cardRotate { to { transform: rotate(360deg); } }
-
-@keyframes visualRing {
-    from { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.1); }
-    to { transform: rotate(360deg) scale(1); }
-}
-
-@keyframes iconFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-11px) rotate(4deg); }
-}
-
-@keyframes iconSpin {
-    0% { transform: scale(1) rotate(0); }
-    50% { transform: scale(1.15) rotate(-12deg); }
-    100% { transform: scale(1.05) rotate(6deg); }
-}
-
-@keyframes scanLine {
-    0% { transform: translateX(-170px); opacity: 0; }
-    40% { opacity: 1; }
-    100% { transform: translateX(170px); opacity: 0; }
-}
-
-@keyframes emptyPulse {
-    0%, 100% { box-shadow: 0 0 0 rgba(91, 141, 239, 0); }
-    50% { box-shadow: 0 0 40px rgba(91, 141, 239, 0.1); }
-}
-
-@keyframes libraryFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-@keyframes orbit { to { transform: rotate(360deg); } }
-
-@keyframes joinGlow {
-    0%, 100% {
-        box-shadow:
-            0 30px 80px rgba(0, 0, 0, 0.45),
-            inset 0 1px 0 rgba(72, 217, 167, 0.08);
-    }
-    50% {
-        box-shadow:
-            0 34px 95px rgba(0, 0, 0, 0.5),
-            0 0 60px rgba(45, 201, 143, 0.14),
-            inset 0 1px 0 rgba(72, 217, 167, 0.14);
-    }
-}
-
-@keyframes joinOrb {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(110px, -55px) scale(1.35); }
-}
-
-@keyframes joinButtonPulse {
-    0%, 100% { box-shadow: 0 15px 35px rgba(38, 179, 129, 0.35); }
-    50% {
-        box-shadow:
-            0 18px 45px rgba(38, 179, 129, 0.5),
-            0 0 35px rgba(38, 179, 129, 0.22);
-    }
-}
-
-/* =========================================================
-   LIGHT MODE — بدون سفید هم تو حالت روشن
+   LIGHT MODE
 ========================================================= */
 body.light .hero h1 {
     background: linear-gradient(120deg, #2a4a8a 0%, #5a3fb8 50%, #2e7bc4 100%);
-    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -1248,7 +617,6 @@ body.light .hero h1 {
 
 body.light .hero h1 .accent {
     background: linear-gradient(120deg, #2e7bc4 0%, #7a52e0 60%, #c44a9c 100%);
-    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -1258,7 +626,6 @@ body.light .hero p { color: #42527a; }
 
 body.light .section-heading h2 {
     background: linear-gradient(120deg, #2a4a8a 0%, #5a3fb8 100%);
-    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -1284,7 +651,6 @@ body.light .stat-item strong {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    background-size: 200% 200%;
 }
 
 body.light .library-highlight-box {
@@ -1318,19 +684,6 @@ body.light .join-box h2 {
 
 body.light .join-box p { color: #2e5a48; }
 
-body.light .hero__grid {
-    background-image:
-        linear-gradient(rgba(58, 109, 224, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(58, 109, 224, 0.06) 1px, transparent 1px);
-}
-
-body.light .marquee {
-    background: linear-gradient(90deg, rgba(58, 109, 224, 0.04), rgba(122, 82, 224, 0.04));
-    border-color: rgba(58, 109, 224, 0.1);
-}
-
-body.light .marquee__item { color: rgba(58, 109, 224, 0.5); }
-
 body.light .secondary-button {
     color: #33476b;
     background: rgba(200, 216, 244, 0.7);
@@ -1349,33 +702,19 @@ body.light .trip-box {
 
 body.light .trip-box h3 { color: #2a4272; }
 body.light .trip-box p { color: #42527a; }
-
-body.light .aurora__blob { opacity: 0.4; }
-
 body.light .footer { color: #50648a; }
 
 /* =========================================================
-   RESPONSIVE — TABLET
+   RESPONSIVE
 ========================================================= */
 @media (max-width: 1100px) {
     .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .hero__rings { width: 580px; height: 580px; }
 }
 
-/* =========================================================
-   RESPONSIVE — MOBILE
-========================================================= */
 @media (max-width: 700px) {
-    .hero {
-        min-height: auto;
-        padding: 70px 0 90px;
-    }
-
-    .hero__rings { width: 400px; height: 400px; }
-
-    .section { padding: 75px 0; }
-    .stats-section { padding: 75px 0; }
+    .hero { min-height: auto; padding: 70px 0 90px; }
+    .section, .stats-section { padding: 75px 0; }
 
     .hero-label { font-size: 10px; padding: 0 14px; gap: 7px; }
 
@@ -1386,101 +725,43 @@ body.light .footer { color: #50648a; }
         margin-bottom: 22px;
     }
 
-    .hero p {
-        font-size: 13px;
-        line-height: 2;
-        margin-bottom: 32px;
-    }
+    .hero p { font-size: 13px; line-height: 2; margin-bottom: 32px; }
 
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
+    .hero-buttons { flex-direction: column; width: 100%; }
+    .hero-buttons .button { width: min(100%, 320px); min-height: 52px; }
 
-    .hero-buttons .button {
-        width: min(100%, 320px);
-        min-height: 52px;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-
+    .stats-grid { grid-template-columns: 1fr; gap: 14px; }
     .stat-item { min-height: 210px; padding: 26px 20px; }
-    .stat-item strong { font-size: 34px; letter-spacing: -1.5px; }
-    .stat-icon { width: 56px; height: 56px; font-size: 23px; border-radius: 16px; }
+    .stat-item strong { font-size: 34px; }
+    .stat-icon { width: 56px; height: 56px; font-size: 23px; }
 
-    .cards {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
+    .cards { grid-template-columns: 1fr; gap: 16px; }
     .card { min-height: 275px; }
     .card-visual { height: 150px; }
-    .card-icon { width: 74px; height: 74px; border-radius: 22px; }
+    .card-icon { width: 74px; height: 74px; }
     .card-icon svg { width: 30px; height: 30px; }
 
     .section-heading { margin-bottom: 36px; }
-    .section-heading h2 {
-        font-size: 24px;
-        letter-spacing: -0.8px;
-    }
+    .section-heading h2 { font-size: 24px; letter-spacing: -0.8px; }
     .section-heading p { font-size: 12px; }
-    .section-heading > span { font-size: 10.5px; letter-spacing: 1px; }
-    .section-heading > span::before,
-    .section-heading > span::after { width: 14px; }
 
     .library-highlight { padding: 20px 0 80px; }
-
-    .library-highlight-box {
-        min-height: auto;
-        padding: 42px 24px;
-        border-radius: 24px;
-    }
-
-    .library-highlight-content h2 { font-size: 26px; letter-spacing: -0.8px; }
+    .library-highlight-box { min-height: auto; padding: 42px 24px; border-radius: 24px; }
+    .library-highlight-content h2 { font-size: 26px; }
     .library-highlight-content p { font-size: 12.5px; }
 
     .join-section { padding: 0 0 80px; }
-
-    .join-box {
-        padding: 52px 22px;
-        border-radius: 24px;
-    }
-
-    .join-box h2 { font-size: 24px; letter-spacing: -0.8px; }
+    .join-box { padding: 52px 22px; border-radius: 24px; }
+    .join-box h2 { font-size: 24px; }
     .join-box p { font-size: 12.5px; }
-
-    .marquee { padding: 20px 0; }
-    .marquee__track { gap: 40px; animation-duration: 34s; }
-    .marquee__item { font-size: 11.5px; letter-spacing: 0.5px; }
-
-    .card { transform-style: flat !important; }
 }
 
-/* =========================================================
-   RESPONSIVE — TINY
-========================================================= */
 @media (max-width: 420px) {
-    .hero { padding-top: 58px; padding-bottom: 72px; }
-
-    .hero h1 {
-        font-size: 27px;
-        line-height: 1.4;
-        letter-spacing: -0.8px;
-    }
-
+    .hero h1 { font-size: 27px; }
     .hero p { font-size: 12.5px; }
-
     .stat-item { min-height: 195px; padding: 22px 17px; }
     .stat-item strong { font-size: 30px; }
-    .stat-item h3 { font-size: 14px; }
-    .stat-item p { font-size: 11px; }
-
     .card-content { padding: 20px 18px; }
-    .card-content h3 { font-size: 16px; }
-
     .library-highlight-content h2 { font-size: 22px; }
     .join-box h2 { font-size: 22px; }
 }
@@ -1491,7 +772,6 @@ body.light .footer { color: #50648a; }
         transition: none !important;
         scroll-behavior: auto !important;
     }
-    .cursor-dot, .cursor-ring { display: none !important; }
 }
 </style>
 
@@ -1501,40 +781,15 @@ body.light .footer { color: #50648a; }
     <div class="scroll-progress__bar" id="scrollProgressBar"></div>
 </div>
 
-<!-- AURORA -->
-<div class="aurora" aria-hidden="true">
-    <div class="aurora__blob aurora__blob--1"></div>
-    <div class="aurora__blob aurora__blob--2"></div>
-    <div class="aurora__blob aurora__blob--3"></div>
-</div>
-
-<!-- GRAIN -->
-<div class="grain" aria-hidden="true"></div>
-
-<!-- CURSOR -->
-<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
-<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
-
 
 <!-- =====================================================
      HERO
 ====================================================== -->
 <section class="hero">
-
     <div class="hero__grid" aria-hidden="true"></div>
-    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
-
-    <div class="hero__rings" aria-hidden="true">
-        <div class="hero__ring"></div>
-        <div class="hero__ring"></div>
-        <div class="hero__ring"></div>
-    </div>
 
     <div class="container hero-content">
-
-        <span class="hero-label">
-            کانون فرهنگی نوجوانان رویش
-        </span>
+        <span class="hero-label">کانون فرهنگی نوجوانان رویش</span>
 
         <h1>
             جایی برای <span class="accent">رشد و رفاقت</span><br>
@@ -1547,54 +802,17 @@ body.light .footer { color: #50648a; }
         </p>
 
         <div class="hero-buttons">
-
-            <a href="#join" class="button primary-button" data-magnetic>
-                عضویت در رویش
-            </a>
-
-            <a href="#activities" class="button secondary-button" data-magnetic>
-                فعالیت‌های ما
-            </a>
-
+            <a href="#join" class="button primary-button">عضویت در رویش</a>
+            <a href="#activities" class="button secondary-button">فعالیت‌های ما</a>
         </div>
-
     </div>
-
 </section>
-
-
-<!-- =====================================================
-     MARQUEE
-====================================================== -->
-<div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-        <span class="marquee__item">رشد</span>
-        <span class="marquee__item">رفاقت</span>
-        <span class="marquee__item">یادگیری</span>
-        <span class="marquee__item">تجربه</span>
-        <span class="marquee__item">خلاقیت</span>
-        <span class="marquee__item">نوجوانی</span>
-        <span class="marquee__item">کتابخانه</span>
-        <span class="marquee__item">اردو</span>
-        <span class="marquee__item">دوستی</span>
-        <span class="marquee__item">رشد</span>
-        <span class="marquee__item">رفاقت</span>
-        <span class="marquee__item">یادگیری</span>
-        <span class="marquee__item">تجربه</span>
-        <span class="marquee__item">خلاقیت</span>
-        <span class="marquee__item">نوجوانی</span>
-        <span class="marquee__item">کتابخانه</span>
-        <span class="marquee__item">اردو</span>
-        <span class="marquee__item">دوستی</span>
-    </div>
-</div>
 
 
 <!-- =====================================================
      STATS
 ====================================================== -->
 <section class="stats-section" id="stats">
-
     <div class="container">
 
         <div class="section-heading reveal">
@@ -1604,37 +822,24 @@ body.light .footer { color: #50648a; }
         </div>
 
         {% if stats %}
-
             <div class="stats-grid">
-
                 {% for stat in stats %}
-
-                    <article class="stat-item reveal" data-tilt>
-                        <div class="stat-icon">
-                            {{ stat.icon|default:"📊" }}
-                        </div>
-                        <strong data-count="{{ stat.value }}">{{ stat.value }}</strong>
+                    <article class="stat-item reveal">
+                        <div class="stat-icon">{{ stat.icon|default:"📊" }}</div>
+                        <strong>{{ stat.value }}</strong>
                         <h3>{{ stat.title }}</h3>
-                        {% if stat.description %}
-                            <p>{{ stat.description }}</p>
-                        {% endif %}
+                        {% if stat.description %}<p>{{ stat.description }}</p>{% endif %}
                     </article>
-
                 {% endfor %}
-
             </div>
-
         {% else %}
-
             <div class="trip-box">
                 <h3>هنوز آماری برای نمایش ثبت نشده است</h3>
                 <p>مدیر سایت می‌تواند آمارهای موردنظر را از پنل مدیریت اضافه کند.</p>
             </div>
-
         {% endif %}
 
     </div>
-
 </section>
 
 
@@ -1642,7 +847,6 @@ body.light .footer { color: #50648a; }
      ACTIVITIES
 ====================================================== -->
 <section class="section" id="activities">
-
     <div class="container">
 
         <div class="section-heading reveal">
@@ -1652,71 +856,45 @@ body.light .footer { color: #50648a; }
         </div>
 
         <div class="cards">
-
             {% for block in blocks %}
-
-                <article class="card reveal" data-tilt>
-
+                <article class="card reveal">
                     <div class="card-visual">
-                        <span class="line"></span>
                         <div class="card-icon">
                             {% if forloop.counter == 1 %}
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                             {% elif forloop.counter == 2 %}
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                             {% elif forloop.counter == 3 %}
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
                             {% elif forloop.counter == 4 %}
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 2l2 7 7 2-7 2-2 7-2-7-7-2 7-2 2-7z"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 7 7 2-7 2-2 7-2-7-7-2 7-2 2-7z"/></svg>
                             {% elif forloop.counter == 5 %}
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
                             {% else %}
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg>
                             {% endif %}
                         </div>
                     </div>
 
                     <div class="card-content">
                         <h3>{{ block.title }}</h3>
-                        {% if block.description %}
-                            <p>{{ block.description }}</p>
-                        {% endif %}
+                        {% if block.description %}<p>{{ block.description }}</p>{% endif %}
                         {% if block.button_text and block.button_url %}
                             <a href="{{ block.button_url }}" class="card-link" target="_blank" rel="noopener noreferrer">
                                 {{ block.button_text }}
                             </a>
                         {% endif %}
                     </div>
-
                 </article>
-
             {% empty %}
-
                 <div class="trip-box">
                     <h3>فعلاً فعالیتی برای نمایش وجود ندارد</h3>
                     <p>فعالیت‌های فعال کانون در این قسمت نمایش داده خواهند شد.</p>
                 </div>
-
             {% endfor %}
-
         </div>
 
     </div>
-
 </section>
 
 
@@ -1724,7 +902,6 @@ body.light .footer { color: #50648a; }
      TRIPS
 ====================================================== -->
 <section class="section trips-section" id="trips">
-
     <div class="container">
 
         <div class="section-heading reveal">
@@ -1734,98 +911,39 @@ body.light .footer { color: #50648a; }
         </div>
 
         <div class="cards">
-
             {% for trip in trips %}
-
-                <article class="card reveal" data-tilt>
-
+                <article class="card reveal">
                     <div class="card-visual">
-                        <span class="line"></span>
                         <div class="card-icon">
                             {% if forloop.counter == 1 %}
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
-                                    <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
-                                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
-                                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
                             {% elif forloop.counter == 2 %}
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M3 12l9-9 9 9M5 10v10h14V10"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
                             {% elif forloop.counter == 3 %}
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <path d="M12 6v6l4 2"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                             {% else %}
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M5 12h14M13 6l6 6-6 6"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                             {% endif %}
                         </div>
                     </div>
 
                     <div class="card-content">
                         <h3>{{ trip.title }}</h3>
-                        {% if trip.description %}
-                            <p>{{ trip.description }}</p>
-                        {% endif %}
+                        {% if trip.description %}<p>{{ trip.description }}</p>{% endif %}
                         {% if trip.registration_url %}
-                            <a href="{{ trip.registration_url }}" class="button primary-button" target="_blank" rel="noopener noreferrer" data-magnetic>
-                                ثبت‌نام
-                            </a>
+                            <a href="{{ trip.registration_url }}" class="button primary-button" target="_blank" rel="noopener noreferrer">ثبت‌نام</a>
                         {% endif %}
                     </div>
-
                 </article>
-
             {% empty %}
-
                 <div class="trip-box">
                     <h3>فعلاً برنامه‌ای برای ثبت‌نام وجود ندارد</h3>
                     <p>اردوها و برنامه‌های فعال در این قسمت نمایش داده خواهند شد.</p>
                 </div>
-
             {% endfor %}
-
         </div>
 
     </div>
-
-</section>
-
-
-<!-- =====================================================
-     LIBRARY
-====================================================== -->
-<section class="library-highlight">
-
-    <div class="container">
-
-        <div class="library-highlight-box">
-
-            <div class="library-highlight-content">
-
-                <span class="hero-label">کتابخانه رویش</span>
-
-                <h2>کتابی برای خواندن پیدا کن</h2>
-
-                <p>
-                    کتاب‌های موجود در کتابخانه کانون را ببین
-                    و برای امانت گرفتنشان درخواست بده.
-                </p>
-
-                <a href="{% url 'library' %}" class="button primary-button" data-magnetic>
-                    ورود به کتابخانه
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
 </section>
 
 
@@ -1833,45 +951,28 @@ body.light .footer { color: #50648a; }
      JOIN
 ====================================================== -->
 <section class="join-section" id="join">
-
     <div class="container">
-
         <div class="join-box">
-
             <span>خانواده رویش</span>
-
             <h2>دوست داری تو هم عضو رویش باشی؟</h2>
-
             <p>
                 مشخصاتت را ثبت کن تا مربیان کانون
                 در اولین فرصت با تو تماس بگیرند.
             </p>
-
-            <a href="#" class="button join-button" data-magnetic>
-                ثبت‌نام در کانون
-            </a>
-
+            <a href="#" class="button join-button">ثبت‌نام در کانون</a>
         </div>
-
     </div>
-
 </section>
 
 
 <div class="container">
-    <div class="footer">
-        کانون فرهنگی تربیتی رویش
-    </div>
+    <div class="footer">کانون فرهنگی تربیتی رویش</div>
 </div>
 
 
 <script>
 (function () {
     "use strict";
-
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
-    const isDesktop = window.innerWidth > 900 && !isTouch;
 
     /* ================= SCROLL PROGRESS ================= */
     const progressBar = document.getElementById("scrollProgressBar");
@@ -1895,41 +996,7 @@ body.light .footer { color: #50648a; }
 
     updateProgress();
 
-    /* ================= CUSTOM CURSOR ================= */
-    if (isDesktop && !prefersReduced) {
-        const dot = document.getElementById("cursorDot");
-        const ring = document.getElementById("cursorRing");
-
-        if (dot && ring) {
-            let mouseX = window.innerWidth / 2;
-            let mouseY = window.innerHeight / 2;
-            let ringX = mouseX;
-            let ringY = mouseY;
-
-            document.body.classList.add("cursor-ready");
-
-            document.addEventListener("mousemove", (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
-            }, { passive: true });
-
-            (function animateRing() {
-                ringX += (mouseX - ringX) * 0.18;
-                ringY += (mouseY - ringY) * 0.18;
-                ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
-                requestAnimationFrame(animateRing);
-            })();
-
-            const hoverSelectors = "a, button, .card, .stat-item, .marquee__item, [data-magnetic]";
-            document.querySelectorAll(hoverSelectors).forEach((el) => {
-                el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
-                el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
-            });
-        }
-    }
-
-    /* ================= SCROLL REVEAL ================= */
+    /* ================= SCROLL REVEAL (سبک) ================= */
     const revealEls = document.querySelectorAll(".reveal");
     if (revealEls.length && "IntersectionObserver" in window) {
         const observer = new IntersectionObserver((entries) => {
@@ -1945,205 +1012,6 @@ body.light .footer { color: #50648a; }
     } else {
         revealEls.forEach((el) => el.classList.add("reveal-active"));
     }
-
-    /* ================= COUNT-UP ================= */
-    function animateCount(el) {
-        const raw = el.getAttribute("data-count");
-        if (!raw) return;
-
-        const match = String(raw).match(/^([\d۰-۹,\.]+)(.*)$/);
-        if (!match) return;
-
-        const numberPart = match[1].replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
-        const suffix = match[2] || "";
-        const target = parseFloat(numberPart.replace(/,/g, ""));
-        if (isNaN(target)) return;
-
-        const duration = 1800;
-        const start = performance.now();
-        const hasDecimal = numberPart.includes(".");
-
-        function tick(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = target * eased;
-
-            let display;
-            if (hasDecimal) display = current.toFixed(1);
-            else display = Math.floor(current).toLocaleString("fa-IR");
-
-            el.textContent = display + suffix;
-
-            if (progress < 1) requestAnimationFrame(tick);
-            else el.textContent = raw;
-        }
-
-        requestAnimationFrame(tick);
-    }
-
-    const countEls = document.querySelectorAll("[data-count]");
-    if (countEls.length && "IntersectionObserver" in window) {
-        const countObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    animateCount(entry.target);
-                    countObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.4 });
-
-        countEls.forEach((el) => countObserver.observe(el));
-    }
-
-    /* ================= 3D TILT ================= */
-    if (isDesktop && !prefersReduced) {
-        document.querySelectorAll("[data-tilt]").forEach((card) => {
-            let rect = null;
-
-            card.addEventListener("mouseenter", () => {
-                rect = card.getBoundingClientRect();
-            });
-
-            card.addEventListener("mousemove", (e) => {
-                if (!rect) rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const cx = rect.width / 2;
-                const cy = rect.height / 2;
-                const rotateY = ((x - cx) / cx) * 5;
-                const rotateX = ((cy - y) / cy) * 5;
-
-                card.style.transform =
-                    `perspective(1000px) translateY(-12px) scale(1.015) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-
-            card.addEventListener("mouseleave", () => {
-                card.style.transform = "";
-                rect = null;
-            });
-        });
-    }
-
-    /* ================= MAGNETIC ================= */
-    if (isDesktop && !prefersReduced) {
-        document.querySelectorAll("[data-magnetic]").forEach((btn) => {
-            btn.addEventListener("mousemove", (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                btn.style.transform = `translate(${x * 0.22}px, ${y * 0.3}px) scale(1.03)`;
-            });
-
-            btn.addEventListener("mouseleave", () => {
-                btn.style.transform = "";
-            });
-        });
-    }
-
-    /* ================= HERO PARTICLES ================= */
-    const canvas = document.getElementById("heroCanvas");
-    if (canvas && !prefersReduced) {
-        const ctx = canvas.getContext("2d");
-        let particles = [];
-        let w, h;
-        let animationId;
-
-        function resize() {
-            const rect = canvas.getBoundingClientRect();
-            const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            w = rect.width;
-            h = rect.height;
-            canvas.width = w * dpr;
-            canvas.height = h * dpr;
-            canvas.style.width = w + "px";
-            canvas.style.height = h + "px";
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-
-        function createParticles() {
-            const count = Math.min(55, Math.floor((w * h) / 22000));
-            particles = [];
-            for (let i = 0; i < count; i++) {
-                particles.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * 0.32,
-                    vy: (Math.random() - 0.5) * 0.32,
-                    r: Math.random() * 1.6 + 0.5,
-                    hue: Math.random() > 0.5 ? 222 : 268,
-                });
-            }
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, w, h);
-
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 130) {
-                        const alpha = (1 - dist / 130) * 0.3;
-                        ctx.strokeStyle = `hsla(228, 75%, 68%, ${alpha})`;
-                        ctx.lineWidth = 0.6;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            particles.forEach((p) => {
-                p.x += p.vx;
-                p.y += p.vy;
-
-                if (p.x < 0 || p.x > w) p.vx *= -1;
-                if (p.y < 0 || p.y > h) p.vy *= -1;
-
-                ctx.fillStyle = `hsla(${p.hue}, 85%, 70%, 0.65)`;
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = `hsla(${p.hue}, 85%, 62%, 0.75)`;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.shadowBlur = 0;
-            });
-
-            animationId = requestAnimationFrame(draw);
-        }
-
-        function init() {
-            resize();
-            createParticles();
-            cancelAnimationFrame(animationId);
-            draw();
-        }
-
-        init();
-
-        let resizeTimer;
-        window.addEventListener("resize", () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                cancelAnimationFrame(animationId);
-                init();
-            }, 200);
-        }, { passive: true });
-
-        if ("IntersectionObserver" in window) {
-            new IntersectionObserver(([entry]) => {
-                if (entry.isIntersecting) {
-                    if (!animationId) draw();
-                } else {
-                    cancelAnimationFrame(animationId);
-                    animationId = null;
-                }
-            }).observe(canvas);
-        }
-    }
-
 })();
 </script>
 

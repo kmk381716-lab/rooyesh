@@ -20,8 +20,6 @@
 
     .fill-page {
 
-        /* دارک (پیش‌فرض) */
-
         --fp-card-1: #1a3055;
         --fp-card-2: #102040;
         --fp-card-inner: rgba(8, 14, 26, 0.7);
@@ -46,6 +44,10 @@
         --fp-blue-light: #6da4ff;
         --fp-cyan: #4cc9e8;
 
+        --fp-success: #4ade80;
+        --fp-success-bg: rgba(74, 222, 128, 0.12);
+        --fp-success-border: rgba(74, 222, 128, 0.4);
+
         --fp-danger: #fb7185;
         --fp-danger-bg: rgba(244, 63, 94, 0.15);
         --fp-danger-border: rgba(244, 63, 94, 0.4);
@@ -67,8 +69,6 @@
         transition: color 0.4s ease;
     }
 
-
-    /* تم روشن */
 
     body.light .fill-page {
 
@@ -96,6 +96,10 @@
         --fp-blue-light: #2a6bff;
         --fp-cyan: #2e7bc4;
 
+        --fp-success: #167a52;
+        --fp-success-bg: rgba(30, 150, 104, 0.1);
+        --fp-success-border: rgba(30, 150, 104, 0.35);
+
         --fp-shadow:
             0 30px 80px rgba(58, 109, 224, 0.22),
             0 0 60px rgba(58, 109, 224, 0.1),
@@ -110,11 +114,9 @@
     .fill-container {
 
         position: relative;
-
         z-index: 1;
 
         width: 100%;
-
         max-width: 780px;
 
         margin: 0 auto;
@@ -126,16 +128,8 @@
 
 
     @keyframes fillContainerShow {
-
-        from {
-            opacity: 0;
-            transform: translateY(24px) scale(0.985);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        from { opacity: 0; transform: translateY(24px) scale(0.985); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
 
@@ -154,7 +148,6 @@
         padding: 28px;
 
         border: 1.5px solid var(--fp-border);
-
         border-radius: 22px;
 
         background:
@@ -180,13 +173,9 @@
     ========================================================= */
 
     .fill-header {
-
         padding: 30px;
-
         margin-bottom: 16px;
-
-        animation:
-            fillHeaderShow 0.65s 0.08s both;
+        animation: fillHeaderShow 0.65s 0.08s both;
     }
 
 
@@ -195,10 +184,7 @@
         content: "";
 
         position: absolute;
-
-        top: 0;
-        right: 0;
-        left: 0;
+        top: 0; right: 0; left: 0;
 
         height: 3px;
 
@@ -219,29 +205,19 @@
 
 
     @keyframes fillBorderShine {
-
         to { background-position: 200% 0; }
     }
 
 
     @keyframes fillHeaderShow {
-
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
 
     .fill-badge {
 
         display: inline-flex;
-
         align-items: center;
 
         gap: 8px;
@@ -251,7 +227,6 @@
         padding: 7px 12px;
 
         border: 1.5px solid rgba(109, 164, 255, 0.28);
-
         border-radius: 10px;
 
         background:
@@ -264,7 +239,6 @@
         color: var(--fp-blue-light);
 
         font-size: 11px;
-
         font-weight: 800;
     }
 
@@ -298,7 +272,6 @@
 
 
     @keyframes fillDot {
-
         0%, 100% { transform: scale(1); opacity: 0.75; }
         50% { transform: scale(1.3); opacity: 1; }
     }
@@ -307,7 +280,6 @@
     .fill-header h1 {
 
         position: relative;
-
         z-index: 2;
 
         margin: 0 0 12px;
@@ -315,9 +287,7 @@
         color: var(--fp-text);
 
         font-size: 27px;
-
         line-height: 1.55;
-
         font-weight: 800;
 
         letter-spacing: -0.5px;
@@ -329,7 +299,6 @@
     .fill-description {
 
         position: relative;
-
         z-index: 2;
 
         margin: 0;
@@ -339,12 +308,106 @@
         color: var(--fp-muted);
 
         line-height: 2;
-
         font-size: 13px;
-
         font-weight: 500;
 
         overflow-wrap: anywhere;
+    }
+
+
+    /* =========================================================
+       PROGRESS
+    ========================================================= */
+
+    .fill-progress-wrap {
+
+        position: relative;
+        z-index: 2;
+
+        margin-top: 22px;
+
+        padding-top: 18px;
+
+        border-top: 1.5px solid var(--fp-border);
+    }
+
+
+    .fill-progress-head {
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 10px;
+
+        margin-bottom: 10px;
+
+        color: var(--fp-muted);
+
+        font-size: 11.5px;
+        font-weight: 700;
+    }
+
+
+    .fill-progress-head strong {
+
+        color: var(--fp-blue-light);
+
+        font-weight: 900;
+
+        font-variant-numeric: tabular-nums;
+    }
+
+
+    .fill-progress-bar {
+
+        position: relative;
+
+        width: 100%;
+        height: 8px;
+
+        border-radius: 6px;
+
+        background: rgba(74, 125, 232, 0.14);
+
+        overflow: hidden;
+
+        border: 1px solid rgba(109, 164, 255, 0.18);
+    }
+
+
+    .fill-progress-fill {
+
+        display: block;
+
+        width: 0%;
+        height: 100%;
+
+        border-radius: 6px;
+
+        background:
+            linear-gradient(
+                90deg,
+                var(--fp-cyan),
+                var(--fp-blue-light)
+            );
+
+        box-shadow: 0 0 12px rgba(76, 201, 232, 0.5);
+
+        transition: width 0.45s cubic-bezier(.22, 1, .36, 1);
+    }
+
+
+    .fill-progress-fill.complete {
+
+        background:
+            linear-gradient(
+                90deg,
+                var(--fp-success),
+                #22c55e
+            );
+
+        box-shadow: 0 0 16px rgba(74, 222, 128, 0.6);
     }
 
 
@@ -353,7 +416,6 @@
     ========================================================= */
 
     .fill-questions {
-
         padding: 28px;
     }
 
@@ -361,9 +423,7 @@
     .fill-questions-heading {
 
         display: flex;
-
         align-items: center;
-
         justify-content: space-between;
 
         gap: 12px;
@@ -381,7 +441,6 @@
     .fill-questions-title {
 
         display: flex;
-
         align-items: center;
 
         gap: 10px;
@@ -389,7 +448,6 @@
         color: var(--fp-text);
 
         font-size: 15px;
-
         font-weight: 800;
     }
 
@@ -419,7 +477,6 @@
         color: var(--fp-dim);
 
         font-size: 11px;
-
         font-weight: 500;
     }
 
@@ -439,7 +496,6 @@
         padding: 20px;
 
         border: 1.5px solid var(--fp-border-inner);
-
         border-radius: 16px;
 
         background: var(--fp-card-inner);
@@ -456,12 +512,12 @@
     }
 
 
-    .fill-question:nth-child(1) { animation-delay: 0.04s; }
-    .fill-question:nth-child(2) { animation-delay: 0.08s; }
-    .fill-question:nth-child(3) { animation-delay: 0.12s; }
-    .fill-question:nth-child(4) { animation-delay: 0.16s; }
-    .fill-question:nth-child(5) { animation-delay: 0.20s; }
-    .fill-question:nth-child(6) { animation-delay: 0.24s; }
+    .fill-question.has-error {
+
+        border-color: var(--fp-danger-border);
+
+        background: var(--fp-danger-bg);
+    }
 
 
     .fill-question::before {
@@ -490,6 +546,12 @@
     }
 
 
+    .fill-question.has-error::before {
+        background: var(--fp-danger);
+        opacity: 1;
+    }
+
+
     .fill-question:hover {
 
         transform: translateY(-2px);
@@ -510,16 +572,8 @@
 
 
     @keyframes fillQuestionShow {
-
-        from {
-            opacity: 0;
-            transform: translateY(12px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
 
@@ -530,17 +584,13 @@
     .fill-question-title {
 
         display: block;
-
         width: 100%;
 
         margin-bottom: 14px;
-
         padding-left: 4px;
 
         line-height: 1.9;
-
         font-size: 14px;
-
         font-weight: 700;
 
         color: var(--fp-text);
@@ -572,27 +622,21 @@
         display: block !important;
 
         width: 100% !important;
-
         min-width: 0 !important;
-
         min-height: 52px !important;
 
         padding: 14px 16px !important;
 
         border: 1.5px solid var(--fp-input-border) !important;
-
         border-radius: 12px !important;
 
         font-family: 'Vazirmatn', Tahoma, sans-serif !important;
 
         font-size: 14px !important;
-
         font-weight: 600 !important;
-
         line-height: 1.7 !important;
 
         background: var(--fp-input) !important;
-
         color: var(--fp-text) !important;
 
         outline: none !important;
@@ -641,7 +685,6 @@
         border-color: rgba(109, 164, 255, 0.7) !important;
 
         background: var(--fp-input-hover) !important;
-
         background-color: var(--fp-input-hover) !important;
     }
 
@@ -655,7 +698,6 @@
         border-color: var(--fp-blue-light) !important;
 
         background: var(--fp-input-focus) !important;
-
         background-color: var(--fp-input-focus) !important;
 
         transform: translateY(-1px);
@@ -691,7 +733,6 @@
         padding: 8px 12px !important;
 
         cursor: pointer;
-
     }
 
 
@@ -712,7 +753,6 @@
         font-family: 'Vazirmatn', Tahoma, sans-serif;
 
         font-size: 12px;
-
         font-weight: 700;
 
         cursor: pointer;
@@ -731,6 +771,25 @@
     }
 
 
+    .fill-file-info {
+
+        margin-top: 8px;
+
+        color: var(--fp-dim);
+
+        font-size: 11px;
+        font-weight: 500;
+
+        line-height: 1.8;
+    }
+
+
+    .fill-file-info strong {
+        color: var(--fp-blue-light);
+        font-weight: 700;
+    }
+
+
     /* =========================================================
        CHOICES
     ========================================================= */
@@ -740,7 +799,6 @@
         position: relative;
 
         display: flex;
-
         align-items: center;
 
         width: 100%;
@@ -752,7 +810,6 @@
         padding: 14px 16px;
 
         border: 1.5px solid var(--fp-border-inner);
-
         border-radius: 12px;
 
         background: rgba(74, 125, 232, 0.05);
@@ -804,13 +861,11 @@
     .fill-choice label {
 
         display: flex;
-
         align-items: center;
 
         gap: 12px;
 
         width: 100%;
-
         margin: 0;
 
         cursor: pointer;
@@ -818,9 +873,7 @@
         color: var(--fp-text-soft);
 
         font-weight: 600;
-
         line-height: 1.75;
-
         font-size: 14px;
 
         overflow-wrap: anywhere;
@@ -854,15 +907,12 @@
         padding: 14px 16px;
 
         border: 1.5px dashed rgba(109, 164, 255, 0.3);
-
         border-radius: 11px;
 
         color: var(--fp-muted);
 
         line-height: 1.9;
-
         font-size: 12.5px;
-
         font-weight: 500;
 
         background: rgba(74, 125, 232, 0.04);
@@ -886,7 +936,6 @@
         color: var(--fp-danger);
 
         font-size: 12.5px;
-
         font-weight: 700;
 
         line-height: 1.85;
@@ -894,27 +943,17 @@
         background: var(--fp-danger-bg);
 
         border: 1.5px solid var(--fp-danger-border);
-
         border-radius: 10px;
 
         overflow-wrap: anywhere;
 
-        animation:
-            fillErrorShow 0.4s ease;
+        animation: fillErrorShow 0.4s ease;
     }
 
 
     @keyframes fillErrorShow {
-
-        from {
-            opacity: 0;
-            transform: translateY(-6px) scale(0.98);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
 
@@ -925,7 +964,6 @@
     .fill-submit-area {
 
         margin-top: 22px;
-
         padding-top: 20px;
 
         border-top: 1.5px solid var(--fp-border);
@@ -937,21 +975,17 @@
         position: relative;
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         gap: 10px;
 
         width: 100%;
-
         min-height: 56px;
 
         padding: 15px;
 
         border: none;
-
         border-radius: 14px;
 
         background:
@@ -969,7 +1003,6 @@
         font-family: 'Vazirmatn', Tahoma, sans-serif;
 
         font-size: 14px;
-
         font-weight: 800;
 
         overflow: hidden;
@@ -991,7 +1024,6 @@
         content: "";
 
         position: absolute;
-
         inset: 0;
 
         background:
@@ -1014,7 +1046,7 @@
     }
 
 
-    .fill-submit-btn:hover {
+    .fill-submit-btn:hover:not(:disabled) {
 
         transform: translateY(-3px);
 
@@ -1028,23 +1060,47 @@
     }
 
 
-    .fill-submit-btn:hover::before {
+    .fill-submit-btn:hover:not(:disabled)::before {
         transform: translateX(-120%);
     }
 
 
-    .fill-submit-btn:active {
+    .fill-submit-btn:active:not(:disabled) {
         transform: translateY(0) scale(0.985);
     }
 
 
     .fill-submit-btn:disabled {
 
-        opacity: 0.7;
-
+        opacity: 0.75;
         cursor: wait;
-
         transform: none;
+    }
+
+
+    .fill-submit-btn .spinner {
+
+        display: none;
+
+        width: 16px;
+        height: 16px;
+
+        border: 2px solid rgba(219, 230, 255, 0.35);
+        border-top-color: #dbe6ff;
+
+        border-radius: 50%;
+
+        animation: fillSpin 0.7s linear infinite;
+    }
+
+
+    .fill-submit-btn.loading .spinner {
+        display: inline-block;
+    }
+
+
+    @keyframes fillSpin {
+        to { transform: rotate(360deg); }
     }
 
 
@@ -1063,6 +1119,99 @@
 
 
     /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast-container {
+
+        position: fixed;
+
+        top: 20px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 9999;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 10px;
+
+        pointer-events: none;
+    }
+
+
+    .toast {
+
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+
+        min-width: 220px;
+        max-width: 380px;
+
+        padding: 12px 16px;
+
+        border-radius: 12px;
+
+        background: rgba(20, 32, 56, 0.95);
+
+        border: 1.5px solid rgba(109, 164, 255, 0.4);
+
+        color: #e0eaff;
+
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+        font-size: 12.5px;
+        font-weight: 700;
+
+        box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.5),
+            0 0 40px rgba(74, 125, 232, 0.2);
+
+        animation: toastIn 0.35s cubic-bezier(.22, 1, .36, 1);
+
+        pointer-events: auto;
+    }
+
+
+    body.light .toast {
+
+        background: rgba(240, 245, 255, 0.98);
+
+        border-color: rgba(58, 109, 224, 0.4);
+
+        color: #0a1630;
+    }
+
+
+    .toast.success {
+
+        border-color: var(--fp-success-border);
+
+        color: var(--fp-success);
+    }
+
+
+    .toast.out {
+        animation: toastOut 0.3s ease forwards;
+    }
+
+
+    @keyframes toastIn {
+        from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+
+    @keyframes toastOut {
+        to { opacity: 0; transform: translateY(-12px) scale(0.96); }
+    }
+
+
+    /* =========================================================
        MOBILE
     ========================================================= */
 
@@ -1072,24 +1221,20 @@
             padding: 20px 12px 40px;
         }
 
-
         .fill-card {
             border-radius: 18px;
             padding: 22px 16px;
         }
-
 
         .fill-header {
             padding: 24px 18px;
             margin-bottom: 12px;
         }
 
-
         .fill-badge {
             font-size: 10px;
             padding: 6px 10px;
         }
-
 
         .fill-header h1 {
             font-size: 21px;
@@ -1097,22 +1242,18 @@
             margin-bottom: 10px;
         }
 
-
         .fill-description {
             font-size: 12px;
             line-height: 1.95;
         }
 
-
         .fill-questions {
             padding: 20px 14px;
         }
 
-
         .fill-questions-title {
             font-size: 14px;
         }
-
 
         .fill-question {
             padding: 16px 14px;
@@ -1120,12 +1261,10 @@
             border-radius: 14px;
         }
 
-
         .fill-question-title {
             font-size: 13.5px;
             margin-bottom: 12px;
         }
-
 
         .fill-page input[type="text"],
         .fill-page input[type="number"],
@@ -1136,43 +1275,35 @@
             min-height: 52px !important;
             padding: 14px 15px !important;
             border-radius: 11px !important;
-            font-size: 16px !important;   /* ← برای جلوگیری از zoom در iOS */
+            font-size: 16px !important;
         }
-
 
         .fill-page textarea {
             min-height: 110px !important;
         }
-
 
         .fill-choice {
             padding: 13px 14px;
             gap: 10px;
         }
 
-
         .fill-choice label {
             font-size: 14px;
         }
-
-
-        .fill-choice input[type="radio"],
-        .fill-choice input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-        }
-
 
         .fill-submit-btn {
             min-height: 54px;
             font-size: 14px;
         }
+
+        .toast-container {
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            transform: none;
+        }
     }
 
-
-    /* =========================================================
-       TINY PHONES
-    ========================================================= */
 
     @media (max-width: 380px) {
 
@@ -1180,47 +1311,36 @@
             padding: 14px 8px 30px;
         }
 
-
         .fill-card {
             padding: 18px 13px;
             border-radius: 16px;
         }
 
-
         .fill-header {
             padding: 20px 14px;
         }
-
 
         .fill-header h1 {
             font-size: 19px;
         }
 
-
         .fill-questions {
             padding: 16px 11px;
         }
-
 
         .fill-question {
             padding: 14px 11px;
         }
 
-
         .fill-question-title {
             font-size: 13px;
         }
-
 
         .fill-choice label {
             font-size: 13px;
         }
     }
 
-
-    /* =========================================================
-       REDUCED MOTION
-    ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
@@ -1243,9 +1363,7 @@
     <div class="fill-container">
 
 
-        <!-- =====================================================
-             HEADER
-        ====================================================== -->
+        <!-- HEADER -->
 
         <section class="fill-card fill-header">
 
@@ -1255,9 +1373,7 @@
             </div>
 
 
-            <h1>
-                {{ form.title }}
-            </h1>
+            <h1>{{ form.title }}</h1>
 
 
             {% if form.description %}
@@ -1266,15 +1382,51 @@
                 </p>
             {% endif %}
 
+
+            <!-- PROGRESS -->
+
+            <div
+                class="fill-progress-wrap"
+                id="progressWrap"
+                data-required-count="0"
+            >
+
+                <div class="fill-progress-head">
+
+                    <span>
+                        پیشرفت تکمیل سؤالات اجباری
+                    </span>
+
+                    <strong id="progressText">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="fill-progress-bar">
+
+                    <span
+                        class="fill-progress-fill"
+                        id="progressFill"
+                    ></span>
+
+                </div>
+
+            </div>
+
         </section>
 
 
 
-        <!-- =====================================================
-             FORM
-        ====================================================== -->
+        <!-- FORM -->
 
-        <form method="post" enctype="multipart/form-data">
+        <form
+            method="post"
+            enctype="multipart/form-data"
+            id="fillForm"
+            novalidate
+        >
 
             {% csrf_token %}
 
@@ -1296,16 +1448,21 @@
 
 
 
-                {% for question in questions %}
+                {% for question, field in fields_by_question %}
 
-                    <div class="fill-question">
+                    <div
+                        class="fill-question{% if field.errors %} has-error{% endif %}"
+                        data-question-id="{{ question.id }}"
+                        data-required="{% if question.required %}1{% else %}0{% endif %}"
+                        data-type="{{ question.field_type }}"
+                    >
 
 
                         <!-- TITLE -->
 
                         <label
                             class="fill-question-title"
-                            for="question_{{ question.id }}"
+                            for="{{ field.id_for_label }}"
                         >
 
                             {{ forloop.counter }}.
@@ -1319,172 +1476,81 @@
 
 
 
-                        {# ================= TEXT ================= #}
+                        {# ================= CHOICE TYPES ================= #}
 
-                        {% if question.field_type == "text" %}
+                        {% if question.field_type == "boolean" or question.field_type == "single" or question.field_type == "multiple" %}
 
-                            <input
-                                type="text"
-                                id="question_{{ question.id }}"
-                                name="question_{{ question.id }}"
-                                {% if question.required %}required{% endif %}
-                                autocomplete="off"
-                            >
+                            {% for choice in field %}
 
+                                <div class="fill-choice">
 
-                        {# ================= TEXTAREA ================= #}
+                                    <label for="{{ choice.id_for_label }}">
 
-                        {% elif question.field_type == "textarea" %}
+                                        {{ choice.tag }}
 
-                            <textarea
-                                id="question_{{ question.id }}"
-                                name="question_{{ question.id }}"
-                                rows="5"
-                                {% if question.required %}required{% endif %}
-                            ></textarea>
+                                        <span>{{ choice.choice_label }}</span>
 
+                                    </label>
 
-                        {# ================= NUMBER ================= #}
+                                </div>
 
-                        {% elif question.field_type == "number" %}
+                            {% empty %}
 
-                            <input
-                                type="number"
-                                id="question_{{ question.id }}"
-                                name="question_{{ question.id }}"
-                                inputmode="numeric"
-                                {% if question.required %}required{% endif %}
-                            >
+                                <p class="fill-empty-options">
+                                    برای این سؤال هنوز گزینه‌ای تعریف نشده است.
+                                </p>
 
-
-                        {# ================= DATE ================= #}
-
-                        {% elif question.field_type == "date" %}
-
-                            <input
-                                type="date"
-                                id="question_{{ question.id }}"
-                                name="question_{{ question.id }}"
-                                {% if question.required %}required{% endif %}
-                            >
+                            {% endfor %}
 
 
                         {# ================= FILE ================= #}
 
                         {% elif question.field_type == "file" %}
 
-                            <input
-                                type="file"
-                                id="question_{{ question.id }}"
-                                name="question_{{ question.id }}"
-                                {% if question.required %}required{% endif %}
+                            {{ field }}
+
+                            <div
+                                class="fill-file-info"
+                                data-file-info
+                            ></div>
+
+
+                        {# ================= TEXTAREA ================= #}
+
+                        {% elif question.field_type == "textarea" %}
+
+                            {{ field }}
+
+                            <div
+                                class="fill-file-info"
+                                data-counter-for="{{ field.id_for_label }}"
                             >
-
-
-                        {# ================= BOOLEAN ================= #}
-
-                        {% elif question.field_type == "boolean" %}
-
-                            <div class="fill-choice">
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="question_{{ question.id }}"
-                                        value="بله"
-                                        {% if question.required %}required{% endif %}
-                                    >
-                                    <span>بله</span>
-                                </label>
-                            </div>
-
-                            <div class="fill-choice">
-                                <label>
-                                    <input
-                                        type="radio"
-                                        name="question_{{ question.id }}"
-                                        value="خیر"
-                                    >
-                                    <span>خیر</span>
-                                </label>
+                                0 کاراکتر
                             </div>
 
 
-                        {# ================= SINGLE ================= #}
+                        {# ================= بقیه ================= #}
 
-                        {% elif question.field_type == "single" %}
+                        {% else %}
 
-                            {% for option in question.options.all %}
-
-                                <div class="fill-choice">
-
-                                    <label>
-
-                                        <input
-                                            type="radio"
-                                            name="question_{{ question.id }}"
-                                            value="{{ option.title }}"
-                                            {# فقط اولین radio required بشه #}
-                                            {% if question.required and forloop.first %}required{% endif %}
-                                        >
-
-                                        <span>{{ option.title }}</span>
-
-                                    </label>
-
-                                </div>
-
-                            {% empty %}
-
-                                <p class="fill-empty-options">
-                                    برای این سؤال هنوز گزینه‌ای تعریف نشده است.
-                                </p>
-
-                            {% endfor %}
-
-
-                        {# ================= MULTIPLE ================= #}
-
-                        {% elif question.field_type == "multiple" %}
-
-                            {% for option in question.options.all %}
-
-                                <div class="fill-choice">
-
-                                    <label>
-
-                                        <input
-                                            type="checkbox"
-                                            name="question_{{ question.id }}"
-                                            value="{{ option.title }}"
-                                        >
-
-                                        <span>{{ option.title }}</span>
-
-                                    </label>
-
-                                </div>
-
-                            {% empty %}
-
-                                <p class="fill-empty-options">
-                                    برای این سؤال هنوز گزینه‌ای تعریف نشده است.
-                                </p>
-
-                            {% endfor %}
+                            {{ field }}
 
                         {% endif %}
 
 
 
-                        {# ================= ERROR ================= #}
+                        <!-- ERRORS -->
 
-                        {% if question.id in errors %}
+                        {% if field.errors %}
+
                             <div class="fill-error">
-                                {{ errors|default_if_none:''|dictsort:''|first|default:'' }}
-                                {% for key, value in errors.items %}
-                                    {% if key == question.id %}{{ value }}{% endif %}
+
+                                {% for error in field.errors %}
+                                    {{ error }}<br>
                                 {% endfor %}
+
                             </div>
+
                         {% endif %}
 
 
@@ -1501,9 +1567,12 @@
                     <button
                         type="submit"
                         class="fill-submit-btn"
+                        id="submitBtn"
                     >
 
-                        <span>
+                        <span class="spinner"></span>
+
+                        <span id="submitText">
                             ثبت پاسخ فرم
                         </span>
 
@@ -1523,6 +1592,10 @@
 
 
 
+<div class="toast-container" id="toastContainer"></div>
+
+
+
 <script>
 
 (function () {
@@ -1530,32 +1603,50 @@
 
 
     /* ==================================================
-       جلوگیری از ارسال چندباره
+       ELEMENTS
     ================================================== */
 
-    const form = document.querySelector("form");
-    const submitBtn = document.querySelector(".fill-submit-btn");
+    const form        = document.getElementById("fillForm");
+    const submitBtn   = document.getElementById("submitBtn");
+    const submitText  = document.getElementById("submitText");
+    const progressFill = document.getElementById("progressFill");
+    const progressText = document.getElementById("progressText");
+
+    const FORM_ID =
+        "{{ form.uuid }}";
+
+    const STORAGE_KEY =
+        "form_fill_draft_" + FORM_ID;
 
 
-    if (form && submitBtn) {
+    /* ==================================================
+       TOAST
+    ================================================== */
 
-        form.addEventListener("submit", function () {
+    function showToast(message, type = "info") {
 
-            submitBtn.disabled = true;
+        const container =
+            document.getElementById("toastContainer");
 
-            submitBtn.style.opacity = "0.7";
-            submitBtn.style.cursor = "wait";
+        if (!container) return;
 
+        const toast = document.createElement("div");
 
-            const text = submitBtn.querySelector("span");
+        toast.className = `toast ${type}`;
 
-            if (text) {
-                text.textContent = "در حال ثبت پاسخ...";
-            }
+        toast.innerHTML =
+            `<span>${type === "success" ? "✓" : "ℹ"}</span><span>${message}</span>`;
 
-        });
+        container.appendChild(toast);
+
+        setTimeout(() => {
+
+            toast.classList.add("out");
+
+            setTimeout(() => toast.remove(), 320);
+
+        }, 2600);
     }
-
 
 
     /* ==================================================
@@ -1564,23 +1655,418 @@
 
     document
         .querySelectorAll(".fill-choice")
-        .forEach(function (choice) {
+        .forEach(choice => {
 
-            choice.addEventListener("click", function (event) {
+            choice.addEventListener("click", event => {
 
                 if (event.target.tagName !== "INPUT") {
 
-                    const input = this.querySelector("input");
+                    const input =
+                        choice.querySelector("input");
 
-                    if (input) {
-                        input.click();
-                    }
+                    if (input) input.click();
                 }
-
             });
-
         });
 
+
+    /* ==================================================
+       TEXTAREA COUNTER
+    ================================================== */
+
+    document
+        .querySelectorAll("[data-counter-for]")
+        .forEach(counter => {
+
+            const inputId =
+                counter.dataset.counterFor;
+
+            const textarea =
+                document.getElementById(inputId);
+
+            if (!textarea) return;
+
+            const update = () => {
+
+                counter.textContent =
+                    `${textarea.value.length} کاراکتر`;
+            };
+
+            textarea.addEventListener("input", update);
+
+            update();
+        });
+
+
+    /* ==================================================
+       FILE SIZE INFO
+    ================================================== */
+
+    document
+        .querySelectorAll("input[type='file']")
+        .forEach(input => {
+
+            input.addEventListener("change", () => {
+
+                const question =
+                    input.closest(".fill-question");
+
+                if (!question) return;
+
+                const info =
+                    question.querySelector("[data-file-info]");
+
+                if (!info) return;
+
+                const file = input.files && input.files[0];
+
+                if (!file) {
+
+                    info.innerHTML = "";
+                    return;
+                }
+
+                const size =
+                    (file.size / 1024 / 1024).toFixed(2);
+
+                info.innerHTML =
+                    `فایل انتخاب‌شده: <strong>${file.name}</strong> (${size} مگابایت)`;
+            });
+        });
+
+
+    /* ==================================================
+       PROGRESS BAR
+    ================================================== */
+
+    function updateProgress() {
+
+        const requiredQuestions =
+            document.querySelectorAll(
+                ".fill-question[data-required='1']"
+            );
+
+        if (!requiredQuestions.length) {
+
+            progressFill.style.width = "100%";
+            progressFill.classList.add("complete");
+            progressText.textContent = "۱۰۰٪";
+            return;
+        }
+
+
+        let filled = 0;
+
+        requiredQuestions.forEach(q => {
+
+            if (isQuestionFilled(q)) filled++;
+        });
+
+
+        const percent =
+            Math.round((filled / requiredQuestions.length) * 100);
+
+        progressFill.style.width = percent + "%";
+        progressText.textContent = percent + "٪";
+
+        progressFill.classList.toggle(
+            "complete",
+            percent === 100
+        );
+    }
+
+
+    function isQuestionFilled(question) {
+
+        const type = question.dataset.type;
+
+        if (type === "boolean" || type === "single") {
+
+            return !!question.querySelector("input:checked");
+        }
+
+        if (type === "multiple") {
+
+            return !!question.querySelector("input:checked");
+        }
+
+        if (type === "file") {
+
+            const f = question.querySelector("input[type='file']");
+
+            return !!(f && f.files && f.files.length);
+        }
+
+        const input =
+            question.querySelector("input, textarea");
+
+        return !!(input && input.value.trim());
+    }
+
+
+    document
+        .querySelectorAll(".fill-question input, .fill-question textarea")
+        .forEach(el => {
+
+            el.addEventListener("input", updateProgress);
+            el.addEventListener("change", updateProgress);
+        });
+
+
+    updateProgress();
+
+
+    /* ==================================================
+       AUTOSAVE DRAFT
+    ================================================== */
+
+    function saveDraft() {
+
+        try {
+
+            const data = {};
+
+            document
+                .querySelectorAll(".fill-question")
+                .forEach(q => {
+
+                    const id = q.dataset.questionId;
+                    const type = q.dataset.type;
+
+                    if (type === "multiple") {
+
+                        data[id] = Array.from(
+                            q.querySelectorAll("input:checked")
+                        ).map(i => i.value);
+
+                    } else if (type === "boolean" || type === "single") {
+
+                        const checked =
+                            q.querySelector("input:checked");
+
+                        data[id] = checked ? checked.value : "";
+
+                    } else if (type === "file") {
+
+                        // فایل قابل ذخیره نیست
+
+                    } else {
+
+                        const input =
+                            q.querySelector("input, textarea");
+
+                        data[id] = input ? input.value : "";
+                    }
+                });
+
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(data)
+            );
+
+        } catch (_) {}
+    }
+
+
+    function restoreDraft() {
+
+        let raw;
+
+        try { raw = localStorage.getItem(STORAGE_KEY); }
+
+        catch (_) { return; }
+
+        if (!raw) return;
+
+        let data;
+
+        try { data = JSON.parse(raw); }
+
+        catch (_) { return; }
+
+
+        let restored = false;
+
+
+        Object.keys(data).forEach(id => {
+
+            const question =
+                document.querySelector(
+                    `.fill-question[data-question-id="${id}"]`
+                );
+
+            if (!question) return;
+
+            const type = question.dataset.type;
+            const value = data[id];
+
+
+            if (type === "multiple" && Array.isArray(value)) {
+
+                value.forEach(v => {
+
+                    const input =
+                        question.querySelector(
+                            `input[value="${CSS.escape(v)}"]`
+                        );
+
+                    if (input) input.checked = true;
+                });
+
+                restored = true;
+
+            } else if (type === "boolean" || type === "single") {
+
+                if (value) {
+
+                    const input =
+                        question.querySelector(
+                            `input[value="${CSS.escape(value)}"]`
+                        );
+
+                    if (input) input.checked = true;
+
+                    restored = true;
+                }
+
+            } else if (type === "file") {
+
+                // skip
+
+            } else {
+
+                const input =
+                    question.querySelector("input, textarea");
+
+                if (input && value) {
+
+                    input.value = value;
+                    restored = true;
+                }
+            }
+        });
+
+
+        if (restored) {
+
+            showToast("پیش‌نویس قبلی بازگردانی شد", "info");
+
+            updateProgress();
+        }
+    }
+
+
+    let autosaveTimer = null;
+
+    function scheduleAutosave() {
+
+        if (autosaveTimer) clearTimeout(autosaveTimer);
+
+        autosaveTimer = setTimeout(saveDraft, 1000);
+    }
+
+
+    document
+        .querySelectorAll(".fill-question input, .fill-question textarea")
+        .forEach(el => {
+
+            el.addEventListener("input", scheduleAutosave);
+            el.addEventListener("change", scheduleAutosave);
+        });
+
+
+    /* ==================================================
+       SUBMIT
+    ================================================== */
+
+    if (form && submitBtn) {
+
+        form.addEventListener("submit", (e) => {
+
+            // اعتبارسنجی سریع اجباری‌ها
+            const requiredQuestions =
+                document.querySelectorAll(
+                    ".fill-question[data-required='1']"
+                );
+
+            let firstInvalid = null;
+
+            requiredQuestions.forEach(q => {
+
+                if (!isQuestionFilled(q)) {
+
+                    q.classList.add("has-error");
+
+                    if (!firstInvalid) firstInvalid = q;
+                }
+            });
+
+
+            if (firstInvalid) {
+
+                e.preventDefault();
+
+                firstInvalid.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                });
+
+                showToast(
+                    "لطفاً سؤالات اجباری را تکمیل کنید",
+                    "info"
+                );
+
+                return;
+            }
+
+
+            submitBtn.classList.add("loading");
+            submitBtn.disabled = true;
+
+            if (submitText) {
+
+                submitText.textContent =
+                    "در حال ثبت پاسخ...";
+            }
+
+
+            // پاک کردن پیش‌نویس
+            try { localStorage.removeItem(STORAGE_KEY); }
+
+            catch (_) {}
+        });
+    }
+
+
+    /* ==================================================
+       اسکرول به خطای اول در بارگذاری اولیه
+    ================================================== */
+
+    window.addEventListener("DOMContentLoaded", () => {
+
+        const firstError =
+            document.querySelector(".fill-question.has-error");
+
+        if (firstError) {
+
+            setTimeout(() => {
+
+                firstError.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                });
+
+            }, 300);
+        }
+    });
+
+
+    /* ==================================================
+       بازگردانی پیش‌نویس
+    ================================================== */
+
+    restoreDraft();
 
 })();
 

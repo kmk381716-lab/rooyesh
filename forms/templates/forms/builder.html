@@ -17,7 +17,6 @@
 
     .builder-page {
 
-        /* دارک (پیش‌فرض) */
         --bp-card-1: #1a3055;
         --bp-card-2: #102040;
         --bp-border: rgba(109, 164, 255, 0.28);
@@ -42,6 +41,14 @@
         --bp-danger-bg: rgba(244, 63, 94, 0.15);
         --bp-danger-border: rgba(244, 63, 94, 0.4);
 
+        --bp-warn: #fbbf24;
+        --bp-warn-bg: rgba(251, 191, 36, 0.12);
+        --bp-warn-border: rgba(251, 191, 36, 0.4);
+
+        --bp-success: #34d399;
+        --bp-success-bg: rgba(52, 211, 153, 0.14);
+        --bp-success-border: rgba(52, 211, 153, 0.4);
+
         --bp-shadow:
             0 30px 80px rgba(0, 0, 0, 0.55),
             0 0 60px rgba(74, 125, 232, 0.14),
@@ -61,8 +68,6 @@
             color 0.4s ease;
     }
 
-
-    /* تم روشن — وقتی body.light فعال باشه */
 
     body.light .builder-page {
 
@@ -463,8 +468,51 @@
     }
 
 
+    .field-label-row {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 12px;
+
+        margin-bottom: 10px;
+    }
+
+
+    .field-label-row label {
+        margin-bottom: 0 !important;
+    }
+
+
+    .char-counter {
+
+        color: var(--bp-dim);
+
+        font-size: 10.5px;
+
+        font-weight: 600;
+
+        font-variant-numeric: tabular-nums;
+
+        transition: color 0.2s ease;
+    }
+
+
+    .char-counter.warn {
+        color: var(--bp-warn);
+    }
+
+
+    .char-counter.danger {
+        color: var(--bp-danger);
+    }
+
+
     /* =========================================================
-       INPUTS — با هر دو تم
+       INPUTS
     ========================================================= */
 
     .builder-page input[type="text"],
@@ -553,7 +601,18 @@
 
         box-shadow:
             0 0 0 4px rgba(74, 125, 232, 0.25) !important,
-            0 15px 35px rgba(0, 0, 0, 0.4) !important !important;
+            0 15px 35px rgba(0, 0, 0, 0.4) !important;
+    }
+
+
+    .builder-page input[type="text"].has-error,
+    .builder-page textarea.has-error,
+    .builder-page select.has-error {
+
+        border-color: var(--bp-danger) !important;
+
+        box-shadow:
+            0 0 0 4px rgba(244, 63, 94, 0.18) !important;
     }
 
 
@@ -792,6 +851,30 @@
     }
 
 
+    .question.dragging {
+
+        opacity: 0.55;
+
+        transform: scale(0.985);
+
+        border-color: var(--bp-blue-light);
+
+        border-style: dashed;
+    }
+
+
+    .question.drag-over {
+
+        border-color: var(--bp-cyan);
+
+        border-style: dashed;
+
+        box-shadow:
+            0 0 0 4px rgba(76, 201, 232, 0.18),
+            0 18px 40px rgba(0, 0, 0, 0.3);
+    }
+
+
     @keyframes bpQuestionShow {
 
         from {
@@ -839,6 +922,57 @@
         gap: 11px;
 
         min-width: 0;
+    }
+
+
+    .drag-handle {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 34px;
+        height: 34px;
+
+        flex-shrink: 0;
+
+        border-radius: 9px;
+
+        background: rgba(74, 125, 232, 0.1);
+
+        border: 1.5px solid rgba(109, 164, 255, 0.25);
+
+        color: var(--bp-muted);
+
+        font-size: 16px;
+
+        line-height: 1;
+
+        cursor: grab;
+
+        user-select: none;
+
+        transition:
+            color 0.2s ease,
+            background 0.2s ease,
+            border-color 0.2s ease;
+    }
+
+
+    .drag-handle:hover {
+
+        color: var(--bp-blue-light);
+
+        background: rgba(74, 125, 232, 0.18);
+
+        border-color: rgba(109, 164, 255, 0.5);
+    }
+
+
+    .drag-handle:active {
+        cursor: grabbing;
     }
 
 
@@ -892,51 +1026,95 @@
     }
 
 
-    .remove-btn {
+    .question-actions {
 
-        position: relative;
+        display: flex;
 
-        flex-shrink: 0;
+        align-items: center;
 
-        min-height: 40px;
+        gap: 6px;
 
-        padding: 9px 16px;
+        flex-wrap: wrap;
+    }
 
-        border: 1.5px solid var(--bp-danger-border);
 
-        border-radius: 11px;
+    .icon-btn {
 
-        background: var(--bp-danger-bg);
+        display: inline-flex;
 
-        color: var(--bp-danger);
+        align-items: center;
+
+        justify-content: center;
+
+        min-height: 38px;
+
+        min-width: 38px;
+
+        padding: 8px 12px;
+
+        border: 1.5px solid rgba(109, 164, 255, 0.28);
+
+        border-radius: 10px;
+
+        background: rgba(74, 125, 232, 0.08);
+
+        color: var(--bp-text-soft);
 
         cursor: pointer;
 
         font-family: 'Vazirmatn', Tahoma, sans-serif;
 
-        font-size: 11.5px;
+        font-size: 12px;
 
         font-weight: 800;
 
         white-space: nowrap;
 
         transition:
-            transform 0.22s ease,
-            background 0.22s ease,
-            border-color 0.22s ease,
-            box-shadow 0.22s ease;
+            transform 0.2s ease,
+            background 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease;
     }
 
 
-    .remove-btn:hover {
+    .icon-btn:hover {
 
         transform: translateY(-2px);
+
+        background: rgba(74, 125, 232, 0.2);
+
+        border-color: rgba(109, 164, 255, 0.55);
+
+        color: var(--bp-text);
+    }
+
+
+    .icon-btn:disabled {
+
+        opacity: 0.35;
+
+        cursor: not-allowed;
+
+        transform: none;
+    }
+
+
+    .icon-btn.danger {
+
+        border-color: var(--bp-danger-border);
+
+        background: var(--bp-danger-bg);
+
+        color: var(--bp-danger);
+    }
+
+
+    .icon-btn.danger:hover {
 
         background: rgba(244, 63, 94, 0.25);
 
         border-color: rgba(244, 63, 94, 0.6);
-
-        box-shadow: 0 10px 22px rgba(244, 63, 94, 0.2);
     }
 
 
@@ -1200,6 +1378,39 @@
         background: rgba(74, 125, 232, 0.14);
 
         color: var(--bp-text);
+    }
+
+
+    .options-warning {
+
+        display: none;
+
+        align-items: center;
+
+        gap: 8px;
+
+        margin-top: 12px;
+
+        padding: 10px 14px;
+
+        border-radius: 10px;
+
+        background: var(--bp-warn-bg);
+
+        border: 1.5px solid var(--bp-warn-border);
+
+        color: var(--bp-warn);
+
+        font-size: 11.5px;
+
+        font-weight: 700;
+
+        line-height: 1.7;
+    }
+
+
+    .options-warning.show {
+        display: flex;
     }
 
 
@@ -1495,6 +1706,114 @@
 
 
     /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast-container {
+
+        position: fixed;
+
+        top: 20px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 9999;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        pointer-events: none;
+    }
+
+
+    .toast {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        min-width: 240px;
+
+        max-width: 380px;
+
+        padding: 12px 16px;
+
+        border-radius: 12px;
+
+        background: rgba(20, 32, 56, 0.95);
+
+        border: 1.5px solid rgba(109, 164, 255, 0.4);
+
+        color: #e0eaff;
+
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+        font-size: 12.5px;
+
+        font-weight: 700;
+
+        box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.5),
+            0 0 40px rgba(74, 125, 232, 0.2);
+
+        animation: toastIn 0.35s cubic-bezier(.22, 1, .36, 1);
+
+        pointer-events: auto;
+    }
+
+
+    body.light .toast {
+
+        background: rgba(240, 245, 255, 0.98);
+
+        border-color: rgba(58, 109, 224, 0.4);
+
+        color: #0a1630;
+    }
+
+
+    .toast.warn {
+        border-color: var(--bp-warn-border);
+        color: var(--bp-warn);
+    }
+
+
+    .toast.danger {
+        border-color: var(--bp-danger-border);
+        color: var(--bp-danger);
+    }
+
+
+    .toast.success {
+        border-color: var(--bp-success-border);
+        color: var(--bp-success);
+    }
+
+
+    .toast.out {
+        animation: toastOut 0.3s ease forwards;
+    }
+
+
+    @keyframes toastIn {
+        from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+
+    @keyframes toastOut {
+        to { opacity: 0; transform: translateY(-12px) scale(0.96); }
+    }
+
+
+    /* =========================================================
        ANIMATIONS
     ========================================================= */
 
@@ -1550,12 +1869,10 @@
             padding: 24px 14px 45px;
         }
 
-
         .builder-card {
             padding: 26px 20px;
             border-radius: 20px;
         }
-
 
         .builder-title {
             font-size: 22px;
@@ -1573,12 +1890,10 @@
             padding: 20px 12px 35px;
         }
 
-
         .builder-card {
             padding: 22px 16px;
             border-radius: 18px;
         }
-
 
         .builder-header {
             flex-direction: column;
@@ -1587,24 +1902,20 @@
             margin-bottom: 22px;
         }
 
-
         .builder-badge {
             margin-bottom: 10px;
             font-size: 10px;
             padding: 6px 10px;
         }
 
-
         .builder-title {
             margin-bottom: 8px;
             font-size: 20px;
         }
 
-
         .builder-subtitle {
             font-size: 11.5px;
         }
-
 
         .builder-counter {
             width: 100%;
@@ -1612,17 +1923,14 @@
             min-height: 44px;
         }
 
-
         .builder-page .field {
             margin-bottom: 18px;
         }
-
 
         .builder-page .field label {
             margin-bottom: 8px;
             font-size: 12px;
         }
-
 
         .builder-page input[type="text"],
         .builder-page textarea,
@@ -1633,21 +1941,17 @@
             font-size: 14px !important;
         }
 
-
         .builder-page textarea {
             min-height: 110px !important;
         }
-
 
         .questions {
             margin-top: 24px;
         }
 
-
         .questions-title h3 {
             font-size: 14px;
         }
-
 
         .question {
             padding: 20px 16px;
@@ -1655,38 +1959,42 @@
             margin-bottom: 13px;
         }
 
-
-        .question-number-badge {
+        .question-number-badge,
+        .drag-handle {
             width: 32px;
             height: 32px;
             border-radius: 10px;
             font-size: 13px;
         }
 
-
         .question-number {
             font-size: 13.5px;
         }
 
-
-        .remove-btn {
-            min-height: 38px;
-            padding: 8px 13px;
-            font-size: 11px;
+        .question-header {
+            gap: 8px;
         }
 
+        .question-actions {
+            width: 100%;
+            justify-content: flex-end;
+        }
+
+        .icon-btn {
+            min-height: 36px;
+            padding: 7px 10px;
+            font-size: 11px;
+        }
 
         .required-box {
             padding: 11px 14px;
             font-size: 12px !important;
         }
 
-
         .options {
             margin-top: 18px;
             padding-top: 16px;
         }
-
 
         .option-row {
             flex-direction: column;
@@ -1699,17 +2007,14 @@
             margin-bottom: 10px;
         }
 
-
         .option-row input {
             width: 100%;
         }
-
 
         .delete-option {
             width: 100%;
             min-height: 44px;
         }
-
 
         .add-option {
             width: 100%;
@@ -1717,24 +2022,25 @@
             font-size: 12px;
         }
 
-
         .add-question {
             min-height: 54px;
             font-size: 12.5px;
         }
-
 
         .save-btn {
             min-height: 54px;
             font-size: 13px;
             margin-top: 22px;
         }
+
+        .toast-container {
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            transform: none;
+        }
     }
 
-
-    /* =========================================================
-       TINY PHONES
-    ========================================================= */
 
     @media (max-width: 380px) {
 
@@ -1742,45 +2048,30 @@
             padding: 14px 8px 28px;
         }
 
-
         .builder-card {
             padding: 18px 13px;
             border-radius: 16px;
         }
 
-
         .builder-title {
             font-size: 18px;
         }
-
 
         .question {
             padding: 16px 12px;
         }
 
-
-        .question-number-badge {
+        .question-number-badge,
+        .drag-handle {
             width: 30px;
             height: 30px;
         }
 
-
         .question-number {
             font-size: 12.5px;
         }
-
-
-        .remove-btn {
-            min-height: 36px;
-            padding: 7px 11px;
-            font-size: 10.5px;
-        }
     }
 
-
-    /* =========================================================
-       REDUCED MOTION
-    ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
@@ -1834,6 +2125,7 @@
                     <p class="builder-subtitle">
 
                         عنوان، توضیحات و سؤالات فرم را مشخص کنید.
+                        سؤالات را می‌توانید با کشیدن جابه‌جا کنید.
                         سپس فرم آماده انتشار و استفاده خواهد بود.
 
                     </p>
@@ -1878,6 +2170,8 @@
             <form
                 method="post"
                 enctype="multipart/form-data"
+                id="builderForm"
+                novalidate
             >
 
                 {% csrf_token %}
@@ -1888,9 +2182,20 @@
 
                 <div class="field">
 
-                    <label for="title">
-                        عنوان فرم
-                    </label>
+                    <div class="field-label-row">
+
+                        <label for="title">
+                            عنوان فرم
+                        </label>
+
+                        <span
+                            class="char-counter"
+                            id="titleCounter"
+                        >
+                            0 / 200
+                        </span>
+
+                    </div>
 
 
                     <input
@@ -1899,7 +2204,9 @@
                         name="title"
                         placeholder="مثلاً ثبت‌نام مسابقات فوتبال"
                         autocomplete="off"
+                        maxlength="200"
                         required
+                        value="{{ posted.title|default:'' }}"
                     >
 
                 </div>
@@ -1919,7 +2226,7 @@
                         id="description"
                         name="description"
                         placeholder="توضیحات مربوط به این فرم را وارد کنید..."
-                    ></textarea>
+                    >{{ posted.description|default:'' }}</textarea>
 
                 </div>
 
@@ -1937,7 +2244,7 @@
                         </h3>
 
                         <span>
-                            هر سؤال را جداگانه تنظیم کنید
+                            برای جابه‌جایی، سؤال را بکشید
                         </span>
 
                     </div>
@@ -1956,6 +2263,7 @@
                         </div>
 
                         هنوز سؤالی اضافه نشده است.
+                        روی «افزودن سؤال جدید» بزنید.
 
                     </div>
 
@@ -2010,34 +2318,104 @@
 
 
 
+<div class="toast-container" id="toastContainer"></div>
+
+
+
+{% if posted_json %}
+    {{ posted_json|json_script:"posted-data" }}
+{% endif %}
+
+
+
 <script>
 
 
+/* =========================================================
+   STATE
+========================================================= */
+
 let questionIndex = 0;
 
+const STORAGE_KEY = "form_builder_draft_v2";
+const AUTOSAVE_MS = 1500;
+
+let autosaveTimer = null;
 
 
-function addQuestion() {
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message, type = "info") {
 
     const container =
-        document.getElementById("questionsList");
+        document.getElementById("toastContainer");
 
+    if (!container) return;
+
+    const toast =
+        document.createElement("div");
+
+    toast.className = `toast ${type}`;
+
+    const icons = {
+        info: "ℹ",
+        warn: "⚠",
+        danger: "✕",
+        success: "✓",
+    };
+
+    toast.innerHTML =
+        `<span>${icons[type] || "ℹ"}</span><span>${message}</span>`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+
+        toast.classList.add("out");
+
+        setTimeout(() => toast.remove(), 320);
+
+    }, 3200);
+}
+
+
+/* =========================================================
+   QUESTION FACTORY
+========================================================= */
+
+function createQuestionElement(data = {}) {
+
+    const currentIndex =
+        data.key !== undefined
+            ? String(data.key)
+            : String(questionIndex);
+
+    // نکته: questionIndex همیشه باید جلو باشد
+    if (Number(currentIndex) >= questionIndex) {
+
+        questionIndex = Number(currentIndex) + 1;
+    }
 
     const question =
         document.createElement("div");
 
+    question.className = "question";
 
-    const currentIndex =
-        questionIndex;
+    question.dataset.index = currentIndex;
 
+    const title = (data.title || "").replace(/"/g, "&quot;");
 
-    question.className =
-        "question";
+    const type = data.type || "text";
 
+    const required = data.required ? "checked" : "";
 
-    question.dataset.index =
-        currentIndex;
+    const options = Array.isArray(data.options) ? data.options : [];
 
+    const optionsHtml = options
+        .map(opt => buildOptionRow(currentIndex, opt))
+        .join("");
 
     question.innerHTML = `
 
@@ -2052,6 +2430,15 @@ function addQuestion() {
 
             <div class="question-heading">
 
+                <div
+                    class="drag-handle"
+                    draggable="true"
+                    title="برای جابه‌جایی بکشید"
+                    aria-label="جابه‌جایی سؤال"
+                >
+                    ⋮⋮
+                </div>
+
                 <div class="question-number-badge">
                     1
                 </div>
@@ -2063,13 +2450,45 @@ function addQuestion() {
             </div>
 
 
-            <button
-                type="button"
-                class="remove-btn"
-                onclick="removeQuestion(this)"
-            >
-                حذف سؤال
-            </button>
+            <div class="question-actions">
+
+                <button
+                    type="button"
+                    class="icon-btn"
+                    onclick="moveQuestion(this, -1)"
+                    title="انتقال به بالا"
+                >
+                    ↑
+                </button>
+
+                <button
+                    type="button"
+                    class="icon-btn"
+                    onclick="moveQuestion(this, 1)"
+                    title="انتقال به پایین"
+                >
+                    ↓
+                </button>
+
+                <button
+                    type="button"
+                    class="icon-btn"
+                    onclick="duplicateQuestion(this)"
+                    title="کپی سؤال"
+                >
+                    ⧉ کپی
+                </button>
+
+                <button
+                    type="button"
+                    class="icon-btn danger"
+                    onclick="removeQuestion(this)"
+                    title="حذف سؤال"
+                >
+                    حذف
+                </button>
+
+            </div>
 
         </div>
 
@@ -2086,6 +2505,7 @@ function addQuestion() {
                 name="question_title_${currentIndex}"
                 placeholder="مثلاً نام و نام خانوادگی"
                 autocomplete="off"
+                value="${title}"
                 required
             >
 
@@ -2101,7 +2521,7 @@ function addQuestion() {
 
             <select
                 name="question_type_${currentIndex}"
-                onchange="toggleOptions(this)"
+                onchange="onTypeChange(this)"
             >
 
                 <option value="text">متن کوتاه</option>
@@ -2124,6 +2544,7 @@ function addQuestion() {
                 type="checkbox"
                 name="question_required_${currentIndex}"
                 value="${currentIndex}"
+                ${required}
             >
 
             این سؤال اجباری باشد
@@ -2146,7 +2567,9 @@ function addQuestion() {
             </div>
 
 
-            <div class="option-list"></div>
+            <div class="option-list">
+                ${optionsHtml}
+            </div>
 
 
             <button
@@ -2157,243 +2580,885 @@ function addQuestion() {
                 ＋ افزودن گزینه
             </button>
 
-        </div>
 
+            <div class="options-warning">
+                ⚠ حداقل یک گزینه برای این سؤال وارد کنید.
+            </div>
+
+        </div>
     `;
 
+    // ست کردن select بعد از innerHTML
+    const select =
+        question.querySelector("select");
 
-    container.appendChild(question);
+    if (select) select.value = type;
 
-
-    questionIndex++;
-
-
-    updateQuestionNumbers();
-
-    updateQuestionCount();
-
-    updateEmptyMessage();
-
-
-    toggleOptions(
-        question.querySelector("select")
-    );
-
-
-    question
-        .querySelector("input[type='text']")
-        .focus();
+    return question;
 }
 
 
+/* =========================================================
+   BUILD OPTION ROW
+========================================================= */
+
+function buildOptionRow(qIndex, value = "") {
+
+    const safe = String(value).replace(/"/g, "&quot;");
+
+    return `
+        <div class="option-row">
+
+            <input
+                type="text"
+                name="option_${qIndex}"
+                placeholder="مثلاً پایه دهم"
+                autocomplete="off"
+                value="${safe}"
+            >
+
+            <button
+                type="button"
+                class="delete-option"
+                onclick="removeOption(this)"
+            >
+                حذف
+            </button>
+
+        </div>
+    `;
+}
+
+
+/* =========================================================
+   ADD QUESTION
+========================================================= */
+
+function addQuestion(data = {}, options = {}) {
+
+    const container =
+        document.getElementById("questionsList");
+
+    if (!container) return null;
+
+    const question =
+        createQuestionElement(data);
+
+    container.appendChild(question);
+
+    // event listeners
+    bindQuestionEvents(question);
+
+    updateQuestionNumbers();
+    updateQuestionCount();
+    updateEmptyMessage();
+    onTypeChange(question.querySelector("select"));
+    scheduleAutosave();
+
+    if (options.focus !== false) {
+
+        const titleInput =
+            question.querySelector("input[type='text']");
+
+        if (titleInput) titleInput.focus();
+    }
+
+    return question;
+}
+
+
+/* =========================================================
+   REMOVE QUESTION
+========================================================= */
 
 function removeQuestion(button) {
 
     const question =
         button.closest(".question");
 
-
     if (!question) return;
-
 
     question.style.animation =
         "questionRemove 0.25s ease forwards";
-
 
     setTimeout(() => {
 
         question.remove();
 
         updateQuestionNumbers();
-
         updateQuestionCount();
-
         updateEmptyMessage();
+        scheduleAutosave();
 
     }, 220);
 }
 
 
+/* =========================================================
+   DUPLICATE QUESTION
+========================================================= */
+
+function duplicateQuestion(button) {
+
+    const question =
+        button.closest(".question");
+
+    if (!question) return;
+
+    const newKey = String(questionIndex++);
+
+    const title =
+        question.querySelector("input[name^='question_title_']")?.value || "";
+
+    const type =
+        question.querySelector("select")?.value || "text";
+
+    const required =
+        question.querySelector("input[type='checkbox']")?.checked || false;
+
+    const options = Array.from(
+        question.querySelectorAll(".option-row input")
+    ).map(i => i.value);
+
+
+    const clone =
+        createQuestionElement({
+            key: newKey,
+            title,
+            type,
+            required,
+            options,
+        });
+
+
+    question.parentNode.insertBefore(clone, question.nextSibling);
+
+    bindQuestionEvents(clone);
+
+    updateQuestionNumbers();
+    updateQuestionCount();
+    scheduleAutosave();
+
+    showToast("سؤال کپی شد", "success");
+
+    clone.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+
+/* =========================================================
+   MOVE QUESTION (up/down buttons)
+========================================================= */
+
+function moveQuestion(button, direction) {
+
+    const question =
+        button.closest(".question");
+
+    if (!question) return;
+
+    if (direction < 0) {
+
+        const prev = question.previousElementSibling;
+
+        if (prev && prev.classList.contains("question")) {
+
+            question.parentNode.insertBefore(question, prev);
+        }
+
+    } else {
+
+        const next = question.nextElementSibling;
+
+        if (next && next.classList.contains("question")) {
+
+            question.parentNode.insertBefore(next, question);
+        }
+    }
+
+    updateQuestionNumbers();
+    scheduleAutosave();
+}
+
+
+/* =========================================================
+   UPDATE NUMBERS
+========================================================= */
 
 function updateQuestionNumbers() {
 
     const questions =
         document.querySelectorAll(".question");
 
-
     questions.forEach((question, index) => {
 
         const number = index + 1;
 
-
         const title =
             question.querySelector(".question-number");
 
-
         const badge =
             question.querySelector(".question-number-badge");
-
 
         if (title) title.textContent = `سؤال ${number}`;
 
         if (badge) badge.textContent = number;
 
+        // غیرفعال کردن دکمه‌های بالا/پایین در ابتدا و انتها
+        const upBtn =
+            question.querySelector(".icon-btn[title='انتقال به بالا']");
+
+        const downBtn =
+            question.querySelector(".icon-btn[title='انتقال به پایین']");
+
+        if (upBtn) upBtn.disabled = (index === 0);
+        if (downBtn) downBtn.disabled = (index === questions.length - 1);
     });
 }
 
 
+/* =========================================================
+   UPDATE COUNT
+========================================================= */
 
 function updateQuestionCount() {
 
     const count =
         document.querySelectorAll(".question").length;
 
-
     const counter =
         document.getElementById("questionCount");
 
-
     if (counter) counter.textContent = count;
-
 }
 
 
-
-function toggleOptions(select) {
-
-    const question =
-        select.closest(".question");
-
-
-    if (!question) return;
-
-
-    const options =
-        question.querySelector(".options");
-
-
-    if (!options) return;
-
-
-    const needsOptions =
-        select.value === "single" ||
-        select.value === "multiple";
-
-
-    options.style.display =
-        needsOptions ? "block" : "none";
-}
-
-
-
-function addOption(button) {
-
-    const question =
-        button.closest(".question");
-
-
-    if (!question) return;
-
-
-    const list =
-        question.querySelector(".option-list");
-
-
-    const qIndex =
-        question.dataset.index;
-
-
-    if (!list) return;
-
-
-    const row =
-        document.createElement("div");
-
-
-    row.className =
-        "option-row";
-
-
-    row.innerHTML = `
-
-        <input
-            type="text"
-            name="option_${qIndex}"
-            placeholder="مثلاً پایه دهم"
-            autocomplete="off"
-        >
-
-
-        <button
-            type="button"
-            class="delete-option"
-            onclick="removeOption(this)"
-        >
-            حذف
-        </button>
-
-    `;
-
-
-    list.appendChild(row);
-
-
-    const input =
-        row.querySelector("input");
-
-
-    if (input) input.focus();
-
-}
-
-
-
-function removeOption(button) {
-
-    const row =
-        button.closest(".option-row");
-
-
-    if (!row) return;
-
-
-    row.style.animation =
-        "optionRemove 0.2s ease forwards";
-
-
-    setTimeout(() => {
-        row.remove();
-    }, 180);
-
-}
-
-
+/* =========================================================
+   EMPTY MESSAGE
+========================================================= */
 
 function updateEmptyMessage() {
 
     const count =
         document.querySelectorAll(".question").length;
 
-
     const emptyMessage =
         document.getElementById("emptyMessage");
 
-
     if (!emptyMessage) return;
-
 
     emptyMessage.style.display =
         count === 0 ? "block" : "none";
-
 }
 
 
+/* =========================================================
+   OPTIONS TOGGLE
+========================================================= */
 
-addQuestion();
+function onTypeChange(select) {
 
-updateQuestionCount();
+    if (!select) return;
 
-updateEmptyMessage();
+    const question =
+        select.closest(".question");
+
+    if (!question) return;
+
+    const options =
+        question.querySelector(".options");
+
+    if (!options) return;
+
+    const needsOptions =
+        select.value === "single" ||
+        select.value === "multiple";
+
+    options.style.display =
+        needsOptions ? "block" : "none";
+
+    if (needsOptions) {
+
+        const list =
+            question.querySelector(".option-list");
+
+        if (list && list.children.length === 0) {
+            addOption(question.querySelector(".add-option"));
+        }
+    }
+
+    validateOptions(question);
+    scheduleAutosave();
+}
+
+
+/* =========================================================
+   OPTION VALIDATION
+========================================================= */
+
+function validateOptions(question) {
+
+    const select =
+        question.querySelector("select");
+
+    const warning =
+        question.querySelector(".options-warning");
+
+    if (!select || !warning) return true;
+
+    const needsOptions =
+        select.value === "single" ||
+        select.value === "multiple";
+
+    if (!needsOptions) {
+
+        warning.classList.remove("show");
+        return true;
+    }
+
+    const filled = Array.from(
+        question.querySelectorAll(".option-row input")
+    ).filter(i => i.value.trim() !== "").length;
+
+    if (filled < 1) {
+
+        warning.classList.add("show");
+        return false;
+    }
+
+    warning.classList.remove("show");
+    return true;
+}
+
+
+/* =========================================================
+   ADD OPTION
+========================================================= */
+
+function addOption(button) {
+
+    if (!button) return;
+
+    const question =
+        button.closest(".question");
+
+    if (!question) return;
+
+    const list =
+        question.querySelector(".option-list");
+
+    const qIndex =
+        question.dataset.index;
+
+    if (!list) return;
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.innerHTML =
+        buildOptionRow(qIndex, "").trim();
+
+    const row = wrapper.firstElementChild;
+
+    list.appendChild(row);
+
+    const input = row.querySelector("input");
+
+    if (input) input.focus();
+
+    validateOptions(question);
+    scheduleAutosave();
+}
+
+
+/* =========================================================
+   REMOVE OPTION
+========================================================= */
+
+function removeOption(button) {
+
+    const row =
+        button.closest(".option-row");
+
+    if (!row) return;
+
+    const question =
+        button.closest(".question");
+
+    row.style.animation =
+        "optionRemove 0.2s ease forwards";
+
+    setTimeout(() => {
+
+        row.remove();
+
+        if (question) validateOptions(question);
+
+        scheduleAutosave();
+
+    }, 180);
+}
+
+
+/* =========================================================
+   BIND EVENTS ON QUESTION
+========================================================= */
+
+function bindQuestionEvents(question) {
+
+    // درگ‌هندل
+    const handle =
+        question.querySelector(".drag-handle");
+
+    if (handle) {
+
+        handle.addEventListener("dragstart", (e) => {
+
+            question.classList.add("dragging");
+
+            e.dataTransfer.effectAllowed = "move";
+
+            e.dataTransfer.setData("text/plain", "");
+
+            // برای فایرفاکس
+            try { e.dataTransfer.setDragImage(question, 0, 0); } catch (_) {}
+        });
+
+        handle.addEventListener("dragend", () => {
+
+            question.classList.remove("dragging");
+
+            document.querySelectorAll(".question.drag-over")
+                .forEach(el => el.classList.remove("drag-over"));
+
+            updateQuestionNumbers();
+            scheduleAutosave();
+        });
+    }
+
+    // درگ‌اُور روی خود سؤال
+    question.addEventListener("dragover", (e) => {
+
+        const dragging =
+            document.querySelector(".question.dragging");
+
+        if (!dragging || dragging === question) return;
+
+        e.preventDefault();
+
+        e.dataTransfer.dropEffect = "move";
+
+        question.classList.add("drag-over");
+
+        const rect = question.getBoundingClientRect();
+
+        const after =
+            (e.clientY - rect.top) / rect.height > 0.5;
+
+        if (after) {
+
+            question.parentNode.insertBefore(
+                dragging,
+                question.nextSibling
+            );
+
+        } else {
+
+            question.parentNode.insertBefore(
+                dragging,
+                question
+            );
+        }
+    });
+
+    question.addEventListener("dragleave", () => {
+
+        question.classList.remove("drag-over");
+    });
+
+    question.addEventListener("drop", (e) => {
+
+        e.preventDefault();
+
+        question.classList.remove("drag-over");
+
+        updateQuestionNumbers();
+        scheduleAutosave();
+    });
+
+
+    // Enter در فیلد عنوان → فوکوس روی select
+    const titleInput =
+        question.querySelector("input[name^='question_title_']");
+
+    if (titleInput) {
+
+        titleInput.addEventListener("keydown", (e) => {
+
+            if (e.key === "Enter") {
+
+                e.preventDefault();
+
+                const select =
+                    question.querySelector("select");
+
+                if (select) select.focus();
+            }
+        });
+
+        titleInput.addEventListener("input", scheduleAutosave);
+    }
+
+
+    // تغییر required
+    const requiredInput =
+        question.querySelector("input[type='checkbox']");
+
+    if (requiredInput) {
+
+        requiredInput.addEventListener("change", scheduleAutosave);
+    }
+
+
+    // Enter در فیلدهای گزینه → گزینه جدید
+    question.addEventListener("keydown", (e) => {
+
+        if (
+            e.key === "Enter" &&
+            e.target.matches(".option-row input")
+        ) {
+
+            e.preventDefault();
+
+            const addBtn =
+                question.querySelector(".add-option");
+
+            if (addBtn) addBtn.click();
+        }
+    });
+
+
+    // تغییر مقدار گزینه → بررسی هشدار
+    question.querySelectorAll(".option-row input")
+        .forEach(input => {
+
+            input.addEventListener("input", () => {
+
+                validateOptions(question);
+                scheduleAutosave();
+            });
+        });
+}
+
+
+/* =========================================================
+   CHARACTER COUNTER
+========================================================= */
+
+function bindCharCounter() {
+
+    const titleInput =
+        document.getElementById("title");
+
+    const counter =
+        document.getElementById("titleCounter");
+
+    if (!titleInput || !counter) return;
+
+    const update = () => {
+
+        const len = titleInput.value.length;
+
+        const max = titleInput.maxLength || 200;
+
+        counter.textContent = `${len} / ${max}`;
+
+        counter.classList.toggle("warn", len > max * 0.75);
+        counter.classList.toggle("danger", len >= max);
+    };
+
+    titleInput.addEventListener("input", update);
+
+    update();
+}
+
+
+/* =========================================================
+   AUTOSAVE + RESTORE
+========================================================= */
+
+function collectDraft() {
+
+    const data = {
+
+        title: document.getElementById("title")?.value || "",
+        description: document.getElementById("description")?.value || "",
+        questions: [],
+    };
+
+    document.querySelectorAll(".question").forEach(q => {
+
+        const titleEl =
+            q.querySelector("input[name^='question_title_']");
+
+        const typeEl = q.querySelector("select");
+
+        const requiredEl = q.querySelector("input[type='checkbox']");
+
+        const options = Array.from(
+            q.querySelectorAll(".option-row input")
+        ).map(i => i.value);
+
+        if (!titleEl) return;
+
+        data.questions.push({
+            key: q.dataset.index,
+            title: titleEl.value,
+            type: typeEl ? typeEl.value : "text",
+            required: requiredEl ? requiredEl.checked : false,
+            options,
+        });
+    });
+
+    return data;
+}
+
+
+function saveDraft() {
+
+    try {
+
+        const data = collectDraft();
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+    } catch (_) {}
+}
+
+
+function clearDraft() {
+
+    try { localStorage.removeItem(STORAGE_KEY); } catch (_) {}
+}
+
+
+function scheduleAutosave() {
+
+    if (autosaveTimer) clearTimeout(autosaveTimer);
+
+    autosaveTimer = setTimeout(saveDraft, AUTOSAVE_MS);
+}
+
+
+function restoreDraft() {
+
+    try {
+
+        const raw = localStorage.getItem(STORAGE_KEY);
+
+        if (!raw) return null;
+
+        const data = JSON.parse(raw);
+
+        if (!data || !Array.isArray(data.questions)) return null;
+
+        return data;
+
+    } catch (_) {
+
+        return null;
+    }
+}
+
+
+/* =========================================================
+   SUBMIT GUARD
+========================================================= */
+
+function validateBeforeSubmit() {
+
+    let ok = true;
+
+    document.querySelectorAll(".question").forEach(q => {
+
+        if (!validateOptions(q)) ok = false;
+    });
+
+    return ok;
+}
+
+
+function bindSubmit() {
+
+    const form =
+        document.getElementById("builderForm");
+
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+
+        // چک عنوان
+        const titleEl =
+            document.getElementById("title");
+
+        if (titleEl && !titleEl.value.trim()) {
+
+            e.preventDefault();
+
+            titleEl.classList.add("has-error");
+            titleEl.focus();
+
+            showToast("عنوان فرم را وارد کنید", "danger");
+
+            return;
+        }
+
+        // چک سؤال‌ها
+        const questions =
+            document.querySelectorAll(".question");
+
+        if (questions.length === 0) {
+
+            e.preventDefault();
+
+            showToast("حداقل یک سؤال اضافه کنید", "warn");
+
+            return;
+        }
+
+        if (!validateBeforeSubmit()) {
+
+            e.preventDefault();
+
+            showToast(
+                "برای سؤال‌های انتخابی حداقل یک گزینه وارد کنید",
+                "warn"
+            );
+
+            return;
+        }
+
+        // اگر همه چیز اوکی بود، پیش‌نویس پاک شود
+        clearDraft();
+    });
+}
+
+
+/* =========================================================
+   KEYBOARD SHORTCUTS
+========================================================= */
+
+function bindShortcuts() {
+
+    document.addEventListener("keydown", (e) => {
+
+        // Ctrl + Shift + A → افزودن سؤال
+        if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "a") {
+
+            e.preventDefault();
+            addQuestion();
+            return;
+        }
+
+        // Ctrl + Enter → ذخیره فرم
+        if (e.ctrlKey && e.key === "Enter") {
+
+            e.preventDefault();
+
+            const form =
+                document.getElementById("builderForm");
+
+            if (form) form.requestSubmit();
+        }
+    });
+}
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+function init() {
+
+    bindCharCounter();
+    bindSubmit();
+    bindShortcuts();
+
+    // ۱. اگر خطای سرور داشتیم و posted_json موجود بود
+    const postedEl =
+        document.getElementById("posted-data");
+
+    if (postedEl) {
+
+        try {
+
+            const data = JSON.parse(postedEl.textContent);
+
+            if (data) {
+
+                const titleEl = document.getElementById("title");
+
+                const descEl = document.getElementById("description");
+
+                if (titleEl && data.title) titleEl.value = data.title;
+
+                if (descEl && data.description) descEl.value = data.description;
+
+                (data.questions || []).forEach(q => {
+
+                    addQuestion(q, { focus: false });
+                });
+
+                if (data.questions && data.questions.length) {
+                    scheduleAutosave();
+                }
+
+                updateQuestionCount();
+                updateEmptyMessage();
+
+                return;
+            }
+
+        } catch (_) {}
+    }
+
+    // ۲. بازگردانی پیش‌نویس localStorage
+    const draft = restoreDraft();
+
+    if (draft && (draft.questions.length || draft.title)) {
+
+        const titleEl = document.getElementById("title");
+
+        const descEl = document.getElementById("description");
+
+        if (titleEl) titleEl.value = draft.title || "";
+
+        if (descEl) descEl.value = draft.description || "";
+
+        draft.questions.forEach(q => {
+
+            addQuestion(q, { focus: false });
+        });
+
+        updateQuestionCount();
+        updateEmptyMessage();
+
+        showToast("پیش‌نویس قبلی بازگردانی شد", "info");
+
+        return;
+    }
+
+    // ۳. حالت اولیه: یک سؤال خالی
+    addQuestion();
+
+    updateQuestionCount();
+    updateEmptyMessage();
+}
+
+
+init();
 
 
 </script>

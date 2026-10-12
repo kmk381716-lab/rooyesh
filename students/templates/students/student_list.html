@@ -1,1310 +1,515 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <title>
-        دانش‌آموزان من | کانون رویش
-    </title>
-
-
-    <style>
-
-        /* =====================================================
-           ROOT
-        ===================================================== */
-
-        :root {
-            --bg: #050b14;
-            --bg-2: #08111f;
-
-            --card: rgba(13, 27, 46, 0.82);
-            --card-2: rgba(9, 20, 35, 0.94);
-
-            --text: #edf4ff;
-            --soft: #aab8ca;
-            --muted: #718096;
-
-            --blue: #4e8cff;
-            --blue-light: #79aaff;
-            --purple: #8b63ff;
-
-            --green: #35d49a;
-            --red: #ff6678;
-
-            --border: rgba(255,255,255,0.075);
-
-            --shadow:
-                0 24px 70px rgba(0,0,0,0.30);
-        }
-
-
-        /* =====================================================
-           RESET
-        ===================================================== */
-
-        * {
-            box-sizing: border-box;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        body {
-            margin: 0;
-
-            min-height: 100vh;
-
-            color: var(--text);
-
-            font-family:
-                Tahoma,
-                Arial,
-                sans-serif;
-
-            background:
-                radial-gradient(
-                    circle at 10% 0%,
-                    rgba(78,140,255,0.13),
-                    transparent 28%
-                ),
-                radial-gradient(
-                    circle at 90% 10%,
-                    rgba(139,99,255,0.11),
-                    transparent 29%
-                ),
-                radial-gradient(
-                    circle at 50% 100%,
-                    rgba(67,213,255,0.05),
-                    transparent 26%
-                ),
-                linear-gradient(
-                    180deg,
-                    var(--bg),
-                    var(--bg-2)
-                );
-
-            overflow-x: hidden;
-        }
-
-
-        body::before {
-            content: "";
-
-            position: fixed;
-
-            inset: 0;
-
-            pointer-events: none;
-
-            background:
-                linear-gradient(
-                    rgba(255,255,255,0.012) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.012) 1px,
-                    transparent 1px
-                );
-
-            background-size:
-                40px 40px;
-
-            mask-image:
-                linear-gradient(
-                    to bottom,
-                    black,
-                    transparent 82%
-                );
-
-            z-index: -1;
-        }
-
-
-        a {
-            color: inherit;
-
-            text-decoration: none;
-        }
-
-
-        button {
-            font: inherit;
-        }
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        .header {
-            position: sticky;
-
-            top: 0;
-
-            z-index: 1000;
-
-            background:
-                rgba(5,12,22,0.84);
-
-            backdrop-filter:
-                blur(22px);
-
-            -webkit-backdrop-filter:
-                blur(22px);
-
-            border-bottom:
-                1px solid rgba(255,255,255,0.055);
-
-            box-shadow:
-                0 10px 45px rgba(0,0,0,0.16);
-        }
-
-
-        .header::before {
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-
-            left: 18%;
-
-            width: 64%;
-
-            height: 1px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(78,140,255,0.65),
-                    rgba(139,99,255,0.55),
-                    transparent
-                );
-        }
-
-
-        .header-inner {
-            width:
-                min(
-                    1100px,
-                    calc(100% - 36px)
-                );
-
-            min-height: 76px;
-
-            margin-inline: auto;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 18px;
-        }
-
-
-        .header-title h1 {
-            margin:
-                0 0 3px;
-
-            color: #ffffff;
-
-            font-size: 20px;
-
-            font-weight: 900;
-        }
-
-
-        .header-title p {
-            margin: 0;
-
-            color: var(--muted);
-
-            font-size: 11px;
-        }
-
-
-        /* =====================================================
-           BACK
-        ===================================================== */
-
-        .back-button {
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            min-height: 43px;
-
-            padding:
-                0 15px;
-
-            border:
-                1px solid rgba(255,255,255,0.08);
-
-            border-radius: 12px;
-
-            color: #cad7e9;
-
-            background:
-                rgba(255,255,255,0.035);
-
-            font-size: 11px;
-
-            font-weight: 800;
-
-            transition:
-                transform .22s ease,
-                background .22s ease,
-                border-color .22s ease,
-                color .22s ease;
-        }
-
-
-        .back-button:hover {
-            color: #ffffff;
-
-            background:
-                rgba(78,140,255,0.08);
-
-            border-color:
-                rgba(78,140,255,0.21);
-
-            transform:
-                translateY(-2px);
-        }
-
-
-        /* =====================================================
-           MAIN
-        ===================================================== */
-
-        .container {
-            width:
-                min(
-                    1100px,
-                    calc(100% - 36px)
-                );
-
-            margin:
-                0 auto;
-
-            padding:
-                34px 0 70px;
-        }
-
-
-        /* =====================================================
-           MAIN CARD
-        ===================================================== */
-
-        .page-card {
-            position: relative;
-
-            overflow: hidden;
-
-            padding: 27px;
-
-            border:
-                1px solid var(--border);
-
-            border-radius: 24px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(15,31,52,0.86),
-                    rgba(8,19,33,0.95)
-                );
-
-            box-shadow:
-                var(--shadow);
-
-            backdrop-filter:
-                blur(18px);
-
-            -webkit-backdrop-filter:
-                blur(18px);
-        }
-
-
-        .page-card::before {
-            content: "";
-
-            position: absolute;
-
-            top: -110px;
-            left: -100px;
-
-            width: 280px;
-            height: 280px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(78,140,255,0.07);
-
-            filter:
-                blur(75px);
-
-            pointer-events: none;
-        }
-
-
-        .page-card > * {
-            position: relative;
-
-            z-index: 1;
-        }
-
-
-        /* =====================================================
-           TOP
-        ===================================================== */
-
-        .top-section {
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 20px;
-
-            margin-bottom: 23px;
-        }
-
-
-        .top-title {
-            display: flex;
-
-            align-items: center;
-
-            gap: 13px;
-        }
-
-
-        .top-icon {
-            width: 46px;
-            height: 46px;
-
-            flex-shrink: 0;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border-radius: 14px;
-
-            font-size: 21px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(78,140,255,0.18),
-                    rgba(139,99,255,0.16)
-                );
-
-            border:
-                1px solid rgba(255,255,255,0.08);
-
-            box-shadow:
-                0 10px 30px rgba(78,140,255,0.10);
-        }
-
-
-        .top-section h2 {
-            margin:
-                0 0 4px;
-
-            color: #ffffff;
-
-            font-size: 18px;
-
-            font-weight: 900;
-        }
-
-
-        .top-section p {
-            margin: 0;
-
-            color: var(--muted);
-
-            font-size: 10px;
-        }
-
-
-        .add-button {
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 7px;
-
-            min-height: 45px;
-
-            padding:
-                0 16px;
-
-            border:
-                1px solid rgba(255,255,255,0.10);
-
-            border-radius: 12px;
-
-            color: #ffffff;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #4387ff,
-                    #7958eb
-                );
-
-            box-shadow:
-                0 11px 27px rgba(67,135,255,0.18);
-
-            font-size: 11px;
-
-            font-weight: 900;
-
-            transition:
-                transform .22s ease,
-                box-shadow .22s ease;
-        }
-
-
-        .add-button:hover {
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 15px 34px rgba(67,135,255,0.27);
-        }
-
-
-        /* =====================================================
-           STUDENT LIST
-        ===================================================== */
-
-        .student-list {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 9px;
-        }
-
-
-        .student-item {
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 18px;
-
-            padding:
-                13px 14px;
-
-            border:
-                1px solid rgba(255,255,255,0.055);
-
-            border-radius:
-                16px;
-
-            background:
-                rgba(255,255,255,0.022);
-
-            transition:
-                transform .22s ease,
-                border-color .22s ease,
-                background .22s ease,
-                box-shadow .22s ease;
-        }
-
-
-        .student-item:hover {
-            transform:
-                translateY(-2px);
-
-            border-color:
-                rgba(78,140,255,0.17);
-
-            background:
-                rgba(78,140,255,0.035);
-
-            box-shadow:
-                0 13px 32px rgba(0,0,0,0.13);
-        }
-
-
-        /* =====================================================
-           STUDENT INFO
-        ===================================================== */
-
-        .student-info {
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            min-width: 0;
-        }
-
-
-        .avatar {
-            width: 47px;
-            height: 47px;
-
-            flex-shrink: 0;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border-radius: 14px;
-
-            font-size: 20px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(78,140,255,0.14),
-                    rgba(139,99,255,0.14)
-                );
-
-            border:
-                1px solid rgba(255,255,255,0.07);
-        }
-
-
-        .student-name {
-            display: block;
-
-            margin-bottom: 3px;
-
-            color: #eaf2fd;
-
-            font-size: 13px;
-
-            font-weight: 900;
-
-            transition:
-                color .2s ease;
-        }
-
-
-        .student-name:hover {
-            color:
-                var(--blue-light);
-        }
-
-
-        .student-meta {
-            color:
-                #6e7d91;
-
-            font-size:
-                9px;
-        }
-
-
-        /* =====================================================
-           ACTIONS
-        ===================================================== */
-
-        .student-actions {
-            display: flex;
-
-            align-items: center;
-
-            gap: 7px;
-
-            flex-shrink: 0;
-        }
-
-
-        .detail-button,
-        .finance-button {
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            min-height: 38px;
-
-            padding:
-                0 12px;
-
-            border-radius: 10px;
-
-            font-size:
-                10px;
-
-            font-weight:
-                800;
-
-            transition:
-                transform .2s ease,
-                background .2s ease,
-                border-color .2s ease;
-        }
-
-
-        .detail-button {
-            border:
-                1px solid rgba(78,140,255,0.13);
-
-            color:
-                #8db7ff;
-
-            background:
-                rgba(78,140,255,0.055);
-        }
-
-
-        .detail-button:hover {
-            color:
-                #ffffff;
-
-            background:
-                rgba(78,140,255,0.11);
-
-            border-color:
-                rgba(78,140,255,0.23);
-
-            transform:
-                translateY(-1px);
-        }
-
-
-        .finance-button {
-            border:
-                1px solid rgba(53,212,154,0.14);
-
-            color:
-                #67dfb2;
-
-            background:
-                rgba(53,212,154,0.055);
-        }
-
-
-        .finance-button:hover {
-            color:
-                #ffffff;
-
-            background:
-                rgba(53,212,154,0.10);
-
-            border-color:
-                rgba(53,212,154,0.24);
-
-            transform:
-                translateY(-1px);
-        }
-
-
-        .delete-button {
-            min-height: 38px;
-
-            padding:
-                0 12px;
-
-            border:
-                1px solid rgba(255,102,120,0.11);
-
-            border-radius: 10px;
-
-            background:
-                rgba(255,102,120,0.05);
-
-            color:
-                #ff8795;
-
-            font-size:
-                10px;
-
-            font-weight:
-                800;
-
-            cursor:
-                pointer;
-
-            transition:
-                transform .2s ease,
-                background .2s ease,
-                border-color .2s ease;
-        }
-
-
-        .delete-button:hover {
-            transform:
-                translateY(-1px);
-
-            background:
-                rgba(255,102,120,0.09);
-
-            border-color:
-                rgba(255,102,120,0.22);
-        }
-
-
-        /* =====================================================
-           EMPTY
-        ===================================================== */
-
-        .empty-state {
-            min-height:
-                290px;
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            padding:
-                40px 20px;
-
-            text-align:
-                center;
-
-            border:
-                1px dashed rgba(255,255,255,0.09);
-
-            border-radius:
-                17px;
-
-            background:
-                rgba(255,255,255,0.018);
-        }
-
-
-        .empty-icon {
-            width:
-                68px;
-
-            height:
-                68px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            margin-bottom:
-                14px;
-
-            border-radius:
-                20px;
-
-            font-size:
-                30px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(78,140,255,0.09),
-                    rgba(139,99,255,0.08)
-                );
-
-            border:
-                1px solid rgba(255,255,255,0.06);
-        }
-
-
-        .empty-state h3 {
-            margin:
-                0 0 7px;
-
-            color:
-                #e5edf8;
-
-            font-size:
-                16px;
-
-            font-weight:
-                900;
-        }
-
-
-        .empty-state p {
-            margin:
-                0;
-
-            color:
-                #6f7d91;
-
-            font-size:
-                11px;
-        }
-
-
-        /* =====================================================
-           TABLET
-        ===================================================== */
-
-        @media (max-width: 700px) {
-
-            .header-inner {
-                width:
-                    calc(100% - 24px);
-
-                min-height:
-                    68px;
-
-                gap:
-                    10px;
-            }
-
-
-            .header-title h1 {
-                font-size:
-                    17px;
-            }
-
-
-            .header-title p {
-                display:
-                    none;
-            }
-
-
-            .back-button {
-                min-height:
-                    40px;
-
-                padding:
-                    0 11px;
-
-                font-size:
-                    10px;
-            }
-
-
-            .container {
-                width:
-                    calc(100% - 22px);
-
-                padding:
-                    22px 0 50px;
-            }
-
-
-            .page-card {
-                padding:
-                    18px;
-
-                border-radius:
-                    20px;
-            }
-
-
-            .top-section {
-                flex-direction:
-                    column;
-
-                align-items:
-                    stretch;
-
-                gap:
-                    16px;
-            }
-
-
-            .top-title {
-                align-items:
-                    flex-start;
-            }
-
-
-            .top-icon {
-                width:
-                    42px;
-
-                height:
-                    42px;
-            }
-
-
-            .add-button {
-                width:
-                    100%;
-            }
-
-
-            .student-item {
-                align-items:
-                    stretch;
-
-                flex-direction:
-                    column;
-
-                gap:
-                    13px;
-
-                padding:
-                    13px;
-            }
-
-
-            .student-info {
-                width:
-                    100%;
-            }
-
-
-            .student-actions {
-                width:
-                    100%;
-
-                display:
-                    grid;
-
-                grid-template-columns:
-                    repeat(3, 1fr);
-
-                gap:
-                    7px;
-            }
-
-
-            .detail-button,
-            .finance-button,
-            .delete-button {
-                width:
-                    100%;
-            }
-
-        }
-
-
-        /* =====================================================
-           SMALL PHONE
-        ===================================================== */
-
-        @media (max-width: 380px) {
-
-            .page-card {
-                padding:
-                    15px;
-            }
-
-
-            .top-section h2 {
-                font-size:
-                    16px;
-            }
-
-
-            .student-name {
-                font-size:
-                    12px;
-            }
-
-
-            .avatar {
-                width:
-                    43px;
-
-                height:
-                    43px;
-            }
-
-
-            .student-actions {
-                grid-template-columns:
-                    1fr;
-            }
-
-        }
-
-
-        /* =====================================================
-           REDUCE MOTION
-        ===================================================== */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            * {
-                transition:
-                    none !important;
-            }
-
-        }
-
-    </style>
-
-</head>
-
-
-<body>
-
-
-<!-- =====================================================
-     HEADER
-====================================================== -->
-
-<header class="header">
-
-    <div class="header-inner">
-
-
-        <div class="header-title">
-
-            <h1>
-                دانش‌آموزان من
-            </h1>
-
-
-            <p>
-                مدیریت دانش‌آموزان تحت نظر شما
-            </p>
-
+{% extends "base.html" %}
+
+{% block title %}دانش‌آموزان من — کانون رویش{% endblock %}
+
+{% block content %}
+
+<style>
+/* =====================================================
+   PAGE — MY STUDENTS
+===================================================== */
+.my-students-page {
+    padding: 34px 0 70px;
+}
+
+/* ===================== TOP HEADER ===================== */
+.my-students-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+.my-students-top h1 {
+    margin: 0 0 6px;
+    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    font-weight: 900;
+    letter-spacing: -0.4px;
+    background: linear-gradient(120deg, #7fa8ff 0%, #a98eff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.my-students-top p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 42px;
+    padding: 0 15px;
+    border-radius: 12px;
+    color: var(--text-soft);
+    font-size: 11.5px;
+    font-weight: 800;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+
+body.light .back-link { background: rgba(0, 0, 0, 0.03); }
+
+.back-link:hover {
+    color: var(--text);
+    background: rgba(78, 140, 255, 0.10);
+    border-color: rgba(78, 140, 255, 0.28);
+    transform: translateY(-1px);
+}
+
+/* ===================== PAGE CARD ===================== */
+.page-card {
+    position: relative;
+    overflow: hidden;
+    padding: 26px;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: var(--shadow);
+}
+
+.page-card::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; left: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(78, 140, 255, 0.55),
+        rgba(139, 99, 255, 0.55),
+        transparent
+    );
+}
+
+.page-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================== TOP SECTION ===================== */
+.top-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 23px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.top-title {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+}
+
+.top-icon {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-size: 21px;
+    background: linear-gradient(
+        135deg,
+        rgba(78, 140, 255, 0.18),
+        rgba(139, 99, 255, 0.16)
+    );
+    border: 1px solid rgba(78, 140, 255, 0.20);
+    box-shadow: 0 8px 22px rgba(78, 140, 255, 0.10);
+}
+
+.top-section h2 {
+    margin: 0 0 4px;
+    color: var(--text);
+    font-size: 1.05rem;
+    font-weight: 900;
+}
+
+.top-section .subtitle {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 11.5px;
+}
+
+/* ===================== ADD BUTTON ===================== */
+.btn-add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 45px;
+    padding: 0 16px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4387ff, #7958eb);
+    box-shadow: 0 11px 27px rgba(67, 135, 255, 0.22);
+    font-size: 12px;
+    font-weight: 900;
+    text-decoration: none;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    flex-shrink: 0;
+}
+
+.btn-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 34px rgba(67, 135, 255, 0.30);
+}
+
+/* ===================== STUDENT LIST ===================== */
+.student-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.student-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.022);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.light .student-item { background: rgba(255, 255, 255, 0.6); }
+
+.student-item:hover {
+    transform: translateY(-1px);
+    border-color: rgba(78, 140, 255, 0.20);
+    background: rgba(78, 140, 255, 0.04);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+}
+
+/* ===================== STUDENT INFO ===================== */
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.avatar {
+    width: 47px;
+    height: 47px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-size: 20px;
+    background: linear-gradient(
+        135deg,
+        rgba(78, 140, 255, 0.16),
+        rgba(139, 99, 255, 0.16)
+    );
+    border: 1px solid rgba(78, 140, 255, 0.16);
+}
+
+.student-name {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 900;
+    transition: color 0.2s ease;
+}
+
+.student-name:hover { color: var(--blue-light); }
+
+.student-meta {
+    color: var(--text-muted);
+    font-size: 10.5px;
+}
+
+/* ===================== ACTIONS ===================== */
+.student-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+}
+
+.actions form { margin: 0; }
+
+.btn-detail,
+.btn-finance,
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 13px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* مشاهده جزئیات */
+.btn-detail {
+    border: 1px solid rgba(78, 140, 255, 0.20);
+    color: var(--blue-light);
+    background: rgba(78, 140, 255, 0.06);
+}
+
+.btn-detail:hover {
+    color: #ffffff;
+    background: rgba(78, 140, 255, 0.16);
+    border-color: rgba(78, 140, 255, 0.32);
+    transform: translateY(-1px);
+}
+
+/* مالی */
+.btn-finance {
+    border: 1px solid rgba(53, 212, 154, 0.22);
+    color: #67dfb2;
+    background: rgba(53, 212, 154, 0.06);
+}
+
+.btn-finance:hover {
+    color: #ffffff;
+    background: rgba(53, 212, 154, 0.14);
+    border-color: rgba(53, 212, 154, 0.32);
+    transform: translateY(-1px);
+}
+
+/* حذف */
+.btn-delete {
+    border: 1px solid rgba(255, 102, 120, 0.18);
+    background: rgba(255, 102, 120, 0.06);
+    color: #ff8795;
+}
+
+.btn-delete:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 102, 120, 0.12);
+    border-color: rgba(255, 102, 120, 0.30);
+}
+
+/* ===================== EMPTY ===================== */
+.empty-state {
+    min-height: 290px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    border: 1px dashed var(--border);
+    border-radius: 17px;
+    background: rgba(255, 255, 255, 0.018);
+}
+
+body.light .empty-state { background: rgba(255, 255, 255, 0.5); }
+
+.empty-icon {
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    border-radius: 20px;
+    font-size: 30px;
+    background: linear-gradient(
+        135deg,
+        rgba(78, 140, 255, 0.10),
+        rgba(139, 99, 255, 0.08)
+    );
+    border: 1px solid rgba(78, 140, 255, 0.16);
+}
+
+.empty-state h3 {
+    margin: 0 0 7px;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.empty-state p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 700px) {
+    .my-students-page { padding: 22px 0 55px; }
+
+    .my-students-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .page-card {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .top-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .top-title { align-items: flex-start; }
+
+    .top-icon { width: 42px; height: 42px; font-size: 19px; }
+
+    .btn-add { width: 100%; }
+
+    .student-item {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 13px;
+        padding: 13px;
+    }
+
+    .student-info { width: 100%; }
+
+    .student-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+    }
+
+    .btn-detail,
+    .btn-finance,
+    .btn-delete { width: 100%; }
+}
+
+@media (max-width: 380px) {
+    .page-card { padding: 15px; }
+    .top-section h2 { font-size: 0.95rem; }
+    .student-name { font-size: 12px; }
+
+    .avatar {
+        width: 43px;
+        height: 43px;
+        font-size: 18px;
+    }
+
+    .student-actions { grid-template-columns: 1fr; }
+}
+</style>
+
+
+<div class="my-students-page">
+    <div class="container">
+
+        <!-- ===================== TOP HEADER ===================== -->
+        <div class="my-students-top">
+            <div>
+                <h1>دانش‌آموزان من</h1>
+                <p>مدیریت دانش‌آموزان تحت نظر شما</p>
+            </div>
+
+            <a href="{% url 'coaches:dashboard' %}" class="back-link">
+                ← بازگشت به داشبورد
+            </a>
         </div>
 
 
-        <a
-            href="{% url 'coaches:dashboard' %}"
-            class="back-button"
-        >
-            ← بازگشت به داشبورد
-        </a>
+        <!-- ===================== PAGE CARD ===================== -->
+        <div class="page-card">
 
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     MAIN
-====================================================== -->
-
-<main class="container">
-
-
-    <div class="page-card">
-
-
-        <!-- =================================================
-             TOP
-        ================================================== -->
-
-        <div class="top-section">
-
-
-            <div class="top-title">
-
-                <div class="top-icon">
-                    👨‍🎓
+            <!-- ===================== TOP SECTION ===================== -->
+            <div class="top-section">
+                <div class="top-title">
+                    <div class="top-icon">👨‍🎓</div>
+                    <div>
+                        <h2>لیست دانش‌آموزان</h2>
+                        <p class="subtitle">
+                            {{ students.count }} دانش‌آموز ثبت شده است.
+                        </p>
+                    </div>
                 </div>
 
-
-                <div>
-
-                    <h2>
-                        لیست دانش‌آموزان
-                    </h2>
-
-
-                    <p>
-                        {{ students.count }}
-                        دانش‌آموز ثبت شده است.
-                    </p>
-
-                </div>
-
+                <a href="{% url 'students:create' %}" class="btn-add">
+                    ＋ افزودن دانش‌آموز
+                </a>
             </div>
 
 
-            <a
-                href="{% url 'students:create' %}"
-                class="add-button"
-            >
-                ＋ افزودن دانش‌آموز
-            </a>
+            <!-- ===================== STUDENTS ===================== -->
+            {% if students %}
+                <div class="student-list">
+                    {% for student in students %}
+                        <div class="student-item">
 
-        </div>
-
-
-        <!-- =================================================
-             STUDENTS
-        ================================================== -->
-
-        {% if students %}
-
-            <div class="student-list">
-
-
-                {% for student in students %}
-
-
-                    <div class="student-item">
-
-
-                        <!-- STUDENT -->
-
-                        <div class="student-info">
-
-
-                            <div class="avatar">
-                                👤
+                            <div class="student-info">
+                                <div class="avatar">👤</div>
+                                <div>
+                                    <a href="{% url 'students:detail' student.id %}" class="student-name">
+                                        {{ student.first_name }} {{ student.last_name }}
+                                    </a>
+                                    <div class="student-meta">
+                                        {% if student.group %}
+                                            گروه: {{ student.group.name }}
+                                        {% else %}
+                                            بدون گروه
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
 
-
-                            <div>
-
-                                <a
-                                    href="{% url 'students:detail' student.id %}"
-                                    class="student-name"
-                                >
-                                    {{ student.first_name }}
-                                    {{ student.last_name }}
+                            <div class="student-actions">
+                                <a href="{% url 'students:detail' student.id %}" class="btn-detail">
+                                    مشاهده جزئیات
                                 </a>
 
+                                <a href="{% url 'finance:student_finance' student.id %}" class="btn-finance">
+                                    💰 حساب مالی
+                                </a>
 
-                                <div class="student-meta">
-
-                                    {% if student.group %}
-
-                                        گروه:
-                                        {{ student.group.name }}
-
-                                    {% else %}
-
-                                        بدون گروه
-
-                                    {% endif %}
-
-                                </div>
-
+                                <form
+                                    method="post"
+                                    action="{% url 'students:delete' student.id %}"
+                                    onsubmit="return confirm('آیا از حذف این دانش‌آموز مطمئن هستید؟');"
+                                >
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-delete">
+                                        حذف
+                                    </button>
+                                </form>
                             </div>
 
                         </div>
-
-
-                        <!-- ACTIONS -->
-
-                        <div class="student-actions">
-
-
-                            <a
-                                href="{% url 'students:detail' student.id %}"
-                                class="detail-button"
-                            >
-                                مشاهده جزئیات
-                            </a>
-
-
-                            <a
-                                href="{% url 'finance:student_finance' student.id %}"
-                                class="finance-button"
-                            >
-                                💰 حساب مالی
-                            </a>
-
-
-                            <form
-                                method="post"
-                                action="{% url 'students:delete' student.id %}"
-                                onsubmit="return confirm('آیا از حذف این دانش‌آموز مطمئن هستید؟');"
-                            >
-
-                                {% csrf_token %}
-
-
-                                <button
-                                    type="submit"
-                                    class="delete-button"
-                                >
-                                    حذف
-                                </button>
-
-                            </form>
-
-                        </div>
-
-
-                    </div>
-
-
-                {% endfor %}
-
-
-            </div>
-
-
-        {% else %}
-
-
-            <!-- =================================================
-                 EMPTY
-            ================================================== -->
-
-            <div class="empty-state">
-
-
-                <div class="empty-icon">
-                    👨‍🎓
+                    {% endfor %}
                 </div>
 
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon">👨‍🎓</div>
+                    <h3>هنوز دانش‌آموزی ثبت نشده است</h3>
+                    <p>اولین دانش‌آموز خود را اضافه کنید.</p>
+                </div>
+            {% endif %}
 
-                <h3>
-                    هنوز دانش‌آموزی ثبت نشده است
-                </h3>
-
-
-                <p>
-                    اولین دانش‌آموز خود را اضافه کنید.
-                </p>
-
-            </div>
-
-
-        {% endif %}
-
+        </div>
 
     </div>
+</div>
 
-
-</main>
-
-
-</body>
-
-</html>
+{% endblock %}

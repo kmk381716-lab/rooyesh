@@ -1,7 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.contrib.auth.models import User
-
 
 
 class StudentGroup(models.Model):
@@ -25,10 +23,7 @@ class StudentGroup(models.Model):
     class Meta:
         verbose_name = "گروه دانش‌آموزان"
         verbose_name_plural = "گروه‌های دانش‌آموزان"
-
-        ordering = [
-            "name"
-        ]
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
@@ -93,14 +88,12 @@ class Student(models.Model):
     class Meta:
         verbose_name = "دانش‌آموز"
         verbose_name_plural = "دانش‌آموزان"
-
-        ordering = [
-            "first_name",
-            "last_name"
-        ]
+        ordering = ["first_name", "last_name"]
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+
 class Attendance(models.Model):
 
     ATTENDANCE_TYPES = [
@@ -152,16 +145,12 @@ class Attendance(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="تاریخ ثبت"
-
     )
 
     class Meta:
         verbose_name = "حضور و غیاب"
         verbose_name_plural = "حضور و غیاب"
-
-        ordering = [
-            "-date"
-        ]
+        ordering = ["-date"]
 
         constraints = [
             models.UniqueConstraint(

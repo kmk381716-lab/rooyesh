@@ -62,7 +62,6 @@
 
 
         position: relative;
-
         width: 100%;
 
         padding: 30px 20px 60px;
@@ -121,14 +120,16 @@
     }
 
 
+    /* =========================================================
+       CONTAINER
+    ========================================================= */
+
     .responses-container {
 
         position: relative;
-
         z-index: 1;
 
         width: 100%;
-
         max-width: 1100px;
 
         margin: 0 auto;
@@ -138,18 +139,19 @@
 
 
     @keyframes responsesContainerShow {
-
         from { opacity: 0; transform: translateY(24px) scale(0.985); }
         to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
 
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
     .responses-header {
 
         display: flex;
-
         align-items: center;
-
         justify-content: space-between;
 
         gap: 20px;
@@ -159,7 +161,6 @@
         padding: 30px 32px;
 
         border: 1.5px solid var(--rp-border);
-
         border-radius: 24px;
 
         background:
@@ -172,7 +173,6 @@
         box-shadow: var(--rp-shadow);
 
         position: relative;
-
         overflow: hidden;
 
         animation: responsesHeaderShow 0.65s 0.06s both;
@@ -184,10 +184,7 @@
         content: "";
 
         position: absolute;
-
-        top: 0;
-        right: 0;
-        left: 0;
+        top: 0; right: 0; left: 0;
 
         height: 4px;
 
@@ -208,13 +205,11 @@
 
 
     @keyframes responsesBorderShine {
-
         to { background-position: 200% 0; }
     }
 
 
     @keyframes responsesHeaderShow {
-
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
@@ -229,7 +224,6 @@
     .responses-badge {
 
         display: inline-flex;
-
         align-items: center;
 
         gap: 8px;
@@ -252,7 +246,6 @@
         color: var(--rp-blue-light);
 
         font-size: 12px;
-
         font-weight: 800;
     }
 
@@ -286,7 +279,6 @@
 
 
     @keyframes responsesDot {
-
         0%, 100% { transform: scale(1); opacity: 0.75; }
         50% { transform: scale(1.3); opacity: 1; }
     }
@@ -299,9 +291,7 @@
         color: var(--rp-text);
 
         font-size: 30px;
-
         line-height: 1.35;
-
         font-weight: 800;
 
         letter-spacing: -0.7px;
@@ -315,17 +305,96 @@
         color: var(--rp-muted);
 
         font-size: 13.5px;
-
         font-weight: 500;
 
         line-height: 1.9;
     }
 
 
+    .responses-header-actions {
+
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+
+        flex-shrink: 0;
+        flex-wrap: wrap;
+    }
+
+
+    .responses-action-btn {
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 8px;
+
+        min-height: 48px;
+
+        padding: 12px 20px;
+
+        border-radius: 12px;
+
+        border: 1.5px solid rgba(109, 164, 255, 0.3);
+
+        background: rgba(109, 164, 255, 0.1);
+
+        color: var(--rp-text-soft);
+
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+        font-size: 13px;
+        font-weight: 800;
+
+        text-decoration: none;
+
+        white-space: nowrap;
+
+        transition:
+            transform 0.25s ease,
+            background 0.25s ease,
+            border-color 0.25s ease,
+            box-shadow 0.25s ease,
+            color 0.25s ease;
+    }
+
+
+    body.light .responses-action-btn {
+
+        background: rgba(58, 109, 224, 0.08);
+        border-color: rgba(58, 109, 224, 0.3);
+    }
+
+
+    .responses-action-btn svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
+
+    .responses-action-btn:hover {
+
+        transform: translateY(-3px);
+
+        background: rgba(109, 164, 255, 0.2);
+        border-color: rgba(109, 164, 255, 0.6);
+
+        color: var(--rp-text);
+
+        box-shadow: 0 12px 28px rgba(74, 125, 232, 0.28);
+    }
+
+
+    /* =========================================================
+       STATS
+    ========================================================= */
+
     .responses-stats {
 
         display: grid;
-
         grid-template-columns: repeat(3, minmax(0, 1fr));
 
         gap: 16px;
@@ -341,7 +410,6 @@
         padding: 24px;
 
         border: 1.5px solid var(--rp-border-inner);
-
         border-radius: 20px;
 
         background:
@@ -415,7 +483,6 @@
 
 
     @keyframes responsesStatShow {
-
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
@@ -424,9 +491,7 @@
     .responses-stat-icon {
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         width: 54px;
@@ -435,8 +500,6 @@
         margin-bottom: 16px;
 
         border-radius: 16px;
-
-        font-size: 24px;
 
         background:
             linear-gradient(
@@ -447,9 +510,17 @@
 
         border: 1.5px solid rgba(109, 164, 255, 0.3);
 
+        color: var(--rp-blue-light);
+
         box-shadow:
             inset 0 1px 0 rgba(180, 220, 255, 0.18),
             0 8px 20px rgba(0, 0, 0, 0.18);
+    }
+
+
+    .responses-stat-icon svg {
+        width: 26px;
+        height: 26px;
     }
 
 
@@ -463,6 +534,8 @@
             );
 
         border-color: rgba(74, 222, 128, 0.35);
+
+        color: var(--rp-green);
     }
 
 
@@ -476,6 +549,8 @@
             );
 
         border-color: rgba(251, 191, 36, 0.35);
+
+        color: var(--rp-amber);
     }
 
 
@@ -492,7 +567,6 @@
         color: var(--rp-muted);
 
         font-size: 13px;
-
         font-weight: 700;
 
         margin-bottom: 8px;
@@ -504,7 +578,6 @@
     .responses-stat-number {
 
         font-size: 36px;
-
         font-weight: 900;
 
         line-height: 1.2;
@@ -566,11 +639,14 @@
 
 
     @keyframes responsesNumberGradient {
-
         0%, 100% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
     }
 
+
+    /* =========================================================
+       FILTERS
+    ========================================================= */
 
     .responses-filters {
 
@@ -583,7 +659,6 @@
         padding: 22px;
 
         border: 1.5px solid var(--rp-border);
-
         border-radius: 20px;
 
         background:
@@ -600,26 +675,37 @@
 
 
     @keyframes responsesFilterShow {
-
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
+    }
+
+
+    .responses-filter-head {
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 12px;
+
+        margin-bottom: 16px;
+
+        flex-wrap: wrap;
     }
 
 
     .responses-filter-title {
 
         display: flex;
-
         align-items: center;
 
         gap: 10px;
 
-        margin: 0 0 16px;
+        margin: 0;
 
         color: var(--rp-text);
 
         font-size: 15px;
-
         font-weight: 800;
     }
 
@@ -644,6 +730,40 @@
     }
 
 
+    .responses-filter-active {
+
+        display: inline-flex;
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 6px 12px;
+
+        border-radius: 9px;
+
+        background: rgba(74, 125, 232, 0.14);
+
+        border: 1.5px solid rgba(109, 164, 255, 0.3);
+
+        color: var(--rp-blue-light);
+
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+
+    .responses-filter-active a {
+
+        color: var(--rp-red);
+
+        text-decoration: none;
+
+        font-weight: 900;
+
+        margin-right: 4px;
+    }
+
+
     .responses-filters form {
 
         display: grid;
@@ -663,7 +783,6 @@
         display: block;
 
         width: 100%;
-
         min-width: 0;
 
         min-height: 52px;
@@ -671,17 +790,14 @@
         padding: 14px 16px;
 
         background: var(--rp-input);
-
         color: var(--rp-text);
 
         border: 1.5px solid var(--rp-input-border);
-
         border-radius: 12px;
 
         font-family: 'Vazirmatn', Tahoma, sans-serif;
 
         font-size: 14px;
-
         font-weight: 600;
 
         outline: none;
@@ -751,7 +867,6 @@
         padding: 14px 28px;
 
         border: none;
-
         border-radius: 12px;
 
         background:
@@ -769,7 +884,6 @@
         font-family: 'Vazirmatn', Tahoma, sans-serif;
 
         font-size: 14px;
-
         font-weight: 800;
 
         white-space: nowrap;
@@ -793,7 +907,6 @@
         content: "";
 
         position: absolute;
-
         inset: 0;
 
         background:
@@ -810,7 +923,10 @@
     }
 
 
-    .responses-filters button span { position: relative; z-index: 2; }
+    .responses-filters button span {
+        position: relative;
+        z-index: 2;
+    }
 
 
     .responses-filters button:hover {
@@ -832,12 +948,14 @@
     }
 
 
+    /* =========================================================
+       RESULTS HEADER
+    ========================================================= */
+
     .responses-results-header {
 
         display: flex;
-
         align-items: center;
-
         justify-content: space-between;
 
         gap: 12px;
@@ -853,7 +971,6 @@
     .responses-results-title {
 
         display: flex;
-
         align-items: center;
 
         gap: 10px;
@@ -861,7 +978,6 @@
         color: var(--rp-text);
 
         font-size: 16px;
-
         font-weight: 800;
     }
 
@@ -889,7 +1005,6 @@
     .responses-results-count {
 
         display: inline-flex;
-
         align-items: center;
 
         gap: 8px;
@@ -905,7 +1020,6 @@
         color: var(--rp-text-soft);
 
         font-size: 13px;
-
         font-weight: 700;
     }
 
@@ -920,15 +1034,17 @@
         color: var(--rp-text);
 
         font-size: 16px;
-
         font-weight: 900;
     }
 
 
+    /* =========================================================
+       CARDS
+    ========================================================= */
+
     .responses-cards {
 
         display: grid;
-
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 
         gap: 18px;
@@ -942,13 +1058,11 @@
         position: relative;
 
         display: flex;
-
         flex-direction: column;
 
         padding: 24px;
 
         border: 1.5px solid var(--rp-border-inner);
-
         border-radius: 20px;
 
         background:
@@ -989,9 +1103,7 @@
 
         position: absolute;
 
-        top: 0;
-        right: 0;
-        left: 0;
+        top: 0; right: 0; left: 0;
 
         height: 3px;
 
@@ -1009,16 +1121,18 @@
 
 
     @keyframes submissionCardShow {
-
         from { opacity: 0; transform: translateY(12px) scale(0.98); }
         to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
 
+    /* =========================================================
+       CARD HEADER
+    ========================================================= */
+
     .submission-card-header {
 
         display: flex;
-
         align-items: center;
 
         gap: 14px;
@@ -1036,20 +1150,16 @@
         position: relative;
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         width: 52px;
         height: 52px;
-
         min-width: 52px;
 
         border-radius: 50%;
 
         font-size: 20px;
-
         font-weight: 900;
 
         color: #ffffff;
@@ -1061,40 +1171,18 @@
                 var(--rp-cyan)
             );
 
-        border: none;
-
         box-shadow:
             0 8px 20px rgba(74, 125, 232, 0.35),
             inset 0 1px 0 rgba(255, 255, 255, 0.25);
-
-        letter-spacing: 0;
     }
 
 
-    .submission-avatar.color-1 {
-        background: linear-gradient(135deg, #4a7de8, #6da4ff);
-    }
-
-    .submission-avatar.color-2 {
-        background: linear-gradient(135deg, #7c5ce8, #a78bfa);
-    }
-
-    .submission-avatar.color-3 {
-        background: linear-gradient(135deg, #2dc98f, #4ade80);
-    }
-
-    .submission-avatar.color-4 {
-        background: linear-gradient(135deg, #f59e0b, #fbbf24);
-        color: #0a1630;
-    }
-
-    .submission-avatar.color-5 {
-        background: linear-gradient(135deg, #e879c4, #f0abfc);
-    }
-
-    .submission-avatar.color-6 {
-        background: linear-gradient(135deg, #ef4444, #fb7185);
-    }
+    .submission-avatar.color-1 { background: linear-gradient(135deg, #4a7de8, #6da4ff); }
+    .submission-avatar.color-2 { background: linear-gradient(135deg, #7c5ce8, #a78bfa); }
+    .submission-avatar.color-3 { background: linear-gradient(135deg, #2dc98f, #4ade80); }
+    .submission-avatar.color-4 { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0a1630; }
+    .submission-avatar.color-5 { background: linear-gradient(135deg, #e879c4, #f0abfc); }
+    .submission-avatar.color-6 { background: linear-gradient(135deg, #ef4444, #fb7185); }
 
 
     .submission-avatar.guest {
@@ -1106,26 +1194,29 @@
                 #8a9bb0
             );
 
-        font-size: 22px;
+        color: #ffffff;
+    }
+
+
+    .submission-avatar.guest svg {
+        width: 22px;
+        height: 22px;
     }
 
 
     .submission-header-info {
-
         flex: 1;
-
         min-width: 0;
     }
 
 
     .submission-header-name {
 
-        margin: 0 0 6px;
+        margin: 0 0 8px;
 
         color: var(--rp-text);
 
         font-size: 17px;
-
         font-weight: 800;
 
         letter-spacing: -0.3px;
@@ -1144,7 +1235,6 @@
     .submission-header-meta {
 
         display: flex;
-
         align-items: center;
 
         gap: 8px;
@@ -1156,7 +1246,6 @@
     .submission-status-pill {
 
         display: inline-flex;
-
         align-items: center;
 
         gap: 5px;
@@ -1166,7 +1255,6 @@
         border-radius: 7px;
 
         font-size: 10.5px;
-
         font-weight: 800;
 
         line-height: 1.5;
@@ -1176,9 +1264,7 @@
     .submission-status-pill.registered {
 
         color: var(--rp-green);
-
         background: var(--rp-green-bg);
-
         border: 1px solid var(--rp-green-border);
     }
 
@@ -1191,9 +1277,7 @@
     .submission-status-pill.guest-status {
 
         color: var(--rp-amber);
-
         background: var(--rp-amber-bg);
-
         border: 1px solid var(--rp-amber-border);
     }
 
@@ -1221,7 +1305,6 @@
         color: var(--rp-dim);
 
         font-size: 11px;
-
         font-weight: 700;
 
         font-variant-numeric: tabular-nums;
@@ -1232,10 +1315,13 @@
     }
 
 
+    /* =========================================================
+       CARD DETAILS
+    ========================================================= */
+
     .submission-details {
 
         display: flex;
-
         flex-direction: column;
 
         gap: 0;
@@ -1247,7 +1333,6 @@
     .submission-detail-row {
 
         display: flex;
-
         align-items: center;
 
         gap: 10px;
@@ -1268,7 +1353,6 @@
         color: var(--rp-muted);
 
         font-size: 12px;
-
         font-weight: 700;
 
         flex: 0 0 auto;
@@ -1282,11 +1366,9 @@
         color: var(--rp-text-soft);
 
         font-size: 13px;
-
         font-weight: 600;
 
         flex: 1;
-
         min-width: 0;
 
         text-align: left;
@@ -1298,7 +1380,6 @@
     .submission-detail-value.form-title {
 
         color: var(--rp-blue-light);
-
         font-weight: 700;
     }
 
@@ -1308,13 +1389,17 @@
     }
 
 
+    /* =========================================================
+       CARD ACTIONS
+    ========================================================= */
+
     .submission-card-actions {
 
         display: grid;
 
-        grid-template-columns: 1.4fr 1fr;
+        grid-template-columns: 1fr auto auto;
 
-        gap: 10px;
+        gap: 8px;
 
         margin-top: auto;
 
@@ -1324,13 +1409,10 @@
     }
 
 
-    .submission-view-btn,
-    .submission-delete-btn {
+    .submission-action-btn {
 
         display: inline-flex;
-
         align-items: center;
-
         justify-content: center;
 
         gap: 8px;
@@ -1344,10 +1426,13 @@
         font-family: 'Vazirmatn', Tahoma, sans-serif;
 
         font-size: 12.5px;
-
         font-weight: 800;
 
         text-decoration: none;
+
+        cursor: pointer;
+
+        border: 1.5px solid transparent;
 
         transition:
             transform 0.22s ease,
@@ -1359,11 +1444,16 @@
     }
 
 
-    .submission-view-btn {
+    .submission-action-btn svg {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+    }
+
+
+    .submission-action-btn.view {
 
         position: relative;
-
-        border: none;
 
         background:
             linear-gradient(
@@ -1383,35 +1473,13 @@
     }
 
 
-    .submission-view-btn::before {
-
-        content: "";
-
-        position: absolute;
-
-        inset: 0;
-
-        background:
-            linear-gradient(
-                110deg,
-                transparent 20%,
-                rgba(180, 220, 255, 0.3) 50%,
-                transparent 80%
-            );
-
-        transform: translateX(120%);
-
-        transition: transform 0.6s ease;
-    }
-
-
-    .submission-view-btn span {
+    .submission-action-btn.view span {
         position: relative;
         z-index: 2;
     }
 
 
-    .submission-view-btn:hover {
+    .submission-action-btn.view:hover {
 
         transform: translateY(-3px);
 
@@ -1425,14 +1493,41 @@
     }
 
 
-    .submission-view-btn:hover::before {
-        transform: translateX(-120%);
+    .submission-action-btn.copy {
+
+        border-color: rgba(109, 164, 255, 0.3);
+
+        background: rgba(74, 125, 232, 0.1);
+
+        color: var(--rp-blue-light);
     }
 
 
-    .submission-delete-btn {
+    .submission-action-btn.copy:hover {
 
-        border: 1.5px solid var(--rp-red-border);
+        transform: translateY(-2px);
+
+        background: rgba(74, 125, 232, 0.2);
+
+        border-color: rgba(109, 164, 255, 0.55);
+
+        color: var(--rp-text);
+    }
+
+
+    .submission-action-btn.copy.copied {
+
+        color: var(--rp-green);
+
+        border-color: var(--rp-green-border);
+
+        background: var(--rp-green-bg);
+    }
+
+
+    .submission-action-btn.delete {
+
+        border-color: var(--rp-red-border);
 
         background: var(--rp-red-bg);
 
@@ -1440,9 +1535,9 @@
     }
 
 
-    .submission-delete-btn:hover {
+    .submission-action-btn.delete:hover {
 
-        transform: translateY(-3px);
+        transform: translateY(-2px);
 
         background: rgba(244, 63, 94, 0.25);
 
@@ -1452,14 +1547,15 @@
     }
 
 
+    /* =========================================================
+       EMPTY
+    ========================================================= */
+
     .responses-empty {
 
         display: flex;
-
         flex-direction: column;
-
         align-items: center;
-
         justify-content: center;
 
         min-height: 380px;
@@ -1469,7 +1565,6 @@
         text-align: center;
 
         border: 1.5px dashed rgba(109, 164, 255, 0.3);
-
         border-radius: 22px;
 
         background: rgba(74, 125, 232, 0.04);
@@ -1479,7 +1574,6 @@
 
 
     @keyframes responsesEmptyShow {
-
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
@@ -1488,9 +1582,7 @@
     .responses-empty-icon {
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         width: 88px;
@@ -1499,8 +1591,6 @@
         margin-bottom: 22px;
 
         border-radius: 26px;
-
-        font-size: 38px;
 
         background:
             linear-gradient(
@@ -1511,6 +1601,8 @@
 
         border: 1.5px solid rgba(109, 164, 255, 0.3);
 
+        color: var(--rp-blue-light);
+
         box-shadow:
             inset 0 1px 0 rgba(180, 220, 255, 0.15),
             0 14px 30px rgba(0, 0, 0, 0.15);
@@ -1519,8 +1611,13 @@
     }
 
 
-    @keyframes responsesEmptyFloat {
+    .responses-empty-icon svg {
+        width: 40px;
+        height: 40px;
+    }
 
+
+    @keyframes responsesEmptyFloat {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-10px); }
     }
@@ -1533,33 +1630,44 @@
         color: var(--rp-text);
 
         font-size: 20px;
-
         font-weight: 800;
     }
 
 
     .responses-empty p {
 
-        margin: 0;
+        margin: 0 0 22px;
 
         max-width: 480px;
 
         color: var(--rp-muted);
 
         line-height: 2;
-
         font-size: 14px;
-
         font-weight: 500;
     }
 
 
-    .responses-pagination {
+    .responses-empty-actions {
 
         display: flex;
 
-        justify-content: center;
+        gap: 10px;
 
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+
+    /* =========================================================
+       PAGINATION
+    ========================================================= */
+
+    .responses-pagination {
+
+        display: flex;
+        justify-content: center;
         align-items: center;
 
         flex-wrap: wrap;
@@ -1576,9 +1684,7 @@
         min-height: 48px;
 
         display: inline-flex;
-
         align-items: center;
-
         justify-content: center;
 
         padding: 12px 22px;
@@ -1597,7 +1703,6 @@
         color: var(--rp-text-soft);
 
         font-size: 13.5px;
-
         font-weight: 700;
 
         text-decoration: none;
@@ -1645,16 +1750,118 @@
     }
 
 
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast-container {
+
+        position: fixed;
+
+        top: 20px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 9999;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 10px;
+
+        pointer-events: none;
+    }
+
+
+    .toast {
+
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+
+        min-width: 220px;
+        max-width: 380px;
+
+        padding: 12px 16px;
+
+        border-radius: 12px;
+
+        background: rgba(20, 32, 56, 0.95);
+
+        border: 1.5px solid rgba(109, 164, 255, 0.4);
+
+        color: #e0eaff;
+
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+        font-size: 12.5px;
+        font-weight: 700;
+
+        box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.5),
+            0 0 40px rgba(74, 125, 232, 0.2);
+
+        animation: toastIn 0.35s cubic-bezier(.22, 1, .36, 1);
+
+        pointer-events: auto;
+    }
+
+
+    body.light .toast {
+
+        background: rgba(240, 245, 255, 0.98);
+        border-color: rgba(58, 109, 224, 0.4);
+        color: #0a1630;
+    }
+
+
+    .toast.success {
+
+        border-color: rgba(74, 222, 128, 0.5);
+        color: #6ee7b7;
+    }
+
+
+    body.light .toast.success {
+        color: #167a52;
+    }
+
+
+    .toast.out {
+        animation: toastOut 0.3s ease forwards;
+    }
+
+
+    @keyframes toastIn {
+        from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+
+    @keyframes toastOut {
+        to { opacity: 0; transform: translateY(-12px) scale(0.96); }
+    }
+
+
+    /* =========================================================
+       FOCUS
+    ========================================================= */
+
     .responses-page a:focus-visible,
     .responses-page input:focus-visible,
     .responses-page select:focus-visible,
     .responses-page button:focus-visible {
 
         outline: 3px solid rgba(109, 164, 255, 0.4);
-
         outline-offset: 3px;
     }
 
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
 
     @media (max-width: 900px) {
 
@@ -1690,6 +1897,18 @@
         .responses-header p { font-size: 12.5px; }
         .responses-badge { font-size: 10.5px; padding: 6px 11px; }
 
+        .responses-header-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .responses-action-btn {
+            width: 100%;
+            min-height: 48px;
+            font-size: 12.5px;
+        }
+
         .responses-stats {
             grid-template-columns: 1fr;
             gap: 12px;
@@ -1701,10 +1920,11 @@
         .responses-stat-icon {
             width: 46px;
             height: 46px;
-            font-size: 20px;
             border-radius: 13px;
             margin-bottom: 12px;
         }
+
+        .responses-stat-icon svg { width: 22px; height: 22px; }
 
         .responses-stat-title { font-size: 12px; }
         .responses-stat-number { font-size: 30px; }
@@ -1748,16 +1968,19 @@
         .submission-detail-label { font-size: 11.5px; min-width: 55px; }
         .submission-detail-value { font-size: 12.5px; }
 
-        .submission-card-actions { grid-template-columns: 1fr; }
+        .submission-card-actions {
+            grid-template-columns: 1fr;
+        }
 
-        .submission-view-btn,
-        .submission-delete-btn {
+        .submission-action-btn {
             min-height: 48px;
             font-size: 13px;
+            width: 100%;
         }
 
         .responses-empty { min-height: 300px; padding: 45px 20px; }
-        .responses-empty-icon { width: 76px; height: 76px; font-size: 32px; }
+        .responses-empty-icon { width: 76px; height: 76px; }
+        .responses-empty-icon svg { width: 32px; height: 32px; }
         .responses-empty h3 { font-size: 17px; }
         .responses-empty p { font-size: 13px; }
 
@@ -1766,6 +1989,13 @@
             min-height: 46px;
             padding: 12px 18px;
             font-size: 13px;
+        }
+
+        .toast-container {
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            transform: none;
         }
     }
 
@@ -1811,6 +2041,8 @@
     <div class="responses-container">
 
 
+        <!-- HEADER -->
+
         <header class="responses-header">
 
             <div class="responses-header-content">
@@ -1820,9 +2052,7 @@
                     مدیریت پاسخ‌ها
                 </div>
 
-                <h1>
-                    پاسخ‌های فرم‌ها
-                </h1>
+                <h1>پاسخ‌های فرم‌ها</h1>
 
                 <p>
                     پاسخ‌های ثبت‌شده فرم‌ها را مشاهده، بررسی و مدیریت کنید.
@@ -1830,18 +2060,76 @@
 
             </div>
 
+
+            <div class="responses-header-actions">
+
+                <a
+                    href="{% url 'forms:form_list' %}"
+                    class="responses-action-btn"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+
+                    <span>فرم‌ها</span>
+
+                </a>
+
+
+                <a
+                    href="{% url 'forms:builder' %}"
+                    class="responses-action-btn"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+
+                    <span>ساخت فرم</span>
+
+                </a>
+
+            </div>
+
         </header>
 
 
+
+        <!-- STATS -->
 
         <section class="responses-stats">
 
             <div class="responses-stat">
 
-                <div class="responses-stat-icon">📝</div>
+                <div class="responses-stat-icon">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="9" y1="13" x2="15" y2="13"/>
+                        <line x1="9" y1="17" x2="13" y2="17"/>
+                    </svg>
+
+                </div>
 
                 <div class="responses-stat-title">تعداد فرم‌ها</div>
-
                 <div class="responses-stat-number">{{ total_forms }}</div>
 
             </div>
@@ -1849,10 +2137,16 @@
 
             <div class="responses-stat green">
 
-                <div class="responses-stat-icon">✓</div>
+                <div class="responses-stat-icon">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 11l3 3L22 4"/>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                    </svg>
+
+                </div>
 
                 <div class="responses-stat-title">کل پاسخ‌ها</div>
-
                 <div class="responses-stat-number">{{ total_submissions }}</div>
 
             </div>
@@ -1860,10 +2154,18 @@
 
             <div class="responses-stat amber">
 
-                <div class="responses-stat-icon">👥</div>
+                <div class="responses-stat-icon">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+
+                </div>
 
                 <div class="responses-stat-title">پاسخ‌های این صفحه</div>
-
                 <div class="responses-stat-number">{{ page_obj.object_list|length }}</div>
 
             </div>
@@ -1872,11 +2174,36 @@
 
 
 
+        <!-- FILTERS -->
+
         <section class="responses-filters">
 
-            <div class="responses-filter-title">
-                فیلتر و جستجو
+            <div class="responses-filter-head">
+
+                <div class="responses-filter-title">
+                    فیلتر و جستجو
+                </div>
+
+
+                {% if selected_form_id or search %}
+
+                    <span class="responses-filter-active">
+
+                        فیلتر فعال
+
+                        <a
+                            href="{% url 'forms:responses' %}"
+                            title="پاک کردن فیلترها"
+                        >
+                            ✕
+                        </a>
+
+                    </span>
+
+                {% endif %}
+
             </div>
+
 
             <form method="get">
 
@@ -1917,6 +2244,8 @@
 
 
 
+        <!-- RESULTS HEADER -->
+
         <div class="responses-results-header">
 
             <div class="responses-results-title">
@@ -1931,14 +2260,14 @@
 
 
 
-        {% if page_obj.object_list %}
+        <!-- CARDS -->
 
+        {% if page_obj.object_list %}
 
             <div class="responses-cards">
 
 
                 {% for submission in page_obj %}
-
 
                     {% with first_answer=submission.answers.all|first %}
 
@@ -1960,13 +2289,19 @@
 
                                         {{ submission.user.first_name|default:submission.user.username|first|upper }}
 
-                                    {% elif first_answer and first_answer.text_value %}
-
-                                        {{ first_answer.text_value|first|upper }}
-
                                     {% else %}
 
-                                        👥
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                            <circle cx="12" cy="7" r="4"/>
+                                        </svg>
 
                                     {% endif %}
 
@@ -1981,10 +2316,6 @@
                                         {% if submission.user %}
 
                                             {{ submission.user.get_full_name|default:submission.user.username }}
-
-                                        {% elif first_answer and first_answer.text_value %}
-
-                                            {{ first_answer.text_value|truncatechars:40 }}
 
                                         {% else %}
 
@@ -2057,6 +2388,21 @@
                                 </div>
 
 
+                                <div class="submission-detail-row">
+
+                                    <span class="submission-detail-label">
+                                        پاسخ‌ها
+                                    </span>
+
+                                    <span class="submission-detail-value">
+
+                                        {{ submission.answers.count }} پاسخ ثبت‌شده
+
+                                    </span>
+
+                                </div>
+
+
                             </div>
 
 
@@ -2066,17 +2412,71 @@
 
                                 <a
                                     href="{% url 'forms:submission_detail' submission.id %}"
-                                    class="submission-view-btn"
+                                    class="submission-action-btn view"
                                 >
-                                    <span>مشاهده کامل</span>
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+
+                                    <span>مشاهده</span>
+
                                 </a>
+
+
+                                <button
+                                    type="button"
+                                    class="submission-action-btn copy"
+                                    data-copy-url="{% url 'forms:fill_form' submission.form.uuid %}"
+                                    onclick="copyFormLink(this)"
+                                    title="کپی لینک فرم"
+                                    aria-label="کپی لینک فرم"
+                                >
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                    </svg>
+
+                                </button>
 
 
                                 <a
                                     href="{% url 'forms:delete_submission' submission.id %}"
-                                    class="submission-delete-btn"
+                                    class="submission-action-btn delete"
+                                    title="حذف پاسخ"
+                                    aria-label="حذف پاسخ"
                                 >
-                                    حذف
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <polyline points="3 6 5 6 21 6"/>
+                                        <path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/>
+                                        <path d="M10 11v6M14 11v6"/>
+                                        <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
+                                    </svg>
+
                                 </a>
 
 
@@ -2086,7 +2486,6 @@
                         </article>
 
                     {% endwith %}
-
 
                 {% endfor %}
 
@@ -2100,17 +2499,79 @@
             <div class="responses-empty">
 
                 <div class="responses-empty-icon">
-                    📭
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M22 12h-6l-2 3h-4l-2-3H2"/>
+                        <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
+                    </svg>
+
                 </div>
 
-                <h3>
-                    پاسخی پیدا نشد
-                </h3>
+                <h3>پاسخی پیدا نشد</h3>
 
                 <p>
                     هنوز پاسخی برای فرم‌های انتخاب‌شده ثبت نشده است
                     یا نتیجه‌ای با جستجوی شما مطابقت ندارد.
                 </p>
+
+
+                <div class="responses-empty-actions">
+
+                    {% if selected_form_id or search %}
+
+                        <a
+                            href="{% url 'forms:responses' %}"
+                            class="responses-action-btn"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+
+                            <span>پاک کردن فیلترها</span>
+
+                        </a>
+
+                    {% endif %}
+
+
+                    <a
+                        href="{% url 'forms:form_list' %}"
+                        class="responses-action-btn"
+                    >
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+
+                        <span>مشاهده فرم‌ها</span>
+
+                    </a>
+
+                </div>
 
             </div>
 
@@ -2118,6 +2579,8 @@
         {% endif %}
 
 
+
+        <!-- PAGINATION -->
 
         {% if page_obj.paginator.num_pages > 1 %}
 
@@ -2153,5 +2616,128 @@
     </div>
 
 </div>
+
+
+
+<div class="toast-container" id="toastContainer"></div>
+
+
+
+<script>
+
+(function () {
+    "use strict";
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    function showToast(message, type = "info") {
+
+        const container =
+            document.getElementById("toastContainer");
+
+        if (!container) return;
+
+        const toast = document.createElement("div");
+
+        toast.className = `toast ${type}`;
+
+        const icon = type === "success" ? "✓" : "ℹ";
+
+        toast.innerHTML =
+            `<span>${icon}</span><span>${message}</span>`;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+
+            toast.classList.add("out");
+
+            setTimeout(() => toast.remove(), 320);
+
+        }, 2400);
+    }
+
+
+    /* =========================================================
+       COPY FORM LINK
+    ========================================================= */
+
+    window.copyFormLink = function (button) {
+
+        const path =
+            button.dataset.copyUrl;
+
+        if (!path) return;
+
+        const url =
+            new URL(path, window.location.origin).href;
+
+
+        const onSuccess = () => {
+
+            button.classList.add("copied");
+
+            showToast("لینک فرم کپی شد", "success");
+
+            setTimeout(() => {
+
+                button.classList.remove("copied");
+
+            }, 1800);
+        };
+
+
+        const fallback = () => {
+
+            const temp =
+                document.createElement("textarea");
+
+            temp.value = url;
+
+            temp.style.position = "fixed";
+            temp.style.opacity = "0";
+
+            document.body.appendChild(temp);
+
+            temp.select();
+
+            try {
+
+                document.execCommand("copy");
+
+                onSuccess();
+
+            } catch (_) {
+
+                showToast("کپی دستی انجام دهید", "info");
+
+            } finally {
+
+                temp.remove();
+            }
+        };
+
+
+        if (navigator.clipboard && window.isSecureContext) {
+
+            navigator.clipboard
+                .writeText(url)
+                .then(onSuccess)
+                .catch(fallback);
+
+        } else {
+
+            fallback();
+        }
+    };
+
+
+})();
+
+</script>
+
 
 {% endblock %}

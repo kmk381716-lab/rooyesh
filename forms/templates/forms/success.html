@@ -44,15 +44,12 @@
 
 
         position: relative;
-
         width: 100%;
 
         min-height: calc(100vh - 200px);
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         padding: 40px 20px 60px;
@@ -93,22 +90,23 @@
     }
 
 
+    /* =========================================================
+       CARD
+    ========================================================= */
+
     .success-card {
 
         position: relative;
-
         z-index: 2;
 
         width: 100%;
-
-        max-width: 600px;
+        max-width: 620px;
 
         padding: 40px 34px 32px;
 
         text-align: center;
 
         border: 1.5px solid var(--sp-border);
-
         border-radius: 26px;
 
         background:
@@ -131,10 +129,7 @@
         content: "";
 
         position: absolute;
-
-        top: 0;
-        right: 0;
-        left: 0;
+        top: 0; right: 0; left: 0;
 
         height: 3px;
 
@@ -155,26 +150,26 @@
 
 
     @keyframes successBorderShine {
-
         to { background-position: 200% 0; }
     }
 
 
     @keyframes successCardShow {
-
         from { opacity: 0; transform: translateY(28px) scale(0.975); }
         to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
+
+    /* =========================================================
+       ICON
+    ========================================================= */
 
     .success-icon-wrap {
 
         position: relative;
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         width: 92px;
@@ -206,7 +201,6 @@
         content: "";
 
         position: absolute;
-
         inset: -12px;
 
         border-radius: 35px;
@@ -220,7 +214,6 @@
 
 
     @keyframes successRing {
-
         0% { opacity: 0.65; transform: scale(0.9); }
         70% { opacity: 0; transform: scale(1.18); }
         100% { opacity: 0; transform: scale(1.18); }
@@ -228,7 +221,6 @@
 
 
     @keyframes successIconShow {
-
         from { opacity: 0; transform: scale(0.7) rotate(-8deg); }
         to { opacity: 1; transform: scale(1) rotate(0); }
     }
@@ -237,13 +229,10 @@
     .success-icon {
 
         position: relative;
-
         z-index: 2;
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         width: 60px;
@@ -286,16 +275,18 @@
 
 
     @keyframes successDraw {
-
         from { opacity: 0; transform: scale(0.7); }
         to { opacity: 1; transform: scale(1); }
     }
 
 
+    /* =========================================================
+       TITLE / DESCRIPTION
+    ========================================================= */
+
     .success-title {
 
         position: relative;
-
         z-index: 2;
 
         margin: 0 0 14px;
@@ -303,9 +294,7 @@
         color: var(--sp-text);
 
         font-size: 26px;
-
         line-height: 1.5;
-
         font-weight: 800;
 
         letter-spacing: -0.5px;
@@ -317,7 +306,6 @@
     .success-description {
 
         position: relative;
-
         z-index: 2;
 
         max-width: 480px;
@@ -327,13 +315,11 @@
         color: var(--sp-muted);
 
         font-size: 13.5px;
-
         font-weight: 500;
 
         line-height: 2.05;
 
         overflow-wrap: anywhere;
-
         word-break: break-word;
 
         animation: successTextShow 0.6s 0.19s both;
@@ -341,38 +327,99 @@
 
 
     .success-description strong {
-
         color: var(--sp-text-soft);
-
         font-weight: 800;
     }
 
 
     @keyframes successTextShow {
-
         from { opacity: 0; transform: translateY(8px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
 
+    /* =========================================================
+       META STATS
+    ========================================================= */
+
+    .success-meta {
+
+        position: relative;
+        z-index: 2;
+
+        display: flex;
+        justify-content: center;
+
+        gap: 8px;
+
+        margin-top: 22px;
+
+        flex-wrap: wrap;
+
+        animation: successTextShow 0.6s 0.23s both;
+    }
+
+
+    .success-meta-chip {
+
+        display: inline-flex;
+        align-items: center;
+
+        gap: 7px;
+
+        padding: 8px 13px;
+
+        border-radius: 10px;
+
+        background: rgba(74, 125, 232, 0.1);
+        border: 1.5px solid rgba(109, 164, 255, 0.22);
+
+        color: var(--sp-text-soft);
+
+        font-size: 11.5px;
+        font-weight: 700;
+    }
+
+
+    body.light .success-meta-chip {
+        background: rgba(58, 109, 224, 0.08);
+    }
+
+
+    .success-meta-chip svg {
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+        color: var(--sp-blue-light);
+    }
+
+
+    .success-meta-chip strong {
+        color: var(--sp-text);
+        font-weight: 900;
+        font-variant-numeric: tabular-nums;
+    }
+
+
+    /* =========================================================
+       LINK SECTION
+    ========================================================= */
+
     .success-link-section {
 
         position: relative;
-
         z-index: 2;
 
-        margin-top: 28px;
+        margin-top: 26px;
 
-        animation: successTextShow 0.6s 0.26s both;
+        animation: successTextShow 0.6s 0.27s both;
     }
 
 
     .success-link-label {
 
         display: flex;
-
         align-items: center;
-
         justify-content: space-between;
 
         gap: 10px;
@@ -382,7 +429,6 @@
         color: var(--sp-text-soft);
 
         font-size: 12.5px;
-
         font-weight: 700;
 
         text-align: right;
@@ -392,7 +438,6 @@
     .success-link-status {
 
         display: inline-flex;
-
         align-items: center;
 
         gap: 6px;
@@ -400,7 +445,6 @@
         color: var(--sp-green);
 
         font-size: 11px;
-
         font-weight: 800;
     }
 
@@ -426,7 +470,6 @@
 
 
     @keyframes successDot {
-
         0%, 100% { opacity: 0.7; transform: scale(1); }
         50% { opacity: 1; transform: scale(1.3); }
     }
@@ -435,7 +478,6 @@
     .success-link-box {
 
         display: flex;
-
         align-items: stretch;
 
         gap: 10px;
@@ -443,7 +485,6 @@
         padding: 8px;
 
         border: 1.5px solid var(--sp-border-inner);
-
         border-radius: 14px;
 
         background: var(--sp-input);
@@ -483,7 +524,6 @@
         flex: 1 1 auto;
 
         width: 100%;
-
         min-width: 0;
 
         min-height: 48px;
@@ -491,11 +531,9 @@
         padding: 12px 14px;
 
         border: none;
-
         border-radius: 10px;
 
         direction: ltr;
-
         text-align: left;
 
         background: transparent;
@@ -505,15 +543,12 @@
         font-family: 'Vazirmatn', Tahoma, sans-serif;
 
         font-size: 13px;
-
         font-weight: 600;
 
         outline: none;
 
         overflow: hidden;
-
         text-overflow: ellipsis;
-
         white-space: nowrap;
     }
 
@@ -524,14 +559,12 @@
 
         flex: 0 0 auto;
 
-        min-width: 120px;
-
+        min-width: 130px;
         min-height: 48px;
 
         padding: 12px 20px;
 
         border: none;
-
         border-radius: 10px;
 
         background:
@@ -549,8 +582,13 @@
         font-family: 'Vazirmatn', Tahoma, sans-serif;
 
         font-size: 13px;
-
         font-weight: 800;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 8px;
 
         overflow: hidden;
 
@@ -567,12 +605,18 @@
     }
 
 
+    .success-copy-btn svg {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+    }
+
+
     .success-copy-btn::before {
 
         content: "";
 
         position: absolute;
-
         inset: 0;
 
         background:
@@ -636,28 +680,38 @@
     }
 
 
-    .success-view-btn {
+    /* =========================================================
+       ACTIONS GRID
+    ========================================================= */
+
+    .success-actions {
+
+        display: grid;
+
+        grid-template-columns: 1.4fr 1fr;
+
+        gap: 10px;
+
+        margin-top: 12px;
+    }
+
+
+    .success-action-btn {
 
         position: relative;
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         gap: 10px;
 
         width: 100%;
-
         min-height: 52px;
-
-        margin-top: 12px;
 
         padding: 14px 20px;
 
         border: 1.5px solid rgba(109, 164, 255, 0.3);
-
         border-radius: 12px;
 
         background: rgba(74, 125, 232, 0.1);
@@ -666,8 +720,11 @@
 
         text-decoration: none;
 
-        font-size: 13.5px;
+        cursor: pointer;
 
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+        font-size: 13.5px;
         font-weight: 800;
 
         overflow: hidden;
@@ -681,13 +738,21 @@
     }
 
 
-    body.light .success-view-btn {
+    body.light .success-action-btn {
         background: rgba(58, 109, 224, 0.08);
         border-color: rgba(58, 109, 224, 0.3);
     }
 
 
-    .success-view-btn:hover {
+    .success-action-btn svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+    }
+
+
+    .success-action-btn:hover {
 
         transform: translateY(-2px);
 
@@ -701,28 +766,168 @@
     }
 
 
-    .success-view-btn svg {
+    /* VIEW (primary action) */
 
-        width: 16px;
-        height: 16px;
+    .success-action-btn.view {
 
-        transition: transform 0.3s ease;
+        border: none;
+
+        background:
+            linear-gradient(
+                135deg,
+                #3a6bc4,
+                #2e7fc4 58%,
+                #2a9ac4
+            );
+
+        color: #dbe6ff;
+
+        box-shadow:
+            0 12px 30px rgba(74, 125, 232, 0.42),
+            inset 0 1px 0 rgba(180, 220, 255, 0.2);
     }
 
 
-    .success-view-btn:hover svg {
+    .success-action-btn.view::before {
+
+        content: "";
+
+        position: absolute;
+        inset: 0;
+
+        background:
+            linear-gradient(
+                110deg,
+                transparent 20%,
+                rgba(180, 220, 255, 0.3) 50%,
+                transparent 80%
+            );
+
+        transform: translateX(120%);
+
+        transition: transform 0.65s ease;
+    }
+
+
+    .success-action-btn.view span {
+        position: relative;
+        z-index: 2;
+    }
+
+
+    .success-action-btn.view:hover {
+
+        transform: translateY(-3px);
+
+        color: #b8d0ff;
+
+        box-shadow:
+            0 20px 45px rgba(58, 107, 196, 0.55),
+            0 0 45px rgba(76, 201, 232, 0.35);
+
+        filter: brightness(1.08);
+    }
+
+
+    .success-action-btn.view:hover::before {
+        transform: translateX(-120%);
+    }
+
+
+    .success-action-btn.view:hover svg {
         transform: translateX(-4px);
     }
 
 
+    /* =========================================================
+       QR SECTION
+    ========================================================= */
+
+    .success-qr {
+
+        position: relative;
+        z-index: 2;
+
+        display: none;
+
+        margin-top: 16px;
+
+        padding: 20px;
+
+        border-radius: 16px;
+
+        background: rgba(74, 125, 232, 0.06);
+        border: 1.5px solid rgba(109, 164, 255, 0.22);
+
+        animation: successTextShow 0.4s ease;
+    }
+
+
+    body.light .success-qr {
+        background: rgba(58, 109, 224, 0.05);
+    }
+
+
+    .success-qr.show {
+        display: block;
+    }
+
+
+    .success-qr-title {
+
+        color: var(--sp-text-soft);
+
+        font-size: 12.5px;
+        font-weight: 800;
+
+        margin-bottom: 14px;
+    }
+
+
+    .success-qr-image {
+
+        display: block;
+
+        width: 180px;
+        height: 180px;
+
+        margin: 0 auto;
+
+        padding: 10px;
+
+        border-radius: 14px;
+
+        background: #ffffff;
+
+        box-shadow:
+            0 10px 25px rgba(0, 0, 0, 0.2),
+            inset 0 0 0 1px rgba(58, 109, 224, 0.12);
+    }
+
+
+    .success-qr-hint {
+
+        margin-top: 12px;
+
+        color: var(--sp-dim);
+
+        font-size: 10.5px;
+        font-weight: 500;
+
+        line-height: 1.9;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
     .success-footer {
 
         position: relative;
-
         z-index: 2;
 
         margin-top: 28px;
-
         padding-top: 20px;
 
         border-top: 1.5px solid var(--sp-border);
@@ -730,23 +935,118 @@
         color: var(--sp-dim);
 
         font-size: 11.5px;
-
         font-weight: 500;
 
         line-height: 1.9;
 
-        animation: successTextShow 0.6s 0.34s both;
+        animation: successTextShow 0.6s 0.36s both;
     }
 
 
+    /* =========================================================
+       FOCUS
+    ========================================================= */
+
     .success-copy-btn:focus-visible,
-    .success-view-btn:focus-visible {
+    .success-action-btn:focus-visible {
 
         outline: 3px solid rgba(109, 164, 255, 0.4);
-
         outline-offset: 3px;
     }
 
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast-container {
+
+        position: fixed;
+
+        top: 20px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 9999;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        pointer-events: none;
+    }
+
+
+    .toast {
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        min-width: 220px;
+        max-width: 380px;
+
+        padding: 12px 16px;
+
+        border-radius: 12px;
+
+        background: rgba(20, 32, 56, 0.95);
+        border: 1.5px solid rgba(109, 164, 255, 0.4);
+
+        color: #e0eaff;
+
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
+        font-size: 12.5px;
+        font-weight: 700;
+
+        box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.5),
+            0 0 40px rgba(74, 125, 232, 0.2);
+
+        animation: toastIn 0.35s cubic-bezier(.22, 1, .36, 1);
+
+        pointer-events: auto;
+    }
+
+
+    body.light .toast {
+        background: rgba(240, 245, 255, 0.98);
+        border-color: rgba(58, 109, 224, 0.4);
+        color: #0a1630;
+    }
+
+
+    .toast.success {
+        border-color: var(--sp-green-border);
+        color: var(--sp-green);
+    }
+
+
+    body.light .toast.success {
+        color: #167a52;
+    }
+
+
+    .toast.out {
+        animation: toastOut 0.3s ease forwards;
+    }
+
+
+    @keyframes toastIn {
+        from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+
+    @keyframes toastOut {
+        to { opacity: 0; transform: translateY(-12px) scale(0.96); }
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
 
     @media (max-width: 600px) {
 
@@ -755,12 +1055,10 @@
             min-height: auto;
         }
 
-
         .success-card {
             padding: 30px 20px 26px;
             border-radius: 20px;
         }
-
 
         .success-icon-wrap {
             width: 80px;
@@ -769,53 +1067,54 @@
             border-radius: 24px;
         }
 
-
         .success-icon {
             width: 52px;
             height: 52px;
             border-radius: 17px;
         }
 
-
         .success-icon svg {
             width: 28px;
             height: 28px;
         }
-
 
         .success-title {
             font-size: 21px;
             margin-bottom: 12px;
         }
 
-
         .success-description {
             font-size: 13px;
             line-height: 1.95;
         }
 
-
-        .success-link-section {
-            margin-top: 24px;
+        .success-meta {
+            gap: 7px;
+            margin-top: 18px;
         }
 
+        .success-meta-chip {
+            padding: 7px 11px;
+            font-size: 11px;
+        }
+
+        .success-link-section {
+            margin-top: 22px;
+        }
 
         .success-link-label {
             font-size: 12px;
         }
 
-
         .success-link-status {
             font-size: 10.5px;
         }
-
 
         .success-link-box {
             flex-direction: column;
             padding: 8px;
             gap: 8px;
         }
-
 
         .success-link-input {
             width: 100%;
@@ -824,7 +1123,6 @@
             font-size: 12px;
         }
 
-
         .success-copy-btn {
             width: 100%;
             min-width: 0;
@@ -832,17 +1130,32 @@
             font-size: 13px;
         }
 
+        .success-actions {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
 
-        .success-view-btn {
+        .success-action-btn {
             min-height: 50px;
             font-size: 13px;
         }
 
+        .success-qr-image {
+            width: 160px;
+            height: 160px;
+        }
 
         .success-footer {
             margin-top: 24px;
             padding-top: 16px;
             font-size: 10.5px;
+        }
+
+        .toast-container {
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            transform: none;
         }
     }
 
@@ -853,12 +1166,10 @@
             padding: 14px 8px 30px;
         }
 
-
         .success-card {
             padding: 24px 15px 22px;
             border-radius: 18px;
         }
-
 
         .success-icon-wrap {
             width: 72px;
@@ -866,37 +1177,31 @@
             border-radius: 22px;
         }
 
-
         .success-icon {
             width: 46px;
             height: 46px;
             border-radius: 15px;
         }
 
-
         .success-icon svg {
             width: 24px;
             height: 24px;
         }
 
-
         .success-title {
             font-size: 19px;
         }
-
 
         .success-description {
             font-size: 12.5px;
         }
 
-
         .success-link-input {
             font-size: 11px;
         }
 
-
         .success-copy-btn,
-        .success-view-btn {
+        .success-action-btn {
             font-size: 12.5px;
         }
     }
@@ -923,18 +1228,14 @@
     <section class="success-card">
 
 
+        <!-- ICON -->
+
         <div class="success-icon-wrap">
 
             <div class="success-icon">
 
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden="true"
-                >
-
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M5 12.5L9.2 16.5L19 7.5" />
-
                 </svg>
 
             </div>
@@ -942,6 +1243,8 @@
         </div>
 
 
+
+        <!-- TITLE -->
 
         <h1 class="success-title">
             فرم با موفقیت ساخته شد
@@ -956,21 +1259,90 @@
                 «{{ form.title }}»
             </strong>
 
-            آماده استفاده است.
-            لینک فرم را می‌توانید برای کاربران ارسال کنید.
+            آماده استفاده است. لینک فرم را می‌توانید برای کاربران ارسال کنید.
 
         </p>
 
 
+
+        <!-- META STATS -->
+
+        <div class="success-meta">
+
+            <div class="success-meta-chip">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+
+                {{ form.created_at|date:"Y/m/d" }}
+
+            </div>
+
+
+            <div class="success-meta-chip">
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M9 11l3 3L22 4"/>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+
+                <strong>{{ form.questions.count }}</strong>
+
+                سؤال
+
+            </div>
+
+
+            {% if form.created_by %}
+
+                <div class="success-meta-chip">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+
+                    {{ form.created_by.get_full_name|default:form.created_by.username }}
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- LINK -->
 
         <div class="success-link-section">
 
 
             <div class="success-link-label">
 
-                <span>
-                    لینک فرم
-                </span>
+                <span>لینک فرم</span>
 
 
                 <span class="success-link-status">
@@ -986,14 +1358,15 @@
 
             <div class="success-link-box">
 
-
                 <input
                     id="formLink"
                     class="success-link-input"
                     type="text"
-                    value="{{ request.scheme }}://{{ request.get_host }}{% url 'forms:fill_form' form.id %}"
+                    value="{{ fill_url }}"
                     readonly
                     aria-label="لینک فرم"
+                    onclick="this.select()"
+                    spellcheck="false"
                 >
 
 
@@ -1004,45 +1377,135 @@
                     onclick="copyLink()"
                 >
 
-                    <span id="copyText">
-                        کپی لینک
-                    </span>
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                    </svg>
+
+                    <span id="copyText">کپی لینک</span>
 
                 </button>
-
 
             </div>
 
 
-            <a
-                class="success-view-btn"
-                href="{% url 'forms:fill_form' form.id %}"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+            <!-- ACTIONS -->
 
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+            <div class="success-actions">
+
+                <a
+                    class="success-action-btn view"
+                    href="{{ fill_url }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
 
-                    <path d="M19 12H5"/>
-                    <path d="M12 19l-7-7 7-7"/>
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
 
-                </svg>
+                    <span>مشاهده فرم</span>
 
-                مشاهده فرم
+                </a>
 
-            </a>
+
+                <button
+                    type="button"
+                    class="success-action-btn"
+                    id="qrBtn"
+                    onclick="toggleQR()"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                    </svg>
+
+                    <span id="qrText">نمایش QR</span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="success-action-btn"
+                    id="shareBtn"
+                    onclick="shareForm()"
+                    style="display: none;"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="18" cy="5" r="3"/>
+                        <circle cx="6" cy="12" r="3"/>
+                        <circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    </svg>
+
+                    <span>اشتراک‌گذاری</span>
+
+                </button>
+
+            </div>
+
+
+            <!-- QR -->
+
+            <div class="success-qr" id="qrSection">
+
+                <div class="success-qr-title">
+                    اسکن با دوربین موبایل
+                </div>
+
+                <img
+                    class="success-qr-image"
+                    id="qrImage"
+                    alt="QR Code"
+                >
+
+                <div class="success-qr-hint">
+                    دوربین گوشی را روی کد بگیرید تا فرم باز شود.
+                </div>
+
+            </div>
 
 
         </div>
 
 
+
+        <!-- FOOTER -->
 
         <div class="success-footer">
 
@@ -1059,97 +1522,230 @@
 
 
 
+<div class="toast-container" id="toastContainer"></div>
+
+
+
 <script>
 
-function copyLink() {
-
-    const input =
-        document.getElementById("formLink");
-
-    const button =
-        document.getElementById("copyButton");
-
-    const text =
-        document.getElementById("copyText");
+(function () {
+    "use strict";
 
 
-    navigator.clipboard
-        .writeText(input.value)
-
-        .then(() => {
-
-            showCopiedState();
-
-        })
-
-        .catch(() => {
-
-            fallbackCopy();
-
-        });
-
-}
+    const FORM_URL =
+        document.getElementById("formLink").value;
 
 
-function fallbackCopy() {
+    /* =========================================================
+       TOAST
+    ========================================================= */
 
-    const input =
-        document.getElementById("formLink");
+    function showToast(message, type = "success") {
+
+        const container =
+            document.getElementById("toastContainer");
+
+        if (!container) return;
+
+        const toast = document.createElement("div");
+
+        toast.className = `toast ${type}`;
+
+        const icon = type === "success" ? "✓" : "ℹ";
+
+        toast.innerHTML =
+            `<span>${icon}</span><span>${message}</span>`;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+
+            toast.classList.add("out");
+
+            setTimeout(() => toast.remove(), 320);
+
+        }, 2400);
+    }
 
 
-    input.focus();
+    /* =========================================================
+       COPY LINK
+    ========================================================= */
 
-    input.select();
+    window.copyLink = function () {
 
-    input.setSelectionRange(0, 99999);
-
-
-    try {
-
-        document.execCommand("copy");
-
-        showCopiedState();
-
-    } catch (error) {
+        const button =
+            document.getElementById("copyButton");
 
         const text =
             document.getElementById("copyText");
 
 
-        text.textContent =
-            "لینک را دستی کپی کنید";
+        const onSuccess = () => {
 
+            button.classList.add("copied");
+
+            if (text) text.textContent = "لینک کپی شد";
+
+            showToast("لینک فرم کپی شد", "success");
+
+
+            setTimeout(() => {
+
+                button.classList.remove("copied");
+
+                if (text) text.textContent = "کپی لینک";
+
+            }, 1900);
+        };
+
+
+        const fallback = () => {
+
+            const temp =
+                document.createElement("textarea");
+
+            temp.value = FORM_URL;
+
+            temp.style.position = "fixed";
+            temp.style.opacity = "0";
+
+            document.body.appendChild(temp);
+
+            temp.select();
+
+            try {
+
+                document.execCommand("copy");
+
+                onSuccess();
+
+            } catch (_) {
+
+                showToast("کپی دستی انجام دهید", "info");
+
+            } finally {
+
+                temp.remove();
+            }
+        };
+
+
+        if (navigator.clipboard && window.isSecureContext) {
+
+            navigator.clipboard
+                .writeText(FORM_URL)
+                .then(onSuccess)
+                .catch(fallback);
+
+        } else {
+
+            fallback();
+        }
+    };
+
+
+    /* =========================================================
+       QR CODE
+    ========================================================= */
+
+    window.toggleQR = function () {
+
+        const section =
+            document.getElementById("qrSection");
+
+        const image =
+            document.getElementById("qrImage");
+
+        const btn =
+            document.getElementById("qrBtn");
+
+        const label =
+            document.getElementById("qrText");
+
+        if (!section) return;
+
+
+        if (section.classList.contains("show")) {
+
+            section.classList.remove("show");
+
+            if (label) label.textContent = "نمایش QR";
+
+            return;
+        }
+
+
+        // lazy load
+        if (!image.src || image.src === window.location.href) {
+
+            image.src =
+                "https://api.qrserver.com/v1/create-qr-code/?" +
+                "size=360x360&margin=10&data=" +
+                encodeURIComponent(FORM_URL);
+
+            image.onerror = () => {
+
+                image.replaceWith(
+                    Object.assign(
+                        document.createElement("div"),
+                        {
+                            textContent: "امکان نمایش QR وجود ندارد.",
+                            className: "success-qr-hint",
+                        }
+                    )
+                );
+            };
+        }
+
+
+        section.classList.add("show");
+
+        if (label) label.textContent = "بستن QR";
+
+        section.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+        });
+    };
+
+
+    /* =========================================================
+       SHARE
+    ========================================================= */
+
+    window.shareForm = function () {
+
+        if (!navigator.share) {
+
+            copyLink();
+            return;
+        }
+
+
+        navigator.share({
+            title: document.title,
+            text: "لینک فرم را از این آدرس باز کنید:",
+            url: FORM_URL,
+        })
+        .catch(() => { /* کاربر لغو کرد */ });
+    };
+
+
+    /* =========================================================
+       INIT SHARE
+    ========================================================= */
+
+    if (navigator.share) {
+
+        const shareBtn =
+            document.getElementById("shareBtn");
+
+        if (shareBtn) shareBtn.style.display = "inline-flex";
     }
 
-}
 
-
-function showCopiedState() {
-
-    const button =
-        document.getElementById("copyButton");
-
-    const text =
-        document.getElementById("copyText");
-
-
-    button.classList.add("copied");
-
-
-    text.textContent =
-        "✓ لینک کپی شد";
-
-
-    setTimeout(() => {
-
-        button.classList.remove("copied");
-
-        text.textContent =
-            "کپی لینک";
-
-    }, 1800);
-
-}
+})();
 
 </script>
 

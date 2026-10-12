@@ -8,6 +8,7 @@ from django.utils import timezone
 from .forms import StudentCreateForm, StudentGroupForm
 from .models import Attendance, Student, StudentGroup
 
+
 def can_manage_students(user):
     return (
         user.is_authenticated
@@ -18,10 +19,7 @@ def can_manage_students(user):
     )
 
 
-@user_passes_test(
-    can_manage_students,
-    login_url="/coaches/login/"
-)
+@user_passes_test(can_manage_students, login_url="/coaches/login/")
 def student_list(request):
 
     students = Student.objects.filter(
@@ -36,10 +34,8 @@ def student_list(request):
         }
     )
 
-@user_passes_test(
-    can_manage_students,
-    login_url="/coaches/login/"
-)
+
+@user_passes_test(can_manage_students, login_url="/coaches/login/")
 def student_create(request):
 
     if request.method == "POST":
@@ -49,9 +45,7 @@ def student_create(request):
         if form.is_valid():
 
             student = form.save(commit=False)
-
             student.coach = request.user
-
             student.save()
 
             from finance.models import (
@@ -76,9 +70,7 @@ def student_create(request):
                     created_by=request.user,
                 )
 
-            return redirect(
-                "students:list"
-            )
+            return redirect("students:list")
 
     else:
 
@@ -92,10 +84,8 @@ def student_create(request):
         }
     )
 
-@user_passes_test(
-    can_manage_students,
-    login_url="/coaches/login/"
-)
+
+@user_passes_test(can_manage_students, login_url="/coaches/login/")
 def student_detail(request, student_id):
 
     student = get_object_or_404(
@@ -106,42 +96,16 @@ def student_detail(request, student_id):
 
     attendances = Attendance.objects.filter(
         student=student
-    ).order_by(
-        "-date"
-    )
+    ).order_by("-date")
 
     summary = attendances.aggregate(
         total=Count("id"),
-
-        present=Count(
-            "id",
-            filter=Q(status="present")
-        ),
-
-        absent=Count(
-            "id",
-            filter=Q(status="absent")
-        ),
-
-        excused=Count(
-            "id",
-            filter=Q(status="excused")
-        ),
-
-        heyat=Count(
-            "id",
-            filter=Q(attendance_type="heyat")
-        ),
-
-        weekly_class=Count(
-            "id",
-            filter=Q(attendance_type="weekly_class")
-        ),
-
-        meeting=Count(
-            "id",
-            filter=Q(attendance_type="meeting")
-        ),
+        present=Count("id", filter=Q(status="present")),
+        absent=Count("id", filter=Q(status="absent")),
+        excused=Count("id", filter=Q(status="excused")),
+        heyat=Count("id", filter=Q(attendance_type="heyat")),
+        weekly_class=Count("id", filter=Q(attendance_type="weekly_class")),
+        meeting=Count("id", filter=Q(attendance_type="meeting")),
     )
 
     type_summary = {
@@ -149,54 +113,25 @@ def student_detail(request, student_id):
             attendance_type="heyat"
         ).aggregate(
             total=Count("id"),
-            present=Count(
-                "id",
-                filter=Q(status="present")
-            ),
-            absent=Count(
-                "id",
-                filter=Q(status="absent")
-            ),
-            excused=Count(
-                "id",
-                filter=Q(status="excused")
-            ),
+            present=Count("id", filter=Q(status="present")),
+            absent=Count("id", filter=Q(status="absent")),
+            excused=Count("id", filter=Q(status="excused")),
         ),
-
         "weekly_class": attendances.filter(
             attendance_type="weekly_class"
         ).aggregate(
             total=Count("id"),
-            present=Count(
-                "id",
-                filter=Q(status="present")
-            ),
-            absent=Count(
-                "id",
-                filter=Q(status="absent")
-            ),
-            excused=Count(
-                "id",
-                filter=Q(status="excused")
-            ),
+            present=Count("id", filter=Q(status="present")),
+            absent=Count("id", filter=Q(status="absent")),
+            excused=Count("id", filter=Q(status="excused")),
         ),
-
         "meeting": attendances.filter(
             attendance_type="meeting"
         ).aggregate(
             total=Count("id"),
-            present=Count(
-                "id",
-                filter=Q(status="present")
-            ),
-            absent=Count(
-                "id",
-                filter=Q(status="absent")
-            ),
-            excused=Count(
-                "id",
-                filter=Q(status="excused")
-            ),
+            present=Count("id", filter=Q(status="present")),
+            absent=Count("id", filter=Q(status="absent")),
+            excused=Count("id", filter=Q(status="excused")),
         ),
     }
 
@@ -210,40 +145,23 @@ def student_detail(request, student_id):
             "type_summary": type_summary,
         }
     )
-@user_passes_test(
-    can_manage_students,
-    login_url="/coaches/login/"
-)
+
+
+@user_passes_test(can_manage_students, login_url="/coaches/login/")
 def attendance_create(request):
 
     students = Student.objects.filter(
         coach=request.user,
         is_active=True
-    ).order_by(
-        "first_name",
-        "last_name"
-    )
+    ).order_by("first_name", "last_name")
 
     if request.method == "POST":
 
-        attendance_type = request.POST.get(
-            "attendance_type"
-        )
+        attendance_type = request.POST.get("attendance_type")
+        attendance_date = request.POST.get("date")
+        title = request.POST.get("title", "").strip()
 
-        attendance_date = request.POST.get(
-            "date"
-        )
-
-        title = request.POST.get(
-            "title",
-            ""
-        ).strip()
-
-        valid_types = {
-            "heyat",
-            "weekly_class",
-            "meeting",
-        }
+        valid_types = {"heyat", "weekly_class", "meeting"}
 
         if attendance_type not in valid_types:
 
@@ -278,35 +196,22 @@ def attendance_create(request):
 
         for student in students:
 
-            status = request.POST.get(
-                f"status_{student.id}"
-            )
+            status = request.POST.get(f"status_{student.id}")
 
-            if status not in {
-                "present",
-                "absent",
-                "excused",
-            }:
+            if status not in {"present", "absent", "excused"}:
                 continue
 
             Attendance.objects.update_or_create(
-
                 student=student,
-
                 attendance_type=attendance_type,
-
                 date=attendance_date,
-
                 defaults={
                     "status": status,
                     "title": title,
                 }
-
             )
 
-        return redirect(
-            "students:attendance_create"
-        )
+        return redirect("students:attendance_create")
 
     return render(
         request,
@@ -318,17 +223,12 @@ def attendance_create(request):
     )
 
 
-@user_passes_test(
-    can_manage_students,
-    login_url="/coaches/login/"
-)
+# 👇👇👇 فقط این ویو تغییر کرد 👇👇👇
+@user_passes_test(can_manage_students, login_url="/coaches/login/")
 def student_delete(request, student_id):
 
     if request.method != "POST":
-
-        return redirect(
-            "students:list"
-        )
+        return redirect("students:list")
 
     student = get_object_or_404(
         Student,
@@ -336,11 +236,21 @@ def student_delete(request, student_id):
         coach=request.user
     )
 
+    # ─── حذف وابسته‌های محافظت‌شده قبل از حذف دانش‌آموز ───
+
+    # ۱) شارژهای مالی (Charge.student با PROTECT وصل بود)
+    #    چون related_name='charges' در مدل Charge تعریف شده
+    student.charges.all().delete()
+
+    # ۲) حضور و غیاب‌ها (خودشون CASCADE هستن، ولی برای اطمینان)
+    student.attendances.all().delete()
+
+    # ─── حالا حذف دانش‌آموز ───
     student.delete()
 
-    return redirect(
-        "students:list"
-    )
+    return redirect("students:list")
+# 👆👆👆 پایان تغییر 👆👆👆
+
 
 @user_passes_test(
     lambda user: user.is_authenticated and user.is_superuser,
@@ -372,10 +282,7 @@ def group_create(request):
         if form.is_valid():
 
             form.save()
-
-            return redirect(
-                "students:group_management"
-            )
+            return redirect("students:group_management")
 
     else:
 
@@ -397,31 +304,20 @@ def group_create(request):
 )
 def group_edit(request, group_id):
 
-    group = get_object_or_404(
-        StudentGroup,
-        id=group_id
-    )
+    group = get_object_or_404(StudentGroup, id=group_id)
 
     if request.method == "POST":
 
-        form = StudentGroupForm(
-            request.POST,
-            instance=group
-        )
+        form = StudentGroupForm(request.POST, instance=group)
 
         if form.is_valid():
 
             form.save()
-
-            return redirect(
-                "students:group_management"
-            )
+            return redirect("students:group_management")
 
     else:
 
-        form = StudentGroupForm(
-            instance=group
-        )
+        form = StudentGroupForm(instance=group)
 
     return render(
         request,
@@ -440,25 +336,16 @@ def group_edit(request, group_id):
 def group_toggle(request, group_id):
 
     if request.method != "POST":
+        return redirect("students:group_management")
 
-        return redirect(
-            "students:group_management"
-        )
-
-    group = get_object_or_404(
-        StudentGroup,
-        id=group_id
-    )
+    group = get_object_or_404(StudentGroup, id=group_id)
 
     group.is_active = not group.is_active
+    group.save(update_fields=["is_active"])
 
-    group.save(
-        update_fields=["is_active"]
-    )
+    return redirect("students:group_management")
 
-    return redirect(
-        "students:group_management"
-    )
+
 @user_passes_test(
     lambda user: user.is_authenticated and user.is_superuser,
     login_url="/coaches/login/"

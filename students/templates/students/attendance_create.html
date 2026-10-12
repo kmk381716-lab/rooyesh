@@ -1,1742 +1,571 @@
-
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <title>
-        ثبت حضور و غیاب | کانون رویش
-    </title>
-
-
-    <style>
-
-        /* =====================================================
-           ROOT
-        ===================================================== */
-
-        :root {
-
-            --bg: #050b14;
-            --bg-2: #08111f;
-            --card: rgba(13, 27, 46, 0.78);
-            --card-2: rgba(10, 22, 38, 0.94);
-
-            --white: #ffffff;
-            --text: #edf4ff;
-            --soft: #a9b7ca;
-            --muted: #718096;
-
-            --blue: #4e8cff;
-            --blue-light: #7badff;
-            --purple: #8b63ff;
-
-            --green: #35d49a;
-            --red: #ff6678;
-            --yellow: #e7c967;
-
-            --border: rgba(255,255,255,0.075);
-
-            --shadow:
-                0 22px 70px rgba(0,0,0,0.30);
-        }
-
-
-        /* =====================================================
-           RESET
-        ===================================================== */
-
-        * {
-            box-sizing: border-box;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        body {
-
-            margin: 0;
-
-            min-height: 100vh;
-
-            color: var(--text);
-
-            font-family:
-                Tahoma,
-                Arial,
-                sans-serif;
-
-            line-height: 1.8;
-
-            background:
-                radial-gradient(
-                    circle at 10% 0%,
-                    rgba(78,140,255,0.13),
-                    transparent 28%
-                ),
-                radial-gradient(
-                    circle at 90% 10%,
-                    rgba(139,99,255,0.11),
-                    transparent 28%
-                ),
-                linear-gradient(
-                    180deg,
-                    var(--bg),
-                    var(--bg-2)
-                );
-
-            overflow-x: hidden;
-        }
-
-
-        body::before {
-
-            content: "";
-
-            position: fixed;
-
-            inset: 0;
-
-            pointer-events: none;
-
-            background:
-                linear-gradient(
-                    rgba(255,255,255,0.012) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.012) 1px,
-                    transparent 1px
-                );
-
-            background-size:
-                40px 40px;
-
-            mask-image:
-                linear-gradient(
-                    to bottom,
-                    black,
-                    transparent 80%
-                );
-
-            z-index: -1;
-        }
-
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-
-        button,
-        input,
-        select {
-            font: inherit;
-        }
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        .header {
-
-            position: sticky;
-
-            top: 0;
-
-            z-index: 1000;
-
-            background:
-                rgba(5,12,22,0.82);
-
-            backdrop-filter:
-                blur(22px);
-
-            -webkit-backdrop-filter:
-                blur(22px);
-
-            border-bottom:
-                1px solid rgba(255,255,255,0.055);
-
-            box-shadow:
-                0 10px 45px rgba(0,0,0,0.16);
-        }
-
-
-        .header::before {
-
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-
-            left: 20%;
-
-            width: 60%;
-
-            height: 1px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(78,140,255,0.65),
-                    rgba(139,99,255,0.55),
-                    transparent
-                );
-        }
-
-
-        .header-inner {
-
-            width:
-                min(
-                    1100px,
-                    calc(100% - 36px)
-                );
-
-            min-height: 78px;
-
-            margin-inline: auto;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap: 20px;
-        }
-
-
-        .header-title {
-
-            min-width: 0;
-        }
-
-
-        .header-title h1 {
-
-            margin:
-                0 0 3px;
-
-            color:
-                #ffffff;
-
-            font-size:
-                20px;
-
-            font-weight:
-                900;
-        }
-
-
-        .header-title p {
-
-            margin: 0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-        }
-
-
-        .back-button {
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            gap: 7px;
-
-            min-height:
-                43px;
-
-            padding:
-                0 15px;
-
-            border-radius:
-                12px;
-
-            color:
-                #cbd8ea;
-
-            font-size:
-                11px;
-
-            font-weight:
-                800;
-
-            background:
-                rgba(255,255,255,0.035);
-
-            border:
-                1px solid rgba(255,255,255,0.08);
-
-            transition:
-                0.22s ease;
-        }
-
-
-        .back-button:hover {
-
-            color:
-                #ffffff;
-
-            transform:
-                translateY(-2px);
-
-            background:
-                rgba(78,140,255,0.08);
-
-            border-color:
-                rgba(78,140,255,0.20);
-        }
-
-
-        /* =====================================================
-           CONTAINER
-        ===================================================== */
-
-        .container {
-
-            width:
-                min(
-                    1000px,
-                    calc(100% - 36px)
-                );
-
-            margin-inline:
-                auto;
-
-            padding:
-                34px 0 70px;
-        }
-
-
-        /* =====================================================
-           ERROR
-        ===================================================== */
-
-        .error {
-
-            margin-bottom:
-                18px;
-
-            padding:
-                13px 16px;
-
-            color:
-                #ff97a2;
-
-            background:
-                rgba(255,102,120,0.055);
-
-            border:
-                1px solid rgba(255,102,120,0.14);
-
-            border-radius:
-                14px;
-
-            font-size:
-                12px;
-        }
-
-
-        /* =====================================================
-           CARD
-        ===================================================== */
-
-        .card {
-
-            position:
-                relative;
-
-            overflow:
-                hidden;
-
-            margin-bottom:
-                20px;
-
-            padding:
-                26px;
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                23px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(15,31,52,0.86),
-                    rgba(8,19,33,0.94)
-                );
-
-            box-shadow:
-                var(--shadow);
-
-            backdrop-filter:
-                blur(18px);
-
-            -webkit-backdrop-filter:
-                blur(18px);
-        }
-
-
-        .card::before {
-
-            content: "";
-
-            position:
-                absolute;
-
-            top:
-                -100px;
-
-            right:
-                -100px;
-
-            width:
-                260px;
-
-            height:
-                260px;
-
-            border-radius:
-                50%;
-
-            background:
-                rgba(78,140,255,0.06);
-
-            filter:
-                blur(65px);
-
-            pointer-events:
-                none;
-        }
-
-
-        .card > * {
-            position: relative;
-            z-index: 1;
-        }
-
-
-        /* =====================================================
-           CARD TITLES
-        ===================================================== */
-
-        .card h2 {
-
-            margin:
-                0 0 6px;
-
-            color:
-                #ffffff;
-
-            font-size:
-                19px;
-
-            font-weight:
-                900;
-        }
-
-
-        .description {
-
-            margin:
-                0 0 25px;
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-
-            line-height:
-                2;
-        }
-
-
-        /* =====================================================
-           EVENT FORM
-        ===================================================== */
-
-        .form-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(
-                    3,
-                    minmax(0, 1fr)
-                );
-
-            gap:
-                14px;
-        }
-
-
-        .form-group {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                6px;
-        }
-
-
-        .form-group label {
-
-            color:
-                #aebbd0;
-
-            font-size:
-                11px;
-
-            font-weight:
-                800;
-        }
-
-
-        .form-group input,
-        .form-group select {
-
-            width:
-                100%;
-
-            min-height:
-                46px;
-
-            padding:
-                0 13px;
-
-            border:
-                1px solid rgba(255,255,255,0.075);
-
-            border-radius:
-                12px;
-
-            outline:
-                none;
-
-            color:
-                #ffffff;
-
-            background:
-                rgba(255,255,255,0.032);
-
-            font-size:
-                11px;
-
-            transition:
-                border-color .22s ease,
-                box-shadow .22s ease,
-                background .22s ease;
-        }
-
-
-        .form-group select option {
-            color: #111827;
-            background: #ffffff;
-        }
-
-
-        .form-group input::placeholder {
-            color:
-                #59697f;
-        }
-
-
-        .form-group input:focus,
-        .form-group select:focus {
-
-            border-color:
-                rgba(78,140,255,0.42);
-
-            background:
-                rgba(78,140,255,0.045);
-
-            box-shadow:
-                0 0 0 4px rgba(78,140,255,0.065);
-        }
-
-
-        /* =====================================================
-           ATTENDANCE HEADER
-        ===================================================== */
-
-        .attendance-header {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap:
-                15px;
-
-            margin-bottom:
-                18px;
-        }
-
-
-        .attendance-header h2 {
-            margin: 0;
-        }
-
-
-        .all-present {
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            gap:
-                7px;
-
-            min-height:
-                42px;
-
-            padding:
-                0 14px;
-
-            border:
-                1px solid rgba(53,212,154,0.14);
-
-            border-radius:
-                11px;
-
-            color:
-                #61deb0;
-
-            background:
-                rgba(53,212,154,0.055);
-
-            font-size:
-                10px;
-
-            font-weight:
-                900;
-
-            cursor:
-                pointer;
-
-            transition:
-                0.22s ease;
-        }
-
-
-        .all-present::before {
-
-            content:
-                "✓";
-
-            width:
-                18px;
-
-            height:
-                18px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                6px;
-
-            background:
-                rgba(53,212,154,0.12);
-        }
-
-
-        .all-present:hover {
-
-            transform:
-                translateY(-2px);
-
-            background:
-                rgba(53,212,154,0.09);
-
-            border-color:
-                rgba(53,212,154,0.24);
-        }
-
-
-        /* =====================================================
-           STUDENT LIST
-        ===================================================== */
-
-        .student-list {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                9px;
-        }
-
-
-        .student-row {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap:
-                18px;
-
-            padding:
-                13px 14px;
-
-            border:
-                1px solid rgba(255,255,255,0.055);
-
-            border-radius:
-                16px;
-
-            background:
-                rgba(255,255,255,0.022);
-
-            transition:
-                border-color .2s ease,
-                background .2s ease,
-                transform .2s ease;
-        }
-
-
-        .student-row:hover {
-
-            transform:
-                translateY(-2px);
-
-            border-color:
-                rgba(78,140,255,0.16);
-
-            background:
-                rgba(78,140,255,0.035);
-        }
-
-
-        /* =====================================================
-           STUDENT INFO
-        ===================================================== */
-
-        .student-info {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                11px;
-
-            min-width:
-                0;
-        }
-
-
-        .avatar {
-
-            width:
-                43px;
-
-            height:
-                43px;
-
-            flex-shrink:
-                0;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                13px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(78,140,255,0.14),
-                    rgba(139,99,255,0.14)
-                );
-
-            border:
-                1px solid rgba(255,255,255,0.07);
-
-            font-size:
-                19px;
-        }
-
-
-        .student-name {
-
-            color:
-                #eaf2fd;
-
-            font-size:
-                12px;
-
-            font-weight:
-                900;
-
-            white-space:
-                nowrap;
-
-            overflow:
-                hidden;
-
-            text-overflow:
-                ellipsis;
-        }
-
-
-        .student-grade {
-
-            margin-top:
-                2px;
-
-            color:
-                #6c7b90;
-
-            font-size:
-                9px;
-        }
-
-
-        /* =====================================================
-           STATUS OPTIONS
-        ===================================================== */
-
-        .statuses {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                6px;
-
-            flex-shrink:
-                0;
-        }
-
-
-        .status-option {
-
-            cursor:
-                pointer;
-        }
-
-
-        .status-option input {
-            display:
-                none;
-        }
-
-
-        .status-option span {
-
-            min-width:
-                68px;
-
-            min-height:
-                38px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            padding:
-                0 10px;
-
-            border:
-                1px solid rgba(255,255,255,0.055);
-
-            border-radius:
-                10px;
-
-            color:
-                #78869b;
-
-            background:
-                rgba(255,255,255,0.025);
-
-            font-size:
-                10px;
-
-            font-weight:
-                800;
-
-            transition:
-                0.2s ease;
-        }
-
-
-        .status-option span:hover {
-
-            color:
-                #ced9e8;
-
-            background:
-                rgba(255,255,255,0.045);
-        }
-
-
-        /* حاضر */
-
-        .status-option input[value="present"]:checked + span {
-
-            color:
-                #66dfb3;
-
-            background:
-                rgba(53,212,154,0.09);
-
-            border-color:
-                rgba(53,212,154,0.25);
-
-            box-shadow:
-                0 7px 20px rgba(53,212,154,0.08);
-        }
-
-
-        /* غایب */
-
-        .status-option input[value="absent"]:checked + span {
-
-            color:
-                #ff8795;
-
-            background:
-                rgba(255,102,120,0.09);
-
-            border-color:
-                rgba(255,102,120,0.25);
-
-            box-shadow:
-                0 7px 20px rgba(255,102,120,0.07);
-        }
-
-
-        /* موجه */
-
-        .status-option input[value="excused"]:checked + span {
-
-            color:
-                #e9cf74;
-
-            background:
-                rgba(233,207,116,0.08);
-
-            border-color:
-                rgba(233,207,116,0.22);
-
-            box-shadow:
-                0 7px 20px rgba(233,207,116,0.06);
-        }
-
-
-        /* =====================================================
-           ACTIONS
-        ===================================================== */
-
-        .actions {
-
-            display:
-                flex;
-
-            justify-content:
-                flex-end;
-
-            margin-top:
-                21px;
-
-            padding-top:
-                20px;
-
-            border-top:
-                1px solid rgba(255,255,255,0.06);
-        }
-
-
-        .submit-button {
-
-            min-height:
-                48px;
-
-            padding:
-                0 23px;
-
-            border:
-                1px solid rgba(255,255,255,0.10);
-
-            border-radius:
-                12px;
-
-            color:
-                #ffffff;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #4387ff,
-                    #7958eb
-                );
-
-            box-shadow:
-                0 12px 30px rgba(67,135,255,0.20);
-
-            font-size:
-                11px;
-
-            font-weight:
-                900;
-
-            cursor:
-                pointer;
-
-            transition:
-                transform .22s ease,
-                box-shadow .22s ease;
-        }
-
-
-        .submit-button:hover {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 16px 38px rgba(67,135,255,0.28);
-        }
-
-
-        /* =====================================================
-           EMPTY
-        ===================================================== */
-
-        .empty {
-
-            padding:
-                45px 20px;
-
-            text-align:
-                center;
-
-            color:
-                #6e7d91;
-
-            font-size:
-                12px;
-
-            border:
-                1px dashed rgba(255,255,255,0.08);
-
-            border-radius:
-                15px;
-
-            background:
-                rgba(255,255,255,0.018);
-        }
-
-
-        /* =====================================================
-           TABLET
-        ===================================================== */
-
-        @media (max-width: 850px) {
-
-            .form-grid {
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        minmax(0, 1fr)
-                    );
-            }
-
-
-            .student-row {
-
-                align-items:
-                    stretch;
-
-                flex-direction:
-                    column;
-            }
-
-
-            .statuses {
-
-                width:
-                    100%;
-            }
-
-
-            .status-option {
-
-                flex:
-                    1;
-            }
-
-
-            .status-option span {
-
-                width:
-                    100%;
-            }
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 600px) {
-
-            .header-inner {
-
-                width:
-                    calc(100% - 24px);
-
-                min-height:
-                    68px;
-
-                gap:
-                    10px;
-            }
-
-
-            .header-title h1 {
-
-                font-size:
-                    17px;
-            }
-
-
-            .header-title p {
-
-                font-size:
-                    9px;
-            }
-
-
-            .back-button {
-
-                min-height:
-                    40px;
-
-                padding:
-                    0 11px;
-
-                font-size:
-                    10px;
-            }
-
-
-            .container {
-
-                width:
-                    calc(100% - 22px);
-
-                padding:
-                    22px 0 50px;
-            }
-
-
-            .card {
-
-                padding:
-                    18px;
-
-                border-radius:
-                    19px;
-
-                margin-bottom:
-                    15px;
-            }
-
-
-            .card h2 {
-
-                font-size:
-                    17px;
-            }
-
-
-            .description {
-
-                font-size:
-                    10px;
-
-                margin-bottom:
-                    20px;
-            }
-
-
-            .form-grid {
-
-                grid-template-columns:
-                    1fr;
-            }
-
-
-            .attendance-header {
-
-                align-items:
-                    stretch;
-
-                flex-direction:
-                    column;
-            }
-
-
-            .all-present {
-
-                width:
-                    100%;
-            }
-
-
-            .student-row {
-
-                padding:
-                    13px;
-            }
-
-
-            .student-name {
-
-                font-size:
-                    11px;
-            }
-
-
-            .statuses {
-
-                gap:
-                    6px;
-            }
-
-
-            .status-option span {
-
-                min-height:
-                    42px;
-
-                font-size:
-                    10px;
-            }
-
-
-            .actions {
-
-                margin-top:
-                    18px;
-
-                padding-top:
-                    17px;
-            }
-
-
-            .submit-button {
-
-                width:
-                    100%;
-            }
-        }
-
-
-        /* =====================================================
-           SMALL PHONES
-        ===================================================== */
-
-        @media (max-width: 380px) {
-
-            .header-title h1 {
-
-                font-size:
-                    15px;
-            }
-
-
-            .header-title p {
-                display:
-                    none;
-            }
-
-
-            .back-button {
-
-                padding:
-                    0 9px;
-            }
-
-
-            .avatar {
-
-                width:
-                    39px;
-
-                height:
-                    39px;
-
-                font-size:
-                    17px;
-            }
-
-
-            .status-option span {
-
-                min-width:
-                    0;
-
-                padding:
-                    0 6px;
-
-                font-size:
-                    9px;
-            }
-
-        }
-
-
-        /* =====================================================
-           REDUCE MOTION
-        ===================================================== */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            * {
-
-                transition:
-                    none !important;
-
-                scroll-behavior:
-                    auto !important;
-            }
-
-        }
-
-    </style>
-
-</head>
-
-
-<body>
-
-
-<!-- =====================================================
-     HEADER
-====================================================== -->
-
-<header class="header">
-
-    <div class="header-inner">
-
-
-        <div class="header-title">
-
-            <h1>
-                ثبت حضور و غیاب
-            </h1>
-
-            <p>
-                ثبت حضور دانش‌آموزان گروه شما
-            </p>
-
-        </div>
-
-
-        <a
-            href="{% url 'coaches:dashboard' %}"
-            class="back-button"
-        >
-            ← بازگشت
-        </a>
-
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     MAIN
-====================================================== -->
-
-<main class="container">
-
-
-    {% if error %}
-
-        <div class="error">
-            {{ error }}
-        </div>
-
-    {% endif %}
-
-
-    <form method="post">
-
-        {% csrf_token %}
-
-
-        <!-- =================================================
-             EVENT INFORMATION
-        ================================================== -->
-
-        <div class="card">
-
-            <h2>
-                اطلاعات برنامه
-            </h2>
-
-
-            <p class="description">
-                نوع برنامه، تاریخ و عنوان برنامه را مشخص کنید.
-            </p>
-
-
-            <div class="form-grid">
-
-
-                <div class="form-group">
-
-                    <label for="attendance_type">
-                        نوع برنامه
-                    </label>
-
-
-                    <select
-                        name="attendance_type"
-                        id="attendance_type"
-                        required
-                    >
-
-                        <option value="">
-                            انتخاب کنید
-                        </option>
-
-
-                        <option value="heyat">
-                            هیئت
-                        </option>
-
-
-                        <option value="weekly_class">
-                            کلاس هفتگی
-                        </option>
-
-
-                        <option value="meeting">
-                            قرار
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="date">
-                        تاریخ
-                    </label>
-
-
-                    <input
-                        type="date"
-                        name="date"
-                        id="date"
-                        value="{{ today|date:'Y-m-d' }}"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="title">
-                        عنوان برنامه
-                    </label>
-
-
-                    <input
-                        type="text"
-                        name="title"
-                        id="title"
-                        placeholder="مثلاً هیئت هفتگی"
-                    >
-
-                </div>
-
-
+{% extends "base.html" %}
+
+{% block title %}ثبت حضور و غیاب — کانون رویش{% endblock %}
+
+{% block content %}
+
+<style>
+/* =====================================================
+   PAGE — ATTENDANCE
+===================================================== */
+.attendance-page {
+    padding: 34px 0 70px;
+}
+
+/* ===================== PAGE HEADER ===================== */
+.attendance-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+.attendance-top h1 {
+    margin: 0 0 6px;
+    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    font-weight: 900;
+    letter-spacing: -0.4px;
+    background: linear-gradient(120deg, #7fa8ff 0%, #a98eff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.attendance-top p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 42px;
+    padding: 0 15px;
+    border-radius: 12px;
+    color: var(--text-soft);
+    font-size: 11.5px;
+    font-weight: 800;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+
+body.light .back-link { background: rgba(0, 0, 0, 0.03); }
+
+.back-link:hover {
+    color: var(--text);
+    background: rgba(78, 140, 255, 0.10);
+    border-color: rgba(78, 140, 255, 0.28);
+    transform: translateY(-1px);
+}
+
+/* ===================== ERROR ===================== */
+.error {
+    margin-bottom: 18px;
+    padding: 13px 16px;
+    color: #ff97a2;
+    background: rgba(255, 102, 120, 0.06);
+    border: 1px solid rgba(255, 102, 120, 0.18);
+    border-radius: 14px;
+    font-size: 12px;
+}
+
+body.light .error {
+    color: #b91c1c;
+    background: rgba(239, 68, 68, 0.06);
+    border-color: rgba(239, 68, 68, 0.20);
+}
+
+/* ===================== CARD ===================== */
+.att-card {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    padding: 26px;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: var(--shadow);
+}
+
+.att-card > * { position: relative; z-index: 1; }
+
+.att-card h2 {
+    margin: 0 0 6px;
+    color: var(--text);
+    font-size: 1.05rem;
+    font-weight: 900;
+}
+
+.att-card .description {
+    margin: 0 0 22px;
+    color: var(--text-muted);
+    font-size: 11.5px;
+    line-height: 2;
+}
+
+/* ===================== FORM GRID ===================== */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    color: var(--text-soft);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 13px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 12px;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+body.light .form-group input,
+body.light .form-group select {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.form-group select option {
+    color: #111827;
+    background: #ffffff;
+}
+
+.form-group input::placeholder {
+    color: var(--text-muted);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: rgba(78, 140, 255, 0.42);
+    background: rgba(78, 140, 255, 0.05);
+    box-shadow: 0 0 0 4px rgba(78, 140, 255, 0.08);
+}
+
+/* ===================== ATTENDANCE HEADER ===================== */
+.attendance-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.attendance-header h2 { margin: 0; }
+
+.all-present {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 42px;
+    padding: 0 14px;
+    border: 1px solid rgba(53, 212, 154, 0.20);
+    border-radius: 11px;
+    color: #61deb0;
+    background: rgba(53, 212, 154, 0.07);
+    font-size: 11px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.all-present::before {
+    content: "✓";
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: rgba(53, 212, 154, 0.14);
+    font-size: 11px;
+}
+
+.all-present:hover {
+    transform: translateY(-2px);
+    background: rgba(53, 212, 154, 0.11);
+    border-color: rgba(53, 212, 154, 0.32);
+}
+
+/* ===================== STUDENT LIST ===================== */
+.student-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.student-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+body.light .student-row { background: rgba(255, 255, 255, 0.6); }
+
+.student-row:hover {
+    transform: translateY(-1px);
+    border-color: rgba(78, 140, 255, 0.20);
+    background: rgba(78, 140, 255, 0.04);
+}
+
+/* ===================== STUDENT INFO ===================== */
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+}
+
+.avatar {
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: linear-gradient(135deg, rgba(78, 140, 255, 0.16), rgba(139, 99, 255, 0.16));
+    border: 1px solid var(--border);
+    font-size: 19px;
+}
+
+.student-name {
+    color: var(--text);
+    font-size: 12.5px;
+    font-weight: 900;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.student-grade {
+    margin-top: 2px;
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+/* ===================== STATUSES ===================== */
+.statuses {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.status-option { cursor: pointer; }
+.status-option input { display: none; }
+
+.status-option span {
+    min-width: 68px;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.025);
+    font-size: 11px;
+    font-weight: 800;
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.status-option span:hover {
+    color: var(--text-soft);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* حاضر */
+.status-option input[value="present"]:checked + span {
+    color: #66dfb3;
+    background: rgba(53, 212, 154, 0.10);
+    border-color: rgba(53, 212, 154, 0.30);
+    box-shadow: 0 6px 18px rgba(53, 212, 154, 0.10);
+}
+
+/* غایب */
+.status-option input[value="absent"]:checked + span {
+    color: #ff8795;
+    background: rgba(255, 102, 120, 0.10);
+    border-color: rgba(255, 102, 120, 0.30);
+    box-shadow: 0 6px 18px rgba(255, 102, 120, 0.10);
+}
+
+/* موجه */
+.status-option input[value="excused"]:checked + span {
+    color: #e9cf74;
+    background: rgba(233, 207, 116, 0.10);
+    border-color: rgba(233, 207, 116, 0.28);
+    box-shadow: 0 6px 18px rgba(233, 207, 116, 0.08);
+}
+
+/* ===================== ACTIONS ===================== */
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 21px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.submit-button {
+    min-height: 48px;
+    padding: 0 23px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #4387ff, #7958eb);
+    box-shadow: 0 12px 30px rgba(67, 135, 255, 0.22);
+    font-size: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 38px rgba(67, 135, 255, 0.30);
+}
+
+/* ===================== EMPTY ===================== */
+.empty {
+    padding: 45px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12.5px;
+    border: 1px dashed var(--border);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 850px) {
+    .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .student-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .statuses { width: 100%; }
+    .status-option { flex: 1; }
+    .status-option span { width: 100%; }
+}
+
+@media (max-width: 600px) {
+    .attendance-page { padding: 22px 0 50px; }
+
+    .att-card { padding: 18px; border-radius: 18px; margin-bottom: 15px; }
+    .att-card h2 { font-size: 1rem; }
+    .att-card .description { font-size: 11px; margin-bottom: 20px; }
+
+    .form-grid { grid-template-columns: 1fr; }
+
+    .attendance-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .all-present { width: 100%; }
+
+    .student-row { padding: 13px; }
+    .student-name { font-size: 12px; }
+
+    .status-option span {
+        min-height: 42px;
+        font-size: 11px;
+    }
+
+    .actions { margin-top: 18px; padding-top: 17px; }
+    .submit-button { width: 100%; }
+}
+
+@media (max-width: 380px) {
+    .avatar { width: 39px; height: 39px; font-size: 17px; }
+
+    .status-option span {
+        min-width: 0;
+        padding: 0 6px;
+        font-size: 10px;
+    }
+}
+</style>
+
+
+<div class="attendance-page">
+    <div class="container">
+
+        <!-- ===================== HEADER ===================== -->
+        <div class="attendance-top">
+            <div>
+                <h1>ثبت حضور و غیاب</h1>
+                <p>ثبت حضور دانش‌آموزان گروه شما</p>
             </div>
 
+            <a href="{% url 'coaches:dashboard' %}" class="back-link">
+                ← بازگشت به پنل
+            </a>
         </div>
 
 
-        <!-- =================================================
-             STUDENTS
-        ================================================== -->
-
-        <div class="card">
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
 
 
-            <div class="attendance-header">
+        <form method="post">
+            {% csrf_token %}
 
-                <h2>
-                    دانش‌آموزان
-                </h2>
+            <!-- ===================== EVENT INFO ===================== -->
+            <div class="att-card">
+                <h2>اطلاعات برنامه</h2>
+                <p class="description">
+                    نوع برنامه، تاریخ و عنوان برنامه را مشخص کنید.
+                </p>
 
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="attendance_type">نوع برنامه</label>
+                        <select name="attendance_type" id="attendance_type" required>
+                            <option value="">انتخاب کنید</option>
+                            <option value="heyat">هیئت</option>
+                            <option value="weekly_class">کلاس هفتگی</option>
+                            <option value="meeting">قرار</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">تاریخ</label>
+                        <input
+                            type="date"
+                            name="date"
+                            id="date"
+                            value="{{ today|date:'Y-m-d' }}"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">عنوان برنامه</label>
+                        <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            placeholder="مثلاً هیئت هفتگی"
+                        >
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ===================== STUDENTS ===================== -->
+            <div class="att-card">
+                <div class="attendance-header">
+                    <h2>دانش‌آموزان</h2>
+
+                    {% if students %}
+                        <button
+                            type="button"
+                            class="all-present"
+                            onclick="markAllPresent()"
+                        >
+                            همه حاضر
+                        </button>
+                    {% endif %}
+                </div>
 
                 {% if students %}
+                    <div class="student-list">
+                        {% for student in students %}
+                            <div class="student-row">
+                                <div class="student-info">
+                                    <div class="avatar">👨‍🎓</div>
+                                    <div>
+                                        <div class="student-name">
+                                            {{ student.first_name }} {{ student.last_name }}
+                                        </div>
+                                        <div class="student-grade">
+                                            پایه {{ student.grade }}
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <button
-                        type="button"
-                        class="all-present"
-                        onclick="markAllPresent()"
-                    >
-                        همه حاضر
-                    </button>
+                                <div class="statuses">
+                                    <label class="status-option">
+                                        <input type="radio" name="status_{{ student.id }}" value="present" checked>
+                                        <span>حاضر</span>
+                                    </label>
 
+                                    <label class="status-option">
+                                        <input type="radio" name="status_{{ student.id }}" value="absent">
+                                        <span>غایب</span>
+                                    </label>
+
+                                    <label class="status-option">
+                                        <input type="radio" name="status_{{ student.id }}" value="excused">
+                                        <span>موجه</span>
+                                    </label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="actions">
+                        <button type="submit" class="submit-button">
+                            ثبت حضور و غیاب
+                        </button>
+                    </div>
+
+                {% else %}
+                    <div class="empty">
+                        هنوز دانش‌آموز فعالی برای ثبت حضور وجود ندارد.
+                    </div>
                 {% endif %}
-
             </div>
 
+        </form>
 
-            {% if students %}
-
-
-                <div class="student-list">
-
-
-                    {% for student in students %}
-
-
-                        <div class="student-row">
-
-
-                            <!-- STUDENT -->
-
-                            <div class="student-info">
-
-
-                                <div class="avatar">
-                                    👨‍🎓
-                                </div>
-
-
-                                <div>
-
-                                    <div class="student-name">
-
-                                        {{ student.first_name }}
-                                        {{ student.last_name }}
-
-                                    </div>
-
-
-                                    <div class="student-grade">
-
-                                        پایه {{ student.grade }}
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <!-- STATUS -->
-
-                            <div class="statuses">
-
-
-                                <label class="status-option">
-
-                                    <input
-                                        type="radio"
-                                        name="status_{{ student.id }}"
-                                        value="present"
-                                        checked
-                                    >
-
-                                    <span>
-                                        حاضر
-                                    </span>
-
-                                </label>
-
-
-                                <label class="status-option">
-
-                                    <input
-                                        type="radio"
-                                        name="status_{{ student.id }}"
-                                        value="absent"
-                                    >
-
-                                    <span>
-                                        غایب
-                                    </span>
-
-                                </label>
-
-
-                                <label class="status-option">
-
-                                    <input
-                                        type="radio"
-                                        name="status_{{ student.id }}"
-                                        value="excused"
-                                    >
-
-                                    <span>
-                                        موجه
-                                    </span>
-
-                                </label>
-
-
-                            </div>
-
-
-                        </div>
-
-
-                    {% endfor %}
-
-
-                </div>
-
-
-                <!-- ACTION -->
-
-                <div class="actions">
-
-                    <button
-                        type="submit"
-                        class="submit-button"
-                    >
-                        ثبت حضور و غیاب
-                    </button>
-
-                </div>
-
-
-            {% else %}
-
-
-                <div class="empty">
-
-                    هنوز دانش‌آموز فعالی برای ثبت حضور وجود ندارد.
-
-                </div>
-
-
-            {% endif %}
-
-
-        </div>
-
-
-    </form>
-
-
-</main>
+    </div>
+</div>
 
 
 <script>
-
-    function markAllPresent() {
-
-        const radios =
-            document.querySelectorAll(
-                'input[type="radio"][value="present"]'
-            );
-
-
-        radios.forEach(function (radio) {
-
-            radio.checked = true;
-
-        });
-
-    }
-
+function markAllPresent() {
+    document
+        .querySelectorAll('input[type="radio"][value="present"]')
+        .forEach(function (radio) { radio.checked = true; });
+}
 </script>
 
-
-</body>
-
-</html>
+{% endblock %}

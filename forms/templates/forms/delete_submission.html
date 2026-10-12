@@ -5,7 +5,7 @@
 <style>
 
     /* =========================================================
-       DELETE PAGE — با تم یکسان
+       DELETE PAGE
     ========================================================= */
 
     .delete-page,
@@ -15,8 +15,6 @@
 
 
     .delete-page {
-
-        /* دارک (پیش‌فرض) */
 
         --dp-card-1: #1a3055;
         --dp-card-2: #102040;
@@ -28,10 +26,19 @@
         --dp-muted: #7a8fb5;
         --dp-dim: #5a6d8e;
 
+        --dp-blue-light: #6da4ff;
+
         --dp-red: #fb7185;
         --dp-red-strong: #f43f5e;
         --dp-red-bg: rgba(244, 63, 94, 0.15);
         --dp-red-border: rgba(244, 63, 94, 0.4);
+
+        --dp-warn: #fbbf24;
+        --dp-warn-bg: rgba(251, 191, 36, 0.1);
+        --dp-warn-border: rgba(251, 191, 36, 0.35);
+
+        --dp-input: #050b18;
+        --dp-input-border: rgba(109, 164, 255, 0.42);
 
         --dp-shadow:
             0 30px 80px rgba(0, 0, 0, 0.55),
@@ -48,7 +55,6 @@
         display: flex;
 
         align-items: center;
-
         justify-content: center;
 
         padding: 30px 20px 50px;
@@ -58,8 +64,6 @@
         transition: color 0.4s ease;
     }
 
-
-    /* تم روشن */
 
     body.light .delete-page {
 
@@ -73,10 +77,15 @@
         --dp-muted: #4a5c80;
         --dp-dim: #6a7ba0;
 
+        --dp-blue-light: #2a6bff;
+
         --dp-red: #dc3545;
         --dp-red-strong: #b02a37;
         --dp-red-bg: rgba(220, 53, 69, 0.1);
         --dp-red-border: rgba(220, 53, 69, 0.35);
+
+        --dp-input: #f5f8ff;
+        --dp-input-border: rgba(58, 109, 224, 0.35);
 
         --dp-shadow:
             0 30px 80px rgba(220, 53, 69, 0.2),
@@ -92,19 +101,16 @@
     .delete-card {
 
         position: relative;
-
         z-index: 2;
 
         width: 100%;
-
-        max-width: 560px;
+        max-width: 580px;
 
         padding: 38px 34px 32px;
 
         text-align: center;
 
         border: 1.5px solid var(--dp-border);
-
         border-radius: 24px;
 
         background:
@@ -134,10 +140,7 @@
         content: "";
 
         position: absolute;
-
-        top: 0;
-        right: 0;
-        left: 0;
+        top: 0; right: 0; left: 0;
 
         height: 3px;
 
@@ -160,7 +163,6 @@
 
 
     @keyframes deleteBorderShine {
-
         to { background-position: 200% 0; }
     }
 
@@ -179,7 +181,6 @@
         margin: 0 auto 22px;
 
         display: flex;
-
         align-items: center;
         justify-content: center;
 
@@ -209,15 +210,13 @@
         content: "";
 
         position: absolute;
-
         inset: -12px;
 
         border-radius: 33px;
 
         border: 1.5px solid rgba(244, 63, 94, 0.25);
 
-        animation:
-            warningRing 2.8s ease-out infinite;
+        animation: warningRing 2.8s ease-out infinite;
 
         pointer-events: none;
     }
@@ -225,34 +224,21 @@
 
     @keyframes warningRing {
 
-        0% {
-            opacity: 0.6;
-            transform: scale(0.92);
-        }
-
-        70% {
-            opacity: 0;
-            transform: scale(1.18);
-        }
-
-        100% {
-            opacity: 0;
-            transform: scale(1.18);
-        }
+        0% { opacity: 0.6; transform: scale(0.92); }
+        70% { opacity: 0; transform: scale(1.18); }
+        100% { opacity: 0; transform: scale(1.18); }
     }
 
 
     .warning-icon {
 
         position: relative;
-
         z-index: 2;
 
         width: 56px;
         height: 56px;
 
         display: flex;
-
         align-items: center;
         justify-content: center;
 
@@ -268,7 +254,6 @@
         color: var(--dp-red);
 
         font-size: 28px;
-
         font-weight: 900;
 
         box-shadow:
@@ -278,13 +263,12 @@
 
 
     /* =========================================================
-       TITLE
+       TITLE & QUESTION
     ========================================================= */
 
     .delete-title {
 
         position: relative;
-
         z-index: 2;
 
         margin: 0 0 12px;
@@ -292,75 +276,135 @@
         color: var(--dp-text);
 
         font-size: 27px;
-
         line-height: 1.5;
-
         font-weight: 800;
 
         letter-spacing: -0.6px;
 
-        animation:
-            deleteTextShow 0.6s 0.12s both;
+        animation: deleteTextShow 0.6s 0.12s both;
     }
 
 
     .delete-question {
 
         position: relative;
-
         z-index: 2;
 
         margin: 0 auto;
-
         max-width: 460px;
 
         color: var(--dp-muted);
 
         line-height: 2;
-
         font-size: 13px;
-
         font-weight: 500;
 
         overflow-wrap: anywhere;
 
-        animation:
-            deleteTextShow 0.6s 0.19s both;
+        animation: deleteTextShow 0.6s 0.19s both;
     }
 
 
     .delete-question strong {
-
         color: var(--dp-text-soft);
-
         font-weight: 800;
     }
 
 
     /* =========================================================
-       WARNING BOX
+       META STATS
+    ========================================================= */
+
+    .destroy-stats {
+
+        position: relative;
+        z-index: 2;
+
+        display: flex;
+        justify-content: center;
+
+        gap: 10px;
+
+        margin-top: 20px;
+
+        flex-wrap: wrap;
+
+        animation: deleteTextShow 0.6s 0.22s both;
+    }
+
+
+    .stat-chip {
+
+        display: inline-flex;
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 9px 14px;
+
+        border-radius: 11px;
+
+        background: rgba(244, 63, 94, 0.08);
+
+        border: 1.5px solid rgba(244, 63, 94, 0.22);
+
+        color: var(--dp-text-soft);
+
+        font-size: 11.5px;
+        font-weight: 700;
+    }
+
+
+    .stat-chip strong {
+
+        color: var(--dp-red);
+
+        font-weight: 900;
+
+        font-variant-numeric: tabular-nums;
+    }
+
+
+    .stat-chip-icon {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 22px;
+        height: 22px;
+
+        border-radius: 7px;
+
+        background: rgba(244, 63, 94, 0.16);
+
+        color: var(--dp-red);
+
+        font-size: 12px;
+    }
+
+
+    /* =========================================================
+       WARNING
     ========================================================= */
 
     .delete-warning {
 
         position: relative;
-
         z-index: 2;
 
         display: flex;
-
         align-items: flex-start;
 
         gap: 12px;
 
-        margin: 24px 0 28px;
+        margin: 24px 0 20px;
 
         padding: 16px 18px;
 
         text-align: right;
 
         border: 1.5px solid var(--dp-red-border);
-
         border-radius: 14px;
 
         background: var(--dp-red-bg);
@@ -368,13 +412,11 @@
         color: var(--dp-text-soft);
 
         font-size: 12.5px;
-
         font-weight: 600;
 
         line-height: 1.95;
 
-        animation:
-            warningBoxShow 0.55s 0.24s both;
+        animation: warningBoxShow 0.55s 0.24s both;
     }
 
 
@@ -391,7 +433,6 @@
         height: 30px;
 
         display: flex;
-
         align-items: center;
         justify-content: center;
 
@@ -402,8 +443,155 @@
         color: var(--dp-red);
 
         font-size: 15px;
-
         font-weight: 900;
+    }
+
+
+    /* =========================================================
+       TYPE TO CONFIRM
+    ========================================================= */
+
+    .confirm-block {
+
+        position: relative;
+        z-index: 2;
+
+        display: none;
+
+        margin-bottom: 20px;
+
+        padding: 16px;
+
+        text-align: right;
+
+        border: 1.5px solid var(--dp-warn-border);
+        border-radius: 14px;
+
+        background: var(--dp-warn-bg);
+
+        animation: warningBoxShow 0.5s ease;
+    }
+
+
+    .confirm-block.show {
+        display: block;
+    }
+
+
+    .confirm-label {
+
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+
+        margin-bottom: 12px;
+
+        color: var(--dp-warn);
+
+        font-size: 12px;
+        font-weight: 800;
+
+        line-height: 1.7;
+    }
+
+
+    .confirm-label-icon {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 22px;
+        height: 22px;
+
+        border-radius: 7px;
+
+        background: rgba(251, 191, 36, 0.2);
+
+        font-size: 12px;
+        font-weight: 900;
+    }
+
+
+    .confirm-input {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        min-height: 48px !important;
+
+        padding: 12px 14px !important;
+
+        border-radius: 11px !important;
+
+        border: 1.5px solid var(--dp-input-border) !important;
+
+        background: var(--dp-input) !important;
+        background-color: var(--dp-input) !important;
+
+        color: var(--dp-text) !important;
+
+        font-family: 'Vazirmatn', Tahoma, sans-serif !important;
+
+        font-size: 13px !important;
+        font-weight: 600 !important;
+
+        line-height: 1.7 !important;
+
+        outline: none !important;
+
+        direction: rtl !important;
+        text-align: right !important;
+
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.3) inset,
+            0 2px 6px rgba(0, 0, 0, 0.4) inset !important;
+
+        transition:
+            border-color 0.25s ease,
+            background 0.25s ease,
+            box-shadow 0.25s ease !important;
+    }
+
+
+    body.light .confirm-input {
+
+        box-shadow:
+            0 0 0 1px rgba(0, 0, 0, 0.03) inset,
+            0 2px 6px rgba(58, 109, 224, 0.08) inset !important;
+    }
+
+
+    .confirm-input:focus {
+
+        border-color: var(--dp-blue-light) !important;
+
+        box-shadow:
+            0 0 0 4px rgba(74, 125, 232, 0.2) !important;
+    }
+
+
+    .confirm-input.valid {
+
+        border-color: rgba(74, 222, 128, 0.6) !important;
+
+        box-shadow:
+            0 0 0 4px rgba(74, 222, 128, 0.15) !important;
+    }
+
+
+    .confirm-hint {
+
+        margin-top: 8px;
+
+        color: var(--dp-dim);
+
+        font-size: 10.5px;
+        font-weight: 500;
+
+        line-height: 1.9;
     }
 
 
@@ -414,13 +602,10 @@
     .delete-form {
 
         position: relative;
-
         z-index: 2;
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         gap: 12px;
@@ -429,8 +614,7 @@
 
         flex-wrap: wrap;
 
-        animation:
-            buttonsShow 0.6s 0.30s both;
+        animation: buttonsShow 0.6s 0.32s both;
     }
 
 
@@ -440,9 +624,7 @@
         position: relative;
 
         display: inline-flex;
-
         align-items: center;
-
         justify-content: center;
 
         gap: 8px;
@@ -456,7 +638,6 @@
         font-family: 'Vazirmatn', Tahoma, sans-serif;
 
         font-size: 13.5px;
-
         font-weight: 800;
 
         cursor: pointer;
@@ -470,7 +651,18 @@
             background 0.25s ease,
             border-color 0.25s ease,
             box-shadow 0.25s ease,
-            color 0.25s ease;
+            color 0.25s ease,
+            opacity 0.25s ease;
+    }
+
+
+    .delete-btn svg,
+    .cancel-btn svg {
+
+        width: 16px;
+        height: 16px;
+
+        flex-shrink: 0;
     }
 
 
@@ -502,7 +694,6 @@
         content: "";
 
         position: absolute;
-
         inset: 0;
 
         background:
@@ -519,13 +710,13 @@
     }
 
 
-    .delete-btn span {
+    .delete-btn > span:not(.spinner) {
         position: relative;
         z-index: 2;
     }
 
 
-    .delete-btn:hover {
+    .delete-btn:hover:not(:disabled) {
 
         transform: translateY(-3px);
 
@@ -539,13 +730,63 @@
     }
 
 
-    .delete-btn:hover::before {
+    .delete-btn:hover:not(:disabled)::before {
         transform: translateX(-120%);
     }
 
 
-    .delete-btn:active {
+    .delete-btn:active:not(:disabled) {
         transform: translateY(0) scale(0.985);
+    }
+
+
+    .delete-btn:disabled {
+
+        opacity: 0.45;
+
+        cursor: not-allowed;
+
+        filter: grayscale(0.4);
+    }
+
+
+    .delete-btn.loading {
+
+        pointer-events: none;
+
+        opacity: 0.85;
+    }
+
+
+    .spinner {
+
+        display: none;
+
+        width: 16px;
+        height: 16px;
+
+        border: 2px solid rgba(255, 228, 233, 0.35);
+
+        border-top-color: #ffe4e9;
+
+        border-radius: 50%;
+
+        animation: spin 0.7s linear infinite;
+    }
+
+
+    .delete-btn.loading .spinner {
+        display: inline-block;
+    }
+
+
+    .delete-btn.loading .btn-icon {
+        display: none;
+    }
+
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
     }
 
 
@@ -599,7 +840,6 @@
     .delete-footer {
 
         position: relative;
-
         z-index: 2;
 
         margin-top: 24px;
@@ -611,13 +851,11 @@
         color: var(--dp-dim);
 
         font-size: 10.5px;
-
         font-weight: 500;
 
         line-height: 1.9;
 
-        animation:
-            deleteTextShow 0.6s 0.4s both;
+        animation: deleteTextShow 0.6s 0.4s both;
     }
 
 
@@ -626,11 +864,113 @@
     ========================================================= */
 
     .delete-btn:focus-visible,
-    .cancel-btn:focus-visible {
+    .cancel-btn:focus-visible,
+    .confirm-input:focus-visible {
 
         outline: 3px solid rgba(244, 63, 94, 0.4);
 
         outline-offset: 3px;
+    }
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast-container {
+
+        position: fixed;
+
+        top: 20px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 9999;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 10px;
+
+        pointer-events: none;
+    }
+
+
+    .toast {
+
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+
+        min-width: 220px;
+        max-width: 380px;
+
+        padding: 12px 16px;
+
+        border-radius: 12px;
+
+        background: rgba(20, 32, 56, 0.95);
+
+        border: 1.5px solid rgba(109, 164, 255, 0.4);
+
+        color: #e0eaff;
+
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+        font-size: 12.5px;
+        font-weight: 700;
+
+        box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.5),
+            0 0 40px rgba(74, 125, 232, 0.2);
+
+        animation: toastIn 0.35s cubic-bezier(.22, 1, .36, 1);
+
+        pointer-events: auto;
+    }
+
+
+    body.light .toast {
+
+        background: rgba(240, 245, 255, 0.98);
+
+        border-color: rgba(58, 109, 224, 0.4);
+
+        color: #0a1630;
+    }
+
+
+    .toast.warn {
+
+        border-color: var(--dp-warn-border);
+
+        color: var(--dp-warn);
+    }
+
+
+    .toast.danger {
+
+        border-color: var(--dp-red-border);
+
+        color: var(--dp-red);
+    }
+
+
+    .toast.out {
+        animation: toastOut 0.3s ease forwards;
+    }
+
+
+    @keyframes toastIn {
+        from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+
+    @keyframes toastOut {
+        to { opacity: 0; transform: translateY(-12px) scale(0.96); }
     }
 
 
@@ -640,76 +980,56 @@
 
     @keyframes deleteCardShow {
 
-        from {
-            opacity: 0;
-            transform: translateY(28px) scale(0.975);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        from { opacity: 0; transform: translateY(28px) scale(0.975); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
 
     @keyframes warningShow {
 
-        from {
-            opacity: 0;
-            transform: scale(0.72) rotate(-6deg);
-        }
-
-        to {
-            opacity: 1;
-            transform: scale(1) rotate(0);
-        }
+        from { opacity: 0; transform: scale(0.72) rotate(-6deg); }
+        to { opacity: 1; transform: scale(1) rotate(0); }
     }
 
 
     @keyframes warningBoxShow {
 
-        from {
-            opacity: 0;
-            transform: translateY(8px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
 
     @keyframes deleteTextShow {
 
-        from {
-            opacity: 0;
-            transform: translateY(8px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
 
     @keyframes buttonsShow {
 
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
+    @keyframes shake {
+
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-4px); }
+        40% { transform: translateX(4px); }
+        60% { transform: translateX(-3px); }
+        80% { transform: translateX(3px); }
+    }
+
+
+    .shake {
+        animation: shake 0.45s ease;
     }
 
 
     /* =========================================================
-       TABLET
+       RESPONSIVE
     ========================================================= */
 
     @media (max-width: 800px) {
@@ -718,22 +1038,16 @@
             padding: 24px 14px 40px;
         }
 
-
         .delete-card {
             padding: 32px 24px 26px;
             border-radius: 20px;
         }
-
 
         .delete-title {
             font-size: 23px;
         }
     }
 
-
-    /* =========================================================
-       MOBILE
-    ========================================================= */
 
     @media (max-width: 600px) {
 
@@ -742,96 +1056,98 @@
             min-height: auto;
         }
 
-
         .delete-card {
             max-width: 100%;
             padding: 28px 18px 24px;
             border-radius: 18px;
         }
 
-
         .warning-icon-wrap {
-
             width: 72px;
             height: 72px;
             margin-bottom: 18px;
             border-radius: 21px;
         }
 
-
         .warning-icon {
-
             width: 46px;
             height: 46px;
             border-radius: 14px;
             font-size: 23px;
         }
 
-
         .delete-title {
-
             font-size: 21px;
             margin-bottom: 10px;
         }
 
-
         .delete-question {
             font-size: 12.5px;
-            line-height: 2;
         }
 
+        .destroy-stats {
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .stat-chip {
+            padding: 8px 12px;
+            font-size: 11px;
+        }
 
         .delete-warning {
-
-            margin: 20px 0 22px;
+            margin: 20px 0 18px;
             padding: 14px 15px;
             font-size: 12px;
         }
 
-
         .warning-icon-small {
-
             width: 28px;
             height: 28px;
             font-size: 14px;
         }
 
+        .confirm-block {
+            padding: 14px;
+        }
+
+        .confirm-input {
+            min-height: 46px !important;
+            font-size: 12.5px !important;
+        }
 
         .delete-form {
-
             flex-direction: column;
             align-items: stretch;
             gap: 10px;
         }
 
-
         .delete-btn,
         .cancel-btn {
-
             width: 100%;
             flex: 1 1 auto;
             min-height: 52px;
             font-size: 13.5px;
         }
 
-
         .cancel-btn {
             min-width: 0;
         }
 
-
         .delete-footer {
-
             margin-top: 20px;
             padding-top: 16px;
             font-size: 10px;
         }
+
+        .toast-container {
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            transform: none;
+        }
     }
 
-
-    /* =========================================================
-       TINY PHONES
-    ========================================================= */
 
     @media (max-width: 380px) {
 
@@ -839,49 +1155,37 @@
             padding: 14px 8px 28px;
         }
 
-
         .delete-card {
             padding: 22px 14px 20px;
             border-radius: 16px;
         }
 
-
         .warning-icon-wrap {
-
             width: 64px;
             height: 64px;
             border-radius: 18px;
         }
 
-
         .warning-icon {
-
             width: 42px;
             height: 42px;
             border-radius: 13px;
             font-size: 21px;
         }
 
-
         .delete-title {
             font-size: 19px;
         }
 
-
         .delete-question {
             font-size: 11.5px;
         }
-
 
         .delete-warning {
             font-size: 11px;
         }
     }
 
-
-    /* =========================================================
-       REDUCED MOTION
-    ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
@@ -900,7 +1204,6 @@
 
 
 <div class="delete-page">
-
 
     <section class="delete-card">
 
@@ -941,9 +1244,42 @@
 
 
 
+        <!-- DESTROY STATS -->
+
+        {% with q_count=form.questions.count s_count=form.submissions.count %}
+
+        <div class="destroy-stats">
+
+            <div class="stat-chip">
+
+                <span class="stat-chip-icon">✎</span>
+
+                <strong>{{ q_count }}</strong>
+
+                سؤال
+
+            </div>
+
+
+            <div class="stat-chip">
+
+                <span class="stat-chip-icon">▤</span>
+
+                <strong>{{ s_count }}</strong>
+
+                پاسخ ثبت‌شده
+
+            </div>
+
+        </div>
+
+        {% endwith %}
+
+
+
         <!-- WARNING -->
 
-        <div class="delete-warning">
+        <div class="delete-warning" id="warningBox">
 
             <div class="warning-icon-small">
                 !
@@ -951,8 +1287,52 @@
 
             <div>
 
-                با حذف این فرم، سؤال‌ها و پاسخ‌های ثبت‌شده
-                آن نیز حذف خواهند شد و این عملیات قابل بازگشت نیست.
+                با حذف این فرم، تمام سؤال‌ها، گزینه‌ها،
+                فایل‌های آپلودشده و پاسخ‌های ثبت‌شده
+                برای همیشه حذف خواهند شد و این عملیات
+                <strong>قابل بازگشت نیست</strong>.
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TYPE TO CONFIRM (اگر پاسخ دارد) -->
+
+        <div
+            class="confirm-block"
+            id="confirmBlock"
+            {% if not form.submissions.exists %}style="display:none;"{% endif %}
+        >
+
+            <div class="confirm-label">
+
+                <span class="confirm-label-icon">
+                    !
+                </span>
+
+                این فرم پاسخ ثبت‌شده دارد. برای تأیید،
+                عنوان فرم را دقیقاً تایپ کنید:
+
+            </div>
+
+
+            <input
+                type="text"
+                class="confirm-input"
+                id="confirmInput"
+                placeholder="{{ form.title }}"
+                autocomplete="off"
+                spellcheck="false"
+                dir="rtl"
+            >
+
+
+            <div class="confirm-hint">
+
+                برای فعال شدن دکمه حذف، عنوان فرم را
+                همان‌طور که در بالا نوشته شده وارد کنید.
 
             </div>
 
@@ -965,6 +1345,7 @@
         <form
             method="post"
             class="delete-form"
+            id="deleteForm"
         >
 
             {% csrf_token %}
@@ -973,10 +1354,31 @@
             <button
                 type="submit"
                 class="delete-btn"
+                id="deleteBtn"
+                {% if form.submissions.exists %}disabled{% endif %}
             >
 
+                <span class="spinner"></span>
+
+
+                <svg
+                    class="btn-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/>
+                    <path d="M10 11v6M14 11v6"/>
+                    <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
+                </svg>
+
+
                 <span>
-                    🗑 حذف فرم برای همیشه
+                    حذف فرم برای همیشه
                 </span>
 
             </button>
@@ -985,8 +1387,26 @@
             <a
                 href="{% url 'forms:form_list' %}"
                 class="cancel-btn"
+                id="cancelBtn"
             >
-                انصراف
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+
+
+                <span>
+                    انصراف
+                </span>
+
             </a>
 
         </form>
@@ -1004,7 +1424,216 @@
 
     </section>
 
-
 </div>
+
+
+
+<div class="toast-container" id="toastContainer"></div>
+
+
+
+<script>
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const deleteForm   = document.getElementById("deleteForm");
+const deleteBtn    = document.getElementById("deleteBtn");
+const cancelBtn    = document.getElementById("cancelBtn");
+const confirmBlock = document.getElementById("confirmBlock");
+const confirmInput = document.getElementById("confirmInput");
+const warningBox   = document.getElementById("warningBox");
+
+
+const FORM_TITLE =
+    "{{ form.title|escapejs }}";
+
+
+const HAS_SUBMISSIONS =
+    {% if form.submissions.exists %}true{% else %}false{% endif %};
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message, type = "info") {
+
+    const container =
+        document.getElementById("toastContainer");
+
+    if (!container) return;
+
+    const toast =
+        document.createElement("div");
+
+    toast.className = `toast ${type}`;
+
+    const icons = {
+        info: "ℹ",
+        warn: "⚠",
+        danger: "✕",
+    };
+
+    toast.innerHTML =
+        `<span>${icons[type] || "ℹ"}</span><span>${message}</span>`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+
+        toast.classList.add("out");
+
+        setTimeout(() => toast.remove(), 320);
+
+    }, 2800);
+}
+
+
+/* =========================================================
+   NORMALIZE PERSIAN TEXT
+========================================================= */
+
+function normalizeText(text) {
+
+    if (!text) return "";
+
+    return text
+        .trim()
+        .replace(/ي/g, "ی")
+        .replace(/ك/g, "ک")
+        .replace(/[\u200c\u200f\u200e]/g, "")
+        .replace(/\s+/g, " ");
+}
+
+
+/* =========================================================
+   CONFIRM LOGIC
+========================================================= */
+
+function checkConfirm() {
+
+    if (!HAS_SUBMISSIONS) return;
+    if (!confirmInput || !deleteBtn) return;
+
+    const value =
+        normalizeText(confirmInput.value);
+
+    const expected =
+        normalizeText(FORM_TITLE);
+
+    const ok =
+        value === expected && value.length > 0;
+
+
+    confirmInput.classList.toggle("valid", ok);
+
+    deleteBtn.disabled = !ok;
+}
+
+
+/* =========================================================
+   SHAKE WARNING
+========================================================= */
+
+function shakeWarning() {
+
+    if (!warningBox) return;
+
+    warningBox.classList.remove("shake");
+
+    void warningBox.offsetWidth;
+
+    warningBox.classList.add("shake");
+}
+
+
+/* =========================================================
+   SUBMIT HANDLER
+========================================================= */
+
+if (deleteForm) {
+
+    deleteForm.addEventListener("submit", (e) => {
+
+        if (HAS_SUBMISSIONS && deleteBtn.disabled) {
+
+            e.preventDefault();
+
+            shakeWarning();
+
+            showToast(
+                "عنوان فرم را دقیقاً وارد کنید",
+                "warn"
+            );
+
+            return;
+        }
+
+
+        if (deleteBtn) {
+
+            deleteBtn.classList.add("loading");
+
+            deleteBtn.disabled = true;
+        }
+    });
+}
+
+
+/* =========================================================
+   INPUT HANDLER
+========================================================= */
+
+if (confirmInput) {
+
+    confirmInput.addEventListener("input", checkConfirm);
+
+
+    confirmInput.addEventListener("keydown", (e) => {
+
+        if (e.key === "Enter") {
+
+            e.preventDefault();
+
+            if (!deleteBtn.disabled) {
+                deleteForm.requestSubmit();
+            }
+        }
+    });
+}
+
+
+/* =========================================================
+   ESC → انصراف
+========================================================= */
+
+document.addEventListener("keydown", (e) => {
+
+    if (e.key === "Escape" && cancelBtn) {
+        window.location.href = cancelBtn.href;
+    }
+});
+
+
+/* =========================================================
+   FOCUS امن
+========================================================= */
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    if (HAS_SUBMISSIONS && confirmInput) {
+
+        confirmInput.focus();
+
+    } else if (cancelBtn) {
+
+        cancelBtn.focus();
+    }
+});
+
+</script>
+
 
 {% endblock %}

@@ -1,2070 +1,657 @@
-
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <title>
-        {{ student.first_name }}
-        {{ student.last_name }}
-        | کانون رویش
-    </title>
-
-
-    <style>
-
-        /* =====================================================
-           ROOT
-        ===================================================== */
-
-        :root {
-
-            --bg: #050b14;
-            --bg-2: #08111f;
-
-            --card: rgba(13,27,46,0.82);
-            --card-2: rgba(9,20,35,0.94);
-
-            --text: #edf4ff;
-            --soft: #aab8ca;
-            --muted: #718096;
-
-            --blue: #4e8cff;
-            --blue-light: #78aaff;
-            --purple: #8b63ff;
-
-            --green: #35d49a;
-            --red: #ff6678;
-            --yellow: #e8ca6a;
-
-            --border: rgba(255,255,255,0.075);
-
-            --shadow:
-                0 24px 70px rgba(0,0,0,0.30);
-        }
-
-
-        /* =====================================================
-           RESET
-        ===================================================== */
-
-        * {
-            box-sizing: border-box;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        body {
-
-            margin: 0;
-
-            min-height: 100vh;
-
-            color: var(--text);
-
-            font-family:
-                Tahoma,
-                Arial,
-                sans-serif;
-
-            line-height: 1.8;
-
-            background:
-                radial-gradient(
-                    circle at 10% 0%,
-                    rgba(78,140,255,0.13),
-                    transparent 28%
-                ),
-                radial-gradient(
-                    circle at 90% 10%,
-                    rgba(139,99,255,0.11),
-                    transparent 28%
-                ),
-                radial-gradient(
-                    circle at 50% 100%,
-                    rgba(67,213,255,0.05),
-                    transparent 26%
-                ),
-                linear-gradient(
-                    180deg,
-                    var(--bg),
-                    var(--bg-2)
-                );
-
-            overflow-x: hidden;
-        }
-
-
-        body::before {
-
-            content: "";
-
-            position: fixed;
-
-            inset: 0;
-
-            pointer-events: none;
-
-            background:
-                linear-gradient(
-                    rgba(255,255,255,0.012) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.012) 1px,
-                    transparent 1px
-                );
-
-            background-size:
-                40px 40px;
-
-            mask-image:
-                linear-gradient(
-                    to bottom,
-                    black,
-                    transparent 83%
-                );
-
-            z-index: -1;
-        }
-
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        .header {
-
-            position: sticky;
-
-            top: 0;
-
-            z-index: 1000;
-
-            background:
-                rgba(5,12,22,0.84);
-
-            backdrop-filter:
-                blur(22px);
-
-            -webkit-backdrop-filter:
-                blur(22px);
-
-            border-bottom:
-                1px solid rgba(255,255,255,0.055);
-
-            box-shadow:
-                0 10px 45px rgba(0,0,0,0.16);
-        }
-
-
-        .header::before {
-
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-
-            left: 18%;
-
-            width: 64%;
-
-            height: 1px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(78,140,255,0.65),
-                    rgba(139,99,255,0.55),
-                    transparent
-                );
-        }
-
-
-        .header-inner {
-
-            width:
-                min(
-                    1100px,
-                    calc(100% - 36px)
-                );
-
-            min-height:
-                76px;
-
-            margin-inline:
-                auto;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap:
-                18px;
-        }
-
-
-        .header-title h1 {
-
-            margin:
-                0 0 3px;
-
-            color:
-                #ffffff;
-
-            font-size:
-                20px;
-
-            font-weight:
-                900;
-        }
-
-
-        .header-title p {
-
-            margin:
-                0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-        }
-
-
-        .back-button {
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            min-height:
-                43px;
-
-            padding:
-                0 15px;
-
-            border:
-                1px solid rgba(255,255,255,0.08);
-
-            border-radius:
-                12px;
-
-            color:
-                #cbd8ea;
-
-            background:
-                rgba(255,255,255,0.035);
-
-            font-size:
-                11px;
-
-            font-weight:
-                800;
-
-            transition:
-                transform .22s ease,
-                background .22s ease,
-                border-color .22s ease,
-                color .22s ease;
-        }
-
-
-        .back-button:hover {
-
-            transform:
-                translateY(-2px);
-
-            color:
-                #ffffff;
-
-            background:
-                rgba(78,140,255,0.08);
-
-            border-color:
-                rgba(78,140,255,0.21);
-        }
-
-
-        /* =====================================================
-           MAIN
-        ===================================================== */
-
-        .container {
-
-            width:
-                min(
-                    1100px,
-                    calc(100% - 36px)
-                );
-
-            margin-inline:
-                auto;
-
-            padding:
-                34px 0 70px;
-        }
-
-
-        /* =====================================================
-           CARD
-        ===================================================== */
-
-        .card {
-
-            position:
-                relative;
-
-            overflow:
-                hidden;
-
-            margin-bottom:
-                20px;
-
-            padding:
-                26px;
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                23px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(15,31,52,0.86),
-                    rgba(8,19,33,0.95)
-                );
-
-            box-shadow:
-                var(--shadow);
-
-            backdrop-filter:
-                blur(18px);
-
-            -webkit-backdrop-filter:
-                blur(18px);
-        }
-
-
-        .card::before {
-
-            content: "";
-
-            position:
-                absolute;
-
-            top:
-                -110px;
-
-            right:
-                -100px;
-
-            width:
-                260px;
-
-            height:
-                260px;
-
-            border-radius:
-                50%;
-
-            background:
-                rgba(78,140,255,0.06);
-
-            filter:
-                blur(70px);
-
-            pointer-events:
-                none;
-        }
-
-
-        .card > * {
-
-            position:
-                relative;
-
-            z-index:
-                1;
-        }
-
-
-        /* =====================================================
-           STUDENT HEADER
-        ===================================================== */
-
-        .student-header {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                15px;
-
-            padding-bottom:
-                22px;
-
-            border-bottom:
-                1px solid rgba(255,255,255,0.055);
-        }
-
-
-        .avatar {
-
-            width:
-                68px;
-
-            height:
-                68px;
-
-            flex-shrink:
-                0;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                19px;
-
-            font-size:
-                30px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(78,140,255,0.17),
-                    rgba(139,99,255,0.16)
-                );
-
-            border:
-                1px solid rgba(255,255,255,0.08);
-
-            box-shadow:
-                0 12px 35px rgba(78,140,255,0.10);
-        }
-
-
-        .student-name {
-
-            margin:
-                0 0 4px;
-
-            color:
-                #ffffff;
-
-            font-size:
-                23px;
-
-            font-weight:
-                950;
-        }
-
-
-        .student-grade {
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-        }
-
-
-        /* =====================================================
-           INFO GRID
-        ===================================================== */
-
-        .info-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(
-                    3,
-                    minmax(0,1fr)
-                );
-
-            gap:
-                10px;
-
-            margin-top:
-                20px;
-        }
-
-
-        .info-item {
-
-            min-height:
-                78px;
-
-            padding:
-                14px;
-
-            border:
-                1px solid rgba(255,255,255,0.055);
-
-            border-radius:
-                13px;
-
-            background:
-                rgba(255,255,255,0.022);
-
-            transition:
-                transform .22s ease,
-                border-color .22s ease,
-                background .22s ease;
-        }
-
-
-        .info-item:hover {
-
-            transform:
-                translateY(-2px);
-
-            border-color:
-                rgba(78,140,255,0.16);
-
-            background:
-                rgba(78,140,255,0.035);
-        }
-
-
-        .info-label {
-
-            margin-bottom:
-                5px;
-
-            color:
-                #68788e;
-
-            font-size:
-                9px;
-
-            font-weight:
-                800;
-        }
-
-
-        .info-value {
-
-            color:
-                #dce7f5;
-
-            font-size:
-                12px;
-
-            font-weight:
-                900;
-
-            word-break:
-                break-word;
-        }
-
-
-        /* وضعیت */
-
-        .info-item:last-child .info-value {
-
-            color:
-                var(--green);
-        }
-
-
-        /* =====================================================
-           SECTION TITLE
-        ===================================================== */
-
-        .section-title {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                9px;
-
-            margin:
-                0 0 18px;
-
-            color:
-                #ffffff;
-
-            font-size:
-                17px;
-
-            font-weight:
-                900;
-        }
-
-
-        .section-title::before {
-
-            content:
-                "";
-
-            width:
-                4px;
-
-            height:
-                19px;
-
-            border-radius:
-                999px;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    var(--blue),
-                    var(--purple)
-                );
-        }
-
-
-        /* =====================================================
-           SUMMARY
-        ===================================================== */
-
-        .summary-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(
-                    4,
-                    minmax(0,1fr)
-                );
-
-            gap:
-                11px;
-        }
-
-
-        .summary-box {
-
-            position:
-                relative;
-
-            min-height:
-                105px;
-
-            padding:
-                17px;
-
-            overflow:
-                hidden;
-
-            border:
-                1px solid rgba(255,255,255,0.06);
-
-            border-radius:
-                15px;
-
-            background:
-                rgba(255,255,255,0.022);
-
-            transition:
-                transform .22s ease,
-                border-color .22s ease;
-        }
-
-
-        .summary-box:hover {
-
-            transform:
-                translateY(-3px);
-
-            border-color:
-                rgba(255,255,255,0.11);
-        }
-
-
-        .summary-box::after {
-
-            content:
-                "";
-
-            position:
-                absolute;
-
-            bottom:
-                -45px;
-
-            left:
-                -30px;
-
-            width:
-                110px;
-
-            height:
-                110px;
-
-            border-radius:
-                50%;
-
-            opacity:
-                0.7;
-
-            filter:
-                blur(25px);
-        }
-
-
-        .summary-box:not(.present):not(.absent):not(.excused)::after {
-
-            background:
-                rgba(78,140,255,0.10);
-        }
-
-
-        .summary-box.present::after {
-
-            background:
-                rgba(53,212,154,0.11);
-        }
-
-
-        .summary-box.absent::after {
-
-            background:
-                rgba(255,102,120,0.10);
-        }
-
-
-        .summary-box.excused::after {
-
-            background:
-                rgba(232,202,106,0.10);
-        }
-
-
-        .summary-title {
-
-            color:
-                #718096;
-
-            font-size:
-                10px;
-
-            font-weight:
-                800;
-        }
-
-
-        .summary-number {
-
-            margin-top:
-                5px;
-
-            color:
-                #ffffff;
-
-            font-size:
-                28px;
-
-            line-height:
-                1.35;
-
-            font-weight:
-                950;
-        }
-
-
-        .summary-box.present {
-
-            border-bottom:
-                2px solid rgba(53,212,154,0.55);
-        }
-
-
-        .summary-box.absent {
-
-            border-bottom:
-                2px solid rgba(255,102,120,0.55);
-        }
-
-
-        .summary-box.excused {
-
-            border-bottom:
-                2px solid rgba(232,202,106,0.55);
-        }
-
-
-        /* =====================================================
-           TABLE
-        ===================================================== */
-
-        .table-wrapper {
-
-            overflow-x:
-                auto;
-
-            border:
-                1px solid rgba(255,255,255,0.055);
-
-            border-radius:
-                15px;
-        }
-
-
-        table {
-
-            width:
-                100%;
-
-            min-width:
-                620px;
-
-            border-collapse:
-                collapse;
-        }
-
-
-        th,
-        td {
-
-            padding:
-                14px 13px;
-
-            text-align:
-                right;
-
-            font-size:
-                11px;
-
-            border-bottom:
-                1px solid rgba(255,255,255,0.05);
-        }
-
-
-        th {
-
-            color:
-                #738299;
-
-            background:
-                rgba(255,255,255,0.028);
-
-            font-weight:
-                900;
-        }
-
-
-        td {
-
-            color:
-                #aebcd0;
-
-            background:
-                rgba(255,255,255,0.012);
-        }
-
-
-        tbody tr {
-
-            transition:
-                background .18s ease;
-        }
-
-
-        tbody tr:hover td {
-
-            background:
-                rgba(78,140,255,0.035);
-        }
-
-
-        tr:last-child td {
-
-            border-bottom:
-                none;
-        }
-
-
-        .type-name {
-
-            color:
-                #e0e9f5;
-
-            font-weight:
-                900;
-        }
-
-
-        /* =====================================================
-           STATUS
-        ===================================================== */
-
-        .status {
-
-            display:
-                inline-flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            min-height:
-                28px;
-
-            padding:
-                0 9px;
-
-            border-radius:
-                8px;
-
-            font-size:
-                9px;
-
-            font-weight:
-                900;
-        }
-
-
-        .present-status {
-
-            color:
-                #66dfb3;
-
-            background:
-                rgba(53,212,154,0.09);
-
-            border:
-                1px solid rgba(53,212,154,0.15);
-        }
-
-
-        .absent-status {
-
-            color:
-                #ff8897;
-
-            background:
-                rgba(255,102,120,0.09);
-
-            border:
-                1px solid rgba(255,102,120,0.15);
-        }
-
-
-        .excused-status {
-
-            color:
-                #e8cf79;
-
-            background:
-                rgba(232,207,121,0.08);
-
-            border:
-                1px solid rgba(232,207,121,0.15);
-        }
-
-
-        /* =====================================================
-           EMPTY
-        ===================================================== */
-
-        .empty {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            min-height:
-                230px;
-
-            text-align:
-                center;
-
-            padding:
-                35px 20px;
-
-            color:
-                #6e7d91;
-
-            border:
-                1px dashed rgba(255,255,255,0.09);
-
-            border-radius:
-                16px;
-
-            background:
-                rgba(255,255,255,0.018);
-
-            font-size:
-                11px;
-        }
-
-
-        .empty-icon {
-
-            width:
-                62px;
-
-            height:
-                62px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            margin-bottom:
-                12px;
-
-            border-radius:
-                18px;
-
-            font-size:
-                27px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(78,140,255,0.09),
-                    rgba(139,99,255,0.08)
-                );
-
-            border:
-                1px solid rgba(255,255,255,0.06);
-        }
-
-
-        /* =====================================================
-           TABLET
-        ===================================================== */
-
-        @media (max-width: 850px) {
-
-            .info-grid {
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        minmax(0,1fr)
-                    );
-            }
-
-
-            .summary-grid {
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        minmax(0,1fr)
-                    );
-            }
-
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 600px) {
-
-            .header-inner {
-
-                width:
-                    calc(100% - 24px);
-
-                min-height:
-                    68px;
-            }
-
-
-            .header-title h1 {
-
-                font-size:
-                    17px;
-            }
-
-
-            .header-title p {
-
-                display:
-                    none;
-            }
-
-
-            .back-button {
-
-                min-height:
-                    40px;
-
-                padding:
-                    0 11px;
-
-                font-size:
-                    10px;
-            }
-
-
-            .container {
-
-                width:
-                    calc(100% - 22px);
-
-                padding:
-                    22px 0 50px;
-            }
-
-
-            .card {
-
-                padding:
-                    18px;
-
-                margin-bottom:
-                    15px;
-
-                border-radius:
-                    19px;
-            }
-
-
-            .student-header {
-
-                align-items:
-                    flex-start;
-            }
-
-
-            .avatar {
-
-                width:
-                    55px;
-
-                height:
-                    55px;
-
-                border-radius:
-                    15px;
-
-                font-size:
-                    24px;
-            }
-
-
-            .student-name {
-
-                font-size:
-                    19px;
-
-                line-height:
-                    1.5;
-            }
-
-
-            .student-grade {
-
-                font-size:
-                    10px;
-            }
-
-
-            .info-grid {
-
-                grid-template-columns:
-                    1fr;
-            }
-
-
-            .summary-grid {
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        minmax(0,1fr)
-                    );
-            }
-
-
-            .summary-box {
-
-                min-height:
-                    92px;
-
-                padding:
-                    14px;
-            }
-
-
-            .summary-number {
-
-                font-size:
-                    24px;
-            }
-
-
-            .section-title {
-
-                font-size:
-                    16px;
-            }
-
-
-            .table-wrapper {
-
-                border:
-                    none;
-
-                overflow:
-                    visible;
-            }
-
-
-            /*
-               جدول گزارش تفکیکی
-               در موبایل به کارت تبدیل می‌شود
-            */
-
-            .table-wrapper table {
-
-                min-width:
-                    0;
-
-                display:
-                    block;
-            }
-
-
-            .table-wrapper thead {
-
-                display:
-                    none;
-            }
-
-
-            .table-wrapper tbody,
-            .table-wrapper tr,
-            .table-wrapper td {
-
-                display:
-                    block;
-
-                width:
-                    100%;
-            }
-
-
-            .table-wrapper tr {
-
-                margin-bottom:
-                    10px;
-
-                padding:
-                    13px;
-
-                border:
-                    1px solid rgba(255,255,255,0.055);
-
-                border-radius:
-                    14px;
-
-                background:
-                    rgba(255,255,255,0.02);
-            }
-
-
-            .table-wrapper tr:last-child {
-
-                margin-bottom:
-                    0;
-            }
-
-
-            .table-wrapper td {
-
-                display:
-                    flex;
-
-                align-items:
-                    center;
-
-                justify-content:
-                    space-between;
-
-                gap:
-                    12px;
-
-                padding:
-                    8px 0;
-
-                border:
-                    none;
-
-                background:
-                    transparent !important;
-
-                font-size:
-                    10px;
-            }
-
-
-            .table-wrapper td::before {
-
-                color:
-                    #69788d;
-
-                font-size:
-                    9px;
-
-                font-weight:
-                    800;
-            }
-
-
-            .table-wrapper td:nth-child(1)::before {
-                content:
-                    "نوع برنامه";
-            }
-
-
-            .table-wrapper td:nth-child(2)::before {
-                content:
-                    "کل";
-            }
-
-
-            .table-wrapper td:nth-child(3)::before {
-                content:
-                    "حاضر";
-            }
-
-
-            .table-wrapper td:nth-child(4)::before {
-                content:
-                    "غایب";
-            }
-
-
-            .table-wrapper td:nth-child(5)::before {
-                content:
-                    "موجه";
-            }
-
-
-            /*
-               جدول سابقه حضور
-            */
-
-            .history-table tr {
-
-                padding:
-                    14px;
-            }
-
-
-            .history-table td:nth-child(1)::before {
-                content:
-                    "تاریخ";
-            }
-
-
-            .history-table td:nth-child(2)::before {
-                content:
-                    "نوع برنامه";
-            }
-
-
-            .history-table td:nth-child(3)::before {
-                content:
-                    "عنوان";
-            }
-
-
-            .history-table td:nth-child(4)::before {
-                content:
-                    "وضعیت";
-            }
-
-
-        }
-
-
-        /* =====================================================
-           SMALL MOBILE
-        ===================================================== */
-
-        @media (max-width: 380px) {
-
-            .header-title h1 {
-
-                font-size:
-                    15px;
-            }
-
-
-            .card {
-
-                padding:
-                    16px;
-            }
-
-
-            .student-name {
-
-                font-size:
-                    17px;
-            }
-
-
-            .avatar {
-
-                width:
-                    50px;
-
-                height:
-                    50px;
-            }
-
-
-            .summary-grid {
-
-                gap:
-                    7px;
-            }
-
-
-            .summary-box {
-
-                min-height:
-                    84px;
-
-                padding:
-                    12px;
-            }
-
-
-            .summary-number {
-
-                font-size:
-                    22px;
-            }
-
-        }
-
-
-        /* =====================================================
-           REDUCE MOTION
-        ===================================================== */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            * {
-
-                transition:
-                    none !important;
-
-                scroll-behavior:
-                    auto !important;
-            }
-
-        }
-
-    </style>
-
-</head>
-
-
-<body>
-
-
-<!-- =====================================================
-     HEADER
-====================================================== -->
-
-<header class="header">
-
-    <div class="header-inner">
-
-
-        <div class="header-title">
-
-            <h1>
-                جزئیات دانش‌آموز
-            </h1>
-
-
-            <p>
-                کانون فرهنگی تربیتی رویش
-            </p>
-
-        </div>
-
-
-        <a
-            href="{% url 'students:list' %}"
-            class="back-button"
-        >
-            ← بازگشت
-        </a>
-
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     MAIN
-====================================================== -->
-
-<main class="container">
-
-
-    <!-- =================================================
-         STUDENT INFORMATION
-    ================================================== -->
-
-    <div class="card">
-
-        <div class="student-header">
-
-            <div class="avatar">
-                👨‍🎓
-            </div>
-
-
+{% extends "base.html" %}
+
+{% block title %}{{ student.first_name }} {{ student.last_name }} — کانون رویش{% endblock %}
+
+{% block content %}
+
+<style>
+/* =====================================================
+   PAGE — STUDENT DETAIL
+===================================================== */
+.student-detail-page {
+    padding: 34px 0 70px;
+}
+
+/* ===================== TOP HEADER ===================== */
+.student-detail-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+.student-detail-top h1 {
+    margin: 0 0 6px;
+    font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+    font-weight: 900;
+    letter-spacing: -0.4px;
+    background: linear-gradient(120deg, #7fa8ff 0%, #a98eff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.student-detail-top p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 42px;
+    padding: 0 15px;
+    border-radius: 12px;
+    color: var(--text-soft);
+    font-size: 11.5px;
+    font-weight: 800;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+
+body.light .back-link { background: rgba(0, 0, 0, 0.03); }
+
+.back-link:hover {
+    color: var(--text);
+    background: rgba(78, 140, 255, 0.10);
+    border-color: rgba(78, 140, 255, 0.28);
+    transform: translateY(-1px);
+}
+
+/* ===================== CARD ===================== */
+.d-card {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    padding: 26px;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: var(--shadow);
+}
+
+.d-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================== STUDENT HEADER ===================== */
+.student-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+}
+
+.avatar {
+    width: 68px;
+    height: 68px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 19px;
+    font-size: 30px;
+    background: linear-gradient(
+        135deg,
+        rgba(78, 140, 255, 0.17),
+        rgba(139, 99, 255, 0.16)
+    );
+    border: 1px solid rgba(78, 140, 255, 0.20);
+    box-shadow: 0 10px 28px rgba(78, 140, 255, 0.12);
+}
+
+.student-name {
+    margin: 0 0 4px;
+    color: var(--text);
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+}
+
+.student-grade {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+/* ===================== INFO GRID ===================== */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.info-item {
+    min-height: 78px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.022);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+body.light .info-item { background: rgba(255, 255, 255, 0.6); }
+
+.info-item:hover {
+    transform: translateY(-1px);
+    border-color: rgba(78, 140, 255, 0.20);
+    background: rgba(78, 140, 255, 0.04);
+}
+
+.info-label {
+    margin-bottom: 5px;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.info-value {
+    color: var(--text);
+    font-size: 12.5px;
+    font-weight: 900;
+    word-break: break-word;
+}
+
+.info-value.inactive {
+    color: var(--red);
+}
+
+/* ===================== SECTION TITLE ===================== */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 18px;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+.section-title::before {
+    content: "";
+    width: 4px;
+    height: 19px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--blue), var(--purple));
+}
+
+/* ===================== SUMMARY ===================== */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 11px;
+}
+
+.summary-box {
+    position: relative;
+    min-height: 105px;
+    padding: 17px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.022);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+body.light .summary-box { background: rgba(255, 255, 255, 0.65); }
+
+.summary-box:hover {
+    transform: translateY(-2px);
+    border-color: rgba(78, 140, 255, 0.20);
+}
+
+.summary-title {
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.summary-number {
+    margin-top: 5px;
+    color: var(--text);
+    font-size: 28px;
+    line-height: 1.35;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+}
+
+.summary-box.present { border-bottom: 2px solid rgba(53, 212, 154, 0.55); }
+.summary-box.absent  { border-bottom: 2px solid rgba(255, 102, 120, 0.55); }
+.summary-box.excused { border-bottom: 2px solid rgba(232, 202, 106, 0.55); }
+
+/* ===================== TABLE ===================== */
+.table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+}
+
+table {
+    width: 100%;
+    min-width: 620px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 14px 13px;
+    text-align: right;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.028);
+    font-weight: 900;
+}
+
+body.light th { background: rgba(0, 0, 0, 0.02); }
+
+td {
+    color: var(--text-soft);
+    background: rgba(255, 255, 255, 0.012);
+}
+
+body.light td { background: rgba(255, 255, 255, 0.5); }
+
+tbody tr { transition: background 0.18s ease; }
+
+tbody tr:hover td {
+    background: rgba(78, 140, 255, 0.035);
+}
+
+tr:last-child td { border-bottom: none; }
+
+.type-name {
+    color: var(--text);
+    font-weight: 900;
+}
+
+/* ===================== STATUS BADGES ===================== */
+.status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 10.5px;
+    font-weight: 900;
+}
+
+.status.present-status {
+    color: #66dfb3;
+    background: rgba(53, 212, 154, 0.10);
+    border: 1px solid rgba(53, 212, 154, 0.22);
+}
+
+.status.absent-status {
+    color: #ff8897;
+    background: rgba(255, 102, 120, 0.10);
+    border: 1px solid rgba(255, 102, 120, 0.22);
+}
+
+.status.excused-status {
+    color: #e8cf79;
+    background: rgba(232, 207, 121, 0.10);
+    border: 1px solid rgba(232, 207, 121, 0.22);
+}
+
+/* ===================== EMPTY ===================== */
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 230px;
+    text-align: center;
+    padding: 35px 20px;
+    color: var(--text-muted);
+    border: 1px dashed var(--border);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.018);
+    font-size: 12px;
+}
+
+body.light .empty { background: rgba(255, 255, 255, 0.5); }
+
+.empty-icon {
+    width: 62px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    border-radius: 18px;
+    font-size: 27px;
+    background: linear-gradient(
+        135deg,
+        rgba(78, 140, 255, 0.10),
+        rgba(139, 99, 255, 0.08)
+    );
+    border: 1px solid rgba(78, 140, 255, 0.16);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 850px) {
+    .info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+    .student-detail-page { padding: 22px 0 55px; }
+
+    .student-detail-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .d-card {
+        padding: 18px;
+        margin-bottom: 15px;
+        border-radius: 19px;
+    }
+
+    .student-header { align-items: flex-start; }
+
+    .avatar {
+        width: 55px;
+        height: 55px;
+        border-radius: 15px;
+        font-size: 24px;
+    }
+
+    .student-name { font-size: 1.15rem; }
+    .student-grade { font-size: 11px; }
+
+    .info-grid { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .summary-box { min-height: 92px; padding: 14px; }
+    .summary-number { font-size: 24px; }
+
+    .section-title { font-size: 0.95rem; }
+
+    .table-wrapper {
+        border: none;
+        overflow: visible;
+    }
+
+    .table-wrapper table {
+        min-width: 0;
+        display: block;
+    }
+
+    .table-wrapper thead { display: none; }
+
+    .table-wrapper tbody,
+    .table-wrapper tr,
+    .table-wrapper td {
+        display: block;
+        width: 100%;
+    }
+
+    .table-wrapper tr {
+        margin-bottom: 10px;
+        padding: 13px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    body.light .table-wrapper tr { background: rgba(255, 255, 255, 0.65); }
+
+    .table-wrapper tr:last-child { margin-bottom: 0; }
+
+    .table-wrapper td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 0;
+        border: none;
+        background: transparent !important;
+        font-size: 11px;
+    }
+
+    .table-wrapper td::before {
+        color: var(--text-muted);
+        font-size: 10px;
+        font-weight: 800;
+    }
+
+    /* جدول گزارش تفکیکی */
+    .type-table td:nth-child(1)::before { content: "نوع برنامه"; }
+    .type-table td:nth-child(2)::before { content: "کل"; }
+    .type-table td:nth-child(3)::before { content: "حاضر"; }
+    .type-table td:nth-child(4)::before { content: "غایب"; }
+    .type-table td:nth-child(5)::before { content: "موجه"; }
+
+    /* جدول سابقه حضور */
+    .history-table td:nth-child(1)::before { content: "تاریخ"; }
+    .history-table td:nth-child(2)::before { content: "نوع برنامه"; }
+    .history-table td:nth-child(3)::before { content: "عنوان"; }
+    .history-table td:nth-child(4)::before { content: "وضعیت"; }
+}
+
+@media (max-width: 380px) {
+    .d-card { padding: 16px; }
+    .student-name { font-size: 1.05rem; }
+
+    .avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .summary-grid { gap: 7px; }
+    .summary-box { min-height: 84px; padding: 12px; }
+    .summary-number { font-size: 22px; }
+}
+</style>
+
+
+<div class="student-detail-page">
+    <div class="container">
+
+        <!-- ===================== TOP HEADER ===================== -->
+        <div class="student-detail-top">
             <div>
-
-                <h2 class="student-name">
-
-                    {{ student.first_name }}
-                    {{ student.last_name }}
-
-                </h2>
-
-
-                <div class="student-grade">
-
-                    پایه {{ student.grade }}
-
-                </div>
-
+                <h1>جزئیات دانش‌آموز</h1>
+                <p>کانون فرهنگی تربیتی رویش</p>
             </div>
 
+            <a href="{% url 'students:list' %}" class="back-link">
+                ← بازگشت
+            </a>
         </div>
 
 
-        <div class="info-grid">
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    نام
+        <!-- ===================== STUDENT INFO ===================== -->
+        <div class="d-card">
+            <div class="student-header">
+                <div class="avatar">👨‍🎓</div>
+                <div>
+                    <h2 class="student-name">
+                        {{ student.first_name }} {{ student.last_name }}
+                    </h2>
+                    <div class="student-grade">
+                        پایه {{ student.grade }}
+                    </div>
                 </div>
-
-                <div class="info-value">
-                    {{ student.first_name }}
-                </div>
-
             </div>
 
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    نام خانوادگی
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">نام</div>
+                    <div class="info-value">{{ student.first_name }}</div>
                 </div>
 
-                <div class="info-value">
-                    {{ student.last_name }}
+                <div class="info-item">
+                    <div class="info-label">نام خانوادگی</div>
+                    <div class="info-value">{{ student.last_name }}</div>
                 </div>
 
+                <div class="info-item">
+                    <div class="info-label">پایه</div>
+                    <div class="info-value">{{ student.grade }}</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">شماره تماس</div>
+                    <div class="info-value">
+                        {% if student.phone %}{{ student.phone }}{% else %}ثبت نشده{% endif %}
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">تماس والدین</div>
+                    <div class="info-value">
+                        {% if student.parent_phone %}{{ student.parent_phone }}{% else %}ثبت نشده{% endif %}
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">وضعیت</div>
+                    <div class="info-value {% if not student.is_active %}inactive{% endif %}">
+                        {% if student.is_active %}فعال{% else %}غیرفعال{% endif %}
+                    </div>
+                </div>
             </div>
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    پایه
-                </div>
-
-                <div class="info-value">
-                    {{ student.grade }}
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    شماره تماس
-                </div>
-
-                <div class="info-value">
-
-                    {% if student.phone %}
-
-                        {{ student.phone }}
-
-                    {% else %}
-
-                        ثبت نشده
-
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    تماس والدین
-                </div>
-
-                <div class="info-value">
-
-                    {% if student.parent_phone %}
-
-                        {{ student.parent_phone }}
-
-                    {% else %}
-
-                        ثبت نشده
-
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    وضعیت
-                </div>
-
-                <div class="info-value">
-
-                    {% if student.is_active %}
-
-                        فعال
-
-                    {% else %}
-
-                        <span style="color:#ff8897;">
-                            غیرفعال
-                        </span>
-
-                    {% endif %}
-
-                </div>
-
-            </div>
-
-
         </div>
 
-    </div>
 
+        <!-- ===================== SUMMARY ===================== -->
+        <div class="d-card">
+            <h2 class="section-title">خلاصه حضور و غیاب</h2>
 
-    <!-- =================================================
-         SUMMARY
-    ================================================== -->
-
-    <div class="card">
-
-        <h2 class="section-title">
-            خلاصه حضور و غیاب
-        </h2>
-
-
-        <div class="summary-grid">
-
-
-            <div class="summary-box">
-
-                <div class="summary-title">
-                    کل ثبت‌ها
+            <div class="summary-grid">
+                <div class="summary-box">
+                    <div class="summary-title">کل ثبت‌ها</div>
+                    <div class="summary-number">{{ summary.total }}</div>
                 </div>
 
-                <div class="summary-number">
-                    {{ summary.total }}
+                <div class="summary-box present">
+                    <div class="summary-title">حاضر</div>
+                    <div class="summary-number">{{ summary.present }}</div>
                 </div>
 
+                <div class="summary-box absent">
+                    <div class="summary-title">غایب</div>
+                    <div class="summary-number">{{ summary.absent }}</div>
+                </div>
+
+                <div class="summary-box excused">
+                    <div class="summary-title">موجه</div>
+                    <div class="summary-number">{{ summary.excused }}</div>
+                </div>
             </div>
-
-
-            <div class="summary-box present">
-
-                <div class="summary-title">
-                    حاضر
-                </div>
-
-                <div class="summary-number">
-                    {{ summary.present }}
-                </div>
-
-            </div>
-
-
-            <div class="summary-box absent">
-
-                <div class="summary-title">
-                    غایب
-                </div>
-
-                <div class="summary-number">
-                    {{ summary.absent }}
-                </div>
-
-            </div>
-
-
-            <div class="summary-box excused">
-
-                <div class="summary-title">
-                    موجه
-                </div>
-
-                <div class="summary-number">
-                    {{ summary.excused }}
-                </div>
-
-            </div>
-
-
         </div>
 
-    </div>
 
-
-    <!-- =================================================
-         TYPE SUMMARY
-    ================================================== -->
-
-    <div class="card">
-
-        <h2 class="section-title">
-            گزارش تفکیکی
-        </h2>
-
-
-        <div class="table-wrapper">
-
-            <table class="type-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            نوع برنامه
-                        </th>
-
-                        <th>
-                            کل
-                        </th>
-
-                        <th>
-                            حاضر
-                        </th>
-
-                        <th>
-                            غایب
-                        </th>
-
-                        <th>
-                            موجه
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-
-                    <tr>
-
-                        <td class="type-name">
-                            🕌 هیئت
-                        </td>
-
-                        <td>
-                            {{ type_summary.heyat.total }}
-                        </td>
-
-                        <td>
-                            {{ type_summary.heyat.present }}
-                        </td>
-
-                        <td>
-                            {{ type_summary.heyat.absent }}
-                        </td>
-
-                        <td>
-                            {{ type_summary.heyat.excused }}
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td class="type-name">
-                            📚 کلاس هفتگی
-                        </td>
-
-                        <td>
-                            {{ type_summary.weekly_class.total }}
-                        </td>
-
-                        <td>
-                            {{ type_summary.weekly_class.present }}
-                        </td>
-
-                        <td>
-                            {{ type_summary.weekly_class.absent }}
-                        </td>
-
-                        <td>
-                            {{ type_summary.weekly_class.excused }}
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td class="type-name">
-                            🤝 قرار
-                        </td>
-
-                        <td>
-                            {{ type_summary.meeting.total }}
-                        </td>
-
-                        <td>
-                            {{ type_summary.meeting.present }}
-                        </td>
-
-                        <td>
-                            {{ type_summary.meeting.absent }}
-                        </td>
-
-                        <td>
-                            {{ type_summary.meeting.excused }}
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-
-    <!-- =================================================
-         ATTENDANCE HISTORY
-    ================================================== -->
-
-    <div class="card">
-
-        <h2 class="section-title">
-            سابقه کامل حضور و غیاب
-        </h2>
-
-
-        {% if attendances %}
+        <!-- ===================== TYPE SUMMARY ===================== -->
+        <div class="d-card">
+            <h2 class="section-title">گزارش تفکیکی</h2>
 
             <div class="table-wrapper">
-
-                <table class="history-table">
-
+                <table class="type-table">
                     <thead>
-
                         <tr>
-
-                            <th>
-                                تاریخ
-                            </th>
-
-                            <th>
-                                نوع برنامه
-                            </th>
-
-                            <th>
-                                عنوان
-                            </th>
-
-                            <th>
-                                وضعیت
-                            </th>
-
+                            <th>نوع برنامه</th>
+                            <th>کل</th>
+                            <th>حاضر</th>
+                            <th>غایب</th>
+                            <th>موجه</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="type-name">🕌 هیئت</td>
+                            <td>{{ type_summary.heyat.total }}</td>
+                            <td>{{ type_summary.heyat.present }}</td>
+                            <td>{{ type_summary.heyat.absent }}</td>
+                            <td>{{ type_summary.heyat.excused }}</td>
                         </tr>
 
-                    </thead>
+                        <tr>
+                            <td class="type-name">📚 کلاس هفتگی</td>
+                            <td>{{ type_summary.weekly_class.total }}</td>
+                            <td>{{ type_summary.weekly_class.present }}</td>
+                            <td>{{ type_summary.weekly_class.absent }}</td>
+                            <td>{{ type_summary.weekly_class.excused }}</td>
+                        </tr>
 
-
-                    <tbody>
-
-
-                        {% for attendance in attendances %}
-
-                            <tr>
-
-                                <td>
-                                    {{ attendance.date }}
-                                </td>
-
-
-                                <td>
-
-                                    {{ attendance.get_attendance_type_display }}
-
-                                </td>
-
-
-                                <td>
-
-                                    {% if attendance.title %}
-
-                                        {{ attendance.title }}
-
-                                    {% else %}
-
-                                        بدون عنوان
-
-                                    {% endif %}
-
-                                </td>
-
-
-                                <td>
-
-
-                                    {% if attendance.status == "present" %}
-
-                                        <span class="status present-status">
-                                            حاضر
-                                        </span>
-
-
-                                    {% elif attendance.status == "absent" %}
-
-                                        <span class="status absent-status">
-                                            غایب
-                                        </span>
-
-
-                                    {% elif attendance.status == "excused" %}
-
-                                        <span class="status excused-status">
-                                            موجه
-                                        </span>
-
-                                    {% endif %}
-
-
-                                </td>
-
-                            </tr>
-
-                        {% endfor %}
-
-
+                        <tr>
+                            <td class="type-name">🤝 قرار</td>
+                            <td>{{ type_summary.meeting.total }}</td>
+                            <td>{{ type_summary.meeting.present }}</td>
+                            <td>{{ type_summary.meeting.absent }}</td>
+                            <td>{{ type_summary.meeting.excused }}</td>
+                        </tr>
                     </tbody>
-
                 </table>
-
             </div>
+        </div>
 
 
-        {% else %}
+        <!-- ===================== ATTENDANCE HISTORY ===================== -->
+        <div class="d-card">
+            <h2 class="section-title">سابقه کامل حضور و غیاب</h2>
 
-            <div class="empty">
-
-                <div class="empty-icon">
-                    📋
+            {% if attendances %}
+                <div class="table-wrapper">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>تاریخ</th>
+                                <th>نوع برنامه</th>
+                                <th>عنوان</th>
+                                <th>وضعیت</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for attendance in attendances %}
+                                <tr>
+                                    <td>{{ attendance.date }}</td>
+                                    <td>{{ attendance.get_attendance_type_display }}</td>
+                                    <td>
+                                        {% if attendance.title %}
+                                            {{ attendance.title }}
+                                        {% else %}
+                                            بدون عنوان
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if attendance.status == "present" %}
+                                            <span class="status present-status">حاضر</span>
+                                        {% elif attendance.status == "absent" %}
+                                            <span class="status absent-status">غایب</span>
+                                        {% elif attendance.status == "excused" %}
+                                            <span class="status excused-status">موجه</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-
-                هنوز هیچ سابقه‌ای ثبت نشده است.
-
-            </div>
-
-        {% endif %}
-
+            {% else %}
+                <div class="empty">
+                    <div class="empty-icon">📋</div>
+                    هنوز هیچ سابقه‌ای ثبت نشده است.
+                </div>
+            {% endif %}
+        </div>
 
     </div>
+</div>
 
-
-</main>
-
-
-</body>
-
-</html>
+{% endblock %}

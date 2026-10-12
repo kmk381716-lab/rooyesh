@@ -20,8 +20,6 @@
 
     .forms-page {
 
-        /* دارک (پیش‌فرض) */
-
         --fp-card-1: #1a3055;
         --fp-card-2: #102040;
         --fp-card-inner: rgba(20, 32, 58, 0.85);
@@ -57,7 +55,6 @@
 
 
         position: relative;
-
         width: 100%;
 
         padding: 30px 20px 60px;
@@ -67,8 +64,6 @@
         transition: color 0.4s ease;
     }
 
-
-    /* تم روشن */
 
     body.light .forms-page {
 
@@ -114,11 +109,9 @@
     .forms-container {
 
         position: relative;
-
         z-index: 1;
 
         width: 100%;
-
         max-width: 1120px;
 
         margin: 0 auto;
@@ -130,16 +123,8 @@
 
 
     @keyframes formsContainerShow {
-
-        from {
-            opacity: 0;
-            transform: translateY(24px) scale(0.985);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        from { opacity: 0; transform: translateY(24px) scale(0.985); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
 
@@ -150,9 +135,7 @@
     .forms-header {
 
         display: flex;
-
         align-items: center;
-
         justify-content: space-between;
 
         gap: 20px;
@@ -162,7 +145,6 @@
         padding: 28px 30px;
 
         border: 1.5px solid var(--fp-border);
-
         border-radius: 22px;
 
         background:
@@ -175,11 +157,9 @@
         box-shadow: var(--fp-shadow);
 
         position: relative;
-
         overflow: hidden;
 
-        animation:
-            formsHeaderShow 0.65s 0.06s both;
+        animation: formsHeaderShow 0.65s 0.06s both;
     }
 
 
@@ -188,10 +168,7 @@
         content: "";
 
         position: absolute;
-
-        top: 0;
-        right: 0;
-        left: 0;
+        top: 0; right: 0; left: 0;
 
         height: 3px;
 
@@ -212,22 +189,13 @@
 
 
     @keyframes formsBorderShine {
-
         to { background-position: 200% 0; }
     }
 
 
     @keyframes formsHeaderShow {
-
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
 
@@ -240,7 +208,6 @@
     .forms-badge {
 
         display: inline-flex;
-
         align-items: center;
 
         gap: 8px;
@@ -263,7 +230,6 @@
         color: var(--fp-blue-light);
 
         font-size: 11px;
-
         font-weight: 800;
     }
 
@@ -297,7 +263,6 @@
 
 
     @keyframes formsDot {
-
         0%, 100% { transform: scale(1); opacity: 0.75; }
         50% { transform: scale(1.3); opacity: 1; }
     }
@@ -310,9 +275,7 @@
         color: var(--fp-text);
 
         font-size: 28px;
-
         line-height: 1.4;
-
         font-weight: 800;
 
         letter-spacing: -0.5px;
@@ -326,7 +289,6 @@
         color: var(--fp-muted);
 
         font-size: 13px;
-
         font-weight: 500;
 
         line-height: 1.9;
@@ -340,13 +302,11 @@
     .forms-header-actions {
 
         display: flex;
-
         align-items: center;
 
         gap: 10px;
 
         flex-shrink: 0;
-
         flex-wrap: wrap;
     }
 
@@ -356,9 +316,7 @@
         position: relative;
 
         display: inline-flex;
-
         align-items: center;
-
         justify-content: center;
 
         gap: 8px;
@@ -374,7 +332,6 @@
         font-family: 'Vazirmatn', Tahoma, sans-serif;
 
         font-size: 13px;
-
         font-weight: 800;
 
         white-space: nowrap;
@@ -391,7 +348,12 @@
     }
 
 
-    /* PRIMARY (ساخت فرم) */
+    .forms-action-btn svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
 
     .forms-action-btn.primary {
 
@@ -416,7 +378,6 @@
         content: "";
 
         position: absolute;
-
         inset: 0;
 
         background:
@@ -430,6 +391,12 @@
         transform: translateX(120%);
 
         transition: transform 0.65s ease;
+    }
+
+
+    .forms-action-btn.primary span {
+        position: relative;
+        z-index: 2;
     }
 
 
@@ -452,8 +419,6 @@
     }
 
 
-    /* SECONDARY (دیدن ثبت‌نامی‌ها) */
-
     .forms-action-btn.secondary {
 
         color: var(--fp-text-soft);
@@ -467,7 +432,6 @@
     body.light .forms-action-btn.secondary {
 
         background: rgba(58, 109, 224, 0.08);
-
         border-color: rgba(58, 109, 224, 0.3);
     }
 
@@ -477,7 +441,6 @@
         transform: translateY(-3px);
 
         background: rgba(109, 164, 255, 0.2);
-
         border-color: rgba(109, 164, 255, 0.6);
 
         color: var(--fp-text);
@@ -498,9 +461,7 @@
     .forms-toolbar {
 
         display: flex;
-
         align-items: center;
-
         justify-content: space-between;
 
         gap: 12px;
@@ -516,7 +477,6 @@
     .forms-section-title {
 
         display: flex;
-
         align-items: center;
 
         gap: 10px;
@@ -524,7 +484,6 @@
         color: var(--fp-text);
 
         font-size: 15px;
-
         font-weight: 800;
     }
 
@@ -552,7 +511,6 @@
     .forms-count {
 
         display: inline-flex;
-
         align-items: center;
 
         gap: 8px;
@@ -560,7 +518,6 @@
         color: var(--fp-muted);
 
         font-size: 12px;
-
         font-weight: 600;
     }
 
@@ -570,10 +527,14 @@
         color: var(--fp-text);
 
         font-size: 15px;
-
         font-weight: 900;
 
         font-variant-numeric: tabular-nums;
+    }
+
+
+    .forms-count-sep {
+        color: var(--fp-dim);
     }
 
 
@@ -600,11 +561,9 @@
         position: relative;
 
         display: flex;
-
-        align-items: center;
+        flex-direction: column;
 
         width: 100%;
-
         min-width: 0;
 
         gap: 14px;
@@ -612,7 +571,6 @@
         padding: 18px;
 
         border: 1.5px solid var(--fp-border-inner);
-
         border-radius: 18px;
 
         background:
@@ -689,16 +647,8 @@
 
 
     @keyframes formCardShow {
-
-        from {
-            opacity: 0;
-            transform: translateY(12px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
 
@@ -709,12 +659,9 @@
     .form-main {
 
         display: flex;
-
         align-items: center;
 
         gap: 14px;
-
-        flex: 1 1 auto;
 
         min-width: 0;
 
@@ -733,21 +680,16 @@
         position: relative;
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         width: 54px;
         height: 54px;
-
         min-width: 54px;
 
         flex-shrink: 0;
 
         border-radius: 15px;
-
-        font-size: 24px;
 
         background:
             linear-gradient(
@@ -758,6 +700,8 @@
 
         border: 1.5px solid rgba(109, 164, 255, 0.28);
 
+        color: var(--fp-blue-light);
+
         box-shadow:
             inset 0 1px 0 rgba(180, 220, 255, 0.18),
             0 8px 20px rgba(0, 0, 0, 0.18);
@@ -766,6 +710,12 @@
             transform 0.35s cubic-bezier(.34, 1.56, .64, 1),
             box-shadow 0.3s ease,
             border-color 0.3s ease;
+    }
+
+
+    .form-icon svg {
+        width: 24px;
+        height: 24px;
     }
 
 
@@ -794,9 +744,7 @@
     ========================================================= */
 
     .form-content {
-
         flex: 1 1 auto;
-
         min-width: 0;
     }
 
@@ -808,7 +756,6 @@
         color: var(--fp-text);
 
         font-size: 15px;
-
         font-weight: 800;
 
         line-height: 1.6;
@@ -827,7 +774,6 @@
         color: var(--fp-muted);
 
         font-size: 12px;
-
         font-weight: 500;
 
         line-height: 1.85;
@@ -847,13 +793,18 @@
 
         color: var(--fp-dim);
 
-        font-size: 22px;
-
-        font-weight: 700;
+        display: flex;
+        align-items: center;
 
         transition:
             color 0.25s ease,
             transform 0.25s ease;
+    }
+
+
+    .form-arrow svg {
+        width: 20px;
+        height: 20px;
     }
 
 
@@ -866,44 +817,104 @@
 
 
     /* =========================================================
+       FORM META
+    ========================================================= */
+
+    .form-meta {
+
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+
+        flex-wrap: wrap;
+
+        padding-top: 12px;
+
+        border-top: 1.5px solid var(--fp-border-inner);
+    }
+
+
+    .meta-chip {
+
+        display: inline-flex;
+        align-items: center;
+
+        gap: 6px;
+
+        padding: 6px 10px;
+
+        border-radius: 9px;
+
+        background: rgba(74, 125, 232, 0.08);
+
+        border: 1px solid rgba(109, 164, 255, 0.18);
+
+        color: var(--fp-text-soft);
+
+        font-size: 10.5px;
+        font-weight: 700;
+    }
+
+
+    .meta-chip svg {
+        width: 12px;
+        height: 12px;
+        color: var(--fp-blue-light);
+    }
+
+
+    .meta-chip strong {
+
+        color: var(--fp-text);
+
+        font-weight: 900;
+
+        font-variant-numeric: tabular-nums;
+    }
+
+
+    /* =========================================================
        FORM ACTIONS
     ========================================================= */
 
     .form-actions {
 
         display: flex;
-
         align-items: center;
 
-        flex-shrink: 0;
+        gap: 8px;
+
+        width: 100%;
     }
 
 
-    .form-delete-btn {
+    .form-action-btn {
 
         display: inline-flex;
-
         align-items: center;
-
         justify-content: center;
+
+        gap: 6px;
 
         min-height: 42px;
 
-        padding: 10px 16px;
-
-        border: 1.5px solid var(--fp-red-border);
+        padding: 10px 14px;
 
         border-radius: 11px;
 
-        background: var(--fp-red-bg);
+        border: 1.5px solid transparent;
 
-        color: var(--fp-red);
+        background: transparent;
 
-        text-decoration: none;
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
 
         font-size: 11.5px;
-
         font-weight: 800;
+
+        cursor: pointer;
+
+        text-decoration: none;
 
         white-space: nowrap;
 
@@ -911,11 +922,67 @@
             transform 0.22s ease,
             background 0.22s ease,
             border-color 0.22s ease,
-            box-shadow 0.22s ease;
+            box-shadow 0.22s ease,
+            color 0.22s ease;
     }
 
 
-    .form-delete-btn:hover {
+    .form-action-btn svg {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+    }
+
+
+    .form-action-btn.copy {
+
+        flex: 1 1 auto;
+
+        color: var(--fp-blue-light);
+
+        border-color: rgba(109, 164, 255, 0.28);
+
+        background: rgba(74, 125, 232, 0.08);
+    }
+
+
+    .form-action-btn.copy:hover {
+
+        transform: translateY(-2px);
+
+        background: rgba(74, 125, 232, 0.18);
+
+        border-color: rgba(109, 164, 255, 0.55);
+
+        color: var(--fp-text);
+
+        box-shadow: 0 10px 22px rgba(74, 125, 232, 0.2);
+    }
+
+
+    .form-action-btn.copy.copied {
+
+        color: var(--fp-green);
+
+        border-color: rgba(74, 222, 128, 0.45);
+
+        background: rgba(74, 222, 128, 0.12);
+    }
+
+
+    .form-action-btn.delete {
+
+        flex: 0 0 auto;
+
+        color: var(--fp-red);
+
+        border-color: var(--fp-red-border);
+
+        background: var(--fp-red-bg);
+    }
+
+
+    .form-action-btn.delete:hover {
 
         transform: translateY(-2px);
 
@@ -936,11 +1003,8 @@
         grid-column: 1 / -1;
 
         display: flex;
-
         flex-direction: column;
-
         align-items: center;
-
         justify-content: center;
 
         min-height: 340px;
@@ -950,7 +1014,6 @@
         text-align: center;
 
         border: 1.5px dashed rgba(109, 164, 255, 0.28);
-
         border-radius: 20px;
 
         background: rgba(74, 125, 232, 0.04);
@@ -964,9 +1027,7 @@
     .forms-empty-icon {
 
         display: flex;
-
         align-items: center;
-
         justify-content: center;
 
         width: 72px;
@@ -975,8 +1036,6 @@
         margin: 0 auto 20px;
 
         border-radius: 22px;
-
-        font-size: 30px;
 
         background:
             linear-gradient(
@@ -987,6 +1046,8 @@
 
         border: 1.5px solid rgba(109, 164, 255, 0.3);
 
+        color: var(--fp-blue-light);
+
         box-shadow:
             inset 0 1px 0 rgba(180, 220, 255, 0.15),
             0 10px 25px rgba(0, 0, 0, 0.15);
@@ -995,8 +1056,13 @@
     }
 
 
-    @keyframes formsEmptyFloat {
+    .forms-empty-icon svg {
+        width: 32px;
+        height: 32px;
+    }
 
+
+    @keyframes formsEmptyFloat {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-8px); }
     }
@@ -1009,7 +1075,6 @@
         color: var(--fp-text);
 
         font-size: 18px;
-
         font-weight: 800;
     }
 
@@ -1023,7 +1088,6 @@
         color: var(--fp-muted);
 
         font-size: 13px;
-
         font-weight: 500;
 
         line-height: 2;
@@ -1031,16 +1095,103 @@
 
 
     @keyframes formsEmptyShow {
+        from { opacity: 0; transform: translateY(15px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
 
-        from {
-            opacity: 0;
-            transform: translateY(15px) scale(0.98);
-        }
 
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast-container {
+
+        position: fixed;
+
+        top: 20px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        z-index: 9999;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 10px;
+
+        pointer-events: none;
+    }
+
+
+    .toast {
+
+        display: flex;
+        align-items: center;
+
+        gap: 10px;
+
+        min-width: 220px;
+        max-width: 380px;
+
+        padding: 12px 16px;
+
+        border-radius: 12px;
+
+        background: rgba(20, 32, 56, 0.95);
+
+        border: 1.5px solid rgba(109, 164, 255, 0.4);
+
+        color: #e0eaff;
+
+        font-family: 'Vazirmatn', Tahoma, sans-serif;
+
+        font-size: 12.5px;
+        font-weight: 700;
+
+        box-shadow:
+            0 20px 45px rgba(0, 0, 0, 0.5),
+            0 0 40px rgba(74, 125, 232, 0.2);
+
+        animation: toastIn 0.35s cubic-bezier(.22, 1, .36, 1);
+
+        pointer-events: auto;
+    }
+
+
+    body.light .toast {
+
+        background: rgba(240, 245, 255, 0.98);
+        border-color: rgba(58, 109, 224, 0.4);
+        color: #0a1630;
+    }
+
+
+    .toast.success {
+
+        border-color: rgba(74, 222, 128, 0.5);
+        color: #6ee7b7;
+    }
+
+
+    body.light .toast.success {
+        color: #167a52;
+    }
+
+
+    .toast.out {
+        animation: toastOut 0.3s ease forwards;
+    }
+
+
+    @keyframes toastIn {
+        from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+
+    @keyframes toastOut {
+        to { opacity: 0; transform: translateY(-12px) scale(0.96); }
     }
 
 
@@ -1048,7 +1199,8 @@
        FOCUS
     ========================================================= */
 
-    .forms-page a:focus-visible {
+    .forms-page a:focus-visible,
+    .forms-page button:focus-visible {
 
         outline: 3px solid rgba(109, 164, 255, 0.4);
 
@@ -1066,11 +1218,9 @@
             padding: 24px 14px 45px;
         }
 
-
         .forms-header {
             padding: 24px 22px;
         }
-
 
         .forms-grid {
             grid-template-columns: 1fr;
@@ -1088,172 +1238,120 @@
             padding: 20px 12px 40px;
         }
 
-
         .forms-header {
-
             flex-direction: column;
-
             align-items: stretch;
-
             gap: 18px;
-
             padding: 22px 18px;
-
             border-radius: 20px;
         }
-
 
         .forms-header h1 {
             font-size: 22px;
         }
 
-
         .forms-header p {
             font-size: 12px;
         }
-
 
         .forms-badge {
             font-size: 10px;
             padding: 6px 10px;
         }
 
-
         .forms-header-actions {
-
             display: grid;
-
             grid-template-columns: repeat(2, minmax(0, 1fr));
-
             gap: 10px;
-
             width: 100%;
         }
-
 
         .forms-action-btn {
-
             width: 100%;
-
             min-height: 50px;
-
             padding: 12px 14px;
-
             font-size: 12.5px;
         }
-
 
         .forms-toolbar {
             margin-bottom: 12px;
         }
 
-
         .forms-section-title {
             font-size: 14px;
         }
-
 
         .forms-grid {
             gap: 12px;
         }
 
-
         .form-card {
-
-            flex-direction: column;
-
-            align-items: stretch;
-
             gap: 12px;
-
             padding: 16px;
-
             border-radius: 16px;
         }
-
 
         .form-main {
             gap: 12px;
         }
 
-
         .form-icon {
-
             width: 50px;
             height: 50px;
             min-width: 50px;
-
-            font-size: 22px;
-
             border-radius: 14px;
         }
 
+        .form-icon svg {
+            width: 22px;
+            height: 22px;
+        }
 
         .form-content h2 {
             font-size: 14.5px;
         }
 
-
         .form-content p {
             font-size: 12px;
         }
-
 
         .form-arrow {
             display: none;
         }
 
-
-        .form-actions {
-            width: 100%;
+        .form-action-btn {
+            min-height: 44px;
+            font-size: 12px;
         }
-
-
-        .form-delete-btn {
-
-            width: 100%;
-
-            min-height: 46px;
-
-            font-size: 12.5px;
-        }
-
 
         .forms-empty {
-
             min-height: 300px;
-
             padding: 40px 20px;
-
             border-radius: 18px;
         }
-
 
         .forms-empty-icon {
-
             width: 64px;
             height: 64px;
-
-            font-size: 28px;
-
             border-radius: 18px;
         }
-
 
         .forms-empty h2 {
             font-size: 16px;
         }
 
-
         .forms-empty p {
             font-size: 12px;
         }
+
+        .toast-container {
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            transform: none;
+        }
     }
 
-
-    /* =========================================================
-       VERY SMALL MOBILE
-    ========================================================= */
 
     @media (max-width: 420px) {
 
@@ -1261,36 +1359,30 @@
             grid-template-columns: 1fr;
         }
 
-
         .forms-header h1 {
             font-size: 20px;
         }
 
-
         .form-icon {
-
             width: 46px;
             height: 46px;
             min-width: 46px;
-
-            font-size: 20px;
         }
 
+        .form-icon svg {
+            width: 20px;
+            height: 20px;
+        }
 
         .form-content h2 {
             font-size: 13.5px;
         }
-
 
         .form-content p {
             font-size: 11.5px;
         }
     }
 
-
-    /* =========================================================
-       REDUCED MOTION
-    ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
@@ -1312,12 +1404,9 @@
     <div class="forms-container">
 
 
-        <!-- =====================================================
-             HEADER
-        ====================================================== -->
+        <!-- HEADER -->
 
         <header class="forms-header">
-
 
             <div class="forms-header-info">
 
@@ -1326,11 +1415,7 @@
                     مدیریت فرم‌ها
                 </div>
 
-
-                <h1>
-                    فرم‌ها
-                </h1>
-
+                <h1>فرم‌ها</h1>
 
                 <p>
                     فرم‌های ساخته‌شده را مشاهده، مدیریت و منتشر کنید.
@@ -1339,20 +1424,26 @@
             </div>
 
 
-
             <div class="forms-header-actions">
-
 
                 <a
                     href="{% url 'forms:builder' %}"
                     class="forms-action-btn primary"
                 >
 
-                    <span>
-                        ＋
-                    </span>
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
 
-                    ساخت فرم جدید
+                    <span>ساخت فرم جدید</span>
 
                 </a>
 
@@ -1362,118 +1453,236 @@
                     class="forms-action-btn secondary"
                 >
 
-                    <span>
-                        ▣
-                    </span>
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <rect x="3" y="4" width="18" height="18" rx="2"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                        <line x1="9" y1="4" x2="9" y2="22"/>
+                    </svg>
 
-                    دیدن ثبت‌نامی‌ها
+                    <span>دیدن ثبت‌نامی‌ها</span>
 
                 </a>
 
-
             </div>
-
 
         </header>
 
 
 
-        <!-- =====================================================
-             TOOLBAR
-        ====================================================== -->
+        <!-- TOOLBAR -->
 
         <div class="forms-toolbar">
-
 
             <div class="forms-section-title">
                 فرم‌های ساخته‌شده
             </div>
 
-
             <div class="forms-count">
 
-                <span>
-                    تعداد:
-                </span>
+                <span>تعداد:</span>
 
-                <strong>
-                    {{ forms|length }}
-                </strong>
+                <strong>{{ forms|length }}</strong>
 
             </div>
-
 
         </div>
 
 
 
-        <!-- =====================================================
-             FORMS GRID
-        ====================================================== -->
+        <!-- FORMS GRID -->
 
         <div class="forms-grid">
 
 
             {% for form in forms %}
 
-
                 <article class="form-card">
 
 
+                    <!-- MAIN LINK -->
+
                     <a
-                        href="{% url 'forms:fill_form' form.id %}"
+                        href="{% url 'forms:fill_form' form.uuid %}"
                         class="form-main"
                     >
 
-
                         <div class="form-icon">
-                            📝
-                        </div>
 
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="9" y1="13" x2="15" y2="13"/>
+                                <line x1="9" y1="17" x2="13" y2="17"/>
+                            </svg>
+
+                        </div>
 
 
                         <div class="form-content">
 
-
-                            <h2>
-                                {{ form.title }}
-                            </h2>
-
+                            <h2>{{ form.title }}</h2>
 
                             {% if form.description %}
-
-                                <p>
-                                    {{ form.description|truncatechars:100 }}
-                                </p>
-
+                                <p>{{ form.description|truncatechars:100 }}</p>
                             {% else %}
-
-                                <p>
-                                    بدون توضیحات
-                                </p>
-
+                                <p>بدون توضیحات</p>
                             {% endif %}
-
 
                         </div>
 
 
                         <div class="form-arrow">
-                            ←
-                        </div>
 
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+
+                        </div>
 
                     </a>
 
 
 
+                    <!-- META -->
+
+                    <div class="form-meta">
+
+                        <span class="meta-chip">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+
+                            {{ form.created_at|date:"Y/m/d" }}
+
+                        </span>
+
+
+                        <span class="meta-chip">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path d="M9 11l3 3L22 4"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                            </svg>
+
+                            <strong>{{ form.questions.count }}</strong>
+
+                            سؤال
+
+                        </span>
+
+
+                        <span class="meta-chip">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+
+                            <strong>{{ form.submissions.count }}</strong>
+
+                            پاسخ
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- ACTIONS -->
+
                     <div class="form-actions">
+
+                        <button
+                            type="button"
+                            class="form-action-btn copy"
+                            data-copy-url="{% url 'forms:fill_form' form.uuid %}"
+                            onclick="copyFormLink(this)"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+
+                            <span>کپی لینک</span>
+
+                        </button>
+
 
                         <a
                             href="{% url 'forms:delete_form' form.id %}"
-                            class="form-delete-btn"
+                            class="form-action-btn delete"
                         >
-                            حذف
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/>
+                                <path d="M10 11v6M14 11v6"/>
+                                <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
+                            </svg>
+
+                            <span>حذف</span>
+
                         </a>
 
                     </div>
@@ -1487,48 +1696,191 @@
 
                 <div class="forms-empty">
 
-
                     <div class="forms-empty-icon">
-                        📝
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="9" y1="13" x2="15" y2="13"/>
+                            <line x1="9" y1="17" x2="13" y2="17"/>
+                        </svg>
+
                     </div>
 
-
-                    <h2>
-                        هنوز فرمی ساخته نشده است
-                    </h2>
-
+                    <h2>هنوز فرمی ساخته نشده است</h2>
 
                     <p>
                         در حال حاضر هیچ فرمی در سامانه وجود ندارد.
                         برای شروع، اولین فرم خود را ایجاد کنید.
                     </p>
 
-
                     <a
                         href="{% url 'forms:builder' %}"
                         class="forms-action-btn primary"
                     >
 
-                        <span>
-                            ＋
-                        </span>
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
 
-                        ساخت اولین فرم
+                        <span>ساخت اولین فرم</span>
 
                     </a>
 
-
                 </div>
-
 
             {% endfor %}
 
-
         </div>
-
 
     </div>
 
 </div>
+
+
+
+<div class="toast-container" id="toastContainer"></div>
+
+
+
+<script>
+
+(function () {
+    "use strict";
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    function showToast(message, type = "info") {
+
+        const container =
+            document.getElementById("toastContainer");
+
+        if (!container) return;
+
+        const toast = document.createElement("div");
+
+        toast.className = `toast ${type}`;
+
+        const icon = type === "success" ? "✓" : "ℹ";
+
+        toast.innerHTML =
+            `<span>${icon}</span><span>${message}</span>`;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+
+            toast.classList.add("out");
+
+            setTimeout(() => toast.remove(), 320);
+
+        }, 2400);
+    }
+
+
+    /* =========================================================
+       COPY FORM LINK
+    ========================================================= */
+
+    window.copyFormLink = function (button) {
+
+        const path =
+            button.dataset.copyUrl;
+
+        if (!path) return;
+
+        const url =
+            new URL(path, window.location.origin).href;
+
+
+        const onSuccess = () => {
+
+            button.classList.add("copied");
+
+            const label =
+                button.querySelector("span");
+
+            if (label) label.textContent = "کپی شد";
+
+            showToast("لینک فرم کپی شد", "success");
+
+
+            setTimeout(() => {
+
+                button.classList.remove("copied");
+
+                if (label) label.textContent = "کپی لینک";
+
+            }, 1800);
+        };
+
+
+        const fallback = () => {
+
+            const temp =
+                document.createElement("textarea");
+
+            temp.value = url;
+
+            temp.style.position = "fixed";
+            temp.style.opacity = "0";
+
+            document.body.appendChild(temp);
+
+            temp.select();
+
+            try {
+
+                document.execCommand("copy");
+
+                onSuccess();
+
+            } catch (_) {
+
+                showToast("کپی دستی انجام دهید", "info");
+
+            } finally {
+
+                temp.remove();
+            }
+        };
+
+
+        if (navigator.clipboard && window.isSecureContext) {
+
+            navigator.clipboard
+                .writeText(url)
+                .then(onSuccess)
+                .catch(fallback);
+
+        } else {
+
+            fallback();
+        }
+    };
+
+
+})();
+
+</script>
+
 
 {% endblock %}
