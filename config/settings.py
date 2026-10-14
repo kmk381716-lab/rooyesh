@@ -28,6 +28,9 @@ DEBUG = os.environ.get("DEBUG", "True") == "True"
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "kanoonrooyesh.ir",
+    "www.kanoonrooyesh.ir",
+    "rooyesh.onrender.com",
 ]
 
 # وقتی روی Render رفتیم، دامنه Render به صورت خودکار اضافه می‌شود
