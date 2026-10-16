@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -18,12 +19,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 # ---------------------------------------------------------
 
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
-    "django-insecure-local-dev-key-change-before-deploy-9f3k7x2m8p"
-)
+# پیش‌فرض False است تا اگر فراموش شد، سایت امن بماند.
+# روی سیستم خودت برای توسعه: DEBUG=True را در متغیر محیطی بگذار.
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-DEBUG = os.environ.get("DEBUG", "True") == "True"
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    if DEBUG:
+        # فقط برای توسعه‌ی محلی
+        SECRET_KEY = "django-insecure-local-dev-only"
+    else:
+        raise ImproperlyConfigured(
+            "SECRET_KEY environment variable is not set."
+        )
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -38,6 +46,18 @@ if os.environ.get("RENDER_EXTERNAL_HOSTNAME"):
     ALLOWED_HOSTS.append(
         os.environ["RENDER_EXTERNAL_HOSTNAME"]
     )
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://kanoonrooyesh.ir",
+    "https://www.kanoonrooyesh.ir",
+    "https://rooyesh.onrender.com",
+]
+
+# تنظیمات امنیتی HTTPS (فقط در حالت production)
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 
 # ---------------------------------------------------------
@@ -161,6 +181,15 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
 
 
 # ---------------------------------------------------------
